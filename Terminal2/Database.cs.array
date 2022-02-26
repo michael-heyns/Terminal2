@@ -1,0 +1,62 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
+
+namespace Terminal
+{
+    class Database
+    {
+        private static Session[] database = new Session[100];
+        public static Session Find(string name)
+        {
+            for (int i = 0; i < database.Length; i++)
+            {
+                if (database[i] != null && database[i].name.Equals(name))
+                {
+                    return database[i];
+                }
+            }
+            return null;
+        }
+        public static void Remove(string name)
+        {
+            Session s = Find(name);
+            if (s != null)
+                s = null;
+        }
+        public static void Add(Session session)
+        {
+            Remove(session.name);
+            for (int i = 0; i < database.Length; i++)
+            {
+                if (database[i] == null)
+                {
+//                    database[i] = session;
+                    database[i] = new Session();
+                    database[i].name = session.name;
+                    database[i].conOptions = session.conOptions;
+                    database[i].logOptions = session.logOptions;
+                    return;
+                }
+            }
+        }
+
+        public static void GetAllNames(ComboBox cb)
+        {
+            cb.Items.Clear();
+            for (int i = 0; i < database.Length; i++)
+{
+                if (database[i] != null && database[i].name.Length > 0)
+                {
+                    Console.WriteLine(database[i].name);
+                    cb.Items.Add(database[i].name);
+                }
+            }
+        }
+    }
+}

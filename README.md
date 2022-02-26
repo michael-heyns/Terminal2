@@ -26,3 +26,10 @@ The font face has been kept clean and the settings have been moved one layer dow
 
 Here is an example of a session that set up a Bluetooth LE session on a test bench
  ![Example3](https://user-images.githubusercontent.com/4144679/155835735-37577069-0292-4842-9af9-eb935ef1e937.png)
+
+### The name
+The name "Terminal2" was chosen to allow existing users of the very useful (but unmaintained) "Terminal" program (by Br@dy++) to adapt quickly.
+It will definitely change some time in the future.
+
+## Feedback
+Please provide constructure feedback.

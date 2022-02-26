@@ -24,4 +24,5 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.
 
- 
+Here is an example of a session that set up a Bluetooth LE session on a test bench
+ ![Example3](https://user-images.githubusercontent.com/4144679/155835735-37577069-0292-4842-9af9-eb935ef1e937.png)

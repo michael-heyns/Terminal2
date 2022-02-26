@@ -1,7 +1,7 @@
 # Terminal2
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 ## Sales pitch
-Every Embedded Engineer needs a Terminal Emulator at some point of their career.
+Every Embedded Engineer needs a Terminal Emulator at some point in their career.
 Terminal2 combines features of a number of terminal emulators out there.  
 With Terminal2, you can define colorful profiles and quickly switch between sessions (profiles).  You can share profiles with colleagues. You can create and assign multi-line macros to function keys and you can change the color of the incoming text based of keywords you define.
 

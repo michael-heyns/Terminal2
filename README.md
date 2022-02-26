@@ -19,7 +19,7 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 2. Visual Studio (VS19+) with C#.
 3. Load the solution (.sln file).
 4. Build the Debug or Release version.
-5. Copy Terminal2.exe to a folder in your path.
+5. Add Terminal2.exe to your start menu or toolbar.
 
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.

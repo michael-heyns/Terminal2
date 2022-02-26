@@ -16,7 +16,7 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 
 ## Building Terminal2
 1. Windows 10, 11 with .NET 4.6.1 or later
-2. Visual Studio (VS19+) with C#.  No external libraries used.
+2. Visual Studio (VS19+) with C#.
 3. Load the solution (.sln file).
 4. Build the Debug or Release version.
 5. Copy Terminal2.exe to a folder in your path.

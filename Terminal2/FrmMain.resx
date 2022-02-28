@@ -226,6 +226,14 @@
         WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="helpInput.Text" xml:space="preserve">
+    <value>Input Panel:
+    1) The incoming data is displayed here
+    2) You may select a section of text with the mouse
+    3) Or use &lt;Ctrl&gt;-A for everything
+    4) Then cut it &lt;Ctrl&gt;-X or copy it &lt;Ctrl&gt;-C
+</value>
+  </data>
   <data name="helpProfile.Text" xml:space="preserve">
     <value>Profile
     1) Profiles remember all the settings and colour options selected
@@ -240,7 +248,7 @@
     <value>Output history
     1) All the transmitted data are shown here
     2) $0D and $0A are shows so that you can see exactly what went out
-    3) Double-Click on a line to copy it to the command line
+    3) Click on a line to copy it to the command line
         ($0D and $0A will be removed from line endings)
 
 </value>

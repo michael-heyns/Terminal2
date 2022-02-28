@@ -602,21 +602,6 @@ namespace Terminal
             dgMacroTable.Dock = DockStyle.Fill;
             dgMacroTable.ClearSelection();
         }
-        private void LbOutput_DoubleClick(object sender, EventArgs e)
-        {
-            string line = lbOutput.SelectedItem.ToString();
-            string cmd;
-            if (_activeProfile.displayOptions.timestampOutputLines && line.Length >= 14)
-                cmd = line.Substring(14);
-            else
-                cmd = line;
-
-            if (cmd.EndsWith("$0A"))
-                cmd = cmd.Substring(0, cmd.Length - 3);
-            if (cmd.EndsWith("$0D"))
-                cmd = cmd.Substring(0, cmd.Length - 3);
-            tbCommand.Text = cmd;
-        }
         private void DgMacroTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex < 1 || e.RowIndex > 4)
@@ -639,7 +624,7 @@ namespace Terminal
             mac.uiColumn = e.ColumnIndex;
             mac.uiRow = e.RowIndex;
 
-            if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+            if (e.Button == MouseButtons.Right)
             {
                 if (_activeProfile.macros[id].run)
                 {
@@ -774,9 +759,28 @@ namespace Terminal
         }
         private void TbCommand_KeyDown(object sender, KeyEventArgs e)
         {
-            dgMacroTable.ClearSelection();
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.C)
+            {
+                if (e.Control)
+                    rtb.Copy();
+            }
+            else if (e.KeyCode == Keys.A)
+            {
+                if (e.Control)
+                    rtb.SelectAll();
+            }
+            else if (e.KeyCode == Keys.X)
+            {
+                if (e.Control)
+                {
+                    rtb.Copy();
+                    rtb.Clear();
+                }
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
                 BtnSend_Click(sender, e);
+            }
             else if (e.KeyCode == Keys.Escape)
             {
                 if (helpCmdLine.Visible)
@@ -1111,6 +1115,7 @@ namespace Terminal
                 helpLogfile.Visible = true;
                 helpColors.Visible = true;
                 helpClickHere.Visible = true;
+                helpInput.Visible = true;
                 btnHelp.BackColor = Color.Lime;
             }
             else
@@ -1125,6 +1130,7 @@ namespace Terminal
                 helpLogfile.Visible = false;
                 helpColors.Visible = false;
                 helpClickHere.Visible = false;
+                helpInput.Visible = false;
                 btnHelp.BackColor = Color.Transparent;
             }
             tbCommand.Focus();
@@ -1255,10 +1261,6 @@ namespace Terminal
             rtb.Copy();
         }
 
-        private void StsLogfile_DoubleClick(object sender, EventArgs e)
-        {
-        }
-
         private void StsLogfile_Click(object sender, EventArgs e)
         {
             try
@@ -1266,6 +1268,23 @@ namespace Terminal
                 System.Diagnostics.Process.Start(Log.Filename);
             }
             catch { }
+        }
+
+        private void LbOutput_Click(object sender, EventArgs e)
+        {
+            string line = lbOutput.SelectedItem.ToString();
+            string cmd;
+            if (_activeProfile.displayOptions.timestampOutputLines && line.Length >= 14)
+                cmd = line.Substring(14);
+            else
+                cmd = line;
+
+            if (cmd.EndsWith("$0A"))
+                cmd = cmd.Substring(0, cmd.Length - 3);
+            if (cmd.EndsWith("$0D"))
+                cmd = cmd.Substring(0, cmd.Length - 3);
+            tbCommand.Text = cmd;
+
         }
     }
     public static class RichTextBoxExtensions

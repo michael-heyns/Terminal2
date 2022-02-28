@@ -31,19 +31,19 @@ namespace Terminal
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.blank2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
@@ -60,8 +60,8 @@ namespace Terminal
             this.btnLogOptions = new System.Windows.Forms.Button();
             this.btnStartLog = new System.Windows.Forms.Button();
             this.MacroPanel = new System.Windows.Forms.Panel();
+            this.helpLogfile = new System.Windows.Forms.TextBox();
             this.helpMacroIcon = new System.Windows.Forms.TextBox();
-            this.helpCmdLine = new System.Windows.Forms.TextBox();
             this.helpMacroTable = new System.Windows.Forms.TextBox();
             this.dgMacroTable = new System.Windows.Forms.DataGridView();
             this.Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -79,6 +79,7 @@ namespace Terminal
             this.scF12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.helpCmdLine = new System.Windows.Forms.TextBox();
             this.btnFile = new System.Windows.Forms.Button();
             this.btnEditMacro = new System.Windows.Forms.Button();
             this.SendPanel = new System.Windows.Forms.Panel();
@@ -107,6 +108,7 @@ namespace Terminal
             this.LED1 = new System.Windows.Forms.Label();
             this.LED2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.helpInput = new System.Windows.Forms.TextBox();
             this.helpColors = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.helpASCII = new System.Windows.Forms.ListBox();
@@ -118,7 +120,6 @@ namespace Terminal
             this.helpOutput = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.logFlusher = new System.Windows.Forms.Timer(this.components);
-            this.helpLogfile = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -158,7 +159,6 @@ namespace Terminal
             this.stsLogfile.Size = new System.Drawing.Size(25, 17);
             this.stsLogfile.Text = "xxx";
             this.stsLogfile.Click += new System.EventHandler(this.StsLogfile_Click);
-            this.stsLogfile.DoubleClick += new System.EventHandler(this.StsLogfile_DoubleClick);
             // 
             // btnConnect
             // 
@@ -328,6 +328,22 @@ namespace Terminal
             this.MacroPanel.Size = new System.Drawing.Size(926, 109);
             this.MacroPanel.TabIndex = 6;
             // 
+            // helpLogfile
+            // 
+            this.helpLogfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.helpLogfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.helpLogfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.helpLogfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.helpLogfile.Location = new System.Drawing.Point(16, 61);
+            this.helpLogfile.Multiline = true;
+            this.helpLogfile.Name = "helpLogfile";
+            this.helpLogfile.ReadOnly = true;
+            this.helpLogfile.Size = new System.Drawing.Size(325, 48);
+            this.helpLogfile.TabIndex = 11;
+            this.helpLogfile.Text = "Logfile: \r\n    1) The latest log file is shown in the Status Bar\r\n    2) Click on" +
+    " the filename and it will open in your favoutite editor\r\n";
+            this.helpLogfile.Visible = false;
+            // 
             // helpMacroIcon
             // 
             this.helpMacroIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -343,37 +359,20 @@ namespace Terminal
             this.helpMacroIcon.Text = "Macro Table               ^\r\n    1) Click icon to edit\r\n";
             this.helpMacroIcon.Visible = false;
             // 
-            // helpCmdLine
-            // 
-            this.helpCmdLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.helpCmdLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpCmdLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpCmdLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpCmdLine.Location = new System.Drawing.Point(3, 40);
-            this.helpCmdLine.Multiline = true;
-            this.helpCmdLine.Name = "helpCmdLine";
-            this.helpCmdLine.ReadOnly = true;
-            this.helpCmdLine.Size = new System.Drawing.Size(289, 59);
-            this.helpCmdLine.TabIndex = 5;
-            this.helpCmdLine.Text = "Command Line:\r\n    1) <Escape> clears the line and stops all running macros\r\n    " +
-    "2) The length of the string is limited to 65535 characters\r\n    3) $nn inserts t" +
-    "he HEX value nn into the line\r\n";
-            this.helpCmdLine.Visible = false;
-            // 
             // helpMacroTable
             // 
             this.helpMacroTable.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.helpMacroTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.helpMacroTable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.helpMacroTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpMacroTable.Location = new System.Drawing.Point(510, 31);
+            this.helpMacroTable.Location = new System.Drawing.Point(485, 31);
             this.helpMacroTable.Multiline = true;
             this.helpMacroTable.Name = "helpMacroTable";
             this.helpMacroTable.ReadOnly = true;
-            this.helpMacroTable.Size = new System.Drawing.Size(281, 55);
+            this.helpMacroTable.Size = new System.Drawing.Size(188, 55);
             this.helpMacroTable.TabIndex = 4;
-            this.helpMacroTable.Text = "Macro Table:\r\n    1) <Ctrl> + Mouse Click edits a specific macro\r\n    2) Function" +
-    " keys can be used to activate a macro\r\n";
+            this.helpMacroTable.Text = "Macro Table:\r\n    1) Left-Click to activate a macro\r\n    2) Right-Click to edit t" +
+    "he macro\r\n\r\n";
             this.helpMacroTable.Visible = false;
             // 
             // dgMacroTable
@@ -402,14 +401,14 @@ namespace Terminal
             this.scF11,
             this.scF12});
             this.dgMacroTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle90.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle90.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle90.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle90.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle90.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle90.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle90;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
@@ -418,8 +417,8 @@ namespace Terminal
             this.dgMacroTable.ReadOnly = true;
             this.dgMacroTable.RowHeadersVisible = false;
             this.dgMacroTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle91;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgMacroTable.RowTemplate.ReadOnly = true;
             this.dgMacroTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgMacroTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -441,80 +440,80 @@ namespace Terminal
             // 
             // F1
             // 
-            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.F1.DefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.F1.DefaultCellStyle = dataGridViewCellStyle1;
             this.F1.HeaderText = "F1";
             this.F1.Name = "F1";
             this.F1.ReadOnly = true;
             // 
             // scF2
             // 
-            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF2.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF2.DefaultCellStyle = dataGridViewCellStyle2;
             this.scF2.HeaderText = "F2";
             this.scF2.Name = "scF2";
             this.scF2.ReadOnly = true;
             // 
             // scF3
             // 
-            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF3.DefaultCellStyle = dataGridViewCellStyle81;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF3.DefaultCellStyle = dataGridViewCellStyle3;
             this.scF3.HeaderText = "F3";
             this.scF3.Name = "scF3";
             this.scF3.ReadOnly = true;
             // 
             // scF4
             // 
-            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF4.DefaultCellStyle = dataGridViewCellStyle82;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF4.DefaultCellStyle = dataGridViewCellStyle4;
             this.scF4.HeaderText = "F4";
             this.scF4.Name = "scF4";
             this.scF4.ReadOnly = true;
             // 
             // scF5
             // 
-            dataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF5.DefaultCellStyle = dataGridViewCellStyle83;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF5.DefaultCellStyle = dataGridViewCellStyle5;
             this.scF5.HeaderText = "F5";
             this.scF5.Name = "scF5";
             this.scF5.ReadOnly = true;
             // 
             // scF6
             // 
-            dataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF6.DefaultCellStyle = dataGridViewCellStyle84;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF6.DefaultCellStyle = dataGridViewCellStyle6;
             this.scF6.HeaderText = "F6";
             this.scF6.Name = "scF6";
             this.scF6.ReadOnly = true;
             // 
             // scF7
             // 
-            dataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF7.DefaultCellStyle = dataGridViewCellStyle85;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF7.DefaultCellStyle = dataGridViewCellStyle7;
             this.scF7.HeaderText = "F7";
             this.scF7.Name = "scF7";
             this.scF7.ReadOnly = true;
             // 
             // scF8
             // 
-            dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF8.DefaultCellStyle = dataGridViewCellStyle86;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF8.DefaultCellStyle = dataGridViewCellStyle8;
             this.scF8.HeaderText = "F8";
             this.scF8.Name = "scF8";
             this.scF8.ReadOnly = true;
             // 
             // scF9
             // 
-            dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF9.DefaultCellStyle = dataGridViewCellStyle87;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF9.DefaultCellStyle = dataGridViewCellStyle9;
             this.scF9.HeaderText = "F9";
             this.scF9.Name = "scF9";
             this.scF9.ReadOnly = true;
             // 
             // scF10
             // 
-            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF10.DefaultCellStyle = dataGridViewCellStyle88;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF10.DefaultCellStyle = dataGridViewCellStyle10;
             this.scF10.HeaderText = "F10";
             this.scF10.Name = "scF10";
             this.scF10.ReadOnly = true;
@@ -527,8 +526,8 @@ namespace Terminal
             // 
             // scF12
             // 
-            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF12.DefaultCellStyle = dataGridViewCellStyle89;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF12.DefaultCellStyle = dataGridViewCellStyle11;
             this.scF12.HeaderText = "F12";
             this.scF12.Name = "scF12";
             this.scF12.ReadOnly = true;
@@ -548,6 +547,23 @@ namespace Terminal
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 109);
             this.panel4.TabIndex = 1;
+            // 
+            // helpCmdLine
+            // 
+            this.helpCmdLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.helpCmdLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.helpCmdLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.helpCmdLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.helpCmdLine.Location = new System.Drawing.Point(3, 40);
+            this.helpCmdLine.Multiline = true;
+            this.helpCmdLine.Name = "helpCmdLine";
+            this.helpCmdLine.ReadOnly = true;
+            this.helpCmdLine.Size = new System.Drawing.Size(289, 59);
+            this.helpCmdLine.TabIndex = 5;
+            this.helpCmdLine.Text = "Command Line:\r\n    1) <Escape> clears the line and stops all running macros\r\n    " +
+    "2) The length of the string is limited to 65535 characters\r\n    3) $nn inserts t" +
+    "he HEX value nn into the line\r\n";
+            this.helpCmdLine.Visible = false;
             // 
             // btnFile
             // 
@@ -686,7 +702,7 @@ namespace Terminal
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(926, 99);
             this.lbOutput.TabIndex = 0;
-            this.lbOutput.DoubleClick += new System.EventHandler(this.LbOutput_DoubleClick);
+            this.lbOutput.Click += new System.EventHandler(this.LbOutput_Click);
             this.lbOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // PanelTwo
@@ -922,6 +938,7 @@ namespace Terminal
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.helpInput);
             this.splitContainer1.Panel1.Controls.Add(this.helpColors);
             this.splitContainer1.Panel1.Controls.Add(this.progressBar);
             this.splitContainer1.Panel1.Controls.Add(this.helpASCII);
@@ -943,6 +960,20 @@ namespace Terminal
             this.splitContainer1.Size = new System.Drawing.Size(926, 466);
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 11;
+            // 
+            // helpInput
+            // 
+            this.helpInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.helpInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.helpInput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.helpInput.Location = new System.Drawing.Point(50, 155);
+            this.helpInput.Multiline = true;
+            this.helpInput.Name = "helpInput";
+            this.helpInput.ReadOnly = true;
+            this.helpInput.Size = new System.Drawing.Size(278, 77);
+            this.helpInput.TabIndex = 14;
+            this.helpInput.Text = resources.GetString("helpInput.Text");
+            this.helpInput.Visible = false;
             // 
             // helpColors
             // 
@@ -1035,12 +1066,13 @@ namespace Terminal
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(179, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(221, 26);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.copyToolStripMenuItem.Text = "Copy to clipboard...";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
@@ -1070,22 +1102,6 @@ namespace Terminal
             this.logFlusher.Enabled = true;
             this.logFlusher.Interval = 200;
             this.logFlusher.Tick += new System.EventHandler(this.LogFlusher_Tick);
-            // 
-            // helpLogfile
-            // 
-            this.helpLogfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.helpLogfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpLogfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpLogfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpLogfile.Location = new System.Drawing.Point(16, 61);
-            this.helpLogfile.Multiline = true;
-            this.helpLogfile.Name = "helpLogfile";
-            this.helpLogfile.ReadOnly = true;
-            this.helpLogfile.Size = new System.Drawing.Size(325, 48);
-            this.helpLogfile.TabIndex = 11;
-            this.helpLogfile.Text = "Logfile: \r\n    1) The latest log file is shown in the Status Bar\r\n    2) Click on" +
-    " the filename and it will open in your favoutite editor\r\n";
-            this.helpLogfile.Visible = false;
             // 
             // FrmMain
             // 
@@ -1204,6 +1220,7 @@ namespace Terminal
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.TextBox helpLogfile;
+        private System.Windows.Forms.TextBox helpInput;
     }
 }
 

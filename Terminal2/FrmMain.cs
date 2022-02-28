@@ -1105,6 +1105,8 @@ namespace Terminal
         {
             if (!helpCmdLine.Visible)
             {
+                helpSource.BackColor = rtb.BackColor;
+                helpSource.Visible = true;
                 helpCmdLine.Visible = true;
                 helpMacroTable.Visible = true;
                 helpSplitline.Visible = true;
@@ -1120,6 +1122,7 @@ namespace Terminal
             }
             else
             {
+                helpSource.Visible = false;
                 helpCmdLine.Visible = false;
                 helpMacroTable.Visible = false;
                 helpSplitline.Visible = false;

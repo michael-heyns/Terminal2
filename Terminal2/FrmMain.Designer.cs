@@ -31,19 +31,19 @@ namespace Terminal
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.blank2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
@@ -108,6 +108,7 @@ namespace Terminal
             this.LED1 = new System.Windows.Forms.Label();
             this.LED2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.helpSource = new System.Windows.Forms.TextBox();
             this.helpInput = new System.Windows.Forms.TextBox();
             this.helpColors = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
@@ -401,14 +402,14 @@ namespace Terminal
             this.scF11,
             this.scF12});
             this.dgMacroTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle25;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
@@ -417,8 +418,8 @@ namespace Terminal
             this.dgMacroTable.ReadOnly = true;
             this.dgMacroTable.RowHeadersVisible = false;
             this.dgMacroTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle26;
             this.dgMacroTable.RowTemplate.ReadOnly = true;
             this.dgMacroTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgMacroTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -440,80 +441,80 @@ namespace Terminal
             // 
             // F1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.F1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.F1.DefaultCellStyle = dataGridViewCellStyle14;
             this.F1.HeaderText = "F1";
             this.F1.Name = "F1";
             this.F1.ReadOnly = true;
             // 
             // scF2
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF2.DefaultCellStyle = dataGridViewCellStyle15;
             this.scF2.HeaderText = "F2";
             this.scF2.Name = "scF2";
             this.scF2.ReadOnly = true;
             // 
             // scF3
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF3.DefaultCellStyle = dataGridViewCellStyle16;
             this.scF3.HeaderText = "F3";
             this.scF3.Name = "scF3";
             this.scF3.ReadOnly = true;
             // 
             // scF4
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF4.DefaultCellStyle = dataGridViewCellStyle17;
             this.scF4.HeaderText = "F4";
             this.scF4.Name = "scF4";
             this.scF4.ReadOnly = true;
             // 
             // scF5
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF5.DefaultCellStyle = dataGridViewCellStyle18;
             this.scF5.HeaderText = "F5";
             this.scF5.Name = "scF5";
             this.scF5.ReadOnly = true;
             // 
             // scF6
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF6.DefaultCellStyle = dataGridViewCellStyle19;
             this.scF6.HeaderText = "F6";
             this.scF6.Name = "scF6";
             this.scF6.ReadOnly = true;
             // 
             // scF7
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF7.DefaultCellStyle = dataGridViewCellStyle20;
             this.scF7.HeaderText = "F7";
             this.scF7.Name = "scF7";
             this.scF7.ReadOnly = true;
             // 
             // scF8
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF8.DefaultCellStyle = dataGridViewCellStyle21;
             this.scF8.HeaderText = "F8";
             this.scF8.Name = "scF8";
             this.scF8.ReadOnly = true;
             // 
             // scF9
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF9.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF9.DefaultCellStyle = dataGridViewCellStyle22;
             this.scF9.HeaderText = "F9";
             this.scF9.Name = "scF9";
             this.scF9.ReadOnly = true;
             // 
             // scF10
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF10.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF10.DefaultCellStyle = dataGridViewCellStyle23;
             this.scF10.HeaderText = "F10";
             this.scF10.Name = "scF10";
             this.scF10.ReadOnly = true;
@@ -526,8 +527,8 @@ namespace Terminal
             // 
             // scF12
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF12.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF12.DefaultCellStyle = dataGridViewCellStyle24;
             this.scF12.HeaderText = "F12";
             this.scF12.Name = "scF12";
             this.scF12.ReadOnly = true;
@@ -938,6 +939,7 @@ namespace Terminal
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.helpSource);
             this.splitContainer1.Panel1.Controls.Add(this.helpInput);
             this.splitContainer1.Panel1.Controls.Add(this.helpColors);
             this.splitContainer1.Panel1.Controls.Add(this.progressBar);
@@ -961,6 +963,21 @@ namespace Terminal
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 11;
             // 
+            // helpSource
+            // 
+            this.helpSource.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.helpSource.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.helpSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpSource.ForeColor = System.Drawing.Color.Black;
+            this.helpSource.Location = new System.Drawing.Point(10, 6);
+            this.helpSource.Multiline = true;
+            this.helpSource.Name = "helpSource";
+            this.helpSource.ReadOnly = true;
+            this.helpSource.Size = new System.Drawing.Size(255, 34);
+            this.helpSource.TabIndex = 15;
+            this.helpSource.Text = "Source Code:\r\n    https://github.com/michael-heyns/Terminal2";
+            this.helpSource.Visible = false;
+            // 
             // helpInput
             // 
             this.helpInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -970,9 +987,10 @@ namespace Terminal
             this.helpInput.Multiline = true;
             this.helpInput.Name = "helpInput";
             this.helpInput.ReadOnly = true;
-            this.helpInput.Size = new System.Drawing.Size(278, 77);
+            this.helpInput.Size = new System.Drawing.Size(242, 77);
             this.helpInput.TabIndex = 14;
-            this.helpInput.Text = resources.GetString("helpInput.Text");
+            this.helpInput.Text = "Input Panel:\r\n    1) Select a section of text with the mouse\r\n    2) Copy with Ct" +
+    "rl-C\r\n    3) Copy and clear with Ctrl-X\r\n    4) Select everything with Ctrl-A\r\n";
             this.helpInput.Visible = false;
             // 
             // helpColors
@@ -1221,6 +1239,7 @@ namespace Terminal
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
         private System.Windows.Forms.TextBox helpLogfile;
         private System.Windows.Forms.TextBox helpInput;
+        private System.Windows.Forms.TextBox helpSource;
     }
 }
 

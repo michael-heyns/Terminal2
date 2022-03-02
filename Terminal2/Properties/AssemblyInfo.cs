@@ -87,7 +87,7 @@ namespace Terminal
             if (trademarkAttr != null)
                 Trademark = trademarkAttr.Trademark;
 
-            AssemblyVersion = assembly.GetName().Version.ToString() + ".Beta-6";
+            AssemblyVersion = assembly.GetName().Version.ToString() + ".Beta-7";
 
             AssemblyFileVersionAttribute fileVersionAttr =
                 GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly);

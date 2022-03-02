@@ -1275,6 +1275,9 @@ namespace Terminal
 
         private void LbOutput_Click(object sender, EventArgs e)
         {
+            if (lbOutput.SelectedIndex < 0)
+                return;
+
             string line = lbOutput.SelectedItem.ToString();
             string cmd;
             if (_activeProfile.displayOptions.timestampOutputLines && line.Length >= 14)

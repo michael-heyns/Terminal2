@@ -821,6 +821,7 @@ namespace Terminal
             // 
             // cbFreeze
             // 
+            this.cbFreeze.AutoSize = true;
             this.cbFreeze.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cbFreeze.Location = new System.Drawing.Point(13, 5);
             this.cbFreeze.Name = "cbFreeze";

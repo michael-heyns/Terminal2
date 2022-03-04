@@ -202,7 +202,7 @@ namespace Terminal
             this.grpColourFilters.Size = new System.Drawing.Size(553, 402);
             this.grpColourFilters.TabIndex = 15;
             this.grpColourFilters.TabStop = false;
-            this.grpColourFilters.Text = "Coloured Text Filters";
+            this.grpColourFilters.Text = "Colored Text Filters";
             // 
             // label23
             // 
@@ -216,7 +216,7 @@ namespace Terminal
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(38, 25);
+            this.label16.Location = new System.Drawing.Point(48, 25);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(34, 13);
             this.label16.TabIndex = 69;
@@ -554,11 +554,11 @@ namespace Terminal
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 368);
+            this.label2.Location = new System.Drawing.Point(215, 366);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 38;
-            this.label2.Text = "All other text";
+            this.label2.Text = "Default";
             // 
             // TextColorInput
             // 
@@ -898,9 +898,9 @@ namespace Terminal
             this.cbColourFilters.AutoSize = true;
             this.cbColourFilters.Location = new System.Drawing.Point(22, 56);
             this.cbColourFilters.Name = "cbColourFilters";
-            this.cbColourFilters.Size = new System.Drawing.Size(159, 17);
+            this.cbColourFilters.Size = new System.Drawing.Size(153, 17);
             this.cbColourFilters.TabIndex = 57;
-            this.cbColourFilters.Text = "Enable coloured text filtering";
+            this.cbColourFilters.Text = "Enable colored text filtering";
             this.cbColourFilters.UseVisualStyleBackColor = true;
             this.cbColourFilters.CheckedChanged += new System.EventHandler(this.CbColourFilters_CheckedChanged);
             // 
@@ -927,7 +927,7 @@ namespace Terminal
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
             // 
-            // FrmConfig
+            // FrmDisplayOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -942,7 +942,7 @@ namespace Terminal
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmConfig";
+            this.Name = "FrmDisplayOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Display Options";
             this.Load += new System.EventHandler(this.Config_Load);

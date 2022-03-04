@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Common;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-
-using Microsoft.Win32;
-using System.Runtime.InteropServices;
 
 namespace Terminal
 {
@@ -46,19 +40,15 @@ namespace Terminal
         private bool _lastSendCR = true;
         private bool _lastSendLF = true;
 
-        private int x = 0;
+        private int xPos = 0;
         private string _logLine = string.Empty;
         private string _timeAtX0;
         private Color _activeColor = Color.Black;
         private bool _colorHasChanged = false;
-
         private bool _firstActivation = true;
-
-        private void DetectColourChange(string str)
+        private int _indexAtX0 = 0;
+        private bool DetectColourChange(string str)
         {
-            if (_colorHasChanged)
-                return;
-
             for (int i = 0; i < _activeProfile.displayOptions.lines.Length; i++)
             {
                 if (_activeProfile.displayOptions.lines[i].text.Length > 0)
@@ -69,8 +59,7 @@ namespace Terminal
                         if (str.StartsWith(_activeProfile.displayOptions.lines[i].text))
                         {
                             _activeColor = _activeProfile.displayOptions.lines[i].color;
-                            _colorHasChanged = true;
-                            break;
+                            return true;
                         }
                     }
 
@@ -80,12 +69,12 @@ namespace Terminal
                         if (str.Contains(_activeProfile.displayOptions.lines[i].text))
                         {
                             _activeColor = _activeProfile.displayOptions.lines[i].color;
-                            _colorHasChanged = true;
-                            break;
+                            return true;
                         }
                     }
                 }
             }
+            return false;
         }
 
         private void ShowText(string text)
@@ -117,15 +106,18 @@ namespace Terminal
                             }
                             if (rbEndOnCR.Checked)
                             {
-                                if (x == 0)
+                                if (xPos == 0)
                                 {
-                                    _timeAtX0 = Utils.Timestamp();
-                                    ShowText(_timeAtX0);
+                                    if (cbTimestamp.Checked)
+                                    {
+                                        _timeAtX0 = Utils.Timestamp();
+                                        ShowText(_timeAtX0);
+                                    }
                                 }
 
                                 Log.Add("R : " + _timeAtX0 + _logLine);
                                 _logLine = string.Empty;
-                                x = 0;
+                                xPos = 0;
                                 ShowText("\r");
                                 _activeColor = _activeProfile.displayOptions.inputText;
                                 _colorHasChanged = false;
@@ -140,15 +132,18 @@ namespace Terminal
                             }
                             if (rbEndOnLF.Checked)
                             {
-                                if (x == 0)
+                                if (xPos == 0)
                                 {
-                                    _timeAtX0 = Utils.Timestamp();
-                                    ShowText(_timeAtX0);
+                                    if (cbTimestamp.Checked)
+                                    {
+                                        _timeAtX0 = Utils.Timestamp();
+                                        ShowText(_timeAtX0);
+                                    }
                                 }
 
                                 Log.Add("R : " + _timeAtX0 + _logLine);
                                 _logLine = string.Empty;
-                                x = 0;
+                                xPos = 0;
                                 ShowText("\r");
                                 _activeColor = _activeProfile.displayOptions.inputText;
                                 _colorHasChanged = false;
@@ -158,10 +153,14 @@ namespace Terminal
                         default:
                             _logLine += c;
 
-                            if (x == 0)
+                            if (xPos == 0)
                             {
-                                _timeAtX0 = Utils.Timestamp();
-                                ShowText(_timeAtX0);
+                                if (cbTimestamp.Checked)
+                                {
+                                    _timeAtX0 = Utils.Timestamp();
+                                    ShowText(_timeAtX0);
+                                }
+                                _indexAtX0 = rtb.TextLength;
                             }
 
                             if (cbASCII.Checked)
@@ -172,10 +171,21 @@ namespace Terminal
                                 ShowText($"{b:X2} ");
                             }
 
-                            if (_activeProfile.displayOptions.colorFiltersEnabled)
-                                DetectColourChange(_logLine);
+                            xPos++;
 
-                            x++;
+                            if (_activeProfile.displayOptions.colorFiltersEnabled)
+                            {
+                                if (!_colorHasChanged)
+                                {
+                                    _colorHasChanged = DetectColourChange(_logLine);
+                                    if (_colorHasChanged)
+                                    {
+                                        rtb.SelectionStart = _indexAtX0;
+                                        rtb.SelectionLength = xPos;
+                                        rtb.SelectionColor = _activeColor;
+                                    }
+                                }
+                            }
                             break;
                     }
                 }
@@ -568,10 +578,12 @@ namespace Terminal
             if (cbFreeze.Checked)
             {
                 cbFreeze.BackColor = Color.Tomato;
+                Application.DoEvents();
             }
             else
             {
                 cbFreeze.BackColor = PanelOne.BackColor;
+                Application.DoEvents();
                 this.Invoke(this.UIInputQHandlerInstance);
             }
 
@@ -1056,15 +1068,6 @@ namespace Terminal
                     else
                     {
                         _state = State.Disconnected;
-                        _comms = null;
-                        btnConnect.BackColor = Color.Transparent;
-                        SetPortAndConnectLabels();
-                        btnConnectOptions.Enabled = true;
-                        pdPort.Enabled = true;
-                        lblProfileName.Enabled = true;
-                        btnProfileSelect.Enabled = true;
-                        btnFile.Enabled = false;
-                        Log.Add(Utils.Timestamp() + "{DISCONNECTED}");
                     }
                     return;
                 }
@@ -1305,5 +1308,4 @@ namespace Terminal
             box.SelectionColor = box.ForeColor;
         }
     }
-
 }

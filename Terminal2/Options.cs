@@ -184,12 +184,12 @@ namespace Terminal
 
         public static string TimestampForFilename()
         {
-            return $"{DateTime.Now.Year:d4}{DateTime.Now.Month:d2}{DateTime.Now.Day:d2}_{DateTime.Now.Hour:d2}{DateTime.Now.Minute:d2}{DateTime.Now.Second:d2}";
+            return $"{DateTime.Now:yyMMdd_HHmmss}";
         }
 
         public static string Timestamp()
         {
-            return $"{DateTime.Now.Hour:d2}:{DateTime.Now.Minute:d2}:{DateTime.Now.Second:d2}.{DateTime.Now.Millisecond:d3}: ";
+            return $"{DateTime.Now:HH:mm:ss.ff}: ";
         }
     }
 }

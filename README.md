@@ -1,4 +1,4 @@
-# Terminal2
+# Terminal2 - v1.0.1.0
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 ## Sales pitch
 Every Embedded Engineer needs a Terminal Emulator at some point in their career.
@@ -25,8 +25,8 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.
 
-Here is an example that sets up a Bluetooth LE (BLE) session on a test bench
- ![Example3](https://user-images.githubusercontent.com/4144679/155835735-37577069-0292-4842-9af9-eb935ef1e937.png)
+Here is an example from the Scotty's emulator on Enterprise (NCC-1701-B)
+ ![image](https://user-images.githubusercontent.com/4144679/158015612-71783993-04b7-4406-8e24-b360062123d0.png)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (but unmaintained) "Terminal" program (by Br@dy++) to adapt quickly.

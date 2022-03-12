@@ -25,7 +25,7 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.
 
-Here is an example from the Scotty's emulator on Enterprise (NCC-1701-B)
+Here is an example from Scotty's emulator on Enterprise (NCC-1701-B)
  ![image](https://user-images.githubusercontent.com/4144679/158015612-71783993-04b7-4406-8e24-b360062123d0.png)
 
 ### The name

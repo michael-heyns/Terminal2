@@ -17,8 +17,11 @@ namespace Terminal
         public string Handshaking = "None";
         public string Parity = "None";
         public string StopBits = "1";
-        public string TCPAdress = "localhost";
-        public string TCPPort = "5000";
+        public string TCPListenPort = "5000";
+        public string TCPConnectAdress = "localhost";
+        public string TCPConnectPort = "5000";
+        public bool InitialDTR = false;
+        public bool InitialRTS = false;
 
         public ConOptions Clone()
         {
@@ -77,6 +80,7 @@ namespace Terminal
         public int mode = 0;
         public string text = string.Empty;
         public Color color = Color.Black;
+        public bool freeze = false;
         public ColorLines Clone()
         {
             return (ColorLines)MemberwiseClone();
@@ -96,6 +100,10 @@ namespace Terminal
         public Color outputBackground = Color.Gainsboro;
 
         public bool timestampOutputLines = true;
+
+        public int maxBufferSizeMB = 10;
+        public int cutPercent = 10;
+        public int freezeSizeKB = 10;
 
         public DisplayOptions()
         {

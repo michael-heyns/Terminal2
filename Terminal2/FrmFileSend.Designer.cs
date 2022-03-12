@@ -86,7 +86,6 @@ namespace Terminal
             this.tbFilename.Size = new System.Drawing.Size(285, 20);
             this.tbFilename.TabIndex = 13;
             this.tbFilename.TextChanged += new System.EventHandler(this.TbFilename_TextChanged);
-            this.tbFilename.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbFilename_KeyDown);
             // 
             // btnSelect
             // 

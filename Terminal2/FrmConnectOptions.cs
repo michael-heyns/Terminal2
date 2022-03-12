@@ -23,15 +23,17 @@ namespace Terminal
         private void BtnOk_Click(object sender, EventArgs e)
         {
             // screen --> options
-            _conOptions.TCPPort = tbTcpListenPort.Text;
-            _conOptions.TCPPort = tbTcpConnectPort.Text;
-            _conOptions.TCPAdress = tbTcpConnectAddress.Text;
+            _conOptions.TCPListenPort = tbTcpListenPort.Text;
+            _conOptions.TCPConnectPort = tbTcpConnectPort.Text;
+            _conOptions.TCPConnectAdress = tbTcpConnectAddress.Text;
             _conOptions.SerialPort = pdSerialPort.Text;
             _conOptions.Baudrate = pdBaudrate.Text;
             _conOptions.DataBits = pdDataBits.Text;
             _conOptions.Parity = pdParity.Text;
             _conOptions.StopBits = pdStopBits.Text;
             _conOptions.Handshaking = pdHandshaking.Text;
+            _conOptions.InitialDTR = cbInitialDTR.Checked;
+            _conOptions.InitialRTS = cbInitialRTS.Checked;
 
             if (cbTcpServer.Checked)
             {
@@ -61,6 +63,8 @@ namespace Terminal
             pdParity.Enabled = false;
             pdStopBits.Enabled = false;
             pdHandshaking.Enabled = false;
+            cbInitialDTR.Enabled = false;
+            cbInitialRTS.Enabled = false;
 
             if (_conOptions.Type == ConOptions.ConType.TCPServer)
             {
@@ -79,6 +83,8 @@ namespace Terminal
                 pdParity.Enabled = true;
                 pdStopBits.Enabled = true;
                 pdHandshaking.Enabled = true;
+                cbInitialDTR.Enabled = true;
+                cbInitialRTS.Enabled = true;
             }
         }
         private void FrmConnectOptions_Load(object sender, EventArgs e)
@@ -86,15 +92,18 @@ namespace Terminal
             _conOptions.Modified = false;
 
             // options --> screen
-            tbTcpListenPort.Text = _conOptions.TCPPort;
-            tbTcpConnectPort.Text = _conOptions.TCPPort;
-            tbTcpConnectAddress.Text = _conOptions.TCPAdress;
+            tbTcpListenPort.Text = _conOptions.TCPListenPort;
+            tbTcpConnectPort.Text = _conOptions.TCPConnectPort;
+            tbTcpConnectAddress.Text = _conOptions.TCPConnectAdress;
             pdSerialPort.Text = _conOptions.SerialPort;
             pdBaudrate.Text = _conOptions.Baudrate;
             pdDataBits.Text = _conOptions.DataBits;
             pdParity.Text = _conOptions.Parity;
             pdStopBits.Text = _conOptions.StopBits;
             pdHandshaking.Text = _conOptions.Handshaking;
+            cbInitialDTR.Checked = _conOptions.InitialDTR;
+            cbInitialRTS.Checked = _conOptions.InitialRTS;
+
             switch (_conOptions.Type)
             {
                 default:
@@ -142,6 +151,15 @@ namespace Terminal
                 _conOptions.Type = ConOptions.ConType.TCPServer;
                 EnableOptionFields();
             }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

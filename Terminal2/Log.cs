@@ -69,8 +69,16 @@ namespace Terminal
             {
                 if (_fileData.Length == 0)
                     return;
-                File.AppendAllText(_filename, _fileData);
-                _fileData = string.Empty;
+                for (int retry = 0; retry < 5; retry++)
+                {
+                    try
+                    {
+                        File.AppendAllText(_filename, _fileData);
+                        _fileData = string.Empty;
+                        return;
+                    }
+                    catch { }
+                }
             }
         }
     }

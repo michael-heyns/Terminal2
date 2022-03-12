@@ -9,6 +9,11 @@ namespace Terminal
     {
         private readonly FrmMain _main;
         private readonly EnqueuedDelegate _handler;
+        private int _lengthOfStringObjects = 0;
+        public int LengthOfStringObjects
+        {
+            get { return _lengthOfStringObjects; }
+        }
         public EventQueue(FrmMain main, EnqueuedDelegate handler)
         {
             _main = main;
@@ -20,11 +25,14 @@ namespace Terminal
 
         public override object Dequeue()
         {
-            return base.Dequeue();
+            object obj = base.Dequeue();
+            _lengthOfStringObjects -= obj.ToString().Length;
+            return obj;
         }
 
         public override void Enqueue(object item)
         {
+            _lengthOfStringObjects += item.ToString().Length;
             base.Enqueue(item);
             _main.Invoke(_handler);
         }

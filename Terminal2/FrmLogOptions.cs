@@ -94,13 +94,14 @@ namespace Terminal
             ShowExample();
         }
 
-        private void BtnEditor_Click(object sender, EventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-
-        }
-
-        private void FrmLogOptions_Load(object sender, EventArgs e)
-        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

@@ -123,6 +123,25 @@
   <metadata name="colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
   </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>v1.0.1.0
+    * Added fine-tuning options and history
+    * Added Quick Launch button to start another session without having to close the current connection
+    * Added 'Export'  to *.rtf/*.txt option.  (.RTF files retain colors information and are opened by Word).
+    * Pressing 'Escape' will close a dialog box
+    * Ability to freeze the display when a specified key word is detected
+
+Beta-13
+    * Added more baud rate constants
+
+Beta-12
+    * Increased the Rx and Tx buffer sizes.  (It was missing data).
+    * Added feature to set initial RTS and DTR states
+    * Fixed bug when clicking on HISTORY line
+    * Serial and Tx and Rx timeouts added - else it may sit forever waiting on the port
+    * Eliminated the send queue and put straight into send buffer - faster response on sending
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

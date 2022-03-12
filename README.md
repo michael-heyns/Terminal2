@@ -33,4 +33,4 @@ The name "Terminal2" was chosen to allow existing users of the very useful (but 
 It will definitely change some time in the future.
 
 ## Feedback
-Please provide constructure feedback.
+Constructive feedback welcome.

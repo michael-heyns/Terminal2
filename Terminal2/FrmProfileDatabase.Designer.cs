@@ -32,7 +32,7 @@ namespace Terminal
             this.btnSelect = new System.Windows.Forms.Button();
             this.lbProfileList = new System.Windows.Forms.ListBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -46,7 +46,7 @@ namespace Terminal
             // 
             this.btnSelect.Enabled = false;
             this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(270, 44);
+            this.btnSelect.Location = new System.Drawing.Point(270, 73);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 3;
@@ -77,15 +77,16 @@ namespace Terminal
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(118, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 16);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Profile Database";
+            this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(345, 21);
+            this.lblTitle.TabIndex = 8;
+            this.lblTitle.Text = "Profile Database";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnExport
             // 
@@ -144,7 +145,7 @@ namespace Terminal
             // btnStart
             // 
             this.btnStart.Enabled = false;
-            this.btnStart.Location = new System.Drawing.Point(269, 141);
+            this.btnStart.Location = new System.Drawing.Point(269, 44);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 13;
@@ -162,7 +163,7 @@ namespace Terminal
             this.Controls.Add(this.btnRename);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExport);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lbProfileList);
             this.Controls.Add(this.btnSelect);
@@ -172,8 +173,8 @@ namespace Terminal
             this.Name = "FrmProfileDatabase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profile Database";
+            this.Shown += new System.EventHandler(this.FrmProfileDatabase_Shown);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -181,7 +182,7 @@ namespace Terminal
         private System.Windows.Forms.Button btnSelect;
         private System.Windows.Forms.ListBox lbProfileList;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.OpenFileDialog openFileDialog;

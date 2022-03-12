@@ -50,6 +50,10 @@ namespace Terminal
             this.cbTcpServer = new System.Windows.Forms.RadioButton();
             this.btnOk = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbInitialDTR = new System.Windows.Forms.CheckBox();
+            this.cbInitialRTS = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label8
@@ -92,7 +96,7 @@ namespace Terminal
             "6",
             "7",
             "8"});
-            this.pdDataBits.Location = new System.Drawing.Point(364, 100);
+            this.pdDataBits.Location = new System.Drawing.Point(365, 140);
             this.pdDataBits.Name = "pdDataBits";
             this.pdDataBits.Size = new System.Drawing.Size(49, 21);
             this.pdDataBits.TabIndex = 16;
@@ -128,7 +132,7 @@ namespace Terminal
             "RTS/CTS",
             "Xon/Off",
             "RTS/CTS + Xon/Off"});
-            this.pdHandshaking.Location = new System.Drawing.Point(558, 100);
+            this.pdHandshaking.Location = new System.Drawing.Point(559, 140);
             this.pdHandshaking.Name = "pdHandshaking";
             this.pdHandshaking.Size = new System.Drawing.Size(137, 21);
             this.pdHandshaking.TabIndex = 12;
@@ -143,7 +147,7 @@ namespace Terminal
             "1",
             "1.5",
             "2"});
-            this.pdStopBits.Location = new System.Drawing.Point(504, 100);
+            this.pdStopBits.Location = new System.Drawing.Point(505, 140);
             this.pdStopBits.Name = "pdStopBits";
             this.pdStopBits.Size = new System.Drawing.Size(49, 21);
             this.pdStopBits.TabIndex = 11;
@@ -160,7 +164,7 @@ namespace Terminal
             "Even",
             "Mark",
             "Space"});
-            this.pdParity.Location = new System.Drawing.Point(418, 100);
+            this.pdParity.Location = new System.Drawing.Point(419, 140);
             this.pdParity.Name = "pdParity";
             this.pdParity.Size = new System.Drawing.Size(81, 21);
             this.pdParity.TabIndex = 10;
@@ -184,8 +188,11 @@ namespace Terminal
             "57600",
             "115200",
             "128000",
-            "256000"});
-            this.pdBaudrate.Location = new System.Drawing.Point(258, 100);
+            "230400",
+            "256000",
+            "460800",
+            "921600"});
+            this.pdBaudrate.Location = new System.Drawing.Point(259, 140);
             this.pdBaudrate.Name = "pdBaudrate";
             this.pdBaudrate.Size = new System.Drawing.Size(101, 21);
             this.pdBaudrate.TabIndex = 9;
@@ -194,7 +201,7 @@ namespace Terminal
             // 
             this.label2.AutoSize = true;
             this.label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label2.Location = new System.Drawing.Point(236, 103);
+            this.label2.Location = new System.Drawing.Point(237, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 8;
@@ -207,7 +214,7 @@ namespace Terminal
             this.pdSerialPort.Enabled = false;
             this.pdSerialPort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdSerialPort.FormattingEnabled = true;
-            this.pdSerialPort.Location = new System.Drawing.Point(150, 100);
+            this.pdSerialPort.Location = new System.Drawing.Point(151, 140);
             this.pdSerialPort.Name = "pdSerialPort";
             this.pdSerialPort.Size = new System.Drawing.Size(80, 21);
             this.pdSerialPort.TabIndex = 7;
@@ -216,7 +223,7 @@ namespace Terminal
             // 
             this.cbSerial.AutoSize = true;
             this.cbSerial.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbSerial.Location = new System.Drawing.Point(26, 101);
+            this.cbSerial.Location = new System.Drawing.Point(27, 141);
             this.cbSerial.Name = "cbSerial";
             this.cbSerial.Size = new System.Drawing.Size(122, 17);
             this.cbSerial.TabIndex = 6;
@@ -228,7 +235,7 @@ namespace Terminal
             // 
             this.tbTcpConnectPort.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbTcpConnectPort.Enabled = false;
-            this.tbTcpConnectPort.Location = new System.Drawing.Point(552, 76);
+            this.tbTcpConnectPort.Location = new System.Drawing.Point(552, 75);
             this.tbTcpConnectPort.Name = "tbTcpConnectPort";
             this.tbTcpConnectPort.Size = new System.Drawing.Size(68, 20);
             this.tbTcpConnectPort.TabIndex = 5;
@@ -237,7 +244,7 @@ namespace Terminal
             // 
             this.label1.AutoSize = true;
             this.label1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label1.Location = new System.Drawing.Point(527, 79);
+            this.label1.Location = new System.Drawing.Point(527, 78);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 4;
@@ -247,7 +254,7 @@ namespace Terminal
             // 
             this.tbTcpConnectAddress.Cursor = System.Windows.Forms.Cursors.Default;
             this.tbTcpConnectAddress.Enabled = false;
-            this.tbTcpConnectAddress.Location = new System.Drawing.Point(376, 76);
+            this.tbTcpConnectAddress.Location = new System.Drawing.Point(376, 75);
             this.tbTcpConnectAddress.Name = "tbTcpConnectAddress";
             this.tbTcpConnectAddress.Size = new System.Drawing.Size(136, 20);
             this.tbTcpConnectAddress.TabIndex = 3;
@@ -256,7 +263,7 @@ namespace Terminal
             // 
             this.cbTcpClient.AutoSize = true;
             this.cbTcpClient.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbTcpClient.Location = new System.Drawing.Point(26, 77);
+            this.cbTcpClient.Location = new System.Drawing.Point(26, 76);
             this.cbTcpClient.Name = "cbTcpClient";
             this.cbTcpClient.Size = new System.Drawing.Size(349, 17);
             this.cbTcpClient.TabIndex = 2;
@@ -288,7 +295,7 @@ namespace Terminal
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(620, 157);
+            this.btnOk.Location = new System.Drawing.Point(621, 189);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 20;
@@ -306,11 +313,53 @@ namespace Terminal
             this.label9.TabIndex = 22;
             this.label9.Text = "Connection Options";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(257, 168);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Initial ON state of ";
+            // 
+            // cbInitialDTR
+            // 
+            this.cbInitialDTR.AutoSize = true;
+            this.cbInitialDTR.Location = new System.Drawing.Point(350, 167);
+            this.cbInitialDTR.Name = "cbInitialDTR";
+            this.cbInitialDTR.Size = new System.Drawing.Size(49, 17);
+            this.cbInitialDTR.TabIndex = 24;
+            this.cbInitialDTR.Text = "DTR";
+            this.cbInitialDTR.UseVisualStyleBackColor = true;
+            // 
+            // cbInitialRTS
+            // 
+            this.cbInitialRTS.AutoSize = true;
+            this.cbInitialRTS.Location = new System.Drawing.Point(396, 167);
+            this.cbInitialRTS.Name = "cbInitialRTS";
+            this.cbInitialRTS.Size = new System.Drawing.Size(48, 17);
+            this.cbInitialRTS.TabIndex = 25;
+            this.cbInitialRTS.Text = "RTS";
+            this.cbInitialRTS.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(446, 168);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(108, 13);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "before the port opens";
+            // 
             // FrmConnectOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 205);
+            this.ClientSize = new System.Drawing.Size(720, 233);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.cbInitialRTS);
+            this.Controls.Add(this.cbInitialDTR);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label8);
@@ -367,5 +416,9 @@ namespace Terminal
         private System.Windows.Forms.TextBox tbTcpConnectPort;
         private System.Windows.Forms.TextBox tbTcpConnectAddress;
         private System.Windows.Forms.TextBox tbTcpListenPort;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox cbInitialDTR;
+        private System.Windows.Forms.CheckBox cbInitialRTS;
+        private System.Windows.Forms.Label label10;
     }
 }

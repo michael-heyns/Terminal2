@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Terminal
 {
@@ -13,12 +14,9 @@ namespace Terminal
     {
         public delegate void EnqueuedDelegate();
         public EnqueuedDelegate UIInputQHandlerInstance;
-        public EnqueuedDelegate UIOutputQHandlerInstance;
-        private readonly EventQueue _uiInputQueue;
+        private readonly EventQueue _uiInputQueue = null;
 
-        private readonly Queue<string> _cmdQueue = new Queue<string>();
         private readonly Queue<int> _macroQueue = new Queue<int>();
-        private readonly String _timLock = string.Empty;
 
         public bool ExitFlag = false;
         private Profile _activeProfile = new Profile();
@@ -26,6 +24,10 @@ namespace Terminal
         private int _ticks = 0;
         private int _tock = 0;
         private Comms _comms = null;
+
+        private readonly string _tickLock = string.Empty;
+        private readonly string _timLock = string.Empty;
+        private readonly string _dollarLock = string.Empty;
 
         private enum State { Changing, Disconnected, Connected, Listening };
         private State _state = State.Disconnected;
@@ -47,6 +49,8 @@ namespace Terminal
         private bool _colorHasChanged = false;
         private bool _firstActivation = true;
         private int _indexAtX0 = 0;
+        private string _halfProcessedLine = string.Empty;
+
         private bool DetectColourChange(string str)
         {
             for (int i = 0; i < _activeProfile.displayOptions.lines.Length; i++)
@@ -59,6 +63,8 @@ namespace Terminal
                         if (str.StartsWith(_activeProfile.displayOptions.lines[i].text))
                         {
                             _activeColor = _activeProfile.displayOptions.lines[i].color;
+                            if (_activeProfile.displayOptions.lines[i].freeze)
+                                cbFreeze.Checked = true;
                             return true;
                         }
                     }
@@ -69,6 +75,8 @@ namespace Terminal
                         if (str.Contains(_activeProfile.displayOptions.lines[i].text))
                         {
                             _activeColor = _activeProfile.displayOptions.lines[i].color;
+                            if (_activeProfile.displayOptions.lines[i].freeze)
+                                cbFreeze.Checked = true;
                             return true;
                         }
                     }
@@ -79,80 +87,37 @@ namespace Terminal
 
         private void ShowText(string text)
         {
+            int limit = _activeProfile.displayOptions.maxBufferSizeMB * (1028 * 1024);
+            if (rtb.Text.Length > limit)
+            {
+                int cutsize = (limit * _activeProfile.displayOptions.cutPercent) / 100;
+                if (Log.Enabled)
+                    rtb.Text = "***<Removed from memory (only) - See the log file for everything>***\n" + rtb.Text.Substring(cutsize);
+                else
+                    rtb.Text = "***<Removed from memory - Hint: Use logging to capture everything>***\n" + rtb.Text.Substring(cutsize);
+            }
+
             if (_activeProfile.displayOptions.colorFiltersEnabled)
                 rtb.AppendText(text, _activeColor);
             else
                 rtb.AppendText(text);
         }
 
-        private void UIInputQueueHandler()
+        private void ProcessEveryCharacter(string str)
         {
-            if (cbFreeze.Checked)
-                return;
-
-            while (_uiInputQueue.Count > 0)
+            for (int i = 0; i < str.Length; i++)
             {
-                string str = (string)_uiInputQueue.Dequeue();
-
-                foreach (char c in str)
+                char c = str[i];
+                switch (c)
                 {
-                    switch (c)
-                    {
-                        case (char)'\r':
-                            if (cbShowCR.Checked)
-                            {
-                                ShowText("{CR}");
-                                _logLine += "{CR}";
-                            }
-                            if (rbEndOnCR.Checked)
-                            {
-                                if (xPos == 0)
-                                {
-                                    if (cbTimestamp.Checked)
-                                    {
-                                        _timeAtX0 = Utils.Timestamp();
-                                        ShowText(_timeAtX0);
-                                    }
-                                }
-
-                                Log.Add("R : " + _timeAtX0 + _logLine);
-                                _logLine = string.Empty;
-                                xPos = 0;
-                                ShowText("\r");
-                                _activeColor = _activeProfile.displayOptions.inputText;
-                                _colorHasChanged = false;
-                            }
-                            break;
-
-                        case (char)'\n':
-                            if (cbShowLF.Checked)
-                            {
-                                ShowText("{LF}");
-                                _logLine += "{CR}";
-                            }
-                            if (rbEndOnLF.Checked)
-                            {
-                                if (xPos == 0)
-                                {
-                                    if (cbTimestamp.Checked)
-                                    {
-                                        _timeAtX0 = Utils.Timestamp();
-                                        ShowText(_timeAtX0);
-                                    }
-                                }
-
-                                Log.Add("R : " + _timeAtX0 + _logLine);
-                                _logLine = string.Empty;
-                                xPos = 0;
-                                ShowText("\r");
-                                _activeColor = _activeProfile.displayOptions.inputText;
-                                _colorHasChanged = false;
-                            }
-                            break;
-
-                        default:
-                            _logLine += c;
-
+                    case (char)'\r':
+                        if (cbShowCR.Checked)
+                        {
+                            ShowText("{CR}");
+                            _logLine += "{CR}";
+                        }
+                        if (rbEndOnCR.Checked)
+                        {
                             if (xPos == 0)
                             {
                                 if (cbTimestamp.Checked)
@@ -160,35 +125,117 @@ namespace Terminal
                                     _timeAtX0 = Utils.Timestamp();
                                     ShowText(_timeAtX0);
                                 }
-                                _indexAtX0 = rtb.TextLength;
                             }
 
-                            if (cbASCII.Checked)
-                                ShowText(c.ToString());
-                            if (cbHEX.Checked)
+                            Log.Add("R : " + _timeAtX0 + _logLine);
+                            _logLine = string.Empty;
+                            xPos = 0;
+                            ShowText("\r");
+                            _activeColor = _activeProfile.displayOptions.inputText;
+                            _colorHasChanged = false;
+
+                            if (cbFreeze.Checked)
                             {
-                                byte b = Convert.ToByte(c);
-                                ShowText($"{b:X2} ");
+                                _halfProcessedLine = str.Substring(i + 1);
+                                return;
                             }
+                        }
+                        break;
 
-                            xPos++;
-
-                            if (_activeProfile.displayOptions.colorFiltersEnabled)
+                    case (char)'\n':
+                        if (cbShowLF.Checked)
+                        {
+                            ShowText("{LF}");
+                            _logLine += "{CR}";
+                        }
+                        if (rbEndOnLF.Checked)
+                        {
+                            if (xPos == 0)
                             {
-                                if (!_colorHasChanged)
+                                if (cbTimestamp.Checked)
                                 {
-                                    _colorHasChanged = DetectColourChange(_logLine);
-                                    if (_colorHasChanged)
-                                    {
-                                        rtb.SelectionStart = _indexAtX0;
-                                        rtb.SelectionLength = xPos;
-                                        rtb.SelectionColor = _activeColor;
-                                    }
+                                    _timeAtX0 = Utils.Timestamp();
+                                    ShowText(_timeAtX0);
                                 }
                             }
-                            break;
-                    }
+
+                            Log.Add("R : " + _timeAtX0 + _logLine);
+                            _logLine = string.Empty;
+                            xPos = 0;
+                            ShowText("\r");
+                            _activeColor = _activeProfile.displayOptions.inputText;
+                            _colorHasChanged = false;
+
+                            if (cbFreeze.Checked)
+                            {
+                                _halfProcessedLine = str.Substring(i + 1);
+                                return;
+                            }
+                        }
+                        break;
+
+                    default:
+                        _logLine += c;
+
+                        if (xPos == 0)
+                        {
+                            if (cbTimestamp.Checked)
+                            {
+                                _timeAtX0 = Utils.Timestamp();
+                                ShowText(_timeAtX0);
+                            }
+                            _indexAtX0 = rtb.TextLength;
+                        }
+
+                        if (cbASCII.Checked)
+                            ShowText(c.ToString());
+                        if (cbHEX.Checked)
+                        {
+                            byte b = Convert.ToByte(c);
+                            ShowText($"{b:X2} ");
+                        }
+
+                        xPos++;
+
+                        if (_activeProfile.displayOptions.colorFiltersEnabled)
+                        {
+                            if (!_colorHasChanged)
+                            {
+                                _colorHasChanged = DetectColourChange(_logLine);
+                                if (_colorHasChanged)
+                                {
+                                    rtb.SelectionStart = _indexAtX0;
+                                    rtb.SelectionLength = xPos;
+                                    rtb.SelectionColor = _activeColor;
+                                }
+                            }
+                        }
+                        break;
                 }
+            }
+        }
+
+        private void UIInputQueueHandler()
+        {
+            if (cbFreeze.Checked)
+            {
+                int freezesize = _activeProfile.displayOptions.freezeSizeKB * 1024;
+                if (_uiInputQueue.LengthOfStringObjects > freezesize)
+                    cbFreeze.Checked = false;
+                else
+                    return;
+            }
+
+            if (_halfProcessedLine.Length > 0)
+            {
+                ProcessEveryCharacter(_halfProcessedLine);
+                _halfProcessedLine = string.Empty;
+            }
+
+            while (_uiInputQueue.Count > 0)
+            {
+                string str = (string)_uiInputQueue.Dequeue();
+                ProcessEveryCharacter(str);
             }
         }
 
@@ -499,10 +546,7 @@ namespace Terminal
                     str += "$0D";
                 if (cbSendLF.Checked)
                     str += "$0A";
-                lock (_cmdQueue)
-                {
-                    _cmdQueue.Enqueue(str);
-                }
+                SendDollarString(str, 0);
             }
             tbCommand.Focus();
         }
@@ -586,7 +630,6 @@ namespace Terminal
                 Application.DoEvents();
                 this.Invoke(this.UIInputQHandlerInstance);
             }
-
             tbCommand.Focus();
         }
 
@@ -702,6 +745,7 @@ namespace Terminal
             _activeProfile.sendCR = cbSendCR.Checked;
             _activeProfile.sendLF = cbSendLF.Checked;
             Database.SaveProfile(_activeProfile);
+            Database.SaveAsActiveProfile(_activeProfile.name);
         }
 
         private void ShowOutgoingData(string line)
@@ -883,37 +927,40 @@ namespace Terminal
 
         private void SendDollarString(string cmd, int icd)
         {
-            byte[] array = Encoding.UTF8.GetBytes(cmd);
-            byte[] oneByte = new byte[1];
-
-            ShowOutgoingData(cmd);
-
-            int i = 0;
-            int len = array.Length;
-            while (i < len)
+            lock (_dollarLock)
             {
-                if (i < len - 1 && array[i] == '$' && array[i + 1] == '$')
-                {
-                    oneByte[0] = array[i];
-                    _comms.Write(oneByte);
-                    i++;
-                }
-                else if (i < len - 2 && array[i] == '$' && IsHex(array[i + 1]) && IsHex(array[i + 2]))
-                {
-                    int ch = (GetHex(array[i + 1]) << 4) | GetHex(array[i + 2]);
-                    oneByte[0] = (byte)ch;
-                    _comms.Write(oneByte);
-                    i += 2;
-                }
-                else
-                {
-                    oneByte[0] = array[i];
-                    _comms.Write(oneByte);
-                }
-                i++;
+                byte[] array = Encoding.UTF8.GetBytes(cmd);
+                byte[] oneByte = new byte[1];
 
-                if (icd > 0)
-                    Thread.Sleep(icd);
+                ShowOutgoingData(cmd);
+
+                int i = 0;
+                int len = array.Length;
+                while (i < len)
+                {
+                    if (i < len - 1 && array[i] == '$' && array[i + 1] == '$')
+                    {
+                        oneByte[0] = array[i];
+                        _comms.Write(oneByte);
+                        i++;
+                    }
+                    else if (i < len - 2 && array[i] == '$' && IsHex(array[i + 1]) && IsHex(array[i + 2]))
+                    {
+                        int ch = (GetHex(array[i + 1]) << 4) | GetHex(array[i + 2]);
+                        oneByte[0] = (byte)ch;
+                        _comms.Write(oneByte);
+                        i += 2;
+                    }
+                    else
+                    {
+                        oneByte[0] = array[i];
+                        _comms.Write(oneByte);
+                    }
+                    i++;
+
+                    if (icd > 0)
+                        Thread.Sleep(icd);
+                }
             }
         }
 
@@ -1021,81 +1068,79 @@ namespace Terminal
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (_comms == null)
-                return;
-            else if (_state == State.Changing || _state == State.Disconnected)
-                return;
-            else if (_state == State.Connected)
+            lock (_tickLock)
             {
-                if (!_comms.Connected())
+                if (_comms == null)
+                    return;
+                else if (_state == State.Changing || _state == State.Disconnected)
+                    return;
+                else if (_state == State.Connected)
                 {
-                    ActionDisconnect();
-                }
-                else
-                {
-                    if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient ||
-                        _activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
+                    if (!_comms.Connected())
                     {
-                        int count = _comms.DataWaiting();
-                        if (count > 0)
+                        ActionDisconnect();
+                    }
+                    else
+                    {
+                        if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient ||
+                            _activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
                         {
-                            byte[] data = _comms.Read();
-                            string str = System.Text.Encoding.Default.GetString(data);
-                            lock (_uiInputQueue)
+                            int count = _comms.DataWaiting();
+                            if (count > 0)
                             {
-                                _uiInputQueue.Enqueue(str);
+                                byte[] data = _comms.Read();
+                                string str = System.Text.Encoding.Default.GetString(data);
+                                lock (_uiInputQueue)
+                                {
+                                    _uiInputQueue.Enqueue(str);
+                                }
                             }
                         }
                     }
                 }
-            }
-            else if (_state == State.Listening)
-            {
-                if (_threadDone)
+                else if (_state == State.Listening)
                 {
-                    if (_threadResult)
+                    if (_threadDone)
                     {
-                        _state = State.Connected;
-                        btnConnect.Text = "Disconnect";
-                        btnConnectOptions.Enabled = false;
-                        pdPort.Enabled = false;
-                        lblProfileName.Enabled = false;
-                        btnProfileSelect.Enabled = false;
-                        btnFile.Enabled = true;
-                        btnConnect.BackColor = Color.Lime;
-                        Log.Add(Utils.Timestamp() + "{CONNECTED}");
+                        if (_threadResult)
+                        {
+                            _state = State.Connected;
+                            btnConnect.Text = "Disconnect";
+                            btnConnectOptions.Enabled = false;
+                            pdPort.Enabled = false;
+                            lblProfileName.Enabled = false;
+                            btnProfileSelect.Enabled = false;
+                            btnFile.Enabled = true;
+                            btnConnect.BackColor = Color.Lime;
+                            Log.Add(Utils.Timestamp() + "{CONNECTED}");
+                        }
+                        else
+                        {
+                            _state = State.Disconnected;
+                        }
+                        return;
                     }
-                    else
+
+                    _ticks++;
+                    if ((timer.Interval * _ticks) >= 100)
                     {
-                        _state = State.Disconnected;
+                        string[] chr = { "|", "/", "---", "\\" };
+                        btnConnect.Text = chr[_tock++];
+                        if (_tock == 4)
+                            _tock = 0;
+                        _ticks = 0;
                     }
-                    return;
                 }
 
-                _ticks++;
-                if (_ticks == (100 / timer.Interval))
+                lock (_timLock)
                 {
-                    string[] chr = { "|", "/", "---", "\\" };
-                    btnConnect.Text = chr[_tock++];
-                    if (_tock == 4)
-                        _tock = 0;
-                    _ticks = 0;
+                    lock (_macroQueue)
+                    {
+                        while (_macroQueue.Count > 0)
+                            PrepareMacro(_macroQueue.Dequeue());
+                    }
+                    ServiceRunningMacros();
                 }
-            }
-
-            lock (_timLock)
-            {
-                lock (_cmdQueue)
-                {
-                    while (_cmdQueue.Count > 0)
-                        SendDollarString(_cmdQueue.Dequeue(), 0);
-                }
-                lock (_macroQueue)
-                {
-                    while (_macroQueue.Count > 0)
-                        PrepareMacro(_macroQueue.Dequeue());
-                }
-                ServiceRunningMacros();
             }
         }
 
@@ -1197,10 +1242,7 @@ namespace Terminal
                             str += "$0D";
                         if (fs.SendLF)
                             str += "$0A";
-                        lock (_cmdQueue)
-                        {
-                            _cmdQueue.Enqueue(str);
-                        }
+                        SendDollarString(str, 0);
                         progressBar.Value++;
                         Application.DoEvents();
                         Thread.Sleep(fs.InterLineDelay);
@@ -1229,6 +1271,7 @@ namespace Terminal
                 SaveActiveProfile();
                 FrmProfileDatabase db = new FrmProfileDatabase(_activeProfile.name);
                 TopMost = false;
+                db.StartOnly = false;
                 db.ShowDialog();
                 TopMost = cbStayOnTop.Checked;
                 if (!db.SelectedProfile.Equals(_activeProfile.name))
@@ -1238,28 +1281,41 @@ namespace Terminal
             tbCommand.Focus();
         }
 
-        private void LblProfileName_DoubleClick(object sender, EventArgs e)
+        private void BtnQuickLaunch_Click(object sender, EventArgs e)
         {
-            BtnProfileSelect_Click(sender, e);
+            btnQuickLaunch.Enabled = false;
+            {
+                FrmProfileDatabase db = new FrmProfileDatabase(_activeProfile.name);
+                TopMost = false;
+                db.StartOnly = true;
+                db.ShowDialog();
+                TopMost = cbStayOnTop.Checked;
+                btnQuickLaunch.Enabled = true;
+            }
+            tbCommand.Focus();
         }
 
         private void BtnNew_Click(object sender, EventArgs e)
         {
-            string source = "(Your Default profile will be copied)";
-            FrmProfileName askname = new FrmProfileName(source, "Name of the New Profile");
-            askname.ShowDialog();
-            if (!askname.NewName.Equals(source))
+            btnNew.Enabled = false;
             {
-                if (!Database.Find(askname.NewName))
-                    Database.Copy("Default", askname.NewName);
-
-                try
+                string source = "(Your Default profile will be copied)";
+                FrmProfileName askname = new FrmProfileName(source, "Name of the New Profile");
+                askname.ShowDialog();
+                if (!askname.NewName.Equals(source))
                 {
-                    string currentExecutable = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-                    System.Diagnostics.Process.Start(currentExecutable, "\"" + askname.NewName + "\"");
+                    if (!Database.Find(askname.NewName))
+                        Database.Copy("Default", askname.NewName);
+
+                    try
+                    {
+                        string currentExecutable = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                        System.Diagnostics.Process.Start(currentExecutable, "\"" + askname.NewName + "\"");
+                    }
+                    catch { }
                 }
-                catch { }
             }
+            btnNew.Enabled = true;
         }
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1284,7 +1340,10 @@ namespace Terminal
             string line = lbOutput.SelectedItem.ToString();
             string cmd;
             if (_activeProfile.displayOptions.timestampOutputLines && line.Length >= 14)
-                cmd = line.Substring(14);
+            {
+                int i = line.IndexOf(": ");
+                cmd = line.Substring(i + 2);
+            }
             else
                 cmd = line;
 
@@ -1294,6 +1353,45 @@ namespace Terminal
                 cmd = cmd.Substring(0, cmd.Length - 3);
             tbCommand.Text = cmd;
 
+        }
+
+        private void LblProfileName_Click(object sender, EventArgs e)
+        {
+            BtnProfileSelect_Click(sender, e);
+        }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            btnExport.Enabled = false;
+            {
+                bool curFreeze = cbFreeze.Checked;
+                if (!cbFreeze.Checked)
+                    cbFreeze.Checked = true;
+
+                if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    try
+                    {
+                        string fname = saveFileDialog.FileName;
+                        if (fname.ToLower().EndsWith(".rtf"))
+                            rtb.SaveFile(saveFileDialog.FileName);
+                        else
+                        {
+                            string[] lines = rtb.Lines;
+                            File.WriteAllLines(fname, lines);
+                        }
+                        MessageBox.Show("The buffer has been exported to file", "Buffer Exported", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("An error occurred while exporting the buffer.  Verify the filename and try again", "Export failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                if (!curFreeze)
+                    cbFreeze.Checked = false;
+            }
+            btnExport.Enabled = true;
         }
     }
     public static class RichTextBoxExtensions

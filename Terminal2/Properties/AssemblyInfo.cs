@@ -34,8 +34,8 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 
 namespace Terminal
 {
@@ -87,7 +87,7 @@ namespace Terminal
             if (trademarkAttr != null)
                 Trademark = trademarkAttr.Trademark;
 
-            AssemblyVersion = assembly.GetName().Version.ToString() + ".Beta-9";
+            AssemblyVersion = assembly.GetName().Version.ToString();
 
             AssemblyFileVersionAttribute fileVersionAttr =
                 GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly);

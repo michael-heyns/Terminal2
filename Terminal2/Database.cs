@@ -172,6 +172,9 @@ namespace Terminal
                 data += $"OnTop={profile.stayontop}\n";
                 data += $"TimeInput={profile.timestampInput}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
+                data += $"MaxBufSizeMB={profile.displayOptions.maxBufferSizeMB}\n";
+                data += $"CutPercent={profile.displayOptions.cutPercent}\n";
+                data += $"FreezeKB={profile.displayOptions.freezeSizeKB}\n";
 
                 if (!Directory.Exists(profile.logOptions.Directory))
                     Directory.CreateDirectory(profile.logOptions.Directory);
@@ -200,6 +203,7 @@ namespace Terminal
                         data += $"F{i}Mode={profile.displayOptions.lines[i].mode}\n";
                         data += $"F{i}Text={profile.displayOptions.lines[i].text}\n";
                         data += $"F{i}Color={profile.displayOptions.lines[i].color.ToArgb()}\n";
+                        data += $"F{i}Freeze={profile.displayOptions.lines[i].freeze}\n";
                     }
                 }
 
@@ -213,8 +217,9 @@ namespace Terminal
                 data += $"Handshaking={profile.conOptions.Handshaking}\n";
                 data += $"Parity={profile.conOptions.Parity}\n";
                 data += $"StopBits={profile.conOptions.StopBits}\n";
-                data += $"TCPAddress={profile.conOptions.TCPAdress}\n";
-                data += $"TCPPort={profile.conOptions.TCPPort}\n";
+                data += $"TCPConnectAddress={profile.conOptions.TCPConnectAdress}\n";
+                data += $"TCPConnectPort={profile.conOptions.TCPConnectPort}\n";
+                data += $"TCPListenPort={profile.conOptions.TCPListenPort}\n";
                 data += $"\n";
 
                 int index = 0;
@@ -338,6 +343,13 @@ namespace Terminal
                             }
                         }
 
+                        else if (line.StartsWith("MaxBufSizeMB="))
+                            profile.displayOptions.maxBufferSizeMB = Utils.Int(line.Substring(13));
+                        else if (line.StartsWith("CutPercent="))
+                            profile.displayOptions.cutPercent = Utils.Int(line.Substring(11));
+                        else if (line.StartsWith("FreezeKB="))
+                            profile.displayOptions.freezeSizeKB = Utils.Int(line.Substring(9));
+
                         else if (line.StartsWith("TimeOutput="))
                             profile.displayOptions.timestampOutputLines = line.Contains("True");
 
@@ -368,6 +380,9 @@ namespace Terminal
                                 key = $"F{i}Color=";
                                 if (line.StartsWith(key))
                                     profile.displayOptions.lines[i].color = Color.FromArgb(Utils.Int(line.Substring(key.Length)));
+                                key = $"F{i}Freeze=";
+                                if (line.StartsWith(key))
+                                    profile.displayOptions.lines[i].freeze = line.Contains("True");
                             }
                         }
                     }
@@ -391,10 +406,12 @@ namespace Terminal
                             profile.conOptions.Parity = line.Substring(7);
                         else if (line.StartsWith("StopBits="))
                             profile.conOptions.StopBits = line.Substring(9);
-                        else if (line.StartsWith("TCPAddress="))
-                            profile.conOptions.TCPAdress = line.Substring(11);
-                        else if (line.StartsWith("TCPPort="))
-                            profile.conOptions.TCPPort = line.Substring(8);
+                        else if (line.StartsWith("TCPConnectAddress="))
+                            profile.conOptions.TCPConnectAdress = line.Substring(18);
+                        else if (line.StartsWith("TCPConnectPort="))
+                            profile.conOptions.TCPConnectPort = line.Substring(15);
+                        else if (line.StartsWith("TCPListenPort="))
+                            profile.conOptions.TCPListenPort = line.Substring(14);
 
                     }
                     else if (section == FSection.Macros)

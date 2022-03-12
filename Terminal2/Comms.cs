@@ -59,6 +59,10 @@ namespace Terminal
                     BaudRate = Utils.Int(_profile.conOptions.Baudrate),
                     DataBits = Utils.Int(_profile.conOptions.DataBits)
                 };
+                _com.ReadBufferSize = 10000000;
+                _com.WriteBufferSize = 1000000;
+                _com.WriteTimeout = 1000;
+                _com.ReadTimeout = 1000;
                 switch (_profile.conOptions.Parity)
                 {
                     default:
@@ -119,6 +123,29 @@ namespace Terminal
                         break;
                 }
 
+                SetupSerialControls();
+                if (_profile.conOptions.InitialDTR)
+                {
+                    _com.DtrEnable = true;
+                    _controls[0].BackColor = Color.Lime;
+                }
+                else
+                {
+                    _com.DtrEnable = false;
+                    _controls[0].BackColor = Color.White;
+                }
+
+                if (_profile.conOptions.InitialRTS)
+                {
+                    _com.RtsEnable = true;
+                    _controls[1].BackColor = Color.Lime;
+                }
+                else
+                {
+                    _com.RtsEnable = false;
+                    _controls[1].BackColor = Color.White;
+                }
+
                 try
                 {
                     _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
@@ -132,7 +159,6 @@ namespace Terminal
                 if (_com.IsOpen)
                 {
                     SetupSerialLEDs();
-                    SetupSerialControls();
                     _connectionString = $"Connected to: {_profile.conOptions.SerialPort},{_profile.conOptions.Baudrate},{_profile.conOptions.DataBits},{_profile.conOptions.Parity},{_profile.conOptions.StopBits},{_profile.conOptions.Handshaking}";
                     _com.DataReceived += SerialDataReceived;
                     _connected = true;
@@ -143,7 +169,7 @@ namespace Terminal
                 _comType = CommType.ctSERVER;
                 try
                 {
-                    int port = Utils.Int(_profile.conOptions.TCPPort);
+                    int port = Utils.Int(_profile.conOptions.TCPListenPort);
                     _server = new TcpListener(IPAddress.Any, port);
                     _server.Start();
 
@@ -162,8 +188,8 @@ namespace Terminal
                 _comType = CommType.ctCLIENT;
                 try
                 {
-                    int port = Utils.Int(_profile.conOptions.TCPPort);
-                    _client = new TcpClient(_profile.conOptions.TCPAdress, port);
+                    int port = Utils.Int(_profile.conOptions.TCPConnectPort);
+                    _client = new TcpClient(_profile.conOptions.TCPConnectAdress, port);
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;

@@ -12,6 +12,7 @@ namespace Terminal
         public DisplayOptions Options;
         public DialogResult Result = DialogResult.Cancel;
 
+        public readonly CheckBox[] FreezeList;
         public readonly ComboBox[] ModeList;
         public readonly TextBox[] TextList;
         public readonly Panel[] PanelList;
@@ -23,6 +24,7 @@ namespace Terminal
             TextList = new TextBox[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 };
             PanelList = new Panel[] { c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12 };
             SampleList = new Label[] { sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12 };
+            FreezeList = new CheckBox[] { e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12 };
         }
 
         private void ShowDisplayOptions()
@@ -46,17 +48,29 @@ namespace Terminal
                 SampleList[i].Font = Options.inputFont;
                 SampleList[i].ForeColor = Options.lines[i].color;
                 TextList[i].Text = Options.lines[i].text;
+                FreezeList[i].Checked = Options.lines[i].freeze;
             }
+
+            tbMaxBufSize.Text = Options.maxBufferSizeMB.ToString();
+            tbCutSize.Text = Options.cutPercent.ToString();
+            tbFreezeSize.Text = Options.freezeSizeKB.ToString();
         }
 
         private void Config_Load(object sender, EventArgs e)
         {
+            AssemblyInfo info = new AssemblyInfo();
+            lblThisVersion.Text = $"v{info.AssemblyVersion}";
+
             cbTimestampOutputLines.Checked = Options.timestampOutputLines;
             ShowDisplayOptions();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
+            LimitBufferSizes();
+            Options.maxBufferSizeMB = Utils.Int(tbMaxBufSize.Text);
+            Options.cutPercent = Utils.Int(tbCutSize.Text);
+            Options.freezeSizeKB = Utils.Int(tbFreezeSize.Text);
             Result = DialogResult.OK;
             Close();
         }
@@ -189,8 +203,65 @@ namespace Terminal
             {
                 Options.lines[i].mode = 0;
                 Options.lines[i].text = string.Empty;
+                Options.lines[i].freeze = false;
             }
             ShowDisplayOptions();
+        }
+
+        private void BtnFTReset_Click(object sender, EventArgs e)
+        {
+            tbMaxBufSize.Text = "10";
+            tbCutSize.Text = "10";
+            tbFreezeSize.Text = "10";
+        }
+        private void LimitBufferSizes()
+        {
+            int v = Utils.Int(tbMaxBufSize.Text);
+            if (v < 1)
+                tbMaxBufSize.Text = "1";
+
+            v = Utils.Int(tbCutSize.Text);
+            if (v < 1)
+                tbCutSize.Text = "1";
+            else if (v > 50)
+                tbCutSize.Text = "50";
+
+            v = Utils.Int(tbFreezeSize.Text);
+            if (v < 1)
+                tbFreezeSize.Text = "1";
+            else if (v > 1000)
+                tbFreezeSize.Text = "1000";
+        }
+
+        private void TbMaxBufSize_Leave(object sender, EventArgs e)
+        {
+            LimitBufferSizes();
+        }
+
+        private void TbCutSize_Leave(object sender, EventArgs e)
+        {
+            LimitBufferSizes();
+        }
+
+        private void TbFreezeSize_Leave(object sender, EventArgs e)
+        {
+            LimitBufferSizes();
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void FreezeChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            int i = Utils.Int(cb.Tag.ToString());
+            Options.lines[i].freeze = cb.Checked;
         }
     }
 }

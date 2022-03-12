@@ -31,25 +31,26 @@ namespace Terminal
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.blank2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnConnectOptions = new System.Windows.Forms.Button();
             this.PanelOne = new System.Windows.Forms.Panel();
+            this.btnQuickLaunch = new System.Windows.Forms.Button();
             this.pdPort = new System.Windows.Forms.ComboBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnProfileSelect = new System.Windows.Forms.Button();
@@ -91,6 +92,7 @@ namespace Terminal
             this.ctrlTwo = new System.Windows.Forms.Label();
             this.lbOutput = new System.Windows.Forms.ListBox();
             this.PanelTwo = new System.Windows.Forms.Panel();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnColorConfig = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -121,6 +123,11 @@ namespace Terminal
             this.helpOutput = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.logFlusher = new System.Windows.Forms.Timer(this.components);
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.sep1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -188,6 +195,7 @@ namespace Terminal
             // 
             // PanelOne
             // 
+            this.PanelOne.Controls.Add(this.btnQuickLaunch);
             this.PanelOne.Controls.Add(this.pdPort);
             this.PanelOne.Controls.Add(this.btnNew);
             this.PanelOne.Controls.Add(this.btnProfileSelect);
@@ -205,6 +213,18 @@ namespace Terminal
             this.PanelOne.Size = new System.Drawing.Size(926, 29);
             this.PanelOne.TabIndex = 4;
             // 
+            // btnQuickLaunch
+            // 
+            this.btnQuickLaunch.AutoSize = true;
+            this.btnQuickLaunch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuickLaunch.Image = ((System.Drawing.Image)(resources.GetObject("btnQuickLaunch.Image")));
+            this.btnQuickLaunch.Location = new System.Drawing.Point(720, 3);
+            this.btnQuickLaunch.Name = "btnQuickLaunch";
+            this.btnQuickLaunch.Size = new System.Drawing.Size(22, 22);
+            this.btnQuickLaunch.TabIndex = 23;
+            this.btnQuickLaunch.UseVisualStyleBackColor = true;
+            this.btnQuickLaunch.Click += new System.EventHandler(this.BtnQuickLaunch_Click);
+            // 
             // pdPort
             // 
             this.pdPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -220,7 +240,7 @@ namespace Terminal
             this.btnNew.AutoSize = true;
             this.btnNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.Location = new System.Drawing.Point(699, 3);
+            this.btnNew.Location = new System.Drawing.Point(698, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(22, 22);
             this.btnNew.TabIndex = 21;
@@ -244,13 +264,13 @@ namespace Terminal
             this.helpClickHere.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.helpClickHere.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.helpClickHere.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpClickHere.Location = new System.Drawing.Point(470, 6);
+            this.helpClickHere.Location = new System.Drawing.Point(476, 6);
             this.helpClickHere.Multiline = true;
             this.helpClickHere.Name = "helpClickHere";
             this.helpClickHere.ReadOnly = true;
-            this.helpClickHere.Size = new System.Drawing.Size(159, 18);
+            this.helpClickHere.Size = new System.Drawing.Size(123, 18);
             this.helpClickHere.TabIndex = 12;
-            this.helpClickHere.Text = "(Double-click for quick access)\r\n";
+            this.helpClickHere.Text = "(Click for quick access)\r\n";
             this.helpClickHere.Visible = false;
             // 
             // cbStayOnTop
@@ -278,7 +298,7 @@ namespace Terminal
             this.lblProfileName.TabIndex = 18;
             this.lblProfileName.Text = "Default";
             this.lblProfileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblProfileName.DoubleClick += new System.EventHandler(this.LblProfileName_DoubleClick);
+            this.lblProfileName.Click += new System.EventHandler(this.LblProfileName_Click);
             // 
             // label1
             // 
@@ -402,14 +422,14 @@ namespace Terminal
             this.scF11,
             this.scF12});
             this.dgMacroTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
@@ -418,8 +438,8 @@ namespace Terminal
             this.dgMacroTable.ReadOnly = true;
             this.dgMacroTable.RowHeadersVisible = false;
             this.dgMacroTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgMacroTable.RowTemplate.ReadOnly = true;
             this.dgMacroTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgMacroTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -441,80 +461,80 @@ namespace Terminal
             // 
             // F1
             // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.F1.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.F1.DefaultCellStyle = dataGridViewCellStyle1;
             this.F1.HeaderText = "F1";
             this.F1.Name = "F1";
             this.F1.ReadOnly = true;
             // 
             // scF2
             // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF2.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF2.DefaultCellStyle = dataGridViewCellStyle2;
             this.scF2.HeaderText = "F2";
             this.scF2.Name = "scF2";
             this.scF2.ReadOnly = true;
             // 
             // scF3
             // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF3.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF3.DefaultCellStyle = dataGridViewCellStyle3;
             this.scF3.HeaderText = "F3";
             this.scF3.Name = "scF3";
             this.scF3.ReadOnly = true;
             // 
             // scF4
             // 
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF4.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF4.DefaultCellStyle = dataGridViewCellStyle4;
             this.scF4.HeaderText = "F4";
             this.scF4.Name = "scF4";
             this.scF4.ReadOnly = true;
             // 
             // scF5
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF5.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF5.DefaultCellStyle = dataGridViewCellStyle5;
             this.scF5.HeaderText = "F5";
             this.scF5.Name = "scF5";
             this.scF5.ReadOnly = true;
             // 
             // scF6
             // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF6.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF6.DefaultCellStyle = dataGridViewCellStyle6;
             this.scF6.HeaderText = "F6";
             this.scF6.Name = "scF6";
             this.scF6.ReadOnly = true;
             // 
             // scF7
             // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF7.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF7.DefaultCellStyle = dataGridViewCellStyle7;
             this.scF7.HeaderText = "F7";
             this.scF7.Name = "scF7";
             this.scF7.ReadOnly = true;
             // 
             // scF8
             // 
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF8.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF8.DefaultCellStyle = dataGridViewCellStyle8;
             this.scF8.HeaderText = "F8";
             this.scF8.Name = "scF8";
             this.scF8.ReadOnly = true;
             // 
             // scF9
             // 
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF9.DefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF9.DefaultCellStyle = dataGridViewCellStyle9;
             this.scF9.HeaderText = "F9";
             this.scF9.Name = "scF9";
             this.scF9.ReadOnly = true;
             // 
             // scF10
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF10.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF10.DefaultCellStyle = dataGridViewCellStyle10;
             this.scF10.HeaderText = "F10";
             this.scF10.Name = "scF10";
             this.scF10.ReadOnly = true;
@@ -527,8 +547,8 @@ namespace Terminal
             // 
             // scF12
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF12.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF12.DefaultCellStyle = dataGridViewCellStyle11;
             this.scF12.HeaderText = "F12";
             this.scF12.Name = "scF12";
             this.scF12.ReadOnly = true;
@@ -709,6 +729,11 @@ namespace Terminal
             // PanelTwo
             // 
             this.PanelTwo.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelTwo.Controls.Add(this.panel3);
+            this.PanelTwo.Controls.Add(this.panel2);
+            this.PanelTwo.Controls.Add(this.panel1);
+            this.PanelTwo.Controls.Add(this.sep1);
+            this.PanelTwo.Controls.Add(this.btnExport);
             this.PanelTwo.Controls.Add(this.btnHelp);
             this.PanelTwo.Controls.Add(this.btnColorConfig);
             this.PanelTwo.Controls.Add(this.btnClear);
@@ -726,6 +751,18 @@ namespace Terminal
             this.PanelTwo.Name = "PanelTwo";
             this.PanelTwo.Size = new System.Drawing.Size(926, 28);
             this.PanelTwo.TabIndex = 8;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.BackColor = System.Drawing.Color.Transparent;
+            this.btnExport.Location = new System.Drawing.Point(751, 1);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(45, 24);
+            this.btnExport.TabIndex = 17;
+            this.btnExport.Text = "E&xport";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // btnHelp
             // 
@@ -754,7 +791,7 @@ namespace Terminal
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.Location = new System.Drawing.Point(797, 1);
+            this.btnClear.Location = new System.Drawing.Point(799, 1);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(45, 24);
             this.btnClear.TabIndex = 16;
@@ -766,7 +803,7 @@ namespace Terminal
             // 
             this.cbShowCR.AutoSize = true;
             this.cbShowCR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbShowCR.Location = new System.Drawing.Point(486, 5);
+            this.cbShowCR.Location = new System.Drawing.Point(418, 5);
             this.cbShowCR.Name = "cbShowCR";
             this.cbShowCR.Size = new System.Drawing.Size(79, 17);
             this.cbShowCR.TabIndex = 10;
@@ -778,7 +815,7 @@ namespace Terminal
             // 
             this.cbShowLF.AutoSize = true;
             this.cbShowLF.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbShowLF.Location = new System.Drawing.Point(571, 5);
+            this.cbShowLF.Location = new System.Drawing.Point(503, 5);
             this.cbShowLF.Name = "cbShowLF";
             this.cbShowLF.Size = new System.Drawing.Size(76, 17);
             this.cbShowLF.TabIndex = 9;
@@ -789,7 +826,7 @@ namespace Terminal
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(288, 7);
+            this.label2.Location = new System.Drawing.Point(220, 7);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 13);
             this.label2.TabIndex = 14;
@@ -799,7 +836,7 @@ namespace Terminal
             // 
             this.rbEndOnCR.AutoSize = true;
             this.rbEndOnCR.Checked = true;
-            this.rbEndOnCR.Location = new System.Drawing.Point(372, 5);
+            this.rbEndOnCR.Location = new System.Drawing.Point(304, 5);
             this.rbEndOnCR.Name = "rbEndOnCR";
             this.rbEndOnCR.Size = new System.Drawing.Size(40, 17);
             this.rbEndOnCR.TabIndex = 13;
@@ -811,7 +848,7 @@ namespace Terminal
             // rbEndOnLF
             // 
             this.rbEndOnLF.AutoSize = true;
-            this.rbEndOnLF.Location = new System.Drawing.Point(419, 5);
+            this.rbEndOnLF.Location = new System.Drawing.Point(351, 5);
             this.rbEndOnLF.Name = "rbEndOnLF";
             this.rbEndOnLF.Size = new System.Drawing.Size(37, 17);
             this.rbEndOnLF.TabIndex = 12;
@@ -823,7 +860,7 @@ namespace Terminal
             // 
             this.cbFreeze.AutoSize = true;
             this.cbFreeze.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbFreeze.Location = new System.Drawing.Point(13, 5);
+            this.cbFreeze.Location = new System.Drawing.Point(600, 5);
             this.cbFreeze.Name = "cbFreeze";
             this.cbFreeze.Size = new System.Drawing.Size(58, 17);
             this.cbFreeze.TabIndex = 11;
@@ -839,7 +876,7 @@ namespace Terminal
             this.cbTimestamp.Checked = true;
             this.cbTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbTimestamp.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbTimestamp.Location = new System.Drawing.Point(77, 5);
+            this.cbTimestamp.Location = new System.Drawing.Point(9, 5);
             this.cbTimestamp.Name = "cbTimestamp";
             this.cbTimestamp.Size = new System.Drawing.Size(77, 17);
             this.cbTimestamp.TabIndex = 8;
@@ -852,7 +889,7 @@ namespace Terminal
             this.cbHEX.AutoSize = true;
             this.cbHEX.BackColor = System.Drawing.SystemColors.Control;
             this.cbHEX.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbHEX.Location = new System.Drawing.Point(217, 5);
+            this.cbHEX.Location = new System.Drawing.Point(149, 5);
             this.cbHEX.Name = "cbHEX";
             this.cbHEX.Size = new System.Drawing.Size(48, 17);
             this.cbHEX.TabIndex = 7;
@@ -867,7 +904,7 @@ namespace Terminal
             this.cbASCII.Checked = true;
             this.cbASCII.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbASCII.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbASCII.Location = new System.Drawing.Point(160, 5);
+            this.cbASCII.Location = new System.Drawing.Point(90, 5);
             this.cbASCII.Name = "cbASCII";
             this.cbASCII.Size = new System.Drawing.Size(53, 17);
             this.cbASCII.TabIndex = 6;
@@ -1004,9 +1041,10 @@ namespace Terminal
             this.helpColors.Multiline = true;
             this.helpColors.Name = "helpColors";
             this.helpColors.ReadOnly = true;
-            this.helpColors.Size = new System.Drawing.Size(118, 37);
+            this.helpColors.Size = new System.Drawing.Size(118, 67);
             this.helpColors.TabIndex = 11;
-            this.helpColors.Text = "Colors and Fonts        ^\r\n    1) Click icon to edit\r\n";
+            this.helpColors.Text = "Options                      ^\r\n    1) Colors and fonts\r\n    2) Fine tuning\r\n    " +
+    "3) History\r\n\r\n";
             this.helpColors.Visible = false;
             // 
             // progressBar
@@ -1121,6 +1159,44 @@ namespace Terminal
             this.logFlusher.Enabled = true;
             this.logFlusher.Interval = 200;
             this.logFlusher.Tick += new System.EventHandler(this.LogFlusher_Tick);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "rtf";
+            this.saveFileDialog.Filter = "RTF Files|*.rtf|Text files|*.txt";
+            this.saveFileDialog.Title = "Export input buffer";
+            // 
+            // sep1
+            // 
+            this.sep1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.sep1.Location = new System.Drawing.Point(669, 2);
+            this.sep1.Name = "sep1";
+            this.sep1.Size = new System.Drawing.Size(4, 23);
+            this.sep1.TabIndex = 18;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel1.Location = new System.Drawing.Point(585, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(4, 23);
+            this.panel1.TabIndex = 19;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Location = new System.Drawing.Point(397, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(4, 23);
+            this.panel2.TabIndex = 19;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel3.Location = new System.Drawing.Point(203, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(4, 23);
+            this.panel3.TabIndex = 19;
             // 
             // FrmMain
             // 
@@ -1241,6 +1317,13 @@ namespace Terminal
         private System.Windows.Forms.TextBox helpLogfile;
         private System.Windows.Forms.TextBox helpInput;
         private System.Windows.Forms.TextBox helpSource;
+        private System.Windows.Forms.Button btnQuickLaunch;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel sep1;
     }
 }
 

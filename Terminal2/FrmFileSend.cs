@@ -72,9 +72,14 @@ namespace Terminal
             btnSend.Enabled = (tbFilename.Text.Length > 0 && msDelay.Text.Length > 0);
         }
 
-        private void TbFilename_KeyDown(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

@@ -170,7 +170,6 @@ namespace Terminal
             this.Name = "FrmLogOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logging Options";
-            this.Load += new System.EventHandler(this.FrmLogOptions_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

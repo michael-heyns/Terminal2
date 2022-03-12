@@ -14,6 +14,8 @@ namespace Terminal
         private enum FSection { None, Profile, Connections, Macros };
         private string _selectedProfileName = string.Empty;
         public string SelectedProfile { get { return _selectedProfileName; } }
+
+        public bool StartOnly = false;
         public FrmProfileDatabase(string name)
         {
             InitializeComponent();
@@ -45,7 +47,11 @@ namespace Terminal
 
         private void LbProfileList_DoubleClick(object sender, EventArgs e)
         {
-            BtnSelect_Click(sender, e);
+            if (StartOnly)
+                BtnStart_Click(sender, e);
+            else
+                BtnSelect_Click(sender, e);
+            Close();
         }
 
         private void ProfileList_SelectedIndexChanged(object sender, EventArgs e)
@@ -149,6 +155,39 @@ namespace Terminal
                 System.Diagnostics.Process.Start(currentExecutable, "\"" + selectedProfile + "\"");
             }
             catch { }
+        }
+
+        private void FrmProfileDatabase_Shown(object sender, EventArgs e)
+        {
+            if (StartOnly)
+            {
+                lblTitle.Text = "Quick Launch";
+                btnSelect.Visible = false;
+                btnCopy.Visible = false;
+                btnRename.Visible = false;
+                btnExport.Visible = false;
+                btnImport.Visible = false;
+                btnDelete.Visible = false;
+            }
+            else
+            {
+                lblTitle.Text = "Profile Database";
+                btnSelect.Visible = true;
+                btnCopy.Visible = true;
+                btnRename.Visible = true;
+                btnExport.Visible = true;
+                btnImport.Visible = true;
+                btnDelete.Visible = true;
+            }
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

@@ -76,7 +76,7 @@ namespace Terminal
             this.lblSourceName.Text = "xxxxxxx";
             this.lblSourceName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FrmSessionName
+            // FrmProfileName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,7 +88,7 @@ namespace Terminal
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmSessionName";
+            this.Name = "FrmProfileName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Name";
             this.ResumeLayout(false);

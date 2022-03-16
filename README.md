@@ -1,3 +1,4 @@
+# ** PLEASE CHECK BACK HERE NEXT WEEK - I'M FIXING A BUG **
 # Terminal2 - v1.0.1.0
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 ## Sales pitch

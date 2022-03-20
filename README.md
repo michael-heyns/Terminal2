@@ -1,6 +1,6 @@
-# ** PLEASE CHECK BACK HERE NEXT WEEK - I'M FIXING A BUG **
-# Terminal2 - v1.0.1.0
+# Terminal2 - v1.0.2.0
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
+
 ## Sales pitch
 Every Embedded Engineer needs a Terminal Emulator at some point in their career.
 Terminal2 combines features of a number of terminal emulators out there.  

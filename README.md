@@ -1,4 +1,5 @@
-# Terminal2
+# ** PLEASE CHECK BACK HERE NEXT WEEK - I'M FIXING A BUG **
+# Terminal2 - v1.0.1.0
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 ## Sales pitch
 Every Embedded Engineer needs a Terminal Emulator at some point in their career.
@@ -17,16 +18,16 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 
 ## Building Terminal2
 1. Windows 10, 11 with .NET 4.6.1 or later
-2. Visual Studio (VS19+) with C#.
+2. Visual Studio (2019 or later) with C#.
 3. Load the solution (.sln file).
-4. Build the Debug or Release version.
+4. Build (Debug or Release).
 5. Add Terminal2.exe to your start menu or toolbar.
 
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.
 
-Here is an example that sets up a Bluetooth LE (BLE) session on a test bench
- ![Example3](https://user-images.githubusercontent.com/4144679/155835735-37577069-0292-4842-9af9-eb935ef1e937.png)
+Here is an example from Scotty's emulator on Enterprise (NCC-1701-B)
+![image](https://user-images.githubusercontent.com/4144679/158015819-a164243d-d9ad-41c7-97fb-025abe0779ef.png)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (but unmaintained) "Terminal" program (by Br@dy++) to adapt quickly.

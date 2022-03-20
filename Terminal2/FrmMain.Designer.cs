@@ -1,5 +1,4 @@
-﻿
-namespace Terminal
+﻿namespace Terminal
 {
     partial class FrmMain
     {
@@ -31,19 +30,19 @@ namespace Terminal
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle90 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle91 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle87 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle88 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle89 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.blank2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
@@ -54,16 +53,12 @@ namespace Terminal
             this.pdPort = new System.Windows.Forms.ComboBox();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnProfileSelect = new System.Windows.Forms.Button();
-            this.helpClickHere = new System.Windows.Forms.TextBox();
             this.cbStayOnTop = new System.Windows.Forms.CheckBox();
             this.lblProfileName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogOptions = new System.Windows.Forms.Button();
             this.btnStartLog = new System.Windows.Forms.Button();
             this.MacroPanel = new System.Windows.Forms.Panel();
-            this.helpLogfile = new System.Windows.Forms.TextBox();
-            this.helpMacroIcon = new System.Windows.Forms.TextBox();
-            this.helpMacroTable = new System.Windows.Forms.TextBox();
             this.dgMacroTable = new System.Windows.Forms.DataGridView();
             this.Mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,10 +75,10 @@ namespace Terminal
             this.scF12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.helpCmdLine = new System.Windows.Forms.TextBox();
             this.btnFile = new System.Windows.Forms.Button();
             this.btnEditMacro = new System.Windows.Forms.Button();
             this.SendPanel = new System.Windows.Forms.Panel();
+            this.cbClearCMD = new System.Windows.Forms.CheckBox();
             this.cbSendCR = new System.Windows.Forms.CheckBox();
             this.cbSendLF = new System.Windows.Forms.CheckBox();
             this.tbCommand = new System.Windows.Forms.TextBox();
@@ -92,15 +87,20 @@ namespace Terminal
             this.ctrlTwo = new System.Windows.Forms.Label();
             this.lbOutput = new System.Windows.Forms.ListBox();
             this.PanelTwo = new System.Windows.Forms.Panel();
+            this.lbTranslateLF = new System.Windows.Forms.ComboBox();
+            this.lbTranslateCR = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.sep1 = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnColorConfig = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.cbShowCR = new System.Windows.Forms.CheckBox();
             this.cbShowLF = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rbEndOnCR = new System.Windows.Forms.RadioButton();
-            this.rbEndOnLF = new System.Windows.Forms.RadioButton();
             this.cbFreeze = new System.Windows.Forms.CheckBox();
             this.cbTimestamp = new System.Windows.Forms.CheckBox();
             this.cbHEX = new System.Windows.Forms.CheckBox();
@@ -110,24 +110,12 @@ namespace Terminal
             this.LED1 = new System.Windows.Forms.Label();
             this.LED2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.helpSource = new System.Windows.Forms.TextBox();
-            this.helpInput = new System.Windows.Forms.TextBox();
-            this.helpColors = new System.Windows.Forms.TextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.helpASCII = new System.Windows.Forms.ListBox();
-            this.helpProfile = new System.Windows.Forms.TextBox();
-            this.helpSplitline = new System.Windows.Forms.TextBox();
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpOutput = new System.Windows.Forms.TextBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.logFlusher = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.sep1 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -199,7 +187,6 @@ namespace Terminal
             this.PanelOne.Controls.Add(this.pdPort);
             this.PanelOne.Controls.Add(this.btnNew);
             this.PanelOne.Controls.Add(this.btnProfileSelect);
-            this.PanelOne.Controls.Add(this.helpClickHere);
             this.PanelOne.Controls.Add(this.cbStayOnTop);
             this.PanelOne.Controls.Add(this.lblProfileName);
             this.PanelOne.Controls.Add(this.label1);
@@ -258,20 +245,6 @@ namespace Terminal
             this.btnProfileSelect.TabIndex = 20;
             this.btnProfileSelect.UseVisualStyleBackColor = true;
             this.btnProfileSelect.Click += new System.EventHandler(this.BtnProfileSelect_Click);
-            // 
-            // helpClickHere
-            // 
-            this.helpClickHere.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpClickHere.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpClickHere.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpClickHere.Location = new System.Drawing.Point(476, 6);
-            this.helpClickHere.Multiline = true;
-            this.helpClickHere.Name = "helpClickHere";
-            this.helpClickHere.ReadOnly = true;
-            this.helpClickHere.Size = new System.Drawing.Size(123, 18);
-            this.helpClickHere.TabIndex = 12;
-            this.helpClickHere.Text = "(Click for quick access)\r\n";
-            this.helpClickHere.Visible = false;
             // 
             // cbStayOnTop
             // 
@@ -337,9 +310,6 @@ namespace Terminal
             // MacroPanel
             // 
             this.MacroPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.MacroPanel.Controls.Add(this.helpLogfile);
-            this.MacroPanel.Controls.Add(this.helpMacroIcon);
-            this.MacroPanel.Controls.Add(this.helpMacroTable);
             this.MacroPanel.Controls.Add(this.dgMacroTable);
             this.MacroPanel.Controls.Add(this.panel6);
             this.MacroPanel.Controls.Add(this.panel4);
@@ -349,53 +319,6 @@ namespace Terminal
             this.MacroPanel.Size = new System.Drawing.Size(926, 109);
             this.MacroPanel.TabIndex = 6;
             // 
-            // helpLogfile
-            // 
-            this.helpLogfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.helpLogfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpLogfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpLogfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpLogfile.Location = new System.Drawing.Point(16, 61);
-            this.helpLogfile.Multiline = true;
-            this.helpLogfile.Name = "helpLogfile";
-            this.helpLogfile.ReadOnly = true;
-            this.helpLogfile.Size = new System.Drawing.Size(325, 48);
-            this.helpLogfile.TabIndex = 11;
-            this.helpLogfile.Text = "Logfile: \r\n    1) The latest log file is shown in the Status Bar\r\n    2) Click on" +
-    " the filename and it will open in your favoutite editor\r\n";
-            this.helpLogfile.Visible = false;
-            // 
-            // helpMacroIcon
-            // 
-            this.helpMacroIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpMacroIcon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpMacroIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpMacroIcon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpMacroIcon.Location = new System.Drawing.Point(797, 3);
-            this.helpMacroIcon.Multiline = true;
-            this.helpMacroIcon.Name = "helpMacroIcon";
-            this.helpMacroIcon.ReadOnly = true;
-            this.helpMacroIcon.Size = new System.Drawing.Size(118, 37);
-            this.helpMacroIcon.TabIndex = 10;
-            this.helpMacroIcon.Text = "Macro Table               ^\r\n    1) Click icon to edit\r\n";
-            this.helpMacroIcon.Visible = false;
-            // 
-            // helpMacroTable
-            // 
-            this.helpMacroTable.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.helpMacroTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpMacroTable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpMacroTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpMacroTable.Location = new System.Drawing.Point(485, 31);
-            this.helpMacroTable.Multiline = true;
-            this.helpMacroTable.Name = "helpMacroTable";
-            this.helpMacroTable.ReadOnly = true;
-            this.helpMacroTable.Size = new System.Drawing.Size(188, 55);
-            this.helpMacroTable.TabIndex = 4;
-            this.helpMacroTable.Text = "Macro Table:\r\n    1) Left-Click to activate a macro\r\n    2) Right-Click to edit t" +
-    "he macro\r\n\r\n";
-            this.helpMacroTable.Visible = false;
-            // 
             // dgMacroTable
             // 
             this.dgMacroTable.AllowUserToAddRows = false;
@@ -404,6 +327,7 @@ namespace Terminal
             this.dgMacroTable.AllowUserToResizeRows = false;
             this.dgMacroTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgMacroTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgMacroTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgMacroTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgMacroTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgMacroTable.ColumnHeadersVisible = false;
@@ -422,14 +346,14 @@ namespace Terminal
             this.scF11,
             this.scF12});
             this.dgMacroTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle90.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle90.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle90.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle90.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle90.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle90.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle90.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle90;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
@@ -438,8 +362,8 @@ namespace Terminal
             this.dgMacroTable.ReadOnly = true;
             this.dgMacroTable.RowHeadersVisible = false;
             this.dgMacroTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle91.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle91;
             this.dgMacroTable.RowTemplate.ReadOnly = true;
             this.dgMacroTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgMacroTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -449,8 +373,9 @@ namespace Terminal
             this.dgMacroTable.ShowRowErrors = false;
             this.dgMacroTable.Size = new System.Drawing.Size(906, 86);
             this.dgMacroTable.TabIndex = 0;
+            this.dgMacroTable.TabStop = false;
+            this.dgMacroTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgMacroTable_CellClick);
             this.dgMacroTable.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgMacroTable_CellMouseDown);
-            this.dgMacroTable.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.MacroTable_CellMouseUp);
             this.dgMacroTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // Mode
@@ -461,80 +386,80 @@ namespace Terminal
             // 
             // F1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.F1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.F1.DefaultCellStyle = dataGridViewCellStyle79;
             this.F1.HeaderText = "F1";
             this.F1.Name = "F1";
             this.F1.ReadOnly = true;
             // 
             // scF2
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF2.DefaultCellStyle = dataGridViewCellStyle80;
             this.scF2.HeaderText = "F2";
             this.scF2.Name = "scF2";
             this.scF2.ReadOnly = true;
             // 
             // scF3
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle81.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF3.DefaultCellStyle = dataGridViewCellStyle81;
             this.scF3.HeaderText = "F3";
             this.scF3.Name = "scF3";
             this.scF3.ReadOnly = true;
             // 
             // scF4
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle82.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF4.DefaultCellStyle = dataGridViewCellStyle82;
             this.scF4.HeaderText = "F4";
             this.scF4.Name = "scF4";
             this.scF4.ReadOnly = true;
             // 
             // scF5
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle83.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF5.DefaultCellStyle = dataGridViewCellStyle83;
             this.scF5.HeaderText = "F5";
             this.scF5.Name = "scF5";
             this.scF5.ReadOnly = true;
             // 
             // scF6
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle84.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF6.DefaultCellStyle = dataGridViewCellStyle84;
             this.scF6.HeaderText = "F6";
             this.scF6.Name = "scF6";
             this.scF6.ReadOnly = true;
             // 
             // scF7
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle85.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF7.DefaultCellStyle = dataGridViewCellStyle85;
             this.scF7.HeaderText = "F7";
             this.scF7.Name = "scF7";
             this.scF7.ReadOnly = true;
             // 
             // scF8
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle86.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF8.DefaultCellStyle = dataGridViewCellStyle86;
             this.scF8.HeaderText = "F8";
             this.scF8.Name = "scF8";
             this.scF8.ReadOnly = true;
             // 
             // scF9
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF9.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle87.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF9.DefaultCellStyle = dataGridViewCellStyle87;
             this.scF9.HeaderText = "F9";
             this.scF9.Name = "scF9";
             this.scF9.ReadOnly = true;
             // 
             // scF10
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF10.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle88.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF10.DefaultCellStyle = dataGridViewCellStyle88;
             this.scF10.HeaderText = "F10";
             this.scF10.Name = "scF10";
             this.scF10.ReadOnly = true;
@@ -547,8 +472,8 @@ namespace Terminal
             // 
             // scF12
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF12.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle89.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF12.DefaultCellStyle = dataGridViewCellStyle89;
             this.scF12.HeaderText = "F12";
             this.scF12.Name = "scF12";
             this.scF12.ReadOnly = true;
@@ -568,23 +493,6 @@ namespace Terminal
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 109);
             this.panel4.TabIndex = 1;
-            // 
-            // helpCmdLine
-            // 
-            this.helpCmdLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.helpCmdLine.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpCmdLine.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpCmdLine.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpCmdLine.Location = new System.Drawing.Point(3, 40);
-            this.helpCmdLine.Multiline = true;
-            this.helpCmdLine.Name = "helpCmdLine";
-            this.helpCmdLine.ReadOnly = true;
-            this.helpCmdLine.Size = new System.Drawing.Size(289, 59);
-            this.helpCmdLine.TabIndex = 5;
-            this.helpCmdLine.Text = "Command Line:\r\n    1) <Escape> clears the line and stops all running macros\r\n    " +
-    "2) The length of the string is limited to 65535 characters\r\n    3) $nn inserts t" +
-    "he HEX value nn into the line\r\n";
-            this.helpCmdLine.Visible = false;
             // 
             // btnFile
             // 
@@ -614,6 +522,7 @@ namespace Terminal
             // SendPanel
             // 
             this.SendPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.SendPanel.Controls.Add(this.cbClearCMD);
             this.SendPanel.Controls.Add(this.btnEditMacro);
             this.SendPanel.Controls.Add(this.btnFile);
             this.SendPanel.Controls.Add(this.cbSendCR);
@@ -626,6 +535,19 @@ namespace Terminal
             this.SendPanel.Size = new System.Drawing.Size(926, 27);
             this.SendPanel.TabIndex = 10;
             // 
+            // cbClearCMD
+            // 
+            this.cbClearCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbClearCMD.AutoSize = true;
+            this.cbClearCMD.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbClearCMD.Location = new System.Drawing.Point(586, 5);
+            this.cbClearCMD.Name = "cbClearCMD";
+            this.cbClearCMD.Size = new System.Drawing.Size(50, 17);
+            this.cbClearCMD.TabIndex = 4;
+            this.cbClearCMD.Text = "Clear";
+            this.cbClearCMD.UseVisualStyleBackColor = true;
+            this.cbClearCMD.CheckedChanged += new System.EventHandler(this.ResetFocus);
+            // 
             // cbSendCR
             // 
             this.cbSendCR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -633,7 +555,7 @@ namespace Terminal
             this.cbSendCR.Checked = true;
             this.cbSendCR.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSendCR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbSendCR.Location = new System.Drawing.Point(638, 5);
+            this.cbSendCR.Location = new System.Drawing.Point(642, 5);
             this.cbSendCR.Name = "cbSendCR";
             this.cbSendCR.Size = new System.Drawing.Size(47, 17);
             this.cbSendCR.TabIndex = 3;
@@ -663,7 +585,7 @@ namespace Terminal
             this.tbCommand.ForeColor = System.Drawing.Color.Blue;
             this.tbCommand.Location = new System.Drawing.Point(10, 3);
             this.tbCommand.Name = "tbCommand";
-            this.tbCommand.Size = new System.Drawing.Size(619, 21);
+            this.tbCommand.Size = new System.Drawing.Size(569, 21);
             this.tbCommand.TabIndex = 1;
             this.tbCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
@@ -723,12 +645,16 @@ namespace Terminal
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.Size = new System.Drawing.Size(926, 99);
             this.lbOutput.TabIndex = 0;
-            this.lbOutput.Click += new System.EventHandler(this.LbOutput_Click);
+            this.lbOutput.SelectedIndexChanged += new System.EventHandler(this.LbOutput_SelectedIndexChanged);
             this.lbOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // PanelTwo
             // 
             this.PanelTwo.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelTwo.Controls.Add(this.lbTranslateLF);
+            this.PanelTwo.Controls.Add(this.lbTranslateCR);
+            this.PanelTwo.Controls.Add(this.label3);
+            this.PanelTwo.Controls.Add(this.label2);
             this.PanelTwo.Controls.Add(this.panel3);
             this.PanelTwo.Controls.Add(this.panel2);
             this.PanelTwo.Controls.Add(this.panel1);
@@ -739,9 +665,6 @@ namespace Terminal
             this.PanelTwo.Controls.Add(this.btnClear);
             this.PanelTwo.Controls.Add(this.cbShowCR);
             this.PanelTwo.Controls.Add(this.cbShowLF);
-            this.PanelTwo.Controls.Add(this.label2);
-            this.PanelTwo.Controls.Add(this.rbEndOnCR);
-            this.PanelTwo.Controls.Add(this.rbEndOnLF);
             this.PanelTwo.Controls.Add(this.cbFreeze);
             this.PanelTwo.Controls.Add(this.cbTimestamp);
             this.PanelTwo.Controls.Add(this.cbHEX);
@@ -751,6 +674,86 @@ namespace Terminal
             this.PanelTwo.Name = "PanelTwo";
             this.PanelTwo.Size = new System.Drawing.Size(926, 28);
             this.PanelTwo.TabIndex = 8;
+            // 
+            // lbTranslateLF
+            // 
+            this.lbTranslateLF.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbTranslateLF.FormattingEnabled = true;
+            this.lbTranslateLF.Items.AddRange(new object[] {
+            "Ignore",
+            "LF",
+            "CR+LF",
+            "Auto"});
+            this.lbTranslateLF.Location = new System.Drawing.Point(329, 3);
+            this.lbTranslateLF.Name = "lbTranslateLF";
+            this.lbTranslateLF.Size = new System.Drawing.Size(62, 21);
+            this.lbTranslateLF.TabIndex = 21;
+            this.lbTranslateLF.SelectedIndexChanged += new System.EventHandler(this.LbTranslateLF_SelectedIndexChanged);
+            // 
+            // lbTranslateCR
+            // 
+            this.lbTranslateCR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lbTranslateCR.FormattingEnabled = true;
+            this.lbTranslateCR.Items.AddRange(new object[] {
+            "Ignore",
+            "CR",
+            "CR+LF",
+            "Auto"});
+            this.lbTranslateCR.Location = new System.Drawing.Point(239, 3);
+            this.lbTranslateCR.Name = "lbTranslateCR";
+            this.lbTranslateCR.Size = new System.Drawing.Size(62, 21);
+            this.lbTranslateCR.TabIndex = 20;
+            this.lbTranslateCR.SelectedIndexChanged += new System.EventHandler(this.LbTranslateCR_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(210, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(28, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "CR=";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(303, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "LF=";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel3.Location = new System.Drawing.Point(203, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(4, 23);
+            this.panel3.TabIndex = 19;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel2.Location = new System.Drawing.Point(397, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(4, 23);
+            this.panel2.TabIndex = 19;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.panel1.Location = new System.Drawing.Point(585, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(4, 23);
+            this.panel1.TabIndex = 19;
+            // 
+            // sep1
+            // 
+            this.sep1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.sep1.Location = new System.Drawing.Point(669, 2);
+            this.sep1.Name = "sep1";
+            this.sep1.Size = new System.Drawing.Size(4, 23);
+            this.sep1.TabIndex = 18;
             // 
             // btnExport
             // 
@@ -822,39 +825,6 @@ namespace Terminal
             this.cbShowLF.Text = "Show {LF}";
             this.cbShowLF.UseVisualStyleBackColor = true;
             this.cbShowLF.CheckedChanged += new System.EventHandler(this.ResetFocus);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(220, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Line ends with:";
-            // 
-            // rbEndOnCR
-            // 
-            this.rbEndOnCR.AutoSize = true;
-            this.rbEndOnCR.Checked = true;
-            this.rbEndOnCR.Location = new System.Drawing.Point(304, 5);
-            this.rbEndOnCR.Name = "rbEndOnCR";
-            this.rbEndOnCR.Size = new System.Drawing.Size(40, 17);
-            this.rbEndOnCR.TabIndex = 13;
-            this.rbEndOnCR.TabStop = true;
-            this.rbEndOnCR.Text = "CR";
-            this.rbEndOnCR.UseVisualStyleBackColor = true;
-            this.rbEndOnCR.CheckedChanged += new System.EventHandler(this.ResetFocus);
-            // 
-            // rbEndOnLF
-            // 
-            this.rbEndOnLF.AutoSize = true;
-            this.rbEndOnLF.Location = new System.Drawing.Point(351, 5);
-            this.rbEndOnLF.Name = "rbEndOnLF";
-            this.rbEndOnLF.Size = new System.Drawing.Size(37, 17);
-            this.rbEndOnLF.TabIndex = 12;
-            this.rbEndOnLF.Text = "LF";
-            this.rbEndOnLF.UseVisualStyleBackColor = true;
-            this.rbEndOnLF.CheckedChanged += new System.EventHandler(this.ResetFocus);
             // 
             // cbFreeze
             // 
@@ -977,75 +947,21 @@ namespace Terminal
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.helpSource);
-            this.splitContainer1.Panel1.Controls.Add(this.helpInput);
-            this.splitContainer1.Panel1.Controls.Add(this.helpColors);
             this.splitContainer1.Panel1.Controls.Add(this.progressBar);
-            this.splitContainer1.Panel1.Controls.Add(this.helpASCII);
             this.splitContainer1.Panel1.Controls.Add(this.LED3);
             this.splitContainer1.Panel1.Controls.Add(this.LED2);
             this.splitContainer1.Panel1.Controls.Add(this.LED1);
             this.splitContainer1.Panel1.Controls.Add(this.LED4);
-            this.splitContainer1.Panel1.Controls.Add(this.helpProfile);
-            this.splitContainer1.Panel1.Controls.Add(this.helpSplitline);
             this.splitContainer1.Panel1.Controls.Add(this.rtb);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ctrlOne);
-            this.splitContainer1.Panel2.Controls.Add(this.helpOutput);
-            this.splitContainer1.Panel2.Controls.Add(this.helpCmdLine);
             this.splitContainer1.Panel2.Controls.Add(this.ctrlTwo);
             this.splitContainer1.Panel2.Controls.Add(this.lbOutput);
             this.splitContainer1.Size = new System.Drawing.Size(926, 466);
             this.splitContainer1.SplitterDistance = 363;
             this.splitContainer1.TabIndex = 11;
-            // 
-            // helpSource
-            // 
-            this.helpSource.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.helpSource.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.helpSource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpSource.ForeColor = System.Drawing.Color.Black;
-            this.helpSource.Location = new System.Drawing.Point(10, 6);
-            this.helpSource.Multiline = true;
-            this.helpSource.Name = "helpSource";
-            this.helpSource.ReadOnly = true;
-            this.helpSource.Size = new System.Drawing.Size(255, 34);
-            this.helpSource.TabIndex = 15;
-            this.helpSource.Text = "Source Code:\r\n    https://github.com/michael-heyns/Terminal2";
-            this.helpSource.Visible = false;
-            // 
-            // helpInput
-            // 
-            this.helpInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpInput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpInput.Location = new System.Drawing.Point(50, 155);
-            this.helpInput.Multiline = true;
-            this.helpInput.Name = "helpInput";
-            this.helpInput.ReadOnly = true;
-            this.helpInput.Size = new System.Drawing.Size(242, 77);
-            this.helpInput.TabIndex = 14;
-            this.helpInput.Text = "Input Panel:\r\n    1) Select a section of text with the mouse\r\n    2) Copy with Ct" +
-    "rl-C\r\n    3) Copy and clear with Ctrl-X\r\n    4) Select everything with Ctrl-A\r\n";
-            this.helpInput.Visible = false;
-            // 
-            // helpColors
-            // 
-            this.helpColors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpColors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpColors.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpColors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpColors.Location = new System.Drawing.Point(805, 3);
-            this.helpColors.Multiline = true;
-            this.helpColors.Name = "helpColors";
-            this.helpColors.ReadOnly = true;
-            this.helpColors.Size = new System.Drawing.Size(118, 67);
-            this.helpColors.TabIndex = 11;
-            this.helpColors.Text = "Options                      ^\r\n    1) Colors and fonts\r\n    2) Fine tuning\r\n    " +
-    "3) History\r\n\r\n";
-            this.helpColors.Visible = false;
             // 
             // progressBar
             // 
@@ -1058,64 +974,20 @@ namespace Terminal
             this.progressBar.TabIndex = 9;
             this.progressBar.Visible = false;
             // 
-            // helpASCII
-            // 
-            this.helpASCII.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.helpASCII.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpASCII.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpASCII.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpASCII.FormattingEnabled = true;
-            this.helpASCII.ItemHeight = 15;
-            this.helpASCII.Location = new System.Drawing.Point(763, 85);
-            this.helpASCII.Name = "helpASCII";
-            this.helpASCII.Size = new System.Drawing.Size(134, 244);
-            this.helpASCII.TabIndex = 8;
-            this.helpASCII.Visible = false;
-            // 
-            // helpProfile
-            // 
-            this.helpProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpProfile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpProfile.Location = new System.Drawing.Point(394, 3);
-            this.helpProfile.Multiline = true;
-            this.helpProfile.Name = "helpProfile";
-            this.helpProfile.ReadOnly = true;
-            this.helpProfile.Size = new System.Drawing.Size(363, 67);
-            this.helpProfile.TabIndex = 7;
-            this.helpProfile.Text = resources.GetString("helpProfile.Text");
-            this.helpProfile.Visible = false;
-            // 
-            // helpSplitline
-            // 
-            this.helpSplitline.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.helpSplitline.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpSplitline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpSplitline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpSplitline.Location = new System.Drawing.Point(318, 315);
-            this.helpSplitline.Multiline = true;
-            this.helpSplitline.Name = "helpSplitline";
-            this.helpSplitline.ReadOnly = true;
-            this.helpSplitline.Size = new System.Drawing.Size(380, 45);
-            this.helpSplitline.TabIndex = 6;
-            this.helpSplitline.Text = "Split Line\r\n    1) Drag the split line up or down to change the input/output wind" +
-    "ow sizes\r\n";
-            this.helpSplitline.Visible = false;
-            // 
             // rtb
             // 
             this.rtb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.rtb.ContextMenuStrip = this.contextMenuStrip;
             this.rtb.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.rtb.HideSelection = false;
             this.rtb.Location = new System.Drawing.Point(0, 0);
             this.rtb.Name = "rtb";
             this.rtb.ReadOnly = true;
             this.rtb.Size = new System.Drawing.Size(926, 363);
             this.rtb.TabIndex = 13;
             this.rtb.Text = "";
+            this.rtb.WordWrap = false;
+            this.rtb.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Rtb_MouseClick);
             this.rtb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // contextMenuStrip
@@ -1133,70 +1005,17 @@ namespace Terminal
             this.copyToolStripMenuItem.Text = "Copy to clipboard...";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItem_Click);
             // 
-            // helpOutput
-            // 
-            this.helpOutput.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.helpOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpOutput.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpOutput.Location = new System.Drawing.Point(318, 12);
-            this.helpOutput.Multiline = true;
-            this.helpOutput.Name = "helpOutput";
-            this.helpOutput.ReadOnly = true;
-            this.helpOutput.Size = new System.Drawing.Size(371, 77);
-            this.helpOutput.TabIndex = 7;
-            this.helpOutput.Text = resources.GetString("helpOutput.Text");
-            this.helpOutput.Visible = false;
-            // 
             // timer
             // 
             this.timer.Enabled = true;
             this.timer.Interval = 10;
             this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // logFlusher
-            // 
-            this.logFlusher.Enabled = true;
-            this.logFlusher.Interval = 200;
-            this.logFlusher.Tick += new System.EventHandler(this.LogFlusher_Tick);
-            // 
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "rtf";
             this.saveFileDialog.Filter = "RTF Files|*.rtf|Text files|*.txt";
             this.saveFileDialog.Title = "Export input buffer";
-            // 
-            // sep1
-            // 
-            this.sep1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.sep1.Location = new System.Drawing.Point(669, 2);
-            this.sep1.Name = "sep1";
-            this.sep1.Size = new System.Drawing.Size(4, 23);
-            this.sep1.TabIndex = 18;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel1.Location = new System.Drawing.Point(585, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(4, 23);
-            this.panel1.TabIndex = 19;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel2.Location = new System.Drawing.Point(397, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(4, 23);
-            this.panel2.TabIndex = 19;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.panel3.Location = new System.Drawing.Point(203, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(4, 23);
-            this.panel3.TabIndex = 19;
             // 
             // FrmMain
             // 
@@ -1221,16 +1040,13 @@ namespace Terminal
             this.PanelOne.ResumeLayout(false);
             this.PanelOne.PerformLayout();
             this.MacroPanel.ResumeLayout(false);
-            this.MacroPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgMacroTable)).EndInit();
             this.SendPanel.ResumeLayout(false);
             this.SendPanel.PerformLayout();
             this.PanelTwo.ResumeLayout(false);
             this.PanelTwo.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
@@ -1286,37 +1102,21 @@ namespace Terminal
         private System.Windows.Forms.DataGridViewTextBoxColumn scF12;
         private System.Windows.Forms.CheckBox cbFreeze;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RadioButton rbEndOnCR;
-        private System.Windows.Forms.RadioButton rbEndOnLF;
         private System.Windows.Forms.Label lblProfileName;
         private System.Windows.Forms.Button btnColorConfig;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.TextBox helpMacroTable;
-        private System.Windows.Forms.TextBox helpCmdLine;
         private System.Windows.Forms.Button btnHelp;
-        private System.Windows.Forms.TextBox helpSplitline;
-        private System.Windows.Forms.TextBox helpProfile;
-        private System.Windows.Forms.TextBox helpOutput;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.ListBox helpASCII;
         private System.Windows.Forms.Button btnFile;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Timer logFlusher;
         private System.Windows.Forms.ToolStripStatusLabel blank2;
-        private System.Windows.Forms.TextBox helpMacroIcon;
-        private System.Windows.Forms.TextBox helpColors;
         private System.Windows.Forms.Button btnProfileSelect;
-        private System.Windows.Forms.TextBox helpClickHere;
         private System.Windows.Forms.RichTextBox rtb;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.ComboBox pdPort;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.TextBox helpLogfile;
-        private System.Windows.Forms.TextBox helpInput;
-        private System.Windows.Forms.TextBox helpSource;
         private System.Windows.Forms.Button btnQuickLaunch;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
@@ -1324,6 +1124,11 @@ namespace Terminal
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel sep1;
+        private System.Windows.Forms.CheckBox cbClearCMD;
+        private System.Windows.Forms.ComboBox lbTranslateCR;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox lbTranslateLF;
     }
 }
 

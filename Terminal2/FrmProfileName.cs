@@ -21,6 +21,7 @@ namespace Terminal
             lblTitle.Text = title;
             lblSourceName.Text = srcname;
             _name = srcname;
+            tbSessionName.Text = srcname;
         }
 
         private void BtnApply_Click(object sender, EventArgs e)

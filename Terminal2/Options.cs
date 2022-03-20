@@ -59,10 +59,6 @@ namespace Terminal
         public int stopAfterRepeats = 0;
 
         // run control
-        public bool run = false;
-        public int runNextLine = 0;
-        public int runRepeats = 0;
-        public long runTimeout = 0;
         public string[] runLines = null;
 
         // helpers
@@ -103,7 +99,7 @@ namespace Terminal
 
         public int maxBufferSizeMB = 10;
         public int cutPercent = 10;
-        public int freezeSizeKB = 10;
+        public int freezeSizeKB = 50;
 
         public DisplayOptions()
         {
@@ -137,9 +133,11 @@ namespace Terminal
         public bool showCurlyLF = false;
         public bool ascii = true;
         public bool hex = false;
-        public bool endOnCR = true;
+        public int translateCR = 3;     // 0=ignore, 1=CR, 2=CRLF, 3=Auto
+        public int translateLF = 3;     // 0=ignore, 1=LF, 2=CRLF, 3=-Auto
         public bool sendCR = true;
         public bool sendLF = false;
+        public bool clearCMD = false;
         public bool stayontop = false;
         public bool timestampInput = true;
 
@@ -198,6 +196,24 @@ namespace Terminal
         public static string Timestamp()
         {
             return $"{DateTime.Now:HH:mm:ss.ff}: ";
+        }
+        public static bool IsNumeric(char ch)
+        {
+            if (ch < '0' || ch > '9')
+                return false;
+            return true;
+        }
+
+        // "HH:mm:ss.ff: "
+        public static bool HasTimestamp(string str)
+        {
+            if (str.Length < 13)
+                return false;
+            if (!IsNumeric(str[0]) || !IsNumeric(str[1]) || !IsNumeric(str[3]) || !IsNumeric(str[4]) || !IsNumeric(str[6]) || !IsNumeric(str[7]) || !IsNumeric(str[9]) || !IsNumeric(str[10]))
+                return false;
+            if (str[2] != (char)':' || str[5] != (char)':' || str[8] != (char)'.' || str[11] != (char)':' || str[12] != (char)' ')
+                return false;
+            return true;
         }
     }
 }

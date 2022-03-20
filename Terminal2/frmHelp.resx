@@ -117,37 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="fontDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>133, 17</value>
-  </metadata>
-  <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.2.0
-    * Major update.
-    * Fixed a memory leak in v1.0.1.x
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Profiles
+    1) Profiles remember all the settings and colour options
+    2) The profile database is automatically updated when the program exits
+    3) All changes made will be saved under the current profile
 
-v1.0.1.1
-    * Added "Clear" checkbox.  When checked, will clear the command line when ENTER is pressed.
+Options
+    1) Click the 'gear' icon to edit the options for a particular section
 
-v1.0.1.0
-    * Added fine-tuning options and history
-    * Added Quick Launch button to start another session without having to close the current connection
-    * Added 'Export'  to *.rtf/*.txt option.  (.RTF files retain colors information and are opened by Word).
-    * Pressing 'Escape' will close a dialog box
-    * Ability to freeze the display when a specified key word is detected
+CR-LF:
+    1) "Auto" should satisfy most needs
+             ttttt CR tttt
+             ttttt LF tttt
+             ttttt CR LF tttt
+         are treated the same for display purposes
 
-Beta-13
-    * Added more baud rate constants
+Input Panel:
+    1) You may select a section of text with the mouse
+    2) Drag over an area to select text.  Copy with Ctrl-C or right-click
+    3) Simply click on a line to copy it (ex-timestamp) to the command line
 
-Beta-12
-    * Increased the Rx and Tx buffer sizes.  (It was missing data).
-    * Added feature to set initial RTS and DTR states
-    * Fixed bug when clicking on HISTORY line
-    * Serial and Tx and Rx timeouts added - else it may sit forever waiting on the port
-    * Eliminated the send queue and put straight into send buffer - faster response on sending
-</value>
+Split Line
+    1) Drag the split line up or down to change the input/output window sizes
+
+Output history
+    1) All the transmitted data are shown here
+    2) $0D and $0A are shows so that you can see exactly what went out
+    3) Simply click on a line to copy it (ex-timestamp) to the command line
+        
+Command Line:
+    1) &lt;Escape&gt; clears the line and stops all running macros
+    2) $nn inserts the HEX value nn into the line
+
+Macro Table:
+    1) Left-Click to activate a macro (and unfreeze the display)
+    2) Right-Click to edit the macro
+
+Logfile: 
+    1) The latest log file is shown in the Status Bar
+    2) Click on the filename and it will open in your favoutite editor
+
+Source Code:
+    https://github.com/michael-heyns/Terminal2
+
+----</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

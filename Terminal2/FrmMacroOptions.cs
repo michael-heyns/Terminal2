@@ -215,34 +215,24 @@ namespace Terminal
                 _activeProfile.macros[id] = new Macro();
 
             Macro mac = _activeProfile.macros[id];
-            lock (mac)
-            {
-                if (mac.run && btnApply.Enabled)
-                {
-                    MessageBox.Show("This macro is running and cannot be changed right now", "Macro is running", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+            _activeProfile.macros[id].title = tbTitle.Text;
 
-                _activeProfile.macros[id].title = tbTitle.Text;
+            string s1 = tbMacroText.Text.Replace("\r", "{0D}");
+            string s2 = s1.Replace("\n", "{0A}");
+            _activeProfile.macros[id].macro = s2;
 
-                string s1 = tbMacroText.Text.Replace("\r", "{0D}");
-                string s2 = s1.Replace("\n", "{0A}");
-                _activeProfile.macros[id].macro = s2;
+            _activeProfile.macros[id].resendEveryMs = ApplyNumbers(tbResendEveryMs, 0, 60000);
+            _activeProfile.macros[id].stopAfterRepeats = ApplyNumbers(tbStopAfterRepeats, 0, 60000);
+            _activeProfile.macros[id].addCR = cbAddCR.Checked;
+            _activeProfile.macros[id].addLF = cbAddLF.Checked;
 
-                _activeProfile.macros[id].resendEveryMs = ApplyNumbers(tbResendEveryMs, 0, 60000);
-                _activeProfile.macros[id].stopAfterRepeats = ApplyNumbers(tbStopAfterRepeats, 0, 60000);
-                _activeProfile.macros[id].addCR = cbAddCR.Checked;
-                _activeProfile.macros[id].addLF = cbAddLF.Checked;
+            _activeProfile.macros[id].repeatEnabled = cbRepeat.Checked;
+            _activeProfile.macros[id].delayBetweenChars = ApplyNumbers(tbDelayBetweenChars, 0, 60000);
+            _activeProfile.macros[id].delayBetweenLines = ApplyNumbers(tbDelayBetweenLines, 0, 60000);
 
-                _activeProfile.macros[id].repeatEnabled = cbRepeat.Checked;
-                _activeProfile.macros[id].delayBetweenChars = ApplyNumbers(tbDelayBetweenChars, 0, 60000);
-                _activeProfile.macros[id].delayBetweenLines = ApplyNumbers(tbDelayBetweenLines, 0, 60000);
-
-                int row = (_Base / 10) + 1;
-                int column = (_Offset + 1);
-                _macroTable.Rows[row].Cells[column].Value = tbTitle.Text;
-            }
-            Modified = true;
+            int row = (_Base / 10) + 1;
+            int column = (_Offset + 1);
+            _macroTable.Rows[row].Cells[column].Value = tbTitle.Text;
         }
 
         private void Title_TextChanged(object sender, EventArgs e)

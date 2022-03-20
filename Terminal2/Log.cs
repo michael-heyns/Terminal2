@@ -13,7 +13,6 @@ namespace Terminal
     {
         private static string _filename = string.Empty;
         private static bool _enabled = false;
-        private static string _fileData = string.Empty;
 
         public static string Filename
         {
@@ -28,20 +27,21 @@ namespace Terminal
             _filename = filename;
 
             AssemblyInfo info = new AssemblyInfo();
-            _fileData = $"\n";
-            _fileData += $"# -----------------------------------------------------\n";
-            _fileData += $"# {info.Title} - v{info.AssemblyVersion} - {info.Copyright}\n";
-            _fileData += $"# {DateTime.Now}\n";
-            _fileData += $"# -----------------------------------------------------\n";
-            _fileData += $"\n";
+            string text = $"\r\n";
+            text += $"# -----------------------------------------------------\r\n";
+            text += $"# {info.Title} - v{info.AssemblyVersion} - {info.Copyright}\r\n";
+            text += $"# {DateTime.Now}\r\n";
+            text += $"# -----------------------------------------------------\r\n";
+            text += $"\r\n";
+            Add(text);
             _enabled = true;
         }
 
         public static void Stop()
         {
-            _fileData = $"\n";
-            _fileData += $"# -- END ----------------------------------------------\n";
-            Flush();
+            string text = $"\r\n";
+            text += $"# -- END ----------------------------------------------\r\n";
+            Add(text);
             _enabled = false;
         }
 
@@ -50,35 +50,18 @@ namespace Terminal
             get { return _enabled; }
         }
 
-        public static void Add(string line)
+        public static void Add(string text)
         {
             if (!_enabled || _filename.Length == 0)
                 return;
-            lock (_fileData)
+            for (int retry = 0; retry < 5; retry++)
             {
-                _fileData += line;
-                _fileData += "\n";
-            }
-        }
-
-        public static void Flush()
-        {
-            if (!_enabled || _filename.Length == 0)
-                return;
-            lock (_fileData)
-            {
-                if (_fileData.Length == 0)
-                    return;
-                for (int retry = 0; retry < 5; retry++)
+                try
                 {
-                    try
-                    {
-                        File.AppendAllText(_filename, _fileData);
-                        _fileData = string.Empty;
-                        return;
-                    }
-                    catch { }
+                    File.AppendAllText(_filename, text);
+                    return;
                 }
+                catch { }
             }
         }
     }

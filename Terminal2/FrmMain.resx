@@ -242,30 +242,11 @@
         WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="helpProfile.Text" xml:space="preserve">
-    <value>Profile
-    1) Profiles remember all the settings and colour options selected
-    2) The profile database is automatically updated when the program exits
-    3) All changes made will be saved under the current profile
-</value>
-  </data>
   <metadata name="contextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>315, 13</value>
   </metadata>
-  <data name="helpOutput.Text" xml:space="preserve">
-    <value>Output history
-    1) All the transmitted data are shown here
-    2) $0D and $0A are shows so that you can see exactly what went out
-    3) Click on a line to copy it to the command line
-        ($0D and $0A will be removed from line endings)
-
-</value>
-  </data>
   <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>127, 13</value>
-  </metadata>
-  <metadata name="logFlusher.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>207, 13</value>
   </metadata>
   <metadata name="saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>464, 13</value>

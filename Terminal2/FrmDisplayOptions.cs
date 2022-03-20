@@ -48,6 +48,7 @@ namespace Terminal
                 SampleList[i].Font = Options.inputFont;
                 SampleList[i].ForeColor = Options.lines[i].color;
                 TextList[i].Text = Options.lines[i].text;
+                ModeList[i].Enabled = (Options.lines[i].text.Length > 0);
                 FreezeList[i].Checked = Options.lines[i].freeze;
             }
 
@@ -149,6 +150,7 @@ namespace Terminal
             TextBox tb = (TextBox)sender;
             int i = Utils.Int(tb.Tag.ToString());
             Options.lines[i].text = tb.Text;
+            ModeList[i].Enabled = (tb.Text.Length > 0);
         }
 
         private void TextColorInput_Click(object sender, EventArgs e)
@@ -201,7 +203,7 @@ namespace Terminal
 
             for (int i = 0; i < Options.lines.Length; i++)
             {
-                Options.lines[i].mode = 0;
+                Options.lines[i].mode = 1;
                 Options.lines[i].text = string.Empty;
                 Options.lines[i].freeze = false;
             }
@@ -212,7 +214,7 @@ namespace Terminal
         {
             tbMaxBufSize.Text = "10";
             tbCutSize.Text = "10";
-            tbFreezeSize.Text = "10";
+            tbFreezeSize.Text = "50";
         }
         private void LimitBufferSizes()
         {

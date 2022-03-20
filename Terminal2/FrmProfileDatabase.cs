@@ -165,7 +165,7 @@ namespace Terminal
                 btnSelect.Visible = false;
                 btnCopy.Visible = false;
                 btnRename.Visible = false;
-                btnExport.Visible = false;
+                btnExport.Visible = true;
                 btnImport.Visible = false;
                 btnDelete.Visible = false;
             }

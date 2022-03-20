@@ -180,6 +180,7 @@ namespace Terminal
             // grpColourFilters
             // 
             this.grpColourFilters.Controls.Add(this.label18);
+            this.grpColourFilters.Controls.Add(this.btnReset);
             this.grpColourFilters.Controls.Add(this.label13);
             this.grpColourFilters.Controls.Add(this.label23);
             this.grpColourFilters.Controls.Add(this.e12);
@@ -1102,7 +1103,7 @@ namespace Terminal
             this.groupBox3.Controls.Add(this.BackColorOutput);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.btnSelectFontOutput);
-            this.groupBox3.Location = new System.Drawing.Point(264, 22);
+            this.groupBox3.Location = new System.Drawing.Point(369, 22);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(220, 96);
             this.groupBox3.TabIndex = 20;
@@ -1111,7 +1112,7 @@ namespace Terminal
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(523, 95);
+            this.btnReset.Location = new System.Drawing.Point(13, 357);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(66, 23);
             this.btnReset.TabIndex = 71;
@@ -1133,7 +1134,6 @@ namespace Terminal
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.btnReset);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.grpColourFilters);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -1201,7 +1201,7 @@ namespace Terminal
             this.tbFreezeSize.Name = "tbFreezeSize";
             this.tbFreezeSize.Size = new System.Drawing.Size(64, 20);
             this.tbFreezeSize.TabIndex = 9;
-            this.tbFreezeSize.Text = "10";
+            this.tbFreezeSize.Text = "50";
             this.tbFreezeSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbFreezeSize.Leave += new System.EventHandler(this.TbFreezeSize_Leave);
             // 
@@ -1329,7 +1329,7 @@ namespace Terminal
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(532, 266);
+            this.textBox1.Size = new System.Drawing.Size(532, 373);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 

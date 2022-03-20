@@ -166,9 +166,11 @@ namespace Terminal
                 data += $"ShowCR={profile.showCurlyCR}\n";
                 data += $"ShowLF={profile.showCurlyLF}\n";
                 data += $"ShowASCII={profile.ascii}\n";
-                data += $"EndOnCR={profile.endOnCR}\n";
+                data += $"TranslateCR={profile.translateCR}\n";
+                data += $"TranslateLF={profile.translateLF}\n";
                 data += $"SendCR={profile.sendCR}\n";
                 data += $"SendLF={profile.sendLF}\n";
+                data += $"ClearCMD={profile.clearCMD}\n";
                 data += $"OnTop={profile.stayontop}\n";
                 data += $"TimeInput={profile.timestampInput}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
@@ -314,12 +316,16 @@ namespace Terminal
                             profile.showCurlyLF = line.Contains("True");
                         else if (line.StartsWith("ShowASCII="))
                             profile.ascii = line.Contains("True");
-                        else if (line.StartsWith("EndOnCR="))
-                            profile.endOnCR = line.Contains("True");
+                        else if (line.StartsWith("TranslateCR="))
+                            profile.translateCR = Utils.Int(line.Substring(12));
+                        else if (line.StartsWith("TranslateLF="))
+                            profile.translateLF = Utils.Int(line.Substring(12));
                         else if (line.StartsWith("SendCR="))
                             profile.sendCR = line.Contains("True");
                         else if (line.StartsWith("SendLF="))
                             profile.sendLF = line.Contains("True");
+                        else if (line.StartsWith("ClearCMD="))
+                            profile.clearCMD = line.Contains("True");
                         else if (line.StartsWith("OnTop="))
                             profile.stayontop = line.Contains("True");
                         else if (line.StartsWith("TimeInput="))

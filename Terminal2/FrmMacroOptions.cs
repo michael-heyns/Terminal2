@@ -65,6 +65,7 @@ namespace Terminal
             btnApply.Enabled = false;
             grpKeys.Enabled = true;
             grpShift.Enabled = true;
+            Close();
         }
 
         private void BtnClear_Click(object sender, EventArgs e)
@@ -75,26 +76,6 @@ namespace Terminal
         private void BtnClearAll_Click(object sender, EventArgs e)
         {
             ClearAllMacros();
-        }
-
-        private void BtnClose_Click(object sender, EventArgs e)
-        {
-            if (btnApply.Enabled)
-            {
-                DialogResult yn = MessageBox.Show("Do you want to save the changes?", "Save changes", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (yn == DialogResult.Yes)
-                {
-                    if (tbTitle.Text.Length == 0 && tbMacroText.Text.Length > 0)
-                    {
-                        MessageBox.Show("This macro has no name", "Name required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else
-                        SaveThisMacro();
-                }
-            }
-            btnApply.Enabled = false;
-            Close();
         }
 
         private bool ClearAllMacros()
@@ -214,7 +195,6 @@ namespace Terminal
             if (_activeProfile.macros[id] == null)
                 _activeProfile.macros[id] = new Macro();
 
-            Macro mac = _activeProfile.macros[id];
             _activeProfile.macros[id].title = tbTitle.Text;
 
             string s1 = tbMacroText.Text.Replace("\r", "{0D}");

@@ -1,7 +1,7 @@
 ﻿
 namespace Terminal
 {
-    partial class frmHelp
+    partial class FrmHelp
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace Terminal
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHelp));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHelp));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.helpASCII = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();

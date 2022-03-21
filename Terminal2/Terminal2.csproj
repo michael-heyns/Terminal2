@@ -116,11 +116,11 @@
     <Compile Include="FrmFileSend.Designer.cs">
       <DependentUpon>FrmFileSend.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmHelp.cs">
+    <Compile Include="FrmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmHelp.Designer.cs">
-      <DependentUpon>frmHelp.cs</DependentUpon>
+    <Compile Include="FrmHelp.Designer.cs">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmLogOptions.cs">
       <SubType>Form</SubType>
@@ -169,8 +169,8 @@
     <EmbeddedResource Include="FrmFileSend.resx">
       <DependentUpon>FrmFileSend.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmHelp.resx">
-      <DependentUpon>frmHelp.cs</DependentUpon>
+    <EmbeddedResource Include="FrmHelp.resx">
+      <DependentUpon>FrmHelp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogOptions.resx">
       <DependentUpon>FrmLogOptions.cs</DependentUpon>

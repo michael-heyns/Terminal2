@@ -124,7 +124,11 @@
     <value>133, 17</value>
   </metadata>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.2.0
+    <value>v1.0.2.1
+    * Fixed race condition when closing serial port
+    * small improvements
+
+v1.0.2.0
     * Major update.
     * Fixed a memory leak in v1.0.1.x
 

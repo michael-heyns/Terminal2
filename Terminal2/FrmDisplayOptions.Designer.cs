@@ -37,6 +37,7 @@ namespace Terminal
             this.btnSelectFontInput = new System.Windows.Forms.Button();
             this.grpColourFilters = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.e12 = new System.Windows.Forms.CheckBox();
@@ -114,7 +115,6 @@ namespace Terminal
             this.label3 = new System.Windows.Forms.Label();
             this.cbColourFilters = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnReset = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -264,6 +264,16 @@ namespace Terminal
             this.label18.Size = new System.Drawing.Size(30, 13);
             this.label18.TabIndex = 54;
             this.label18.Text = "Click";
+            // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(13, 357);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(66, 23);
+            this.btnReset.TabIndex = 71;
+            this.btnReset.Text = "&Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
             // 
             // label13
             // 
@@ -1109,16 +1119,6 @@ namespace Terminal
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Output Panel";
-            // 
-            // btnReset
-            // 
-            this.btnReset.Location = new System.Drawing.Point(13, 357);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(66, 23);
-            this.btnReset.TabIndex = 71;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
             // 
             // tabControl1
             // 

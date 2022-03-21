@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Terminal
 {
-    public partial class frmHelp : Form
+    public partial class FrmHelp : Form
     {
-        public frmHelp()
+        public FrmHelp()
         {
             InitializeComponent();
         }

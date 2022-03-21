@@ -19,15 +19,14 @@ namespace Terminal
         public EnqueuedDelegate UIOutputQHandlerInstance;
         private readonly EventQueue _uiOutputQueue = null;
 
-        private frmHelp help = new frmHelp();
+        private readonly FrmHelp help = new FrmHelp();
         public bool ExitFlag = false;
         private Profile _activeProfile = new Profile();
 
         private int _ticks = 0;
         private int _tock = 0;
-        private Comms _comms = null;
+        private readonly Comms _comms = null;
 
-        private readonly string _timLock = string.Empty;
         private readonly object _dollarLock = new object();
 
         private enum State { Changing, Disconnected, Connected, Listening };
@@ -256,6 +255,7 @@ namespace Terminal
             {
                 string str = (string)_uiInputQueue.Dequeue();
                 ProcessChunk(str);
+                Application.DoEvents();
             }
         }
 
@@ -274,6 +274,7 @@ namespace Terminal
 
                 Log.Add(" T: " + tm + str);
                 lbOutput.TopIndex = lbOutput.Items.Count - 1;
+                Application.DoEvents();
             }
         }
 
@@ -421,7 +422,7 @@ namespace Terminal
                 bool rc = _comms.Connect(_activeProfile);
                 if (rc)
                 {
-                    btnConnect.Text = "Disconnect";
+                    btnConnect.Text = "&Disconnect";
                     btnConnectOptions.Enabled = false;
                     pdPort.Enabled = false;
                     lblProfileName.Enabled = false;
@@ -544,17 +545,17 @@ namespace Terminal
                     _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
                     pdPort.Text = "TCP Client";
                 }
-                btnConnect.Text = "Connect";
+                btnConnect.Text = "&Connect";
             }
             else if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
             {
                 pdPort.Text = "TCP Server";
-                btnConnect.Text = "Start";
+                btnConnect.Text = "&Start";
             }
             else
             {
                 pdPort.Text = "TCP Client";
-                btnConnect.Text = "Connect";
+                btnConnect.Text = "&Connect";
             }
         }
 
@@ -692,8 +693,10 @@ namespace Terminal
                 Macro mac = _activeProfile.macros[m];
                 dgMacroTable.Rows[mac.uiRow].Cells[mac.uiColumn].Style.BackColor = Color.White;
                 _macroThread[m].Abort();
-                _macroThread[m] = new Thread(new ThreadStart(MacroThread));
-                _macroThread[m].Name = m.ToString();
+                _macroThread[m] = new Thread(new ThreadStart(MacroThread))
+                {
+                    Name = m.ToString()
+                };
                 _macroThread[m].Start();
             }
         }
@@ -715,6 +718,10 @@ namespace Terminal
                 {
                     _macroBusy[m] = false;
                     _macroTrigger[m].WaitOne();
+
+                    // -------------------------------------------
+                    // the thread will wait here till activated
+                    // -------------------------------------------
 
                     Macro mac = _activeProfile.macros[m];
                     if (mac == null)
@@ -766,8 +773,10 @@ namespace Terminal
             for (int t = 0; t < _macroThread.Length; t++)
             {
                 _macroTrigger[t] = new AutoResetEvent(false);
-                _macroThread[t] = new Thread(new ThreadStart(MacroThread));
-                _macroThread[t].Name = t.ToString();
+                _macroThread[t] = new Thread(new ThreadStart(MacroThread))
+                {
+                    Name = t.ToString()
+                };
                 _macroThread[t].Start();
             }
         }
@@ -1054,6 +1063,11 @@ namespace Terminal
 
         private void TickHandler()
         {
+            //var performance = new System.Diagnostics.PerformanceCounter("Memory", "Available MBytes");
+            //var memory = performance.NextValue();
+            //this.Text = memory.ToString();
+            //this.Text = GC.GetTotalMemory(false).ToString();
+
             dgMacroTable.ClearSelection();
             if (_comms == null)
                 return;
@@ -1284,7 +1298,7 @@ namespace Terminal
                 return;
 
             string line = lbOutput.SelectedItem.ToString();
-            string cmd = string.Empty;
+            string cmd;
             if (Utils.HasTimestamp(line))
             {
                 int i = line.IndexOf(": ");
@@ -1359,6 +1373,8 @@ namespace Terminal
         private void Rtb_MouseClick(object sender, MouseEventArgs e)
         {
             if (rtb.SelectionLength > 0)
+                return;
+            if (rtb.Lines.Length == 0)
                 return;
 
             string line = rtb.Lines[rtb.GetLineFromCharIndex(rtb.SelectionStart)];

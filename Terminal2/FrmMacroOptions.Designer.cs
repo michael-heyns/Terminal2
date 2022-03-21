@@ -30,7 +30,6 @@ namespace Terminal
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMacroOptions));
-            this.btnClose = new System.Windows.Forms.Button();
             this.grpShift = new System.Windows.Forms.GroupBox();
             this.rbAltPlus = new System.Windows.Forms.RadioButton();
             this.rbControlPlus = new System.Windows.Forms.RadioButton();
@@ -77,17 +76,6 @@ namespace Terminal
             this.grpShift.SuspendLayout();
             this.grpKeys.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(455, 406);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 0;
-            this.btnClose.Text = "&Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // grpShift
             // 
@@ -393,7 +381,7 @@ namespace Terminal
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.Enabled = false;
             this.btnApply.ForeColor = System.Drawing.Color.Red;
-            this.btnApply.Location = new System.Drawing.Point(374, 406);
+            this.btnApply.Location = new System.Drawing.Point(448, 406);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 8;
@@ -629,7 +617,6 @@ namespace Terminal
             this.Controls.Add(this.tbMacroText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grpShift);
-            this.Controls.Add(this.btnClose);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "FrmMacroOptions";
@@ -647,8 +634,6 @@ namespace Terminal
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox grpShift;
         private System.Windows.Forms.GroupBox grpKeys;
         private System.Windows.Forms.RadioButton rbShiftPlus;

@@ -97,7 +97,7 @@ namespace Terminal
 
         public bool timestampOutputLines = true;
 
-        public int maxBufferSizeMB = 10;
+        public int maxBufferSizeKB = 500;
         public int cutPercent = 10;
         public int freezeSizeKB = 50;
 

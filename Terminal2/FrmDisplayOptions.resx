@@ -123,8 +123,36 @@
   <metadata name="colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>133, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAATdJREFUOE9j
+        oB1IWKTBkLTYHoxBbJJAwkJ/hsL1/1gqt/wHYRCbIXGRP1SWCJC8pE+6a/9/nxWXwBjEZkhZ2geVJQKk
+        LO2XAWryWHbhv8PCs//F2/f9Z0hd1g+VJQwYgYrZ63b8Z6nZ9p+pGoIZ00gwgDNzRb90867/yJgrawV+
+        A1jjFkiJFa65Jlux8b589eaP+t37/iNjkJgMUA6khj1hoRRUGwKwxS9gFStYfdJy4oH/+DBIDUfSIlao
+        NlTAk7pEXqV+yxub6Yf/Y8MgOb6MZfJQ5dgBT/pSL+2e3X/NZx7+j4xBYryZy7ygyvADrqxlLfLTDv5X
+        mH0YjEFs7uzlLVBpwoA5ZTETY9HqvYxAzWAMZLOkL2WCShMJ0peKMVRvfAzGWcvFoaIkgqRFEgzJQEw7
+        wMAAAAmbv6x8Lbu3AAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.2.1
+    <value>v1.0.2.5
+    * 64bit and better DPI handling
+    * Macros can contain comments
+    * Tuning parameters have bigger ranges
+    * Bugfix Closing a serial port was done twice
+
+v1.0.2.4
+    * You can move macros around by pressing CTRL and then drag and drop to an empty spot
+
+v1.0.2.3
+    * Missed saving "Initial RTS and DTR" states to disk as well
+
+v1.0.2.2
+    * Moved FREEZE button to the left margin (on request) and changed it to a button instead of checkbox
+    * Freeze is now triggered on mouse DOWN instead of waiting for the complete click to be processed
+
+v1.0.2.1
     * Fixed race condition when closing serial port
     * small improvements
 
@@ -153,7 +181,6 @@ Beta-12
     * Eliminated the send queue and put straight into send buffer - faster response on sending
 </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAgAgIAAAAEAIAAoCAEAhgAAAGBgAAABACAAqJQAAK4IAQBISAAAAQAgAIhUAABWnQEAQEAAAAEA

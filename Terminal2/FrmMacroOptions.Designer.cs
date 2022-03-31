@@ -70,9 +70,8 @@ namespace Terminal
             this.cbAddCR = new System.Windows.Forms.CheckBox();
             this.cbAddLF = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.helpMacros = new System.Windows.Forms.TextBox();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.cbRepeat = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.grpShift.SuspendLayout();
             this.grpKeys.SuspendLayout();
             this.SuspendLayout();
@@ -336,11 +335,11 @@ namespace Terminal
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMacroText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbMacroText.Location = new System.Drawing.Point(20, 200);
+            this.tbMacroText.Location = new System.Drawing.Point(20, 222);
             this.tbMacroText.Multiline = true;
             this.tbMacroText.Name = "tbMacroText";
             this.tbMacroText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbMacroText.Size = new System.Drawing.Size(516, 200);
+            this.tbMacroText.Size = new System.Drawing.Size(516, 205);
             this.tbMacroText.TabIndex = 4;
             this.tbMacroText.WordWrap = false;
             this.tbMacroText.TextChanged += new System.EventHandler(this.MacroText_TextChanged);
@@ -368,11 +367,12 @@ namespace Terminal
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClear.Location = new System.Drawing.Point(20, 406);
+            this.btnClear.Enabled = false;
+            this.btnClear.Location = new System.Drawing.Point(20, 442);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(117, 23);
             this.btnClear.TabIndex = 7;
-            this.btnClear.Text = "&Clear";
+            this.btnClear.Text = "&Clear THIS macro";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -381,7 +381,7 @@ namespace Terminal
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.Enabled = false;
             this.btnApply.ForeColor = System.Drawing.Color.Red;
-            this.btnApply.Location = new System.Drawing.Point(448, 406);
+            this.btnApply.Location = new System.Drawing.Point(448, 442);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 8;
@@ -500,12 +500,12 @@ namespace Terminal
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearAll.Location = new System.Drawing.Point(101, 406);
+            this.btnClearAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClearAll.Location = new System.Drawing.Point(233, 442);
             this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(75, 23);
+            this.btnClearAll.Size = new System.Drawing.Size(119, 23);
             this.btnClearAll.TabIndex = 21;
-            this.btnClearAll.Text = "Clear &All";
+            this.btnClearAll.Text = "Clear &ALL macros";
             this.btnClearAll.UseVisualStyleBackColor = true;
             this.btnClearAll.Click += new System.EventHandler(this.BtnClearAll_Click);
             // 
@@ -549,31 +549,6 @@ namespace Terminal
             this.label12.TabIndex = 27;
             this.label12.Text = "to every line.";
             // 
-            // helpMacros
-            // 
-            this.helpMacros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.helpMacros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.helpMacros.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.helpMacros.Location = new System.Drawing.Point(33, 210);
-            this.helpMacros.Multiline = true;
-            this.helpMacros.Name = "helpMacros";
-            this.helpMacros.ReadOnly = true;
-            this.helpMacros.Size = new System.Drawing.Size(394, 84);
-            this.helpMacros.TabIndex = 28;
-            this.helpMacros.Text = resources.GetString("helpMacros.Text");
-            this.helpMacros.Visible = false;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHelp.Location = new System.Drawing.Point(495, 4);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(47, 23);
-            this.btnHelp.TabIndex = 29;
-            this.btnHelp.Text = "&Help";
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
-            // 
             // cbRepeat
             // 
             this.cbRepeat.AutoSize = true;
@@ -585,11 +560,22 @@ namespace Terminal
             this.cbRepeat.UseVisualStyleBackColor = true;
             this.cbRepeat.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 206);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(492, 13);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Empty lines will be ignored.  Comments starts with \'#\'.  Insert control character" +
+    "s with $nn. (eg $23 for \'#\')";
+            // 
             // FrmMacroOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 441);
+            this.ClientSize = new System.Drawing.Size(554, 477);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.tbDelayBetweenChars);
             this.Controls.Add(this.tbDelayBetweenLines);
             this.Controls.Add(this.tbResendEveryMs);
@@ -601,8 +587,6 @@ namespace Terminal
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnHelp);
-            this.Controls.Add(this.helpMacros);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.grpKeys);
             this.Controls.Add(this.label12);
@@ -674,8 +658,7 @@ namespace Terminal
         private System.Windows.Forms.CheckBox cbAddCR;
         private System.Windows.Forms.CheckBox cbAddLF;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox helpMacros;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.CheckBox cbRepeat;
+        private System.Windows.Forms.Label label8;
     }
 }

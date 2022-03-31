@@ -32,9 +32,13 @@ namespace Terminal
 
         public override void Enqueue(object item)
         {
-            _lengthOfStringObjects += item.ToString().Length;
-            base.Enqueue(item);
-            _main.Invoke(_handler);
+            try
+            {
+                _lengthOfStringObjects += item.ToString().Length;
+                base.Enqueue(item);
+                _main.Invoke(_handler);
+            }
+            catch { }
         }
 
         protected virtual void OnItemAdded(EventArgs e)

@@ -57,17 +57,31 @@ namespace Terminal
         private bool _testForFreeze = false;
         private int _freezeLine = -1;
 
+        private bool _macroIsMoving = false;
+        private int _macroBeingMoved;
+
         private volatile bool _tickBusy = false;
         private void ShowText(string text)
         {
-            int limit = _activeProfile.displayOptions.maxBufferSizeMB * (1028 * 1024);
+            int limit = _activeProfile.displayOptions.maxBufferSizeKB * 1024;
             if (rtb.Text.Length > limit)
             {
-                int cutsize = (limit * _activeProfile.displayOptions.cutPercent) / 100;
+                string msg;
                 if (Log.Enabled)
-                    rtb.Text = "***<Removed from memory (only) - See the log file for everything>***\n" + rtb.Text.Substring(cutsize);
+                    msg = "***<Removed from memory (only) - See the log file for everything>***\n";
                 else
-                    rtb.Text = "***<Removed from memory - Hint: Use logging to capture everything>***\n" + rtb.Text.Substring(cutsize);
+                    msg = "***<Removed from memory - Hint: Use logging to capture everything>***\n";
+
+                if (_activeProfile.displayOptions.cutPercent < 100)
+                {
+                    int cutsize = (limit * _activeProfile.displayOptions.cutPercent) / 100;
+                    msg += rtb.Text.Substring(cutsize);
+                }
+                else
+                {
+                    rtb.Clear();
+                }
+                rtb.Text = msg;
             }
 
             if (_activeProfile.displayOptions.colorFiltersEnabled)
@@ -652,12 +666,12 @@ namespace Terminal
             if (cbFreeze.Checked)
             {
                 cbFreeze.BackColor = Color.Tomato;
-                Application.DoEvents();
+                cbFreeze.Text = "    Run   ";
             }
             else
             {
+                cbFreeze.Text = " Freeze ";
                 cbFreeze.BackColor = PanelOne.BackColor;
-                Application.DoEvents();
                 this.Invoke(this.UIInputQHandlerInstance);
             }
             tbCommand.Focus();
@@ -736,10 +750,17 @@ namespace Terminal
                     _macroBusy[m] = true;
                     for (int i = 0; i < mac.runLines.Length; i++)
                     {
-                        if (mac.addCR)
-                            mac.runLines[i] += "$0D";
-                        if (mac.addLF)
-                            mac.runLines[i] += "$0A";
+                        int commentStart = mac.runLines[i].IndexOf('#');
+                        if (commentStart >= 0)
+                            mac.runLines[i] = mac.runLines[i].Substring(0, commentStart);
+                        mac.runLines[i] = mac.runLines[i].Trim();
+                        if (mac.runLines[i].Length > 0)
+                        {
+                            if (mac.addCR)
+                                mac.runLines[i] += "$0D";
+                            if (mac.addLF)
+                                mac.runLines[i] += "$0A";
+                        }
                     }
 
                     int repeatCount = 0;
@@ -747,8 +768,11 @@ namespace Terminal
                     {
                         foreach (string s in mac.runLines)
                         {
-                            SendDollarString(s, mac.delayBetweenChars);
-                            Thread.Sleep(mac.delayBetweenLines);
+                            if (s.Length > 0)
+                            {
+                                SendDollarString(s, mac.delayBetweenChars);
+                                Thread.Sleep(mac.delayBetweenLines);
+                            }
                         }
 
                         if (!mac.repeatEnabled)
@@ -793,7 +817,7 @@ namespace Terminal
                         DoConnectDisconnect();
                 }
 
-                // may may or may NOT be connected
+                // may or may NOT be connected
                 if (_state == State.Connected)
                 {
                     if (_macroBusy[m])
@@ -805,6 +829,7 @@ namespace Terminal
         }
         private void DgMacroTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            _macroIsMoving = false;
             cbFreeze.Checked = false;
             if (e.RowIndex < 1 || e.RowIndex > 4)
             {
@@ -838,10 +863,57 @@ namespace Terminal
             }
             else
             {
-                DoMacro(m);
+                if ((Control.ModifierKeys & Keys.Control) == Keys.Control)
+                {
+                    if (mac.title.Length > 0)
+                    {
+                        _macroIsMoving = true;
+                        _macroBeingMoved = m;
+                    }
+                }
+                else
+                {
+                    DoMacro(m);
+                }
             }
         }
 
+        private void DgMacroTable_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (!_macroIsMoving)
+                return;
+
+            if (e.RowIndex < 1 || e.RowIndex > 4)
+            {
+                tbCommand.Focus();
+                return;
+            }
+            if (e.ColumnIndex < 1 || e.ColumnIndex > 12)
+            {
+                tbCommand.Focus();
+                return;
+            }
+
+            int m = ((e.RowIndex - 1) * 12) + (e.ColumnIndex - 1);
+            if (_activeProfile.macros[m] == null)
+                _activeProfile.macros[m] = new Macro();
+            Macro dst = _activeProfile.macros[m];
+            if (dst.title.Length > 0)
+            {
+                MessageBox.Show("You can only move macros to empty spots on the table", "Target spot is not empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Macro src = _activeProfile.macros[_macroBeingMoved];
+            _activeProfile.macros[m] = src.Clone();
+            dst = _activeProfile.macros[m];
+            dst.uiColumn = e.ColumnIndex;
+            dst.uiRow = e.RowIndex;
+
+            dgMacroTable.Rows[src.uiRow].Cells[src.uiColumn].Value = string.Empty;
+            _activeProfile.macros[_macroBeingMoved] = null;
+            dgMacroTable.Rows[dst.uiRow].Cells[dst.uiColumn].Value = dst.title;
+        }
         private void SaveActiveProfile()
         {
             _activeProfile.stayontop = cbStayOnTop.Checked;
@@ -1063,6 +1135,7 @@ namespace Terminal
 
         private void TickHandler()
         {
+            // ** To show resource usage: **
             //var performance = new System.Diagnostics.PerformanceCounter("Memory", "Available MBytes");
             //var memory = performance.NextValue();
             //this.Text = memory.ToString();
@@ -1075,14 +1148,14 @@ namespace Terminal
                 return;
             else if (_state == State.Connected)
             {
-                if (!_comms.Connected())
+                if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient ||
+                    _activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
                 {
-                    ActionDisconnect();
-                }
-                else
-                {
-                    if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient ||
-                        _activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
+                    if (!_comms.Connected())
+                    {
+                        ActionDisconnect();
+                    }
+                    else
                     {
                         int count = _comms.DataWaiting();
                         if (count > 0)
@@ -1386,6 +1459,13 @@ namespace Terminal
             else
                 tbCommand.Text = line;
             tbCommand.Focus();
+        }
+
+        private void CbFreeze_MouseDown(object sender, MouseEventArgs e)
+        {
+            bool newState = !cbFreeze.Checked;
+            cbFreeze.Checked = newState;
+            Application.DoEvents();
         }
     }
     public static class RichTextBoxExtensions

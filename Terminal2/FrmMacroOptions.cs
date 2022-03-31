@@ -70,6 +70,13 @@ namespace Terminal
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
+            if (tbTitle.Text.Length > 0 || tbMacroText.Text.Length > 0)
+            {
+                DialogResult yn = MessageBox.Show("This macro will be cleared.  Are you sure?", "Clear this macro", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (yn != DialogResult.Yes)
+                    return;
+            }
+
             ClearScreen();
         }
 
@@ -81,6 +88,10 @@ namespace Terminal
         private bool ClearAllMacros()
         {
             DialogResult yn = MessageBox.Show("All the macros for this profile will be cleared.  Are you sure?", "Clear all macros", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (yn != DialogResult.Yes)
+                return false;
+
+            yn = MessageBox.Show("Are you really, really sure?", "Clear all macros", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (yn == DialogResult.Yes)
             {
                 ClearScreen();
@@ -229,18 +240,6 @@ namespace Terminal
             grpKeys.Enabled = false;
             grpShift.Enabled = false;
             btnClear.Enabled = true;
-        }
-
-        private void BtnHelp_Click(object sender, EventArgs e)
-        {
-            if (!helpMacros.Visible)
-            {
-                helpMacros.Visible = true;
-            }
-            else
-            {
-                helpMacros.Visible = false;
-            }
         }
 
         private void FrmMacroOptions_FormClosing(object sender, FormClosingEventArgs e)

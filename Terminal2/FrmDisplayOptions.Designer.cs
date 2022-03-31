@@ -36,6 +36,7 @@ namespace Terminal
             this.btnOk = new System.Windows.Forms.Button();
             this.btnSelectFontInput = new System.Windows.Forms.Button();
             this.grpColourFilters = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -136,6 +137,7 @@ namespace Terminal
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.grpColourFilters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -179,6 +181,7 @@ namespace Terminal
             // 
             // grpColourFilters
             // 
+            this.grpColourFilters.Controls.Add(this.pictureBox1);
             this.grpColourFilters.Controls.Add(this.label18);
             this.grpColourFilters.Controls.Add(this.btnReset);
             this.grpColourFilters.Controls.Add(this.label13);
@@ -256,14 +259,24 @@ namespace Terminal
             this.grpColourFilters.TabStop = false;
             this.grpColourFilters.Text = "Colored Text Filters";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(259, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 84;
+            this.pictureBox1.TabStop = false;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(252, 378);
+            this.label18.Location = new System.Drawing.Point(210, 9);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(30, 13);
+            this.label18.Size = new System.Drawing.Size(125, 13);
             this.label18.TabIndex = 54;
-            this.label18.Text = "Click";
+            this.label18.Text = "Click to change the color";
             // 
             // btnReset
             // 
@@ -1250,7 +1263,7 @@ namespace Terminal
             this.label6.Size = new System.Drawing.Size(341, 31);
             this.label6.TabIndex = 4;
             this.label6.Text = "Amount of characters to be removed from the start of the buffer when it gets full" +
-    ". (Minimum 1%.  Maximum 50%)";
+    ". (Minimum 1%.  Maximum 100%)";
             // 
             // tbMaxBufSize
             // 
@@ -1258,7 +1271,7 @@ namespace Terminal
             this.tbMaxBufSize.Name = "tbMaxBufSize";
             this.tbMaxBufSize.Size = new System.Drawing.Size(64, 20);
             this.tbMaxBufSize.TabIndex = 3;
-            this.tbMaxBufSize.Text = "10";
+            this.tbMaxBufSize.Text = "500";
             this.tbMaxBufSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbMaxBufSize.Leave += new System.EventHandler(this.TbMaxBufSize_Leave);
             // 
@@ -1267,9 +1280,9 @@ namespace Terminal
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(463, 31);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.Size = new System.Drawing.Size(39, 13);
             this.label5.TabIndex = 2;
-            this.label5.Text = "MBytes";
+            this.label5.Text = "kBytes";
             // 
             // label4
             // 
@@ -1278,7 +1291,7 @@ namespace Terminal
             this.label4.Size = new System.Drawing.Size(326, 30);
             this.label4.TabIndex = 0;
             this.label4.Text = "Maximum amount of characters kept in memory. (This does not affect logging). (Min" +
-    "imum 1 MBytes)\r\n";
+    "imum 10 kBytes)\r\n";
             // 
             // tabPage3
             // 
@@ -1329,6 +1342,7 @@ namespace Terminal
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(532, 373);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = resources.GetString("textBox1.Text");
@@ -1351,6 +1365,7 @@ namespace Terminal
             this.Load += new System.EventHandler(this.Config_Load);
             this.grpColourFilters.ResumeLayout(false);
             this.grpColourFilters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1474,5 +1489,6 @@ namespace Terminal
         private System.Windows.Forms.CheckBox e3;
         private System.Windows.Forms.CheckBox e1;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

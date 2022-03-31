@@ -174,7 +174,7 @@ namespace Terminal
                 data += $"OnTop={profile.stayontop}\n";
                 data += $"TimeInput={profile.timestampInput}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
-                data += $"MaxBufSizeMB={profile.displayOptions.maxBufferSizeMB}\n";
+                data += $"MaxBufSizeKB={profile.displayOptions.maxBufferSizeKB}\n";
                 data += $"CutPercent={profile.displayOptions.cutPercent}\n";
                 data += $"FreezeKB={profile.displayOptions.freezeSizeKB}\n";
 
@@ -219,6 +219,8 @@ namespace Terminal
                 data += $"Handshaking={profile.conOptions.Handshaking}\n";
                 data += $"Parity={profile.conOptions.Parity}\n";
                 data += $"StopBits={profile.conOptions.StopBits}\n";
+                data += $"InitialRTS={profile.conOptions.InitialRTS}\n";
+                data += $"InitialDTR={profile.conOptions.InitialDTR}\n";
                 data += $"TCPConnectAddress={profile.conOptions.TCPConnectAdress}\n";
                 data += $"TCPConnectPort={profile.conOptions.TCPConnectPort}\n";
                 data += $"TCPListenPort={profile.conOptions.TCPListenPort}\n";
@@ -350,7 +352,9 @@ namespace Terminal
                         }
 
                         else if (line.StartsWith("MaxBufSizeMB="))
-                            profile.displayOptions.maxBufferSizeMB = Utils.Int(line.Substring(13));
+                            profile.displayOptions.maxBufferSizeKB = Utils.Int(line.Substring(13)) * 1024;
+                        else if (line.StartsWith("MaxBufSizeKB="))
+                            profile.displayOptions.maxBufferSizeKB = Utils.Int(line.Substring(13));
                         else if (line.StartsWith("CutPercent="))
                             profile.displayOptions.cutPercent = Utils.Int(line.Substring(11));
                         else if (line.StartsWith("FreezeKB="))
@@ -412,6 +416,10 @@ namespace Terminal
                             profile.conOptions.Parity = line.Substring(7);
                         else if (line.StartsWith("StopBits="))
                             profile.conOptions.StopBits = line.Substring(9);
+                        else if (line.StartsWith("InitialRTS="))
+                            profile.conOptions.InitialRTS = line.Contains("True");
+                        else if (line.StartsWith("InitialDTR="))
+                            profile.conOptions.InitialDTR = line.Contains("True");
                         else if (line.StartsWith("TCPConnectAddress="))
                             profile.conOptions.TCPConnectAdress = line.Substring(18);
                         else if (line.StartsWith("TCPConnectPort="))

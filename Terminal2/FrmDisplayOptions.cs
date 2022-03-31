@@ -52,7 +52,7 @@ namespace Terminal
                 FreezeList[i].Checked = Options.lines[i].freeze;
             }
 
-            tbMaxBufSize.Text = Options.maxBufferSizeMB.ToString();
+            tbMaxBufSize.Text = Options.maxBufferSizeKB.ToString();
             tbCutSize.Text = Options.cutPercent.ToString();
             tbFreezeSize.Text = Options.freezeSizeKB.ToString();
         }
@@ -69,7 +69,7 @@ namespace Terminal
         private void BtnOk_Click(object sender, EventArgs e)
         {
             LimitBufferSizes();
-            Options.maxBufferSizeMB = Utils.Int(tbMaxBufSize.Text);
+            Options.maxBufferSizeKB = Utils.Int(tbMaxBufSize.Text);
             Options.cutPercent = Utils.Int(tbCutSize.Text);
             Options.freezeSizeKB = Utils.Int(tbFreezeSize.Text);
             Result = DialogResult.OK;
@@ -212,7 +212,7 @@ namespace Terminal
 
         private void BtnFTReset_Click(object sender, EventArgs e)
         {
-            tbMaxBufSize.Text = "10";
+            tbMaxBufSize.Text = "500";
             tbCutSize.Text = "10";
             tbFreezeSize.Text = "50";
         }
@@ -225,8 +225,8 @@ namespace Terminal
             v = Utils.Int(tbCutSize.Text);
             if (v < 1)
                 tbCutSize.Text = "1";
-            else if (v > 50)
-                tbCutSize.Text = "50";
+            else if (v > 100)
+                tbCutSize.Text = "100";
 
             v = Utils.Int(tbFreezeSize.Text);
             if (v < 1)

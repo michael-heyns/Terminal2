@@ -202,22 +202,6 @@ namespace Terminal
             return _connected;
         }
 
-        private void CloseSerialOnExit()
-        {
-            // A race condition will be created when the port is closed from within 
-            // the main thread.  This mechanism is a work-around suggested by many users
-            try
-            {
-                _com.DataReceived -= SerialDataReceived;
-                _com.DtrEnable = false;
-                _com.RtsEnable = false;
-                _com.DiscardInBuffer();
-                _com.DiscardOutBuffer();
-                _com.Close();
-            }
-            catch { }
-        }
-
         public void Disconnect()
         {
             // don't check - always force - might be waiting
@@ -235,8 +219,19 @@ namespace Terminal
                 switch (_comType)
                 {
                     case CommType.ctSERIAL:
-                        Thread CloseDown = new System.Threading.Thread(new System.Threading.ThreadStart(CloseSerialOnExit));
-                        CloseDown.Start();
+                        if (_com.IsOpen)
+                        {
+                            _com.DataReceived -= SerialDataReceived;
+                            if (_com.Handshake == Handshake.None)
+                            {
+                                _com.DtrEnable = false;
+                                _com.RtsEnable = false;
+                            }
+                            _com.DiscardInBuffer();
+                            _com.DiscardOutBuffer();
+                            _com.Close();
+                            _com = null;
+                        }
                         break;
 
                     case CommType.ctSERVER:

@@ -103,47 +103,61 @@ namespace Terminal
                         break;
                 }
 
+                SetupSerialControls();
+                bool SetInitialRTSCTR = false;
                 switch (_profile.conOptions.Handshaking)
                 {
                     default:
                     case "None":
                         _com.Handshake = Handshake.None;
+                        _controls[0].Enabled = true;
+                        _controls[1].Enabled = true;
+                        SetInitialRTSCTR = true;
                         break;
 
                     case "RTS/CTS":
                         _com.Handshake = Handshake.RequestToSend;
+                        _controls[0].Enabled = false;
+                        _controls[1].Enabled = false;
                         break;
 
                     case "RTS/CTS + Xon/Xoff":
                         _com.Handshake = Handshake.RequestToSendXOnXOff;
+                        _controls[0].Enabled = false;
+                        _controls[1].Enabled = false;
                         break;
 
                     case "Xon/Xoff":
                         _com.Handshake = Handshake.XOnXOff;
+                        _controls[0].Enabled = true;
+                        _controls[1].Enabled = true;
+                        SetInitialRTSCTR = false;
                         break;
                 }
 
-                SetupSerialControls();
-                if (_profile.conOptions.InitialDTR)
+                if (SetInitialRTSCTR)
                 {
-                    _com.DtrEnable = true;
-                    _controls[0].BackColor = Color.Lime;
-                }
-                else
-                {
-                    _com.DtrEnable = false;
-                    _controls[0].BackColor = Color.White;
-                }
+                    if (_profile.conOptions.InitialDTR)
+                    {
+                        _com.DtrEnable = true;
+                        _controls[0].BackColor = Color.Lime;
+                    }
+                    else
+                    {
+                        _com.DtrEnable = false;
+                        _controls[0].BackColor = Color.White;
+                    }
 
-                if (_profile.conOptions.InitialRTS)
-                {
-                    _com.RtsEnable = true;
-                    _controls[1].BackColor = Color.Lime;
-                }
-                else
-                {
-                    _com.RtsEnable = false;
-                    _controls[1].BackColor = Color.White;
+                    if (_profile.conOptions.InitialRTS)
+                    {
+                        _com.RtsEnable = true;
+                        _controls[1].BackColor = Color.Lime;
+                    }
+                    else
+                    {
+                        _com.RtsEnable = false;
+                        _controls[1].BackColor = Color.White;
+                    }
                 }
 
                 try

@@ -136,6 +136,7 @@ namespace Terminal
             this.pdHandshaking.Name = "pdHandshaking";
             this.pdHandshaking.Size = new System.Drawing.Size(137, 21);
             this.pdHandshaking.TabIndex = 12;
+            this.pdHandshaking.SelectedIndexChanged += new System.EventHandler(this.PdHandshaking_SelectedIndexChanged);
             // 
             // pdStopBits
             // 
@@ -353,6 +354,7 @@ namespace Terminal
             // 
             // FrmConnectOptions
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 233);

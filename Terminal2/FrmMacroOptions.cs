@@ -65,6 +65,7 @@ namespace Terminal
             btnApply.Enabled = false;
             grpKeys.Enabled = true;
             grpShift.Enabled = true;
+            Modified = true;
             Close();
         }
 

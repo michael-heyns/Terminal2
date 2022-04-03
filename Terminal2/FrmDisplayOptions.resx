@@ -136,7 +136,16 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.2.5
+    <value>v1.0.2.7
+    * Removed annoying BEEP when pressning ENTER and ESCAPE
+    * Search for ports when the window opens
+
+v1.0.2.6
+    * Added size and connection detail in the status bar.
+    * When the mouse enters the region of the port pull-down control, it will quickly refresh the port list
+    * Color filters "StartWith" option works properly now
+
+v1.0.2.5
     * 64bit and better DPI handling
     * Macros can contain comments
     * Tuning parameters have bigger ranges

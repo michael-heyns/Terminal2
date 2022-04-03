@@ -219,8 +219,10 @@ namespace Terminal
         private void LimitBufferSizes()
         {
             int v = Utils.Int(tbMaxBufSize.Text);
-            if (v < 1)
-                tbMaxBufSize.Text = "1";
+            if (v < 10)
+                tbMaxBufSize.Text = "10";
+            else if (v > 500000)
+                tbMaxBufSize.Text = "500000";
 
             v = Utils.Int(tbCutSize.Text);
             if (v < 1)

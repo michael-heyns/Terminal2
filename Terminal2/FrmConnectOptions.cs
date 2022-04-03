@@ -161,5 +161,19 @@ namespace Terminal
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void PdHandshaking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (pdHandshaking.SelectedIndex == 0 || pdHandshaking.SelectedIndex == 2)
+            {
+                cbInitialDTR.Enabled = true;
+                cbInitialRTS.Enabled = true;
+            }
+            else
+            {
+                cbInitialDTR.Enabled = false;
+                cbInitialRTS.Enabled = false;
+            }
+        }
     }
 }

@@ -96,17 +96,21 @@ namespace Terminal
             {
                 if (_activeProfile.displayOptions.lines[i].text.Length > 0)
                 {
+                    int offset = 0;
+                    if (Utils.HasTimestamp(str))
+                        offset += 13;
+
                     // starts with
                     if (_activeProfile.displayOptions.lines[i].mode == 0)
                     {
-                        if (str.StartsWith(_activeProfile.displayOptions.lines[i].text))
+                        if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.lines[i].text))
                             return i;
                     }
 
                     // contains
                     else if (_activeProfile.displayOptions.lines[i].mode == 1)
                     {
-                        if (str.Contains(_activeProfile.displayOptions.lines[i].text))
+                        if (str.Substring(offset).Contains(_activeProfile.displayOptions.lines[i].text))
                             return i;
                     }
                 }
@@ -385,6 +389,7 @@ namespace Terminal
                     _activeColor = _activeProfile.displayOptions.inputText;
                 }
             }
+            PdPort_SelectedValueChanged(sender, e);
             btnColorConfig.Enabled = true;
             tbCommand.Focus();
         }
@@ -643,7 +648,7 @@ namespace Terminal
                 btnLogOptions.Enabled = false;
                 btnStartLog.BackColor = Color.Lime;
                 btnStartLog.Text = "Stop Log";
-                stsLogfile.Text = Log.Filename;
+                stsLogfile.Text = "   " + Log.Filename + "   ";
             }
             else
             {
@@ -913,6 +918,7 @@ namespace Terminal
             dgMacroTable.Rows[src.uiRow].Cells[src.uiColumn].Value = string.Empty;
             _activeProfile.macros[_macroBeingMoved] = null;
             dgMacroTable.Rows[dst.uiRow].Cells[dst.uiColumn].Value = dst.title;
+            Database.SaveProfile(_activeProfile);
         }
         private void SaveActiveProfile()
         {
@@ -1024,6 +1030,8 @@ namespace Terminal
             }
             else if (e.KeyCode == Keys.Escape)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
                 RestartAllMacros();
                 tbCommand.Text = string.Empty;
             }
@@ -1228,6 +1236,11 @@ namespace Terminal
 
         private void FrmMain_Shown(object sender, EventArgs e)
         {
+            _comms.GetPortNames(pdPort);
+            pdPort.SelectedIndex = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
+            if (pdPort.SelectedIndex < 0 && pdPort.Items.Count > 0)
+                pdPort.SelectedIndex = 0;
+
             if (_firstActivation)
             {
                 BtnHelp_Click(sender, e);
@@ -1466,6 +1479,48 @@ namespace Terminal
             bool newState = !cbFreeze.Checked;
             cbFreeze.Checked = newState;
             Application.DoEvents();
+        }
+
+        private void PdPort_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (pdPort.Text.Equals("TCP Server"))
+                _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
+            else if (pdPort.Text.Equals("TCP Client"))
+                _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
+            else
+            {
+                _activeProfile.conOptions.Type = ConOptions.ConType.Serial;
+                _activeProfile.conOptions.SerialPort = pdPort.Text;
+            }
+
+            if (_activeProfile.conOptions.Type == ConOptions.ConType.Serial)
+            {
+                stsConnectionDetail.Text = $"   Serial: {_activeProfile.conOptions.SerialPort},{_activeProfile.conOptions.Baudrate},{_activeProfile.conOptions.DataBits},{_activeProfile.conOptions.Parity},{_activeProfile.conOptions.StopBits} -- Handshake:{_activeProfile.conOptions.Handshaking}";
+                if (_activeProfile.conOptions.InitialRTS)
+                    stsConnectionDetail.Text += " + RTS:ON";
+                if (_activeProfile.conOptions.InitialDTR)
+                    stsConnectionDetail.Text += " + DTR:ON";
+                stsConnectionDetail.Text += "   ";
+            }
+            else if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
+                stsConnectionDetail.Text = $"   TCP Server: localhost:{_activeProfile.conOptions.TCPListenPort}   ";
+            else
+                stsConnectionDetail.Text = $"   TCP Client: {_activeProfile.conOptions.TCPConnectAdress}:{_activeProfile.conOptions.TCPConnectPort}   ";
+
+            stsMaxSize.Text = $"  max: {_activeProfile.displayOptions.maxBufferSizeKB * 1024}  ";
+        }
+
+        private void Rtb_TextChanged(object sender, EventArgs e)
+        {
+            stsSize.Text = $"  {rtb.Text.Length}  ";
+        }
+
+        private void PdPort_MouseEnter(object sender, EventArgs e)
+        {
+            _comms.GetPortNames(pdPort);
+            pdPort.SelectedIndex = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
+            if (pdPort.SelectedIndex < 0 && pdPort.Items.Count > 0)
+                pdPort.SelectedIndex = 0;
         }
     }
     public static class RichTextBoxExtensions

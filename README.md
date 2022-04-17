@@ -1,4 +1,4 @@
-# Terminal2 - v1.0.3.2
+# Terminal2 - v1.0.3.2 (quite stable now)
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 
 ## Sales pitch

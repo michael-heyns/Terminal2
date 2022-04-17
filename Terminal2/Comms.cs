@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
@@ -6,6 +7,7 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Xml.Linq;
 using System.Net;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Terminal
 {
@@ -24,6 +26,65 @@ namespace Terminal
         private TcpClient _client = null;
         private Socket _socket = null;
         private Profile _profile;
+
+        private Thread _tcpThread = null;
+        private Thread _serialThread = null;
+        private static int _localThreadCount = 0;
+
+        private void SerialReaderThread()
+        {
+            _localThreadCount++;
+            try
+            {
+                while (_connected && _com != null)
+                {
+                    int count = _com.BytesToRead;
+                    if (count > 0)
+                    {
+                        string str = _com.ReadExisting();
+                        _inputQueue.Enqueue(str);
+                    }
+                    else
+                    {
+                        Thread.Sleep(1);
+                    }
+                }
+            }
+            catch { }
+            _localThreadCount--;
+        }
+
+        private void TCPReaderThread()
+        {
+            _localThreadCount++;
+            try
+            {
+                while (_connected && _socket != null)
+                {
+                    int count = DataWaiting();
+                    if (count > 0)
+                    {
+                        string str = string.Empty;
+                        byte[] tcp_data = null;
+                        int tcp_count = 0;
+                        tcp_count = _socket.Available;
+                        if (tcp_count > 0)
+                        {
+                            tcp_data = new byte[tcp_count];
+                            _socket.Receive(tcp_data);
+                            str = System.Text.Encoding.Default.GetString(tcp_data);
+                        }
+                        _inputQueue.Enqueue(str);
+                    }
+                    else
+                    {
+                        Thread.Sleep(1);
+                    }
+                }
+            }
+            catch { }
+            _localThreadCount--;
+        }
 
         public Comms(Label[] leds, Label[] controls, EventQueue inputQueue)
         {
@@ -174,8 +235,9 @@ namespace Terminal
                 {
                     SetupSerialLEDs();
                     _connectionString = $"Connected to: {_profile.conOptions.SerialPort},{_profile.conOptions.Baudrate},{_profile.conOptions.DataBits},{_profile.conOptions.Parity},{_profile.conOptions.StopBits},{_profile.conOptions.Handshaking}";
-                    _com.DataReceived += SerialDataReceived;
                     _connected = true;
+                    _serialThread = new Thread(new ThreadStart(SerialReaderThread));
+                    _serialThread.Start();
                 }
             }
             else if (_profile.conOptions.Type == ConOptions.ConType.TCPServer)
@@ -192,6 +254,8 @@ namespace Terminal
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;
                     _connected = true;
+                    _tcpThread = new Thread(new ThreadStart(TCPReaderThread));
+                    _tcpThread.Start();
                 }
                 catch
                 {
@@ -208,6 +272,8 @@ namespace Terminal
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;
                     _connected = true;
+                    _tcpThread = new Thread(new ThreadStart(TCPReaderThread));
+                    _tcpThread.Start();
                 }
                 catch
                 {
@@ -216,6 +282,25 @@ namespace Terminal
             return _connected;
         }
 
+        // always performs a clean close
+        private void CloseSerialOnExit()
+        {
+            _localThreadCount++;
+            try
+            {
+                if (_com.Handshake == Handshake.None)
+                {
+                    _com.DtrEnable = false;
+                    _com.RtsEnable = false;
+                }
+                _com.DiscardInBuffer();
+                _com.DiscardOutBuffer();
+                _com.Close();
+                _com = null;
+            }
+            catch { }
+            _localThreadCount--;
+        }
         public void Disconnect()
         {
             // don't check - always force - might be waiting
@@ -228,40 +313,58 @@ namespace Terminal
             _connected = false;
             _connectionString = "Disconnected";
 
+            Thread.Sleep(10);
+            if (_localThreadCount != 0)
+            {
+                if (_tcpThread != null)
+                    _tcpThread.Abort();
+                if (_serialThread != null)
+                    _serialThread.Abort();
+            }
+
+            if (_tcpThread != null)
+                _tcpThread.Join();
+            if (_serialThread != null)
+                _serialThread.Join();
+
             try
             {
                 switch (_comType)
                 {
                     case CommType.ctSERIAL:
-                        if (_com.IsOpen)
+                        if (_localThreadCount != 0)
+                            _serialThread.Abort();
+
+                        if (_com != null && _com.IsOpen)
                         {
-                            _com.DataReceived -= SerialDataReceived;
-                            if (_com.Handshake == Handshake.None)
-                            {
-                                _com.DtrEnable = false;
-                                _com.RtsEnable = false;
-                            }
-                            _com.DiscardInBuffer();
-                            _com.DiscardOutBuffer();
-                            _com.Close();
-                            _com = null;
+                            Thread CloseDown = new System.Threading.Thread(new System.Threading.ThreadStart(CloseSerialOnExit));
+                            CloseDown.Start();
                         }
                         break;
 
                     case CommType.ctSERVER:
-                        if (_socket != null)
-                            _socket.Shutdown(SocketShutdown.Both);
+                        if (_localThreadCount != 0)
+                            _tcpThread.Abort();
+
                         if (_server != null)
                             _server.Stop();
+
+                        if (_socket != null)
+                            _socket.Shutdown(SocketShutdown.Both);
+
                         _socket = null;
                         _server = null;
                         break;
 
                     case CommType.ctCLIENT:
+                        if (_localThreadCount != 0)
+                            _tcpThread.Abort();
+
                         if (_socket != null)
+                        {
                             _socket.Shutdown(SocketShutdown.Both);
-                        if (_client != null)
                             _client.Close();
+                        }
                         _socket = null;
                         _server = null;
                         break;
@@ -288,10 +391,7 @@ namespace Terminal
 
                     case CommType.ctSERVER:
                     case CommType.ctCLIENT:
-                        lock (_socket)
-                        {
-                            _socket.Send(data);
-                        }
+                        _socket.Send(data);
                         break;
 
                     default:
@@ -335,11 +435,8 @@ namespace Terminal
 
                     case CommType.ctSERVER:
                     case CommType.ctCLIENT:
-                        lock (_socket)
-                        {
-                            _connected = SocketOpen(_socket);
-                            return _connected;
-                        }
+                        _connected = SocketOpen(_socket);
+                        return _connected;
 
                     default:
                         break;
@@ -399,16 +496,6 @@ namespace Terminal
             }
             catch { }
         }
-        private void SerialDataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            SerialPort sp = (SerialPort)sender;
-            string data = sp.ReadExisting();
-            lock (_inputQueue)
-            {
-                _inputQueue.Enqueue(data);
-            }
-        }
-
         private void SerialPinChangeHandler(object sender, SerialPinChangedEventArgs e)
         {
             if (e.EventType == SerialPinChange.CtsChanged)
@@ -494,10 +581,7 @@ namespace Terminal
 
                     case CommType.ctSERVER:
                     case CommType.ctCLIENT:
-                        lock (_socket)
-                        {
-                            return _socket.Available;
-                        }
+                        return _socket.Available;
 
                     default:
                         break;
@@ -525,16 +609,13 @@ namespace Terminal
                     case CommType.ctCLIENT:
                         byte[] tcp_data = null;
                         int tcp_count = 0;
-                        lock (_socket)
+                        tcp_count = _socket.Available;
+                        if (tcp_count > 0)
                         {
-                            tcp_count = _socket.Available;
-                            if (tcp_count > 0)
-                            {
-                                tcp_data = new byte[tcp_count];
-                                _socket.Receive(tcp_data);
-                            }
-                            return tcp_data;
+                            tcp_data = new byte[tcp_count];
+                            _socket.Receive(tcp_data);
                         }
+                        return tcp_data;
 
                     default:
                         break;
@@ -544,7 +625,7 @@ namespace Terminal
             return null;
         }
 
-        public void GetPortNames(ComboBox cb)
+        public void FillPortNames(ComboBox cb)
         {
             cb.Items.Clear();
             string[] list = SerialPort.GetPortNames();

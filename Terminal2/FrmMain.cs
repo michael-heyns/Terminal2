@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace Terminal
 {
@@ -19,7 +17,10 @@ namespace Terminal
         public EnqueuedDelegate UIOutputQHandlerInstance;
         private readonly EventQueue _uiOutputQueue = null;
 
-        private readonly FrmHelp help = new FrmHelp();
+        private delegate void ColoringDelegate();
+        private readonly ColoringDelegate ColoringInstance;
+        private volatile bool _stopColoring = false;
+
         public bool ExitFlag = false;
         private Profile _activeProfile = new Profile();
 
@@ -27,10 +28,16 @@ namespace Terminal
         private int _tock = 0;
         private readonly Comms _comms = null;
 
-        private readonly object _dollarLock = new object();
+        private readonly static object _dollarLock = new object();
+        private readonly static object _rtbLock = new object();
 
         private enum State { Changing, Disconnected, Connected, Listening };
         private State _state = State.Disconnected;
+
+        // Coloring thread
+        private Thread _colorThread = null;
+        private static readonly AutoResetEvent _colorSemaphore = new AutoResetEvent(false);
+        private int _colorEnd = 0;
 
         // MACRO threads
         private readonly Thread[] _macroThread = new Thread[48];
@@ -47,70 +54,47 @@ namespace Terminal
         private int _lastFileSendILD = 0;
         private bool _lastSendCR = true;
         private bool _lastSendLF = true;
+        private bool _abortFileSend;
+        private bool _pauseFileSend;
 
         private bool _addTimestamp = true;
         private bool _skipNextLF = false;
 
-        private Color _activeColor = Color.Black;
         private bool _firstActivation = true;
-
-        private bool _testForFreeze = false;
-        private int _freezeLine = -1;
 
         private bool _macroIsMoving = false;
         private int _macroBeingMoved;
 
         private volatile bool _tickBusy = false;
-        private void ShowText(string text)
+        private static bool _terminateFlag = false;
+        private static int _localThreadCount = 0;
+
+        private bool _frozen = false;
+
+        // ==============================================
+        private int FindApplicableFilter(string str, int offset)
         {
-            int limit = _activeProfile.displayOptions.maxBufferSizeKB * 1024;
-            if (rtb.Text.Length > limit)
+            if (offset >= str.Length)
+                return -1;
+
+            for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
             {
-                string msg;
-                if (Log.Enabled)
-                    msg = "***<Removed from memory (only) - See the log file for everything>***\n";
-                else
-                    msg = "***<Removed from memory - Hint: Use logging to capture everything>***\n";
+                if (_stopColoring)
+                    return -1;
 
-                if (_activeProfile.displayOptions.cutPercent < 100)
+                if (_activeProfile.displayOptions.filter[i].text.Length > 0)
                 {
-                    int cutsize = (limit * _activeProfile.displayOptions.cutPercent) / 100;
-                    msg += rtb.Text.Substring(cutsize);
-                }
-                else
-                {
-                    rtb.Clear();
-                }
-                rtb.Text = msg;
-            }
-
-            if (_activeProfile.displayOptions.colorFiltersEnabled)
-                rtb.AppendText(text, _activeColor);
-            else
-                rtb.AppendText(text);
-        }
-
-        private int FindColorFilter(string str)
-        {
-            for (int i = 0; i < _activeProfile.displayOptions.lines.Length; i++)
-            {
-                if (_activeProfile.displayOptions.lines[i].text.Length > 0)
-                {
-                    int offset = 0;
-                    if (Utils.HasTimestamp(str))
-                        offset += 13;
-
                     // starts with
-                    if (_activeProfile.displayOptions.lines[i].mode == 0)
+                    if (_activeProfile.displayOptions.filter[i].mode == 0)
                     {
-                        if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.lines[i].text))
+                        if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text))
                             return i;
                     }
 
                     // contains
-                    else if (_activeProfile.displayOptions.lines[i].mode == 1)
+                    else if (_activeProfile.displayOptions.filter[i].mode == 1)
                     {
-                        if (str.Substring(offset).Contains(_activeProfile.displayOptions.lines[i].text))
+                        if (str.Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text))
                             return i;
                     }
                 }
@@ -118,23 +102,88 @@ namespace Terminal
             return -1;
         }
 
-        private void ApplyColorFilters(int startLine)
+        private void ColoringHandler()
         {
-            for (int line = startLine; line < rtb.Lines.Length; line++)
+            int topIndex = rtb.GetCharIndexFromPosition(new Point(1, 1));
+            int bottomIndex = rtb.GetCharIndexFromPosition(new Point(1, rtb.Height - 1));
+            int topLine = rtb.GetLineFromCharIndex(topIndex);
+            int bottomLine = rtb.GetLineFromCharIndex(bottomIndex);
+
+            lock (_rtbLock)
             {
-                int index = FindColorFilter(rtb.Lines[line]);
-                int len = rtb.Lines[line].Length;
-                if (index >= 0)
+                for (int i = bottomLine; i >= topLine; i--)
                 {
-                    int start = rtb.GetFirstCharIndexFromLine(line);
-                    rtb.Select(start, len);
-                    rtb.SelectionColor = _activeProfile.displayOptions.lines[index].color;
-                    if (_testForFreeze && _freezeLine < 0)
+                    // if something changed, quit immediately
+                    if (i >= rtb.Lines.Length)
+                        i = Math.Max(0, rtb.Lines.Length - 1);
+
+                    string str = rtb.Lines[i];
+                    if (str.Length > 0)
                     {
-                        if (_activeProfile.displayOptions.lines[index].freeze)
-                            _freezeLine = line;
+                        int offset = 0;
+                        if (Utils.HasTimestamp(str))
+                            offset += 13;
+
+                        int index = FindApplicableFilter(str, offset);
+                        if (index >= 0)
+                        {
+                            int start = rtb.GetFirstCharIndexFromLine(i) + offset;
+                            int len = str.Length - offset;
+                            rtb.Select(start, len);
+                            rtb.SelectionColor = _activeProfile.displayOptions.filter[index].color;
+                            Application.DoEvents();
+
+                            if (_activeProfile.displayOptions.filter[index].freeze)
+                            {
+                                if (!_frozen)
+                                {
+                                    cbFreeze.Checked = true;
+                                    Application.DoEvents();
+                                    int scrollTo = Math.Min(i + 5, rtb.Lines.Length - 1);
+                                    rtb.SelectionStart = rtb.GetFirstCharIndexFromLine(scrollTo);
+                                    rtb.ScrollToCaret();
+                                    MessageBox.Show("The text \"" + _activeProfile.displayOptions.filter[index].text + "\"" +
+                                        " has been detected at\n" +
+                                        rtb.Lines[i].Substring(0, 40) + "...", 
+                                        "Freeze condition detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                        }
                     }
+                    if (i == _colorEnd)
+                        break;
                 }
+                _colorEnd = bottomLine;
+            }
+        }
+
+        private void ColorThread()
+        {
+            _localThreadCount++;
+            try
+            {
+                while (!_terminateFlag)
+                {
+                    _colorSemaphore.WaitOne();
+                    if (_terminateFlag)
+                        break;
+
+                    _stopColoring = false;
+                    this.Invoke(this.ColoringInstance);
+                }
+            }
+            catch { }
+            _localThreadCount--;
+        }
+
+        // ==============================================
+
+        private void UpdateLineCounter()
+        {
+            lock (_rtbLock)
+            {
+                stsSize.Text = $"  {rtb.Text.Length}  ";
+                stsLineCount.Text = $"  {rtb.Lines.Length}  ";
             }
         }
 
@@ -148,8 +197,6 @@ namespace Terminal
 
             int translateCR = _activeProfile.translateCR;
             int translateLF = _activeProfile.translateLF;
-
-            _testForFreeze = !cbFreeze.Checked;
 
             for (int i = 0; i < str.Length; i++)
             {
@@ -236,50 +283,64 @@ namespace Terminal
                 }
             }
 
-            int fromLine = Math.Max(0, rtb.Lines.Length - 1);
-            ShowText(_displayStr);
-            if (_activeProfile.displayOptions.colorFiltersEnabled)
-                ApplyColorFilters(fromLine);
-            if (_freezeLine >= 0)
+            if (!_frozen)
             {
-                cbFreeze.Checked = true;
-                int topIndex = rtb.GetCharIndexFromPosition(new Point(1, 1));
-                int bottomIndex = rtb.GetCharIndexFromPosition(new Point(1, rtb.Height - 1));
-                int topLine = rtb.GetLineFromCharIndex(topIndex);
-                int bottomLine = rtb.GetLineFromCharIndex(bottomIndex);
-                rtb.SelectionStart = rtb.GetFirstCharIndexFromLine(Math.Max(_freezeLine - (bottomLine - topLine - 5), 0));
+                lock (_rtbLock)
+                {
+                    int lastLine = Math.Max(0, rtb.Lines.Length - 1);
+                    rtb.AppendText(_displayStr, _activeProfile.displayOptions.inputText);
+                    if (rtb.Lines.Length < 100)
+                        _colorSemaphore.Set();
+
+                    // limit our line count
+                    if (rtb.Lines.Length > _activeProfile.displayOptions.maxLines)
+                    {
+                        // mandatory cut
+                        int tocut = rtb.Lines.Length - _activeProfile.displayOptions.maxLines;
+
+                        // plus additional cut
+                        tocut += _activeProfile.displayOptions.cutXtraLines;
+                        if (tocut >= rtb.Lines.Length)
+                        {
+                            rtb.Clear();
+                            lastLine = 0;
+                            _colorEnd = 0;
+                        }
+                        else
+                        {
+                            rtb.ReadOnly = false;
+                            {
+                                rtb.Select(0, rtb.GetFirstCharIndexFromLine(tocut));
+                                rtb.SelectedText = string.Empty;
+                            }
+                            rtb.ReadOnly = true;
+                            lastLine -= tocut;
+                            _colorEnd = lastLine;
+                        }
+
+                        // and put the caret back to the bottom
+                        rtb.SelectionStart = rtb.Text.Length;
+                    }
+                }
                 rtb.ScrollToCaret();
-                rtb.SelectionStart = rtb.Text.Length;
-                _freezeLine = -1;
+                UpdateLineCounter();
             }
-            else
-                rtb.ScrollToCaret();
 
             Log.Add(_logStr);
         }
 
         private void UIInputQueueHandler()
         {
-            if (cbFreeze.Checked)
-            {
-                int freezesize = _activeProfile.displayOptions.freezeSizeKB * 1024;
-                if (_uiInputQueue.LengthOfStringObjects > freezesize)
-                    cbFreeze.Checked = false;
-                else
-                    return;
-            }
-
-            while (_uiInputQueue.Count > 0)
+            while (!_terminateFlag && _uiInputQueue.Count > 0)
             {
                 string str = (string)_uiInputQueue.Dequeue();
                 ProcessChunk(str);
-                Application.DoEvents();
             }
         }
 
         private void UIOutputQueueHandler()
         {
-            while (_uiOutputQueue.Count > 0)
+            while (!_terminateFlag && _uiOutputQueue.Count > 0)
             {
                 string str = (string)_uiOutputQueue.Dequeue();
                 string tm = Utils.Timestamp();
@@ -326,6 +387,8 @@ namespace Terminal
             UIOutputQHandlerInstance = new EnqueuedDelegate(UIOutputQueueHandler);
             _uiOutputQueue = new EventQueue(this, UIOutputQHandlerInstance);
 
+            ColoringInstance = new ColoringDelegate(ColoringHandler);
+
             Database.Initialise();
 
             if (!Database.Find("Default"))
@@ -337,7 +400,7 @@ namespace Terminal
 
                 FrmDisplayOptions conf = new FrmDisplayOptions();
                 for (int i = 0; i < conf.PanelList.Length; i++)
-                    s.displayOptions.lines[i].color = conf.PanelList[i].BackColor;
+                    s.displayOptions.filter[i].color = conf.PanelList[i].BackColor;
 
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
                 s.displayOptions.inputFont = (Font)converter.ConvertFromString(Utils.DefaultInputFont);
@@ -359,7 +422,6 @@ namespace Terminal
             Label[] leds = new Label[] { LED1, LED2, LED3, LED4 };
             Label[] controls = new Label[] { ctrlOne, ctrlTwo };
             _comms = new Comms(leds, controls, _uiInputQueue);
-            _comms.GetPortNames(pdPort);
             SwitchToProfile(preferred);
         }
 
@@ -367,7 +429,7 @@ namespace Terminal
         {
             btnColorConfig.Enabled = false;
             {
-                SaveActiveProfile();
+                SaveThisProfile();
                 FrmDisplayOptions cfg = new FrmDisplayOptions
                 {
                     Options = _activeProfile.displayOptions.Clone()
@@ -380,16 +442,21 @@ namespace Terminal
                 if (cfg.Result == DialogResult.OK)
                 {
                     _activeProfile.displayOptions = cfg.Options.Clone();
-                    SaveActiveProfile();
+                    SaveThisProfile();
 
-                    rtb.BackColor = _activeProfile.displayOptions.inputBackground;
-                    lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
-                    rtb.Font = _activeProfile.displayOptions.inputFont;
-                    lbOutput.Font = _activeProfile.displayOptions.outputFont;
-                    _activeColor = _activeProfile.displayOptions.inputText;
+                    lock (_rtbLock)
+                    {
+                        rtb.BackColor = _activeProfile.displayOptions.inputBackground;
+                        lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
+                        rtb.Font = _activeProfile.displayOptions.inputFont;
+                        lbOutput.Font = _activeProfile.displayOptions.outputFont;
+                    }
+                    _colorEnd = 0;
+                    _stopColoring = false;
+                    this.Invoke(this.ColoringInstance);
                 }
             }
-            PdPort_SelectedValueChanged(sender, e);
+            stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             btnColorConfig.Enabled = true;
             tbCommand.Focus();
         }
@@ -466,13 +533,15 @@ namespace Terminal
             _comms.Disconnect();
             if (_state == State.Listening)
             {
-                while (!_threadDone)
-                    Thread.Sleep(1);
+                Thread.Sleep(10);
+                if (!_threadDone)
+                    _connectThread.Abort();
+                _connectThread.Join();
                 _connectThread = null;
             }
 
             btnConnect.BackColor = Color.Transparent;
-            SetPortAndConnectLabels();
+            RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
             lblProfileName.Enabled = true;
@@ -497,7 +566,13 @@ namespace Terminal
             if (_state == State.Disconnected)
                 ActionConnect();
             else
+            {
+                _abortFileSend = true;
+                _pauseFileSend = false;
+
                 ActionDisconnect();
+                RefreshPortPulldown();
+            }
             btnConnect.Enabled = true;
             tbCommand.Focus();
         }
@@ -527,7 +602,7 @@ namespace Terminal
                 TopMost = cbStayOnTop.Checked;
 
                 if (macros.Modified)
-                    SaveActiveProfile();
+                    SaveThisProfile();
             }
             btnEditMacro.Enabled = true;
             tbCommand.Focus();
@@ -537,45 +612,16 @@ namespace Terminal
         {
             btnLogOptions.Enabled = false;
             {
-                SaveActiveProfile();
+                SaveThisProfile();
                 FrmLogOptions options = new FrmLogOptions(_activeProfile.logOptions);
                 TopMost = false;
                 options.ShowDialog();
                 TopMost = cbStayOnTop.Checked;
                 if (_activeProfile.logOptions.Modified)
-                    SaveActiveProfile();
+                    SaveThisProfile();
             }
             btnLogOptions.Enabled = true;
             tbCommand.Focus();
-        }
-
-        private void SetPortAndConnectLabels()
-        {
-            _comms.GetPortNames(pdPort);
-            if (_activeProfile.conOptions.Type == ConOptions.ConType.Serial)
-            {
-                pdPort.SelectedIndex = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
-                if (pdPort.SelectedIndex < 0 && pdPort.Items.Count > 0)
-                    pdPort.SelectedIndex = 0;
-
-                // test again (we may not have not have COM ports)
-                if (pdPort.SelectedIndex < 0)
-                {
-                    _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
-                    pdPort.Text = "TCP Client";
-                }
-                btnConnect.Text = "&Connect";
-            }
-            else if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
-            {
-                pdPort.Text = "TCP Server";
-                btnConnect.Text = "&Start";
-            }
-            else
-            {
-                pdPort.Text = "TCP Client";
-                btnConnect.Text = "&Connect";
-            }
         }
 
         private void BtnSend_Click(object sender, EventArgs e)
@@ -605,7 +651,7 @@ namespace Terminal
             btnConnectOptions.Enabled = false;
             pdPort.Enabled = false;
             {
-                SaveActiveProfile();
+                SaveThisProfile();
 
                 if (pdPort.Text.Equals("TCP Server"))
                     _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
@@ -623,11 +669,11 @@ namespace Terminal
                 TopMost = cbStayOnTop.Checked;
                 if (_activeProfile.conOptions.Modified)
                 {
-                    _comms.GetPortNames(pdPort);
-                    SaveActiveProfile();
+                    RefreshPortPulldown();
+                    SaveThisProfile();
                 }
             }
-            SetPortAndConnectLabels();
+            RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
             tbCommand.Focus();
@@ -670,14 +716,22 @@ namespace Terminal
         {
             if (cbFreeze.Checked)
             {
+                _frozen = true;
+                rtb.AppendText("\n====== 'Freeze' activated here ======\n", _activeProfile.displayOptions.inputText);
                 cbFreeze.BackColor = Color.Tomato;
                 cbFreeze.Text = "    Run   ";
+                rtb.SelectionStart = rtb.Text.Length;
+                rtb.ScrollToCaret();
             }
             else
             {
+                _uiInputQueue.Clear();
                 cbFreeze.Text = " Freeze ";
                 cbFreeze.BackColor = PanelOne.BackColor;
                 this.Invoke(this.UIInputQHandlerInstance);
+                _frozen = false;
+
+                _colorSemaphore.Set();
             }
             tbCommand.Focus();
         }
@@ -692,17 +746,6 @@ namespace Terminal
         private void CbStayOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = cbStayOnTop.Checked;
-        }
-
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Visible = false;
-            Application.DoEvents();
-            for (int t = 0; t < _macroThread.Length; t++)
-                _macroThread[t].Abort();
-            if (_state == State.Connected)
-                _comms.Disconnect();
-            SaveActiveProfile();
         }
 
         private void RestartMacro(int m)
@@ -731,12 +774,15 @@ namespace Terminal
             int m = Utils.Int(Thread.CurrentThread.Name);
             string[] delim = { "{0D}", "{0A}" };
 
+            _localThreadCount++;
             try // Thread.Abort will cause an exception
             {
-                while (true)
+                while (!_terminateFlag)
                 {
                     _macroBusy[m] = false;
                     _macroTrigger[m].WaitOne();
+                    if (_terminateFlag)
+                        break;
 
                     // -------------------------------------------
                     // the thread will wait here till activated
@@ -755,10 +801,11 @@ namespace Terminal
                     _macroBusy[m] = true;
                     for (int i = 0; i < mac.runLines.Length; i++)
                     {
+                        mac.runLines[i] = mac.runLines[i].TrimStart();
                         int commentStart = mac.runLines[i].IndexOf('#');
                         if (commentStart >= 0)
-                            mac.runLines[i] = mac.runLines[i].Substring(0, commentStart);
-                        mac.runLines[i] = mac.runLines[i].Trim();
+                                mac.runLines[i] = mac.runLines[i].Substring(0, commentStart);
+                        mac.runLines[i] = mac.runLines[i].TrimEnd();
                         if (mac.runLines[i].Length > 0)
                         {
                             if (mac.addCR)
@@ -769,7 +816,7 @@ namespace Terminal
                     }
 
                     int repeatCount = 0;
-                    while (true)
+                    while (!_terminateFlag)
                     {
                         foreach (string s in mac.runLines)
                         {
@@ -791,11 +838,16 @@ namespace Terminal
                 }
             }
             catch { }
-            dgMacroTable.ClearSelection();
+            if (!_terminateFlag)
+            {
+                dgMacroTable.ClearSelection();
+                _localThreadCount--;
+            }
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            lblSaving.Text = string.Empty;
             MacroPanel.Height = (dgMacroTable.Rows[0].Height * 5) + 2; // +2 for horizontal lines
             dgMacroTable.Dock = DockStyle.Fill;
             dgMacroTable.ClearSelection();
@@ -808,6 +860,8 @@ namespace Terminal
                 };
                 _macroThread[t].Start();
             }
+            _colorThread = new Thread(new ThreadStart(ColorThread));
+            _colorThread.Start();
         }
 
         private void DoMacro(int m)
@@ -863,7 +917,7 @@ namespace Terminal
                 TopMost = false;
                 macros.ShowDialog();
                 if (macros.Modified)
-                    SaveActiveProfile();
+                    SaveThisProfile();
                 TopMost = cbStayOnTop.Checked;
             }
             else
@@ -909,19 +963,25 @@ namespace Terminal
                 return;
             }
 
-            Macro src = _activeProfile.macros[_macroBeingMoved];
-            _activeProfile.macros[m] = src.Clone();
-            dst = _activeProfile.macros[m];
-            dst.uiColumn = e.ColumnIndex;
-            dst.uiRow = e.RowIndex;
+            // MOVING MACROS
+            {
+                Macro src = _activeProfile.macros[_macroBeingMoved];
+                _activeProfile.macros[m] = src.Clone();
+                dst = _activeProfile.macros[m];
+                dst.uiColumn = e.ColumnIndex;
+                dst.uiRow = e.RowIndex;
 
-            dgMacroTable.Rows[src.uiRow].Cells[src.uiColumn].Value = string.Empty;
-            _activeProfile.macros[_macroBeingMoved] = null;
-            dgMacroTable.Rows[dst.uiRow].Cells[dst.uiColumn].Value = dst.title;
-            Database.SaveProfile(_activeProfile);
+                dgMacroTable.Rows[src.uiRow].Cells[src.uiColumn].Value = string.Empty;
+                _activeProfile.macros[_macroBeingMoved] = null;
+                dgMacroTable.Rows[dst.uiRow].Cells[dst.uiColumn].Value = dst.title;
+
+                SaveThisProfile();
+            }
         }
-        private void SaveActiveProfile()
+        private void SaveThisProfile()
         {
+            lblSaving.Text = "*";
+            Application.DoEvents();
             _activeProfile.stayontop = cbStayOnTop.Checked;
             _activeProfile.timestampInput = cbTimestamp.Checked;
             _activeProfile.ascii = cbASCII.Checked;
@@ -935,6 +995,8 @@ namespace Terminal
             _activeProfile.clearCMD = cbClearCMD.Checked;
             Database.SaveProfile(_activeProfile);
             Database.SaveAsActiveProfile(_activeProfile.name);
+            Thread.Sleep(50);
+            lblSaving.Text = string.Empty;
         }
 
         private void SwitchToProfile(string name)
@@ -951,11 +1013,13 @@ namespace Terminal
                 _activeProfile = Database.ReadProfile(name);
                 Database.SaveAsActiveProfile(name);
 
-                rtb.BackColor = _activeProfile.displayOptions.inputBackground;
-                lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
-                rtb.Font = _activeProfile.displayOptions.inputFont;
+                lock (_rtbLock)
+                {
+                    rtb.BackColor = _activeProfile.displayOptions.inputBackground;
+                    lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
+                    rtb.Font = _activeProfile.displayOptions.inputFont;
+                }
                 lbOutput.Font = _activeProfile.displayOptions.outputFont;
-                _activeColor = _activeProfile.displayOptions.inputText;
 
                 lblProfileName.Text = _activeProfile.name;
                 cbStayOnTop.Checked = _activeProfile.stayontop;
@@ -984,7 +1048,8 @@ namespace Terminal
                             dgMacroTable.Rows[r].Cells[f].Value = m.title;
                     }
                 }
-                SetPortAndConnectLabels();
+                RefreshPortPulldown();
+                stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             }
         }
         private void TbCommand_KeyDown(object sender, KeyEventArgs e)
@@ -1009,19 +1074,33 @@ namespace Terminal
             else if (e.KeyCode == Keys.C)
             {
                 if (e.Control)
-                    rtb.Copy();
+                {
+                    lock (_rtbLock)
+                    {
+                        rtb.Copy();
+                    }
+                }
             }
             else if (e.KeyCode == Keys.A)
             {
                 if (e.Control)
-                    rtb.SelectAll();
+                {
+                    lock (_rtbLock)
+                    {
+                        rtb.SelectAll();
+                    }
+                }
             }
             else if (e.KeyCode == Keys.X)
             {
                 if (e.Control)
                 {
-                    rtb.Copy();
-                    rtb.Clear();
+                    lock (_rtbLock)
+                    {
+                        rtb.Copy();
+                        rtb.Clear();
+                        _colorEnd = 0;
+                    }
                 }
             }
             else if (e.KeyCode == Keys.Enter)
@@ -1143,11 +1222,8 @@ namespace Terminal
 
         private void TickHandler()
         {
-            // ** To show resource usage: **
-            //var performance = new System.Diagnostics.PerformanceCounter("Memory", "Available MBytes");
-            //var memory = performance.NextValue();
-            //this.Text = memory.ToString();
-            //this.Text = GC.GetTotalMemory(false).ToString();
+            if (_terminateFlag)
+                return;
 
             dgMacroTable.ClearSelection();
             if (_comms == null)
@@ -1162,19 +1238,6 @@ namespace Terminal
                     if (!_comms.Connected())
                     {
                         ActionDisconnect();
-                    }
-                    else
-                    {
-                        int count = _comms.DataWaiting();
-                        if (count > 0)
-                        {
-                            byte[] data = _comms.Read();
-                            string str = System.Text.Encoding.Default.GetString(data);
-                            lock (_uiInputQueue)
-                            {
-                                _uiInputQueue.Enqueue(str);
-                            }
-                        }
                     }
                 }
             }
@@ -1229,18 +1292,13 @@ namespace Terminal
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
+            FrmHelp help = new FrmHelp();
             help.ShowDialog();
             tbCommand.Focus();
-            Application.DoEvents();
         }
 
         private void FrmMain_Shown(object sender, EventArgs e)
         {
-            _comms.GetPortNames(pdPort);
-            pdPort.SelectedIndex = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
-            if (pdPort.SelectedIndex < 0 && pdPort.Items.Count > 0)
-                pdPort.SelectedIndex = 0;
-
             if (_firstActivation)
             {
                 BtnHelp_Click(sender, e);
@@ -1253,7 +1311,14 @@ namespace Terminal
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            rtb.Text = string.Empty;
+            lock (_rtbLock)
+            {
+                _uiInputQueue.Clear();
+                rtb.Clear();
+                _colorEnd = 0;
+            }
+            cbFreeze.Checked = false;
+            UpdateLineCounter();
         }
 
         private void BtnFile_Click(object sender, EventArgs e)
@@ -1280,20 +1345,34 @@ namespace Terminal
                 {
                     string data = File.ReadAllText(fs.Filename);
                     string[] lines = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    btnPauseFile.Text = "Pause";
+                    lblLineCounter.Text = "0";
                     progressBar.Value = 0;
                     progressBar.Maximum = lines.Length;
                     progressBar.Visible = true;
+                    btnAbortFile.Visible = true;
+                    btnPauseFile.Visible = true;
+                    lblLineCounter.Visible = true;
                     SendPanel.Enabled = false;
+                    _abortFileSend = false;
                     Application.DoEvents();
 
-                    foreach (string line in lines)
+                    for (int i = 0; i < lines.Length; i++)
                     {
-                        string str = line;
+                        while (!_terminateFlag && _pauseFileSend)
+                        {
+                            Application.DoEvents();
+                            Thread.Sleep(100);
+                        }
+                        if (_abortFileSend)
+                            break;
+                        string str = lines[i];
                         if (fs.SendCR)
                             str += "$0D";
                         if (fs.SendLF)
                             str += "$0A";
                         SendDollarString(str, 0);
+                        lblLineCounter.Text = (i + 1).ToString();
                         progressBar.Value++;
                         Application.DoEvents();
                         Thread.Sleep(fs.InterLineDelay);
@@ -1304,9 +1383,12 @@ namespace Terminal
                     MessageBox.Show($"The file could not be sent successfully", "Send error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            lblLineCounter.Visible = false;
             btnFile.Enabled = true;
             SendPanel.Enabled = true;
             progressBar.Visible = false;
+            btnAbortFile.Visible = false;
+            btnPauseFile.Visible = false;
             Application.DoEvents();
         }
 
@@ -1314,7 +1396,7 @@ namespace Terminal
         {
             btnProfileSelect.Enabled = false;
             {
-                SaveActiveProfile();
+                SaveThisProfile();
                 FrmProfileDatabase db = new FrmProfileDatabase(_activeProfile.name);
                 TopMost = false;
                 db.StartOnly = false;
@@ -1366,7 +1448,10 @@ namespace Terminal
 
         private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            rtb.Copy();
+            lock (_rtbLock)
+            {
+                rtb.Copy();
+            }
         }
 
         private void StsLogfile_Click(object sender, EventArgs e)
@@ -1409,8 +1494,8 @@ namespace Terminal
         {
             btnExport.Enabled = false;
             {
-                bool curFreeze = cbFreeze.Checked;
-                if (!cbFreeze.Checked)
+                bool initFreeze = cbFreeze.Checked;
+                if (!initFreeze)
                     cbFreeze.Checked = true;
 
                 if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
@@ -1418,12 +1503,15 @@ namespace Terminal
                     try
                     {
                         string fname = saveFileDialog.FileName;
-                        if (fname.ToLower().EndsWith(".rtf"))
-                            rtb.SaveFile(saveFileDialog.FileName);
-                        else
+                        lock (_rtbLock)
                         {
-                            string[] lines = rtb.Lines;
-                            File.WriteAllLines(fname, lines);
+                            if (fname.ToLower().EndsWith(".rtf"))
+                                rtb.SaveFile(saveFileDialog.FileName);
+                            else
+                            {
+                                string[] lines = rtb.Lines;
+                                File.WriteAllLines(fname, lines);
+                            }
                         }
                         MessageBox.Show("The buffer has been exported to file", "Buffer Exported", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -1433,7 +1521,7 @@ namespace Terminal
                     }
                 }
 
-                if (!curFreeze)
+                if (!initFreeze)
                     cbFreeze.Checked = false;
             }
             btnExport.Enabled = true;
@@ -1458,12 +1546,16 @@ namespace Terminal
 
         private void Rtb_MouseClick(object sender, MouseEventArgs e)
         {
-            if (rtb.SelectionLength > 0)
-                return;
-            if (rtb.Lines.Length == 0)
-                return;
+            string line = string.Empty;
+            lock (_rtbLock)
+            {
+                if (rtb.SelectionLength > 0)
+                    return;
+                if (rtb.Lines.Length == 0)
+                    return;
 
-            string line = rtb.Lines[rtb.GetLineFromCharIndex(rtb.SelectionStart)];
+                line = rtb.Lines[rtb.GetLineFromCharIndex(rtb.SelectionStart)];
+            }
             if (Utils.HasTimestamp(line))
             {
                 int i = line.IndexOf(": ");
@@ -1484,13 +1576,20 @@ namespace Terminal
         private void PdPort_SelectedValueChanged(object sender, EventArgs e)
         {
             if (pdPort.Text.Equals("TCP Server"))
+            {
                 _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
+                btnConnect.Text = "&Start";
+            }
             else if (pdPort.Text.Equals("TCP Client"))
+            {
                 _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
+                btnConnect.Text = "&Connect";
+            }
             else
             {
                 _activeProfile.conOptions.Type = ConOptions.ConType.Serial;
                 _activeProfile.conOptions.SerialPort = pdPort.Text;
+                btnConnect.Text = "&Connect";
             }
 
             if (_activeProfile.conOptions.Type == ConOptions.ConType.Serial)
@@ -1507,20 +1606,106 @@ namespace Terminal
             else
                 stsConnectionDetail.Text = $"   TCP Client: {_activeProfile.conOptions.TCPConnectAdress}:{_activeProfile.conOptions.TCPConnectPort}   ";
 
-            stsMaxSize.Text = $"  max: {_activeProfile.displayOptions.maxBufferSizeKB * 1024}  ";
+            SaveThisProfile();
         }
 
-        private void Rtb_TextChanged(object sender, EventArgs e)
+        private void RefreshPortPulldown()
         {
-            stsSize.Text = $"  {rtb.Text.Length}  ";
+            _comms.FillPortNames(pdPort);
+
+            if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient)
+            {
+                pdPort.SelectedIndex = pdPort.Items.IndexOf("TCP Client");
+            }
+            else if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
+            {
+                pdPort.SelectedIndex = pdPort.Items.IndexOf("TCP Server");
+            }
+            else
+            {
+                int i = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
+                if (i >= 0)
+                    pdPort.SelectedIndex = i;
+                else if (pdPort.Items.Count > 0)
+                    pdPort.SelectedIndex = 0;
+            }
         }
 
         private void PdPort_MouseEnter(object sender, EventArgs e)
         {
-            _comms.GetPortNames(pdPort);
-            pdPort.SelectedIndex = pdPort.Items.IndexOf(_activeProfile.conOptions.SerialPort);
-            if (pdPort.SelectedIndex < 0 && pdPort.Items.Count > 0)
-                pdPort.SelectedIndex = 0;
+            RefreshPortPulldown();
+        }
+
+        private void BtnAbortFile_Click(object sender, EventArgs e)
+        {
+            btnAbortFile.Enabled = false;
+            {
+                _abortFileSend = true;
+                _pauseFileSend = false;
+            }
+            btnAbortFile.Enabled = true;
+        }
+        private void BtnPauseFile_Click(object sender, EventArgs e)
+        {
+            btnPauseFile.Enabled = false;
+            {
+                _pauseFileSend = !_pauseFileSend;
+                btnPauseFile.Text = (_pauseFileSend) ? "GO" : "Pause";
+            }
+            btnPauseFile.Enabled = true;
+        }
+
+        private void Rtb_VScroll(object sender, EventArgs e)
+        {
+            try
+            {
+                _stopColoring = false;
+                this.Invoke(this.ColoringInstance);
+            }
+            catch { }
+        }
+
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                _terminateFlag = true;
+                SaveThisProfile();
+
+                this.Visible = false;
+                Application.DoEvents();
+
+                timer.Stop();
+                timer.Enabled = false;
+
+                if (_comms.Connected())
+                    DoConnectDisconnect();
+                Thread.Sleep(50);
+                lock (_uiInputQueue)
+                {
+                    _uiInputQueue.Clear();
+                }
+
+                _colorSemaphore.Set();
+                for (int t = 0; t < _macroThread.Length; t++)
+                    _macroTrigger[t].Set();
+                Thread.Sleep(20);
+                if (_localThreadCount != 0)
+                {
+                    for (int t = 0; t < _macroThread.Length; t++)
+                        _macroThread[t].Abort();
+
+                }
+                for (int t = 0; t < _macroThread.Length; t++)
+                {
+                    if (_macroThread[t] != null)
+                        _macroThread[t].Join();
+                }
+
+                if (_connectThread != null)
+                    _connectThread.Join();
+            }
+            catch { }
         }
     }
     public static class RichTextBoxExtensions

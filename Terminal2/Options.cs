@@ -71,22 +71,21 @@ namespace Terminal
         }
     }
 
-    public class ColorLines
+    public class ColorFilter
     {
         public int mode = 0;
         public string text = string.Empty;
         public Color color = Color.Black;
         public bool freeze = false;
-        public ColorLines Clone()
+        public ColorFilter Clone()
         {
-            return (ColorLines)MemberwiseClone();
+            return (ColorFilter)MemberwiseClone();
         }
     }
 
     public class DisplayOptions
     {
-        public bool colorFiltersEnabled = false;
-        public ColorLines[] lines = new ColorLines[12];
+        public ColorFilter[] filter = new ColorFilter[12];
 
         public Font inputFont;
         public Color inputText = Color.Black;
@@ -97,28 +96,27 @@ namespace Terminal
 
         public bool timestampOutputLines = true;
 
-        public int maxBufferSizeKB = 500;
-        public int cutPercent = 10;
-        public int freezeSizeKB = 50;
+        public int maxLines = 1500;
+        public int cutXtraLines = 500;
 
         public DisplayOptions()
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
             inputFont = (Font)converter.ConvertFromString(Utils.DefaultInputFont);
             outputFont = (Font)converter.ConvertFromString(Utils.DefaultOutputFont);
-            for (int i = 0; i < lines.Length; i++)
-                lines[i] = new ColorLines();
+            for (int i = 0; i < filter.Length; i++)
+                filter[i] = new ColorFilter();
         }
 
         public DisplayOptions Clone()
         {
             DisplayOptions opt = (DisplayOptions)this.MemberwiseClone();
-            for (int dl = 0; dl < lines.Length; dl++)
+            for (int dl = 0; dl < filter.Length; dl++)
             {
-                if (lines[dl] != null)
-                    opt.lines[dl] = lines[dl].Clone();
+                if (filter[dl] != null)
+                    opt.filter[dl] = filter[dl].Clone();
                 else
-                    opt.lines[dl] = null;
+                    opt.filter[dl] = null;
             }
             return opt;
         }

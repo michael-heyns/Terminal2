@@ -136,7 +136,18 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.2.7
+    <value>v1.0.3.0
+    * Major re-write of the display and comms processes
+
+v1.0.2.9
+    * Fixed a silly bug that crashed the program when you pressed HELP
+
+v1.0.2.8
+    * Removed 'accept' flag on the MACRO screen so we can press ENTER to start a new line as before
+    * Changed the font of the macro editor to Courier New 10pt
+    * Make HELP form non-modal
+
+v1.0.2.7
     * Removed annoying BEEP when pressning ENTER and ESCAPE
     * Search for ports when the window opens
 

@@ -30,28 +30,30 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.blank2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsConnectionDetail = new System.Windows.Forms.ToolStripStatusLabel();
-            this.stsSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsMaxSize = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stsLineCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stsSize = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnConnect = new System.Windows.Forms.Button();
             this.btnConnectOptions = new System.Windows.Forms.Button();
             this.PanelOne = new System.Windows.Forms.Panel();
+            this.lblSaving = new System.Windows.Forms.Label();
             this.btnQuickLaunch = new System.Windows.Forms.Button();
             this.pdPort = new System.Windows.Forms.ComboBox();
             this.btnNew = new System.Windows.Forms.Button();
@@ -113,6 +115,9 @@
             this.LED1 = new System.Windows.Forms.Label();
             this.LED2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblLineCounter = new System.Windows.Forms.Label();
+            this.btnPauseFile = new System.Windows.Forms.Button();
+            this.btnAbortFile = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.rtb = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -137,8 +142,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.blank2,
             this.stsConnectionDetail,
-            this.stsSize,
             this.stsMaxSize,
+            this.stsLineCount,
+            this.stsSize,
             this.stsLogfile});
             this.statusStrip1.Location = new System.Drawing.Point(0, 657);
             this.statusStrip1.Name = "statusStrip1";
@@ -163,16 +169,6 @@
             this.stsConnectionDetail.Size = new System.Drawing.Size(119, 19);
             this.stsConnectionDetail.Text = "CONNECTION-INFO";
             // 
-            // stsSize
-            // 
-            this.stsSize.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
-            this.stsSize.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
-            this.stsSize.Name = "stsSize";
-            this.stsSize.Size = new System.Drawing.Size(29, 19);
-            this.stsSize.Text = "  0  ";
-            // 
             // stsMaxSize
             // 
             this.stsMaxSize.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
@@ -182,6 +178,26 @@
             this.stsMaxSize.Name = "stsMaxSize";
             this.stsMaxSize.Size = new System.Drawing.Size(37, 19);
             this.stsMaxSize.Text = "MAX";
+            // 
+            // stsLineCount
+            // 
+            this.stsLineCount.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.stsLineCount.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.stsLineCount.Name = "stsLineCount";
+            this.stsLineCount.Size = new System.Drawing.Size(29, 19);
+            this.stsLineCount.Text = "  0  ";
+            // 
+            // stsSize
+            // 
+            this.stsSize.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.stsSize.BorderStyle = System.Windows.Forms.Border3DStyle.Sunken;
+            this.stsSize.Name = "stsSize";
+            this.stsSize.Size = new System.Drawing.Size(29, 19);
+            this.stsSize.Text = "  0  ";
             // 
             // stsLogfile
             // 
@@ -223,6 +239,7 @@
             // 
             // PanelOne
             // 
+            this.PanelOne.Controls.Add(this.lblSaving);
             this.PanelOne.Controls.Add(this.btnQuickLaunch);
             this.PanelOne.Controls.Add(this.pdPort);
             this.PanelOne.Controls.Add(this.btnNew);
@@ -239,6 +256,19 @@
             this.PanelOne.Name = "PanelOne";
             this.PanelOne.Size = new System.Drawing.Size(926, 29);
             this.PanelOne.TabIndex = 4;
+            // 
+            // lblSaving
+            // 
+            this.lblSaving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSaving.AutoSize = true;
+            this.lblSaving.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaving.ForeColor = System.Drawing.Color.Red;
+            this.lblSaving.Location = new System.Drawing.Point(819, 10);
+            this.lblSaving.Name = "lblSaving";
+            this.lblSaving.Size = new System.Drawing.Size(14, 16);
+            this.lblSaving.TabIndex = 24;
+            this.lblSaving.Text = "*";
+            this.lblSaving.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnQuickLaunch
             // 
@@ -388,14 +418,14 @@
             this.scF11,
             this.scF12});
             this.dgMacroTable.Cursor = System.Windows.Forms.Cursors.Default;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle64.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle64.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle64;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
@@ -404,8 +434,8 @@
             this.dgMacroTable.ReadOnly = true;
             this.dgMacroTable.RowHeadersVisible = false;
             this.dgMacroTable.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgMacroTable.RowsDefaultCellStyle = dataGridViewCellStyle65;
             this.dgMacroTable.RowTemplate.ReadOnly = true;
             this.dgMacroTable.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dgMacroTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -429,80 +459,80 @@
             // 
             // F1
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.F1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.F1.DefaultCellStyle = dataGridViewCellStyle53;
             this.F1.HeaderText = "F1";
             this.F1.Name = "F1";
             this.F1.ReadOnly = true;
             // 
             // scF2
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF2.DefaultCellStyle = dataGridViewCellStyle54;
             this.scF2.HeaderText = "F2";
             this.scF2.Name = "scF2";
             this.scF2.ReadOnly = true;
             // 
             // scF3
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF3.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF3.DefaultCellStyle = dataGridViewCellStyle55;
             this.scF3.HeaderText = "F3";
             this.scF3.Name = "scF3";
             this.scF3.ReadOnly = true;
             // 
             // scF4
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF4.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF4.DefaultCellStyle = dataGridViewCellStyle56;
             this.scF4.HeaderText = "F4";
             this.scF4.Name = "scF4";
             this.scF4.ReadOnly = true;
             // 
             // scF5
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF5.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF5.DefaultCellStyle = dataGridViewCellStyle57;
             this.scF5.HeaderText = "F5";
             this.scF5.Name = "scF5";
             this.scF5.ReadOnly = true;
             // 
             // scF6
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF6.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF6.DefaultCellStyle = dataGridViewCellStyle58;
             this.scF6.HeaderText = "F6";
             this.scF6.Name = "scF6";
             this.scF6.ReadOnly = true;
             // 
             // scF7
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF7.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF7.DefaultCellStyle = dataGridViewCellStyle59;
             this.scF7.HeaderText = "F7";
             this.scF7.Name = "scF7";
             this.scF7.ReadOnly = true;
             // 
             // scF8
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF8.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF8.DefaultCellStyle = dataGridViewCellStyle60;
             this.scF8.HeaderText = "F8";
             this.scF8.Name = "scF8";
             this.scF8.ReadOnly = true;
             // 
             // scF9
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF9.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF9.DefaultCellStyle = dataGridViewCellStyle61;
             this.scF9.HeaderText = "F9";
             this.scF9.Name = "scF9";
             this.scF9.ReadOnly = true;
             // 
             // scF10
             // 
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF10.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF10.DefaultCellStyle = dataGridViewCellStyle62;
             this.scF10.HeaderText = "F10";
             this.scF10.Name = "scF10";
             this.scF10.ReadOnly = true;
@@ -515,8 +545,8 @@
             // 
             // scF12
             // 
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            this.scF12.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            this.scF12.DefaultCellStyle = dataGridViewCellStyle63;
             this.scF12.HeaderText = "F12";
             this.scF12.Name = "scF12";
             this.scF12.ReadOnly = true;
@@ -995,6 +1025,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lblLineCounter);
+            this.splitContainer1.Panel1.Controls.Add(this.btnPauseFile);
+            this.splitContainer1.Panel1.Controls.Add(this.btnAbortFile);
             this.splitContainer1.Panel1.Controls.Add(this.progressBar);
             this.splitContainer1.Panel1.Controls.Add(this.LED3);
             this.splitContainer1.Panel1.Controls.Add(this.LED2);
@@ -1010,6 +1043,42 @@
             this.splitContainer1.Size = new System.Drawing.Size(926, 464);
             this.splitContainer1.SplitterDistance = 361;
             this.splitContainer1.TabIndex = 11;
+            // 
+            // lblLineCounter
+            // 
+            this.lblLineCounter.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblLineCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLineCounter.Location = new System.Drawing.Point(469, 80);
+            this.lblLineCounter.Name = "lblLineCounter";
+            this.lblLineCounter.Size = new System.Drawing.Size(67, 23);
+            this.lblLineCounter.TabIndex = 16;
+            this.lblLineCounter.Text = "0";
+            this.lblLineCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLineCounter.Visible = false;
+            // 
+            // btnPauseFile
+            // 
+            this.btnPauseFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnPauseFile.Location = new System.Drawing.Point(407, 136);
+            this.btnPauseFile.Name = "btnPauseFile";
+            this.btnPauseFile.Size = new System.Drawing.Size(75, 23);
+            this.btnPauseFile.TabIndex = 15;
+            this.btnPauseFile.Text = "Pause";
+            this.btnPauseFile.UseVisualStyleBackColor = true;
+            this.btnPauseFile.Visible = false;
+            this.btnPauseFile.Click += new System.EventHandler(this.BtnPauseFile_Click);
+            // 
+            // btnAbortFile
+            // 
+            this.btnAbortFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAbortFile.Location = new System.Drawing.Point(529, 136);
+            this.btnAbortFile.Name = "btnAbortFile";
+            this.btnAbortFile.Size = new System.Drawing.Size(75, 23);
+            this.btnAbortFile.TabIndex = 14;
+            this.btnAbortFile.Text = "&Cancel";
+            this.btnAbortFile.UseVisualStyleBackColor = true;
+            this.btnAbortFile.Visible = false;
+            this.btnAbortFile.Click += new System.EventHandler(this.BtnAbortFile_Click);
             // 
             // progressBar
             // 
@@ -1036,8 +1105,8 @@
             this.rtb.TabIndex = 13;
             this.rtb.Text = "";
             this.rtb.WordWrap = false;
+            this.rtb.VScroll += new System.EventHandler(this.Rtb_VScroll);
             this.rtb.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Rtb_MouseClick);
-            this.rtb.TextChanged += new System.EventHandler(this.Rtb_TextChanged);
             this.rtb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // contextMenuStrip
@@ -1183,6 +1252,11 @@
         private System.Windows.Forms.ToolStripStatusLabel stsConnectionDetail;
         private System.Windows.Forms.ToolStripStatusLabel stsSize;
         private System.Windows.Forms.ToolStripStatusLabel stsMaxSize;
+        private System.Windows.Forms.ToolStripStatusLabel stsLineCount;
+        private System.Windows.Forms.Label lblSaving;
+        private System.Windows.Forms.Button btnAbortFile;
+        private System.Windows.Forms.Button btnPauseFile;
+        private System.Windows.Forms.Label lblLineCounter;
     }
 }
 

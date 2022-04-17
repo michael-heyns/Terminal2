@@ -323,7 +323,7 @@ namespace Terminal
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(199, 9);
+            this.label1.Location = new System.Drawing.Point(297, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(168, 18);
             this.label1.TabIndex = 3;
@@ -335,11 +335,12 @@ namespace Terminal
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbMacroText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbMacroText.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbMacroText.Location = new System.Drawing.Point(20, 222);
             this.tbMacroText.Multiline = true;
             this.tbMacroText.Name = "tbMacroText";
             this.tbMacroText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbMacroText.Size = new System.Drawing.Size(516, 205);
+            this.tbMacroText.Size = new System.Drawing.Size(713, 205);
             this.tbMacroText.TabIndex = 4;
             this.tbMacroText.WordWrap = false;
             this.tbMacroText.TextChanged += new System.EventHandler(this.MacroText_TextChanged);
@@ -381,7 +382,7 @@ namespace Terminal
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.Enabled = false;
             this.btnApply.ForeColor = System.Drawing.Color.Red;
-            this.btnApply.Location = new System.Drawing.Point(448, 442);
+            this.btnApply.Location = new System.Drawing.Point(645, 442);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 8;
@@ -501,7 +502,7 @@ namespace Terminal
             // btnClearAll
             // 
             this.btnClearAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnClearAll.Location = new System.Drawing.Point(233, 442);
+            this.btnClearAll.Location = new System.Drawing.Point(331, 442);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(119, 23);
             this.btnClearAll.TabIndex = 21;
@@ -572,10 +573,9 @@ namespace Terminal
             // 
             // FrmMacroOptions
             // 
-            this.AcceptButton = this.btnApply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 477);
+            this.ClientSize = new System.Drawing.Size(751, 477);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbDelayBetweenChars);
             this.Controls.Add(this.tbDelayBetweenLines);

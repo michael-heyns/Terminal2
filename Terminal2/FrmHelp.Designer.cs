@@ -73,7 +73,7 @@ namespace Terminal
             this.label2.TabIndex = 3;
             this.label2.Text = "Some tips you may find helpful:";
             // 
-            // frmHelp
+            // FrmHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,9 +86,10 @@ namespace Terminal
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmHelp";
+            this.Name = "FrmHelp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Help";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.FrmHelp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

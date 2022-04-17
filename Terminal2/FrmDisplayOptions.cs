@@ -27,10 +27,8 @@ namespace Terminal
             FreezeList = new CheckBox[] { e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12 };
         }
 
-        private void ShowDisplayOptions()
+        private void RefreshScreenFromDatabase()
         {
-            cbColourFilters.Checked = Options.colorFiltersEnabled;
-            grpColourFilters.Enabled = Options.colorFiltersEnabled;
             BackColorOutput.BackColor = Options.outputBackground;
 
             sampleInput.BackColor = Options.inputBackground;
@@ -41,20 +39,19 @@ namespace Terminal
             foreach (Label lbl in SampleList)
                 lbl.BackColor = Options.inputBackground;
 
-            for (int i = 0; i < Options.lines.Length; i++)
+            for (int i = 0; i < Options.filter.Length; i++)
             {
-                ModeList[i].SelectedIndex = Options.lines[i].mode;
-                PanelList[i].BackColor = Options.lines[i].color;
+                ModeList[i].SelectedIndex = Options.filter[i].mode;
+                PanelList[i].BackColor = Options.filter[i].color;
                 SampleList[i].Font = Options.inputFont;
-                SampleList[i].ForeColor = Options.lines[i].color;
-                TextList[i].Text = Options.lines[i].text;
-                ModeList[i].Enabled = (Options.lines[i].text.Length > 0);
-                FreezeList[i].Checked = Options.lines[i].freeze;
+                SampleList[i].ForeColor = Options.filter[i].color;
+                TextList[i].Text = Options.filter[i].text;
+                ModeList[i].Enabled = (Options.filter[i].text.Length > 0);
+                FreezeList[i].Checked = Options.filter[i].freeze;
             }
 
-            tbMaxBufSize.Text = Options.maxBufferSizeKB.ToString();
-            tbCutSize.Text = Options.cutPercent.ToString();
-            tbFreezeSize.Text = Options.freezeSizeKB.ToString();
+            tbMaxLines.Text = Options.maxLines.ToString();
+            tbXtraLinesToRemove.Text = Options.cutXtraLines.ToString();
         }
 
         private void Config_Load(object sender, EventArgs e)
@@ -63,15 +60,14 @@ namespace Terminal
             lblThisVersion.Text = $"v{info.AssemblyVersion}";
 
             cbTimestampOutputLines.Checked = Options.timestampOutputLines;
-            ShowDisplayOptions();
+            RefreshScreenFromDatabase();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
             LimitBufferSizes();
-            Options.maxBufferSizeKB = Utils.Int(tbMaxBufSize.Text);
-            Options.cutPercent = Utils.Int(tbCutSize.Text);
-            Options.freezeSizeKB = Utils.Int(tbFreezeSize.Text);
+            Options.maxLines = Utils.Int(tbMaxLines.Text);
+            Options.cutXtraLines = Utils.Int(tbXtraLinesToRemove.Text);
             Result = DialogResult.OK;
             Close();
         }
@@ -82,7 +78,7 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.inputFont = fontDialog.Font;
-                ShowDisplayOptions();
+                RefreshScreenFromDatabase();
             }
         }
 
@@ -93,7 +89,7 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.outputFont = fontDialog.Font;
-                ShowDisplayOptions();
+                RefreshScreenFromDatabase();
             }
         }
 
@@ -109,7 +105,7 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.inputBackground = colorDialog.Color;
-                ShowDisplayOptions();
+                RefreshScreenFromDatabase();
             }
         }
 
@@ -120,7 +116,7 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.outputBackground = colorDialog.Color;
-                ShowDisplayOptions();
+                RefreshScreenFromDatabase();
             }
         }
 
@@ -128,13 +124,13 @@ namespace Terminal
         {
             Panel p = (Panel)sender;
             int i = Utils.Int(p.Tag.ToString());
-            colorDialog.Color = Options.lines[i].color;
+            colorDialog.Color = Options.filter[i].color;
             DialogResult ok = colorDialog.ShowDialog();
             if (ok == DialogResult.OK)
             {
                 PanelList[i].BackColor = colorDialog.Color;
-                Options.lines[i].color = colorDialog.Color;
-                ShowDisplayOptions();
+                Options.filter[i].color = colorDialog.Color;
+                RefreshScreenFromDatabase();
             }
         }
 
@@ -142,14 +138,14 @@ namespace Terminal
         {
             ComboBox cbox = (ComboBox)sender;
             int i = Utils.Int(cbox.Tag.ToString());
-            Options.lines[i].mode = cbox.SelectedIndex;
+            Options.filter[i].mode = cbox.SelectedIndex;
         }
 
         private void T1_TextChanged(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
             int i = Utils.Int(tb.Tag.ToString());
-            Options.lines[i].text = tb.Text;
+            Options.filter[i].text = tb.Text;
             ModeList[i].Enabled = (tb.Text.Length > 0);
         }
 
@@ -160,14 +156,8 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.inputText = colorDialog.Color;
-                ShowDisplayOptions();
+                RefreshScreenFromDatabase();
             }
-        }
-
-        private void CbColourFilters_CheckedChanged(object sender, EventArgs e)
-        {
-            grpColourFilters.Enabled = cbColourFilters.Checked;
-            Options.colorFiltersEnabled = cbColourFilters.Checked;
         }
 
         private void BtnDefault_Click(object sender, EventArgs e)
@@ -176,20 +166,19 @@ namespace Terminal
             if (yn != DialogResult.Yes)
                 return;
 
-            Options.lines[11].color = Color.BlueViolet;
-            Options.lines[10].color = Color.SeaGreen;
-            Options.lines[9].color = Color.LightSalmon;
-            Options.lines[8].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            Options.lines[7].color = Color.Green;
-            Options.lines[6].color = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            Options.lines[5].color = Color.Olive;
-            Options.lines[4].color = Color.Fuchsia;
-            Options.lines[3].color = Color.Yellow;
-            Options.lines[2].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            Options.lines[1].color = Color.Blue;
-            Options.lines[0].color = Color.Red;
+            Options.filter[11].color = Color.BlueViolet;
+            Options.filter[10].color = Color.SeaGreen;
+            Options.filter[9].color = Color.LightSalmon;
+            Options.filter[8].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            Options.filter[7].color = Color.Green;
+            Options.filter[6].color = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            Options.filter[5].color = Color.Olive;
+            Options.filter[4].color = Color.Fuchsia;
+            Options.filter[3].color = Color.Yellow;
+            Options.filter[2].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            Options.filter[1].color = Color.Blue;
+            Options.filter[0].color = Color.Red;
 
-            Options.colorFiltersEnabled = false;
             Options.outputBackground = Color.White;
 
             Options.inputText = Color.Black;
@@ -201,40 +190,44 @@ namespace Terminal
             Options.inputFont = (Font)converter.ConvertFromString(Utils.DefaultInputFont);
             Options.outputFont = (Font)converter.ConvertFromString(Utils.DefaultOutputFont);
 
-            for (int i = 0; i < Options.lines.Length; i++)
+            for (int i = 0; i < Options.filter.Length; i++)
             {
-                Options.lines[i].mode = 1;
-                Options.lines[i].text = string.Empty;
-                Options.lines[i].freeze = false;
+                Options.filter[i].mode = 1;
+                Options.filter[i].text = string.Empty;
+                Options.filter[i].freeze = false;
             }
-            ShowDisplayOptions();
+
+            RefreshScreenFromDatabase();
+
+            if (Utils.Int(tbMaxLines.Text) != 1500 || Utils.Int(tbXtraLinesToRemove.Text) != 500)
+            {
+                yn = MessageBox.Show("Do you want to reset the maximum line count as well?", "Reset buffer sizes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (yn == DialogResult.Yes)
+                    BtnFTReset_Click(sender, e);
+            }
         }
 
         private void BtnFTReset_Click(object sender, EventArgs e)
         {
-            tbMaxBufSize.Text = "500";
-            tbCutSize.Text = "10";
-            tbFreezeSize.Text = "50";
+            tbMaxLines.Text = "1500";
+            tbXtraLinesToRemove.Text = "500";
+
+            Options.maxLines = Utils.Int(tbMaxLines.Text);
+            Options.cutXtraLines = Utils.Int(tbXtraLinesToRemove.Text);
         }
         private void LimitBufferSizes()
         {
-            int v = Utils.Int(tbMaxBufSize.Text);
+            int v = Utils.Int(tbMaxLines.Text);
             if (v < 10)
-                tbMaxBufSize.Text = "10";
-            else if (v > 500000)
-                tbMaxBufSize.Text = "500000";
+                tbMaxLines.Text = "10";
+            else if (v > 10000)
+                tbMaxLines.Text = "10000";
 
-            v = Utils.Int(tbCutSize.Text);
-            if (v < 1)
-                tbCutSize.Text = "1";
-            else if (v > 100)
-                tbCutSize.Text = "100";
-
-            v = Utils.Int(tbFreezeSize.Text);
-            if (v < 1)
-                tbFreezeSize.Text = "1";
-            else if (v > 1000)
-                tbFreezeSize.Text = "1000";
+            v = Utils.Int(tbXtraLinesToRemove.Text);
+            if (v < 0)
+                tbXtraLinesToRemove.Text = "0";
+            else if (v > 10000)
+                tbXtraLinesToRemove.Text = "10000";
         }
 
         private void TbMaxBufSize_Leave(object sender, EventArgs e)
@@ -251,21 +244,15 @@ namespace Terminal
         {
             LimitBufferSizes();
         }
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        private void TextBox2_Leave(object sender, EventArgs e)
         {
-            if (keyData == Keys.Escape)
-            {
-                this.Close();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
+            LimitBufferSizes();
         }
-
-        private void FreezeChanged(object sender, EventArgs e)
+        private void E1_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
             int i = Utils.Int(cb.Tag.ToString());
-            Options.lines[i].freeze = cb.Checked;
+            Options.filter[i].freeze = cb.Checked;
         }
     }
 }

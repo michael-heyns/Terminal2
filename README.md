@@ -1,5 +1,5 @@
-# Terminal2 - v1.0.3.2 
-## !Quite usable now!
+# Terminal2 - v1.0.4.0 
+## !With better accuracy on timestamps
 
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 
@@ -19,7 +19,7 @@ With Terminal2, you can define colorful profiles and quickly switch between sess
 Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Server, ASCII, HEX, Line feed, Carriage return, Log files, Profiles, Fonts, Macros
 
 ## Building Terminal2
-1. Windows 10, 11 with .NET 4.6.1 or later
+1. Windows 10, 11 with .NET 4.7.2 or later
 2. Visual Studio (2019 or later) with C#.
 3. Load the solution (.sln file).
 4. Build (Debug or Release).
@@ -33,8 +33,8 @@ Here is an example from Scotty's emulator on Enterprise (NCC-1701-B)
 ![Terminal2](https://user-images.githubusercontent.com/4144679/161002983-ad6ed0a3-b791-414c-8569-b2b6feb4a0ce.png)
 
 ### The name
-The name "Terminal2" was chosen to allow existing users of the very useful (but unmaintained) "Terminal" program (by Br@dy++) to adapt quickly.
+The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.
 It will definitely change some time in the future.
 
 ## Feedback
-Constructive feedback welcome.
+Constructive feedback very welcome.

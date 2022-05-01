@@ -57,9 +57,6 @@ namespace Terminal
         private bool _abortFileSend;
         private bool _pauseFileSend;
 
-        private bool _addTimestamp = true;
-        private bool _skipNextLF = false;
-
         private bool _firstActivation = true;
 
         private bool _macroIsMoving = false;
@@ -104,13 +101,16 @@ namespace Terminal
 
         private void ColoringHandler()
         {
-            int topIndex = rtb.GetCharIndexFromPosition(new Point(1, 1));
-            int bottomIndex = rtb.GetCharIndexFromPosition(new Point(1, rtb.Height - 1));
-            int topLine = rtb.GetLineFromCharIndex(topIndex);
-            int bottomLine = rtb.GetLineFromCharIndex(bottomIndex);
-
             lock (_rtbLock)
             {
+                if (rtb.Lines.Length == 0)
+                    return;
+
+                int topIndex = rtb.GetCharIndexFromPosition(new Point(1, 1));
+                int bottomIndex = rtb.GetCharIndexFromPosition(new Point(1, rtb.Height - 1));
+                int topLine = rtb.GetLineFromCharIndex(topIndex);
+                int bottomLine = rtb.GetLineFromCharIndex(bottomIndex);
+
                 for (int i = bottomLine; i >= topLine; i--)
                 {
                     // if something changed, quit immediately
@@ -122,7 +122,7 @@ namespace Terminal
                     {
                         int offset = 0;
                         if (Utils.HasTimestamp(str))
-                            offset += 13;
+                            offset += Utils.TimestampLength();
 
                         int index = FindApplicableFilter(str, offset);
                         if (index >= 0)
@@ -187,108 +187,15 @@ namespace Terminal
             }
         }
 
-        private void ProcessChunk(string str)
+        private void ProcessChunk(string chunk)
         {
-            string _displayStr = string.Empty;
-            string _logStr = string.Empty;
-            string TS = string.Empty;
-            if (cbTimestamp.Checked)
-                TS = Utils.Timestamp();
-
-            int translateCR = _activeProfile.translateCR;
-            int translateLF = _activeProfile.translateLF;
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (_addTimestamp)
-                {
-                    _displayStr += TS;
-                    _logStr += ("R : " + TS);
-                    _addTimestamp = false;
-                }
-
-                char c = str[i];
-                switch (c)
-                {
-                    case (char)'\r':
-                        if (cbShowCR.Checked)
-                        {
-                            _displayStr += "{CR}";
-                            _logStr += "{CR}";
-                        }
-                        if (translateCR == 1)       // = CR
-                        {
-                            _displayStr += "\n";
-                            _logStr += "\r";
-                        }
-                        else if (translateCR == 2)  // = CRLF
-                        {
-                            _displayStr += "\n";
-                            _logStr += "\r\n";
-                            _addTimestamp = true;
-                        }
-                        else if (translateCR == 3)  // = Auto
-                        {
-                            _displayStr += "\n";
-                            _logStr += "\r\n";
-                            _addTimestamp = true;
-                            _skipNextLF = true;
-                        }
-                        break;
-
-                    case (char)'\n':
-                        if (cbShowLF.Checked)
-                        {
-                            _displayStr += "{LF}";
-                            _logStr += "{LF}";
-                        }
-                        if (translateLF == 1)       // = LF
-                        {
-                            _displayStr += "\n";
-                            _logStr += "\n";
-                            _addTimestamp = true;
-                        }
-                        else if (translateLF == 2)  // = CRLF
-                        {
-                            _displayStr += "\n";
-                            _logStr += "\r\n";
-                            _addTimestamp = true;
-                        }
-                        else if (translateLF == 3)  // = Auto
-                        {
-                            if (!_skipNextLF)
-                            {
-                                _displayStr += "\n";
-                                _logStr += "\r\n";
-                                _addTimestamp = true;
-                                _skipNextLF = false;
-                            }
-                        }
-                        break;
-
-                    default:
-                        if (cbASCII.Checked)
-                        {
-                            _displayStr += c.ToString();
-                            _logStr += c.ToString();
-                        }
-                        if (cbHEX.Checked)
-                        {
-                            byte b = Convert.ToByte(c);
-                            _displayStr += $"{b:X2} ";
-                            _logStr += $"{b:X2} ";
-                        }
-                        _skipNextLF = false;
-                        break;
-                }
-            }
-
+            Log.Add(chunk);
             if (!_frozen)
             {
                 lock (_rtbLock)
                 {
                     int lastLine = Math.Max(0, rtb.Lines.Length - 1);
-                    rtb.AppendText(_displayStr, _activeProfile.displayOptions.inputText);
+                    rtb.AppendText(chunk, _activeProfile.displayOptions.inputText);
                     if (rtb.Lines.Length < 100)
                         _colorSemaphore.Set();
 
@@ -317,16 +224,9 @@ namespace Terminal
                             lastLine -= tocut;
                             _colorEnd = lastLine;
                         }
-
-                        // and put the caret back to the bottom
-                        rtb.SelectionStart = rtb.Text.Length;
                     }
                 }
-                rtb.ScrollToCaret();
-                UpdateLineCounter();
             }
-
-            Log.Add(_logStr);
         }
 
         private void UIInputQueueHandler()
@@ -336,8 +236,18 @@ namespace Terminal
                 string str = (string)_uiInputQueue.Dequeue();
                 ProcessChunk(str);
             }
-        }
 
+            // and put the caret back to the bottom
+            if (!_frozen)
+            {
+                lock (_rtbLock)
+                {
+                    rtb.SelectionStart = rtb.Text.Length;
+                    rtb.ScrollToCaret();
+                }
+                UpdateLineCounter();
+            }
+        }
         private void UIOutputQueueHandler()
         {
             while (!_terminateFlag && _uiOutputQueue.Count > 0)
@@ -351,7 +261,7 @@ namespace Terminal
                 else
                     lbOutput.Items.Add(str);
 
-                Log.Add(" T: " + tm + str);
+                Log.Add("\r\n----> Tx: " + tm + str + "\r\n");
                 lbOutput.TopIndex = lbOutput.Items.Count - 1;
                 Application.DoEvents();
             }
@@ -705,12 +615,43 @@ namespace Terminal
             tbCommand.Focus();
         }
 
+        #region EMBELISHMENTS
+        private void cbTimestamp_CheckedChanged(object sender, EventArgs e)
+        {
+            _activeProfile.embelishments.ShowTimestamp = cbTimestamp.Checked;
+            _comms.SetEmbelishments(_activeProfile.embelishments);
+            tbCommand.Focus();
+        }
         private void CbASCII_CheckedChanged(object sender, EventArgs e)
         {
             if (!cbASCII.Checked && !cbHEX.Checked)
                 cbHEX.Checked = true;
+            _activeProfile.embelishments.ShowASCII = cbASCII.Checked;
+            _comms.SetEmbelishments(_activeProfile.embelishments);
             tbCommand.Focus();
         }
+        private void CbHEX_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!cbASCII.Checked && !cbHEX.Checked)
+                cbASCII.Checked = true;
+            _activeProfile.embelishments.ShowHEX = cbHEX.Checked;
+            _comms.SetEmbelishments(_activeProfile.embelishments);
+            tbCommand.Focus();
+        }
+        private void cbShowCR_CheckedChanged(object sender, EventArgs e)
+        {
+            _activeProfile.embelishments.ShowCR = cbShowCR.Checked;
+            _comms.SetEmbelishments(_activeProfile.embelishments);
+            tbCommand.Focus();
+        }
+
+        private void cbShowLF_CheckedChanged(object sender, EventArgs e)
+        {
+            _activeProfile.embelishments.ShowLF = cbShowLF.Checked;
+            _comms.SetEmbelishments(_activeProfile.embelishments);
+            tbCommand.Focus();
+        }
+        #endregion
 
         private void CbFreeze_CheckedChanged(object sender, EventArgs e)
         {
@@ -733,13 +674,6 @@ namespace Terminal
 
                 _colorSemaphore.Set();
             }
-            tbCommand.Focus();
-        }
-
-        private void CbHEX_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!cbASCII.Checked && !cbHEX.Checked)
-                cbASCII.Checked = true;
             tbCommand.Focus();
         }
 
@@ -983,13 +917,6 @@ namespace Terminal
             lblSaving.Text = "*";
             Application.DoEvents();
             _activeProfile.stayontop = cbStayOnTop.Checked;
-            _activeProfile.timestampInput = cbTimestamp.Checked;
-            _activeProfile.ascii = cbASCII.Checked;
-            _activeProfile.hex = cbHEX.Checked;
-            _activeProfile.translateCR = lbTranslateCR.SelectedIndex;
-            _activeProfile.translateLF = lbTranslateLF.SelectedIndex;
-            _activeProfile.showCurlyCR = cbShowCR.Checked;
-            _activeProfile.showCurlyLF = cbShowLF.Checked;
             _activeProfile.sendCR = cbSendCR.Checked;
             _activeProfile.sendLF = cbSendLF.Checked;
             _activeProfile.clearCMD = cbClearCMD.Checked;
@@ -1023,17 +950,17 @@ namespace Terminal
 
                 lblProfileName.Text = _activeProfile.name;
                 cbStayOnTop.Checked = _activeProfile.stayontop;
-                cbTimestamp.Checked = _activeProfile.timestampInput;
-                cbASCII.Checked = _activeProfile.ascii;
-                cbHEX.Checked = _activeProfile.hex;
 
-                lbTranslateCR.SelectedIndex = _activeProfile.translateCR;
-                lbTranslateLF.SelectedIndex = _activeProfile.translateLF;
-                cbShowCR.Checked = _activeProfile.showCurlyCR;
-                cbShowLF.Checked = _activeProfile.showCurlyLF;
                 cbSendCR.Checked = _activeProfile.sendCR;
                 cbSendLF.Checked = _activeProfile.sendLF;
                 cbClearCMD.Checked = _activeProfile.clearCMD;
+
+                cbTimestamp.Checked = _activeProfile.embelishments.ShowTimestamp;
+                cbASCII.Checked = _activeProfile.embelishments.ShowASCII;
+                cbHEX.Checked = _activeProfile.embelishments.ShowHEX;
+                cbShowCR.Checked = _activeProfile.embelishments.ShowCR;
+                cbShowLF.Checked = _activeProfile.embelishments.ShowLF;
+
                 cbFreeze.Checked = false;
 
                 int i = 0;
@@ -1049,6 +976,7 @@ namespace Terminal
                     }
                 }
                 RefreshPortPulldown();
+                _comms.SetEmbelishments(_activeProfile.embelishments);
                 stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             }
         }
@@ -1301,9 +1229,7 @@ namespace Terminal
         {
             if (_firstActivation)
             {
-                BtnHelp_Click(sender, e);
-                Application.DoEvents();
-                MessageBox.Show($"This is a one-time message.\nThe Help button has been pressed for you.\nPress it whenever you need reminders of the shortcuts.\n(Please read the information carefully and press Help to close)", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"This is a once-only message.\nPress the HELP button for some tips.\nThe key concept is to create a profile for every kind of application you may have.\n\nStart by pressing the [(+)] button (top middle) to create your first profile", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             tbCommand.Focus();
             Application.DoEvents();
@@ -1315,6 +1241,7 @@ namespace Terminal
             {
                 _uiInputQueue.Clear();
                 rtb.Clear();
+                rtb.ZoomFactor = 1;
                 _colorEnd = 0;
             }
             cbFreeze.Checked = false;
@@ -1525,18 +1452,6 @@ namespace Terminal
                     cbFreeze.Checked = false;
             }
             btnExport.Enabled = true;
-        }
-
-        private void LbTranslateCR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbTranslateCR.SelectedIndex == 3)
-                lbTranslateLF.SelectedIndex = 3;
-        }
-
-        private void LbTranslateLF_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lbTranslateLF.SelectedIndex == 3)
-                lbTranslateCR.SelectedIndex = 3;
         }
 
         private void DgMacroTable_CellClick(object sender, DataGridViewCellEventArgs e)

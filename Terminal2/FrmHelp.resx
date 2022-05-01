@@ -118,20 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Profiles
+    <value>Rules for EOL (End-Of-Line)
+    1) xxxxx[CR]xxxxx          --&gt;     xxxxx[EOL] + xxxxx
+    2) xxxxx[LF]xxxxx           --&gt;     xxxxx[EOL] + xxxxx
+    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx[EOL] + xxxxx
+    
+Rules for {CR} and {LF} embelishments
+    1) xxxxx[CR]xxxxx          --&gt;     xxxxx{CR}[EOL] + xxxxx
+    2) xxxxx[LF]xxxxx           --&gt;     xxxxx{LF}[EOL] + xxxxx
+    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx{CR}[EOL]{LF} + xxxxx
+    
+Rules for Timestamping
+    1) xxxxx[CR]xxxxx          --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
+    2) xxxxx[LF]xxxxx           --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
+    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
+
+Profiles
     1) Profiles remember all the settings and colour options
     2) The profile database is automatically updated when the program exits
     3) All changes made will be saved under the current profile
 
 Options
     1) Click the 'gear' icon to edit the options for a particular section
-
-CR-LF:
-    1) "Auto" should satisfy most needs
-             ttttt CR tttt
-             ttttt LF tttt
-             ttttt CR LF tttt
-         are treated the same for display purposes
 
 Input Panel:
     1) You may select a section of text with the mouse

@@ -36,6 +36,19 @@ namespace Terminal
             this.btnOk = new System.Windows.Forms.Button();
             this.btnSelectFontInput = new System.Windows.Forms.Button();
             this.grpColourFilters = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.e2 = new System.Windows.Forms.CheckBox();
+            this.e6 = new System.Windows.Forms.CheckBox();
+            this.e12 = new System.Windows.Forms.CheckBox();
+            this.e8 = new System.Windows.Forms.CheckBox();
+            this.e9 = new System.Windows.Forms.CheckBox();
+            this.e1 = new System.Windows.Forms.CheckBox();
+            this.e7 = new System.Windows.Forms.CheckBox();
+            this.e3 = new System.Windows.Forms.CheckBox();
+            this.e11 = new System.Windows.Forms.CheckBox();
+            this.e10 = new System.Windows.Forms.CheckBox();
+            this.e4 = new System.Windows.Forms.CheckBox();
+            this.e5 = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -116,19 +129,6 @@ namespace Terminal
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.e2 = new System.Windows.Forms.CheckBox();
-            this.e6 = new System.Windows.Forms.CheckBox();
-            this.e12 = new System.Windows.Forms.CheckBox();
-            this.e8 = new System.Windows.Forms.CheckBox();
-            this.e9 = new System.Windows.Forms.CheckBox();
-            this.e1 = new System.Windows.Forms.CheckBox();
-            this.e7 = new System.Windows.Forms.CheckBox();
-            this.e3 = new System.Windows.Forms.CheckBox();
-            this.e11 = new System.Windows.Forms.CheckBox();
-            this.e10 = new System.Windows.Forms.CheckBox();
-            this.e4 = new System.Windows.Forms.CheckBox();
-            this.e5 = new System.Windows.Forms.CheckBox();
             this.grpColourFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -147,7 +147,7 @@ namespace Terminal
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(250, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 16);
+            this.label1.Size = new System.Drawing.Size(117, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Display Options";
             // 
@@ -249,6 +249,147 @@ namespace Terminal
             this.grpColourFilters.TabIndex = 15;
             this.grpColourFilters.TabStop = false;
             this.grpColourFilters.Text = "Colored Text Filters";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(288, 38);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(39, 13);
+            this.label13.TabIndex = 97;
+            this.label13.Text = "Freeze";
+            // 
+            // e2
+            // 
+            this.e2.AutoSize = true;
+            this.e2.Location = new System.Drawing.Point(298, 82);
+            this.e2.Name = "e2";
+            this.e2.Size = new System.Drawing.Size(15, 14);
+            this.e2.TabIndex = 87;
+            this.e2.Tag = "1";
+            this.e2.UseVisualStyleBackColor = true;
+            this.e2.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e6
+            // 
+            this.e6.AutoSize = true;
+            this.e6.Location = new System.Drawing.Point(298, 186);
+            this.e6.Name = "e6";
+            this.e6.Size = new System.Drawing.Size(15, 14);
+            this.e6.TabIndex = 90;
+            this.e6.Tag = "5";
+            this.e6.UseVisualStyleBackColor = true;
+            this.e6.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e12
+            // 
+            this.e12.AutoSize = true;
+            this.e12.Location = new System.Drawing.Point(298, 342);
+            this.e12.Name = "e12";
+            this.e12.Size = new System.Drawing.Size(15, 14);
+            this.e12.TabIndex = 96;
+            this.e12.Tag = "11";
+            this.e12.UseVisualStyleBackColor = true;
+            this.e12.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e8
+            // 
+            this.e8.AutoSize = true;
+            this.e8.Location = new System.Drawing.Point(298, 238);
+            this.e8.Name = "e8";
+            this.e8.Size = new System.Drawing.Size(15, 14);
+            this.e8.TabIndex = 92;
+            this.e8.Tag = "7";
+            this.e8.UseVisualStyleBackColor = true;
+            this.e8.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e9
+            // 
+            this.e9.AutoSize = true;
+            this.e9.Location = new System.Drawing.Point(298, 264);
+            this.e9.Name = "e9";
+            this.e9.Size = new System.Drawing.Size(15, 14);
+            this.e9.TabIndex = 93;
+            this.e9.Tag = "8";
+            this.e9.UseVisualStyleBackColor = true;
+            this.e9.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e1
+            // 
+            this.e1.AutoSize = true;
+            this.e1.Location = new System.Drawing.Point(298, 57);
+            this.e1.Name = "e1";
+            this.e1.Size = new System.Drawing.Size(15, 14);
+            this.e1.TabIndex = 85;
+            this.e1.Tag = "0";
+            this.e1.UseVisualStyleBackColor = true;
+            this.e1.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e7
+            // 
+            this.e7.AutoSize = true;
+            this.e7.Location = new System.Drawing.Point(298, 212);
+            this.e7.Name = "e7";
+            this.e7.Size = new System.Drawing.Size(15, 14);
+            this.e7.TabIndex = 91;
+            this.e7.Tag = "6";
+            this.e7.UseVisualStyleBackColor = true;
+            this.e7.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e3
+            // 
+            this.e3.AutoSize = true;
+            this.e3.Location = new System.Drawing.Point(298, 107);
+            this.e3.Name = "e3";
+            this.e3.Size = new System.Drawing.Size(15, 14);
+            this.e3.TabIndex = 86;
+            this.e3.Tag = "2";
+            this.e3.UseVisualStyleBackColor = true;
+            this.e3.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e11
+            // 
+            this.e11.AutoSize = true;
+            this.e11.Location = new System.Drawing.Point(298, 316);
+            this.e11.Name = "e11";
+            this.e11.Size = new System.Drawing.Size(15, 14);
+            this.e11.TabIndex = 95;
+            this.e11.Tag = "10";
+            this.e11.UseVisualStyleBackColor = true;
+            this.e11.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e10
+            // 
+            this.e10.AutoSize = true;
+            this.e10.Location = new System.Drawing.Point(298, 290);
+            this.e10.Name = "e10";
+            this.e10.Size = new System.Drawing.Size(15, 14);
+            this.e10.TabIndex = 94;
+            this.e10.Tag = "9";
+            this.e10.UseVisualStyleBackColor = true;
+            this.e10.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e4
+            // 
+            this.e4.AutoSize = true;
+            this.e4.Location = new System.Drawing.Point(298, 133);
+            this.e4.Name = "e4";
+            this.e4.Size = new System.Drawing.Size(15, 14);
+            this.e4.TabIndex = 88;
+            this.e4.Tag = "3";
+            this.e4.UseVisualStyleBackColor = true;
+            this.e4.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
+            // 
+            // e5
+            // 
+            this.e5.AutoSize = true;
+            this.e5.Location = new System.Drawing.Point(298, 159);
+            this.e5.Name = "e5";
+            this.e5.Size = new System.Drawing.Size(15, 14);
+            this.e5.TabIndex = 89;
+            this.e5.Tag = "4";
+            this.e5.UseVisualStyleBackColor = true;
+            this.e5.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
             // 
             // pictureBox1
             // 
@@ -1122,147 +1263,6 @@ namespace Terminal
             this.textBox1.Size = new System.Drawing.Size(532, 373);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = resources.GetString("textBox1.Text");
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(288, 38);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(39, 13);
-            this.label13.TabIndex = 97;
-            this.label13.Text = "Freeze";
-            // 
-            // e2
-            // 
-            this.e2.AutoSize = true;
-            this.e2.Location = new System.Drawing.Point(298, 82);
-            this.e2.Name = "e2";
-            this.e2.Size = new System.Drawing.Size(15, 14);
-            this.e2.TabIndex = 87;
-            this.e2.Tag = "1";
-            this.e2.UseVisualStyleBackColor = true;
-            this.e2.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e6
-            // 
-            this.e6.AutoSize = true;
-            this.e6.Location = new System.Drawing.Point(298, 186);
-            this.e6.Name = "e6";
-            this.e6.Size = new System.Drawing.Size(15, 14);
-            this.e6.TabIndex = 90;
-            this.e6.Tag = "5";
-            this.e6.UseVisualStyleBackColor = true;
-            this.e6.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e12
-            // 
-            this.e12.AutoSize = true;
-            this.e12.Location = new System.Drawing.Point(298, 342);
-            this.e12.Name = "e12";
-            this.e12.Size = new System.Drawing.Size(15, 14);
-            this.e12.TabIndex = 96;
-            this.e12.Tag = "11";
-            this.e12.UseVisualStyleBackColor = true;
-            this.e12.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e8
-            // 
-            this.e8.AutoSize = true;
-            this.e8.Location = new System.Drawing.Point(298, 238);
-            this.e8.Name = "e8";
-            this.e8.Size = new System.Drawing.Size(15, 14);
-            this.e8.TabIndex = 92;
-            this.e8.Tag = "7";
-            this.e8.UseVisualStyleBackColor = true;
-            this.e8.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e9
-            // 
-            this.e9.AutoSize = true;
-            this.e9.Location = new System.Drawing.Point(298, 264);
-            this.e9.Name = "e9";
-            this.e9.Size = new System.Drawing.Size(15, 14);
-            this.e9.TabIndex = 93;
-            this.e9.Tag = "8";
-            this.e9.UseVisualStyleBackColor = true;
-            this.e9.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e1
-            // 
-            this.e1.AutoSize = true;
-            this.e1.Location = new System.Drawing.Point(298, 57);
-            this.e1.Name = "e1";
-            this.e1.Size = new System.Drawing.Size(15, 14);
-            this.e1.TabIndex = 85;
-            this.e1.Tag = "0";
-            this.e1.UseVisualStyleBackColor = true;
-            this.e1.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e7
-            // 
-            this.e7.AutoSize = true;
-            this.e7.Location = new System.Drawing.Point(298, 212);
-            this.e7.Name = "e7";
-            this.e7.Size = new System.Drawing.Size(15, 14);
-            this.e7.TabIndex = 91;
-            this.e7.Tag = "6";
-            this.e7.UseVisualStyleBackColor = true;
-            this.e7.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e3
-            // 
-            this.e3.AutoSize = true;
-            this.e3.Location = new System.Drawing.Point(298, 107);
-            this.e3.Name = "e3";
-            this.e3.Size = new System.Drawing.Size(15, 14);
-            this.e3.TabIndex = 86;
-            this.e3.Tag = "2";
-            this.e3.UseVisualStyleBackColor = true;
-            this.e3.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e11
-            // 
-            this.e11.AutoSize = true;
-            this.e11.Location = new System.Drawing.Point(298, 316);
-            this.e11.Name = "e11";
-            this.e11.Size = new System.Drawing.Size(15, 14);
-            this.e11.TabIndex = 95;
-            this.e11.Tag = "10";
-            this.e11.UseVisualStyleBackColor = true;
-            this.e11.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e10
-            // 
-            this.e10.AutoSize = true;
-            this.e10.Location = new System.Drawing.Point(298, 290);
-            this.e10.Name = "e10";
-            this.e10.Size = new System.Drawing.Size(15, 14);
-            this.e10.TabIndex = 94;
-            this.e10.Tag = "9";
-            this.e10.UseVisualStyleBackColor = true;
-            this.e10.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e4
-            // 
-            this.e4.AutoSize = true;
-            this.e4.Location = new System.Drawing.Point(298, 133);
-            this.e4.Name = "e4";
-            this.e4.Size = new System.Drawing.Size(15, 14);
-            this.e4.TabIndex = 88;
-            this.e4.Tag = "3";
-            this.e4.UseVisualStyleBackColor = true;
-            this.e4.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
-            // 
-            // e5
-            // 
-            this.e5.AutoSize = true;
-            this.e5.Location = new System.Drawing.Point(298, 159);
-            this.e5.Name = "e5";
-            this.e5.Size = new System.Drawing.Size(15, 14);
-            this.e5.TabIndex = 89;
-            this.e5.Tag = "4";
-            this.e5.UseVisualStyleBackColor = true;
-            this.e5.CheckedChanged += new System.EventHandler(this.E1_CheckedChanged);
             // 
             // FrmDisplayOptions
             // 

@@ -136,7 +136,11 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.0.3.0
+    <value>v1.0.4.0
+    * Moved timestamping to the point of entry of serial and TCP data. Much more accurate now.
+    * Other embelishments done at the point of entry as well. Faster and cleaner solution.
+
+v1.0.3.0
     * Major re-write of the display and comms processes
 
 v1.0.2.9
@@ -189,16 +193,6 @@ v1.0.1.0
     * Added 'Export'  to *.rtf/*.txt option.  (.RTF files retain colors information and are opened by Word).
     * Pressing 'Escape' will close a dialog box
     * Ability to freeze the display when a specified key word is detected
-
-Beta-13
-    * Added more baud rate constants
-
-Beta-12
-    * Increased the Rx and Tx buffer sizes.  (It was missing data).
-    * Added feature to set initial RTS and DTR states
-    * Fixed bug when clicking on HISTORY line
-    * Serial and Tx and Rx timeouts added - else it may sit forever waiting on the port
-    * Eliminated the send queue and put straight into send buffer - faster response on sending
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

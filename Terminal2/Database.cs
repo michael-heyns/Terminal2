@@ -165,19 +165,19 @@ namespace Terminal
 
                 data += "[Profile]\n";
                 data += $"Name={profile.name}\n";
-                data += $"ShowCR={profile.showCurlyCR}\n";
-                data += $"ShowLF={profile.showCurlyLF}\n";
-                data += $"ShowASCII={profile.ascii}\n";
-                data += $"TranslateCR={profile.translateCR}\n";
-                data += $"TranslateLF={profile.translateLF}\n";
                 data += $"SendCR={profile.sendCR}\n";
                 data += $"SendLF={profile.sendLF}\n";
                 data += $"ClearCMD={profile.clearCMD}\n";
                 data += $"OnTop={profile.stayontop}\n";
-                data += $"TimeInput={profile.timestampInput}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
                 data += $"MaxLines={profile.displayOptions.maxLines}\n";
                 data += $"CutLines={profile.displayOptions.cutXtraLines}\n";
+
+                data += $"ShowCR={profile.embelishments.ShowCR}\n";
+                data += $"ShowLF={profile.embelishments.ShowLF}\n";
+                data += $"ShowASCII={profile.embelishments.ShowASCII}\n";
+                data += $"ShowHEX={profile.embelishments.ShowHEX}\n";
+                data += $"TimeInput={profile.embelishments.ShowTimestamp}\n";
 
                 if (!Directory.Exists(profile.logOptions.Directory))
                 {
@@ -325,26 +325,6 @@ namespace Terminal
                         {
                             profile.name = line.Substring(5);
                         }
-                        else if (line.StartsWith("ShowCR="))
-                        {
-                            profile.showCurlyCR = line.Contains("True");
-                        }
-                        else if (line.StartsWith("ShowLF="))
-                        {
-                            profile.showCurlyLF = line.Contains("True");
-                        }
-                        else if (line.StartsWith("ShowASCII="))
-                        {
-                            profile.ascii = line.Contains("True");
-                        }
-                        else if (line.StartsWith("TranslateCR="))
-                        {
-                            profile.translateCR = Utils.Int(line.Substring(12));
-                        }
-                        else if (line.StartsWith("TranslateLF="))
-                        {
-                            profile.translateLF = Utils.Int(line.Substring(12));
-                        }
                         else if (line.StartsWith("SendCR="))
                         {
                             profile.sendCR = line.Contains("True");
@@ -361,9 +341,25 @@ namespace Terminal
                         {
                             profile.stayontop = line.Contains("True");
                         }
+                        else if (line.StartsWith("ShowCR="))
+                        {
+                            profile.embelishments.ShowCR = line.Contains("True");
+                        }
+                        else if (line.StartsWith("ShowLF="))
+                        {
+                            profile.embelishments.ShowLF = line.Contains("True");
+                        }
+                        else if (line.StartsWith("ShowASCII="))
+                        {
+                            profile.embelishments.ShowASCII = line.Contains("True");
+                        }
+                        else if (line.StartsWith("ShowHEX="))
+                        {
+                            profile.embelishments.ShowHEX = line.Contains("True");
+                        }
                         else if (line.StartsWith("TimeInput="))
                         {
-                            profile.timestampInput = line.Contains("True");
+                            profile.embelishments.ShowTimestamp = line.Contains("True");
                         }
                         else if (line.StartsWith("OutFont="))
                         {

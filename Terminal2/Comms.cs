@@ -26,10 +26,145 @@ namespace Terminal
         private TcpClient _client = null;
         private Socket _socket = null;
         private Profile _profile;
+        private Embelishments _embelishments;
 
         private Thread _tcpThread = null;
         private Thread _serialThread = null;
         private static int _localThreadCount = 0;
+
+        private bool _ignoreNextLF = false;
+        private bool _showTimestamp = false;
+        private int _hexColumn = 0;
+
+        private void Enqueue(string str)
+        {
+            string embelished = string.Empty;
+
+            foreach (char c in str)
+            {
+                if (c == '\r')
+                {
+                    if (_embelishments.ShowASCII)
+                    {
+                        if (_showTimestamp)
+                        {
+                            embelished += Utils.Timestamp();
+                            _showTimestamp = false;
+                        }
+
+                        if (_embelishments.ShowCR)
+                            embelished += "{CR}";
+
+                        embelished += "\n";
+                    }
+
+                    if (_embelishments.ShowHEX)
+                    {
+                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                            embelished += Utils.Timestamp();
+
+                        byte b = Convert.ToByte(c);
+                        embelished += $"{b:X2} ";
+
+                        if (!_embelishments.ShowASCII)
+                        {
+                            _hexColumn++;
+                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
+                            {
+                                embelished += " - ";
+                            }
+                            else if (_hexColumn == 32)
+                            {
+                                embelished += "\n";
+                                _hexColumn = 0;
+                            }
+                        }
+                    }
+
+                    _ignoreNextLF = true;
+
+                    if (_embelishments.ShowTimestamp)
+                        _showTimestamp = true;
+                }
+                else if (c == '\n')
+                {
+                    if (_embelishments.ShowASCII && _embelishments.ShowLF)
+                        embelished += "{LF}";
+
+                    if (!_ignoreNextLF)
+                    {
+                        if (_embelishments.ShowASCII)
+                        {
+                            if (_showTimestamp)
+                            {
+                                embelished += Utils.Timestamp();
+                                _showTimestamp = false;
+                            }
+                            embelished += "\n";
+                        }
+                    }
+                    if (_embelishments.ShowHEX)
+                    {
+                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                            embelished += Utils.Timestamp();
+
+                        byte b = Convert.ToByte(c);
+                        embelished += $"{b:X2} ";
+
+                        if (!_embelishments.ShowASCII)
+                        {
+                            _hexColumn++;
+                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
+                            {
+                                embelished += " - ";
+                            }
+                            else if (_hexColumn == 32)
+                            {
+                                embelished += "\n";
+                                _hexColumn = 0;
+                            }
+                        }
+                    }
+                    _ignoreNextLF = false;
+                }
+                else
+                {
+                    if (_embelishments.ShowASCII && _showTimestamp)
+                    {
+                        embelished += Utils.Timestamp();
+                        _showTimestamp = false;
+                    }
+
+                    if (_embelishments.ShowASCII)
+                        embelished += c;
+
+                    if (_embelishments.ShowHEX)
+                    {
+                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                            embelished += Utils.Timestamp();
+
+                        byte b = Convert.ToByte(c);
+                        embelished += $"{b:X2} ";
+
+                        if (!_embelishments.ShowASCII)
+                        {
+                            _hexColumn++;
+                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
+                            {
+                                embelished += " - ";
+                            }
+                            else if (_hexColumn == 32)
+                            {
+                                embelished += "\n";
+                                _hexColumn = 0;
+                            }
+                        }
+                    }
+                    _ignoreNextLF = false;
+                }
+            }
+            _inputQueue.Enqueue(embelished);
+        }
 
         private void SerialReaderThread()
         {
@@ -42,7 +177,7 @@ namespace Terminal
                     if (count > 0)
                     {
                         string str = _com.ReadExisting();
-                        _inputQueue.Enqueue(str);
+                        Enqueue(str);
                     }
                     else
                     {
@@ -74,7 +209,7 @@ namespace Terminal
                             _socket.Receive(tcp_data);
                             str = System.Text.Encoding.Default.GetString(tcp_data);
                         }
-                        _inputQueue.Enqueue(str);
+                        Enqueue(str);
                     }
                     else
                     {
@@ -95,6 +230,11 @@ namespace Terminal
                 led.Visible = false;
             foreach (Label control in _controls)
                 control.Visible = false;
+        }
+
+        public void SetEmbelishments(Embelishments embelishments)
+        {
+            _embelishments = embelishments;
         }
 
         private enum CommType

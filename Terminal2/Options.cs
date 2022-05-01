@@ -122,23 +122,32 @@ namespace Terminal
         }
     }
 
+    public class Embelishments
+    {
+        public bool ShowCR;
+        public bool ShowLF;
+        public bool ShowTimestamp;
+        public bool ShowASCII;
+        public bool ShowHEX;
+
+        public Embelishments Clone()
+        {
+            Embelishments emb = (Embelishments)this.MemberwiseClone();
+            return emb;
+        }
+    }
+
     public class Profile
     {
         public bool active = false;
 
         public string name = "Default";
-        public bool showCurlyCR = false;
-        public bool showCurlyLF = false;
-        public bool ascii = true;
-        public bool hex = false;
-        public int translateCR = 3;     // 0=ignore, 1=CR, 2=CRLF, 3=Auto
-        public int translateLF = 3;     // 0=ignore, 1=LF, 2=CRLF, 3=-Auto
         public bool sendCR = true;
         public bool sendLF = false;
         public bool clearCMD = false;
         public bool stayontop = false;
-        public bool timestampInput = true;
 
+        public Embelishments embelishments = new Embelishments();
         public ConOptions conOptions = new ConOptions();
         public LoggingOptions logOptions = new LoggingOptions();
         public DisplayOptions displayOptions = new DisplayOptions();
@@ -154,6 +163,7 @@ namespace Terminal
         {
             Profile s = (Profile)this.MemberwiseClone();
             s.name = name;
+            s.embelishments = embelishments.Clone();
             s.conOptions = conOptions.Clone();
             s.logOptions = logOptions.Clone();
             s.displayOptions = displayOptions.Clone();
@@ -193,7 +203,7 @@ namespace Terminal
 
         public static string Timestamp()
         {
-            return $"{DateTime.Now:HH:mm:ss.ff}: ";
+            return $"{DateTime.Now:HH:mm:ss.fff}: ";
         }
         public static bool IsNumeric(char ch)
         {
@@ -202,16 +212,21 @@ namespace Terminal
             return true;
         }
 
-        // "HH:mm:ss.ff: "
+        // "HH:mm:ss.fff: "
         public static bool HasTimestamp(string str)
         {
-            if (str.Length < 13)
+            if (str.Length < 14)
                 return false;
-            if (!IsNumeric(str[0]) || !IsNumeric(str[1]) || !IsNumeric(str[3]) || !IsNumeric(str[4]) || !IsNumeric(str[6]) || !IsNumeric(str[7]) || !IsNumeric(str[9]) || !IsNumeric(str[10]))
+            if (!IsNumeric(str[0]) || !IsNumeric(str[1]) || !IsNumeric(str[3]) || !IsNumeric(str[4]) || !IsNumeric(str[6]) || !IsNumeric(str[7]) || !IsNumeric(str[9]) || !IsNumeric(str[10]) || !IsNumeric(str[11]))
                 return false;
-            if (str[2] != (char)':' || str[5] != (char)':' || str[8] != (char)'.' || str[11] != (char)':' || str[12] != (char)' ')
+            if (str[2] != (char)':' || str[5] != (char)':' || str[8] != (char)'.' || str[12] != (char)':')
                 return false;
             return true;
+        }
+
+        public static int TimestampLength()
+        {
+            return 14;
         }
     }
 }

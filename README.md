@@ -1,5 +1,5 @@
 # Terminal2 - v1.0.4.0 
-(With better accuracy on timestamps)
+(***Now with better accuracy on timestamps***)
 
 Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
 

@@ -615,40 +615,40 @@ namespace Terminal
             tbCommand.Focus();
         }
 
-        #region EMBELISHMENTS
+        #region EMBELLISHMENTS
         private void cbTimestamp_CheckedChanged(object sender, EventArgs e)
         {
-            _activeProfile.embelishments.ShowTimestamp = cbTimestamp.Checked;
-            _comms.SetEmbelishments(_activeProfile.embelishments);
+            _activeProfile.embellishments.ShowTimestamp = cbTimestamp.Checked;
+            _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
         private void CbASCII_CheckedChanged(object sender, EventArgs e)
         {
             if (!cbASCII.Checked && !cbHEX.Checked)
                 cbHEX.Checked = true;
-            _activeProfile.embelishments.ShowASCII = cbASCII.Checked;
-            _comms.SetEmbelishments(_activeProfile.embelishments);
+            _activeProfile.embellishments.ShowASCII = cbASCII.Checked;
+            _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
         private void CbHEX_CheckedChanged(object sender, EventArgs e)
         {
             if (!cbASCII.Checked && !cbHEX.Checked)
                 cbASCII.Checked = true;
-            _activeProfile.embelishments.ShowHEX = cbHEX.Checked;
-            _comms.SetEmbelishments(_activeProfile.embelishments);
+            _activeProfile.embellishments.ShowHEX = cbHEX.Checked;
+            _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
         private void cbShowCR_CheckedChanged(object sender, EventArgs e)
         {
-            _activeProfile.embelishments.ShowCR = cbShowCR.Checked;
-            _comms.SetEmbelishments(_activeProfile.embelishments);
+            _activeProfile.embellishments.ShowCR = cbShowCR.Checked;
+            _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
 
         private void cbShowLF_CheckedChanged(object sender, EventArgs e)
         {
-            _activeProfile.embelishments.ShowLF = cbShowLF.Checked;
-            _comms.SetEmbelishments(_activeProfile.embelishments);
+            _activeProfile.embellishments.ShowLF = cbShowLF.Checked;
+            _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
         #endregion
@@ -955,11 +955,11 @@ namespace Terminal
                 cbSendLF.Checked = _activeProfile.sendLF;
                 cbClearCMD.Checked = _activeProfile.clearCMD;
 
-                cbTimestamp.Checked = _activeProfile.embelishments.ShowTimestamp;
-                cbASCII.Checked = _activeProfile.embelishments.ShowASCII;
-                cbHEX.Checked = _activeProfile.embelishments.ShowHEX;
-                cbShowCR.Checked = _activeProfile.embelishments.ShowCR;
-                cbShowLF.Checked = _activeProfile.embelishments.ShowLF;
+                cbTimestamp.Checked = _activeProfile.embellishments.ShowTimestamp;
+                cbASCII.Checked = _activeProfile.embellishments.ShowASCII;
+                cbHEX.Checked = _activeProfile.embellishments.ShowHEX;
+                cbShowCR.Checked = _activeProfile.embellishments.ShowCR;
+                cbShowLF.Checked = _activeProfile.embellishments.ShowLF;
 
                 cbFreeze.Checked = false;
 
@@ -976,7 +976,7 @@ namespace Terminal
                     }
                 }
                 RefreshPortPulldown();
-                _comms.SetEmbelishments(_activeProfile.embelishments);
+                _comms.SetEmbellishments(_activeProfile.embellishments);
                 stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             }
         }

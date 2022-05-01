@@ -122,7 +122,7 @@ namespace Terminal
         }
     }
 
-    public class Embelishments
+    public class Embellishments
     {
         public bool ShowCR;
         public bool ShowLF;
@@ -130,9 +130,9 @@ namespace Terminal
         public bool ShowASCII;
         public bool ShowHEX;
 
-        public Embelishments Clone()
+        public Embellishments Clone()
         {
-            Embelishments emb = (Embelishments)this.MemberwiseClone();
+            Embellishments emb = (Embellishments)this.MemberwiseClone();
             return emb;
         }
     }
@@ -147,7 +147,7 @@ namespace Terminal
         public bool clearCMD = false;
         public bool stayontop = false;
 
-        public Embelishments embelishments = new Embelishments();
+        public Embellishments embellishments = new Embellishments();
         public ConOptions conOptions = new ConOptions();
         public LoggingOptions logOptions = new LoggingOptions();
         public DisplayOptions displayOptions = new DisplayOptions();
@@ -163,7 +163,7 @@ namespace Terminal
         {
             Profile s = (Profile)this.MemberwiseClone();
             s.name = name;
-            s.embelishments = embelishments.Clone();
+            s.embellishments = embellishments.Clone();
             s.conOptions = conOptions.Clone();
             s.logOptions = logOptions.Clone();
             s.displayOptions = displayOptions.Clone();

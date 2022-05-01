@@ -173,11 +173,11 @@ namespace Terminal
                 data += $"MaxLines={profile.displayOptions.maxLines}\n";
                 data += $"CutLines={profile.displayOptions.cutXtraLines}\n";
 
-                data += $"ShowCR={profile.embelishments.ShowCR}\n";
-                data += $"ShowLF={profile.embelishments.ShowLF}\n";
-                data += $"ShowASCII={profile.embelishments.ShowASCII}\n";
-                data += $"ShowHEX={profile.embelishments.ShowHEX}\n";
-                data += $"TimeInput={profile.embelishments.ShowTimestamp}\n";
+                data += $"ShowCR={profile.embellishments.ShowCR}\n";
+                data += $"ShowLF={profile.embellishments.ShowLF}\n";
+                data += $"ShowASCII={profile.embellishments.ShowASCII}\n";
+                data += $"ShowHEX={profile.embellishments.ShowHEX}\n";
+                data += $"TimeInput={profile.embellishments.ShowTimestamp}\n";
 
                 if (!Directory.Exists(profile.logOptions.Directory))
                 {
@@ -343,23 +343,23 @@ namespace Terminal
                         }
                         else if (line.StartsWith("ShowCR="))
                         {
-                            profile.embelishments.ShowCR = line.Contains("True");
+                            profile.embellishments.ShowCR = line.Contains("True");
                         }
                         else if (line.StartsWith("ShowLF="))
                         {
-                            profile.embelishments.ShowLF = line.Contains("True");
+                            profile.embellishments.ShowLF = line.Contains("True");
                         }
                         else if (line.StartsWith("ShowASCII="))
                         {
-                            profile.embelishments.ShowASCII = line.Contains("True");
+                            profile.embellishments.ShowASCII = line.Contains("True");
                         }
                         else if (line.StartsWith("ShowHEX="))
                         {
-                            profile.embelishments.ShowHEX = line.Contains("True");
+                            profile.embellishments.ShowHEX = line.Contains("True");
                         }
                         else if (line.StartsWith("TimeInput="))
                         {
-                            profile.embelishments.ShowTimestamp = line.Contains("True");
+                            profile.embellishments.ShowTimestamp = line.Contains("True");
                         }
                         else if (line.StartsWith("OutFont="))
                         {

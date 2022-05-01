@@ -26,7 +26,7 @@ namespace Terminal
         private TcpClient _client = null;
         private Socket _socket = null;
         private Profile _profile;
-        private Embelishments _embelishments;
+        private Embellishments _embellishments;
 
         private Thread _tcpThread = null;
         private Thread _serialThread = null;
@@ -44,7 +44,7 @@ namespace Terminal
             {
                 if (c == '\r')
                 {
-                    if (_embelishments.ShowASCII)
+                    if (_embellishments.ShowASCII)
                     {
                         if (_showTimestamp)
                         {
@@ -52,21 +52,21 @@ namespace Terminal
                             _showTimestamp = false;
                         }
 
-                        if (_embelishments.ShowCR)
+                        if (_embellishments.ShowCR)
                             embelished += "{CR}";
 
                         embelished += "\n";
                     }
 
-                    if (_embelishments.ShowHEX)
+                    if (_embellishments.ShowHEX)
                     {
-                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                        if (!_embellishments.ShowASCII && _hexColumn == 0)
                             embelished += Utils.Timestamp();
 
                         byte b = Convert.ToByte(c);
                         embelished += $"{b:X2} ";
 
-                        if (!_embelishments.ShowASCII)
+                        if (!_embellishments.ShowASCII)
                         {
                             _hexColumn++;
                             if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
@@ -83,17 +83,17 @@ namespace Terminal
 
                     _ignoreNextLF = true;
 
-                    if (_embelishments.ShowTimestamp)
+                    if (_embellishments.ShowTimestamp)
                         _showTimestamp = true;
                 }
                 else if (c == '\n')
                 {
-                    if (_embelishments.ShowASCII && _embelishments.ShowLF)
+                    if (_embellishments.ShowASCII && _embellishments.ShowLF)
                         embelished += "{LF}";
 
                     if (!_ignoreNextLF)
                     {
-                        if (_embelishments.ShowASCII)
+                        if (_embellishments.ShowASCII)
                         {
                             if (_showTimestamp)
                             {
@@ -103,15 +103,15 @@ namespace Terminal
                             embelished += "\n";
                         }
                     }
-                    if (_embelishments.ShowHEX)
+                    if (_embellishments.ShowHEX)
                     {
-                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                        if (!_embellishments.ShowASCII && _hexColumn == 0)
                             embelished += Utils.Timestamp();
 
                         byte b = Convert.ToByte(c);
                         embelished += $"{b:X2} ";
 
-                        if (!_embelishments.ShowASCII)
+                        if (!_embellishments.ShowASCII)
                         {
                             _hexColumn++;
                             if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
@@ -129,24 +129,24 @@ namespace Terminal
                 }
                 else
                 {
-                    if (_embelishments.ShowASCII && _showTimestamp)
+                    if (_embellishments.ShowASCII && _showTimestamp)
                     {
                         embelished += Utils.Timestamp();
                         _showTimestamp = false;
                     }
 
-                    if (_embelishments.ShowASCII)
+                    if (_embellishments.ShowASCII)
                         embelished += c;
 
-                    if (_embelishments.ShowHEX)
+                    if (_embellishments.ShowHEX)
                     {
-                        if (!_embelishments.ShowASCII && _hexColumn == 0)
+                        if (!_embellishments.ShowASCII && _hexColumn == 0)
                             embelished += Utils.Timestamp();
 
                         byte b = Convert.ToByte(c);
                         embelished += $"{b:X2} ";
 
-                        if (!_embelishments.ShowASCII)
+                        if (!_embellishments.ShowASCII)
                         {
                             _hexColumn++;
                             if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
@@ -232,9 +232,9 @@ namespace Terminal
                 control.Visible = false;
         }
 
-        public void SetEmbelishments(Embelishments embelishments)
+        public void SetEmbellishments(Embellishments embellishments)
         {
-            _embelishments = embelishments;
+            _embellishments = embellishments;
         }
 
         private enum CommType

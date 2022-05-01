@@ -138,7 +138,7 @@
   <data name="textBox1.Text" xml:space="preserve">
     <value>v1.0.4.0
     * Moved timestamping to the point of entry of serial and TCP data. Much more accurate now.
-    * Other embelishments done at the point of entry as well. Faster and cleaner solution.
+    * Other embellishments done at the point of entry as well. Faster and cleaner solution.
 
 v1.0.3.0
     * Major re-write of the display and comms processes

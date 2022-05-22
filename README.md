@@ -1,5 +1,5 @@
 # Terminal2 - v1.1.0.0 
-(***!! Major Update !!***)
+!*** Major Update ***!
 
 Terminal emulator for Engineers (with Serial and TCP socket capabilities)
 

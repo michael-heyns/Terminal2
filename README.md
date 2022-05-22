@@ -31,6 +31,7 @@ The font face has been kept clean and the settings have been moved one layer dow
 Here is an example from Scotty's emulator on Enterprise (NCC-1701-B)
 
 ![Terminal2](https://user-images.githubusercontent.com/4144679/169687630-1322d9c9-d6b1-4153-bdc0-1c23693d5d6e.png)
+![Connect](https://user-images.githubusercontent.com/4144679/169687784-2598f967-dc87-4b64-9938-7c0a5b8c7c3f.png)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.

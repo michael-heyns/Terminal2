@@ -1,3 +1,4 @@
+![Letter-T-icon](https://user-images.githubusercontent.com/4144679/169688088-3fded329-e2a0-4584-ba97-3fc035695f49.png)
 # Terminal2 - v1.1.0.0 
 *** Major Update ***
 

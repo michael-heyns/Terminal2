@@ -1,7 +1,7 @@
-# Terminal2 - v1.0.4.0 
-(***Now with better accuracy on timestamps***)
+# Terminal2 - v1.1.0.0 
+(*** Major Update ***)
 
-Terminal emulator for Embedded Engineers with Serial and TCP socket capabilities
+Terminal emulator for Engineers (with Serial and TCP socket capabilities)
 
 ## Sales pitch
 Every Embedded Engineer needs a Terminal Emulator at some point in their career.

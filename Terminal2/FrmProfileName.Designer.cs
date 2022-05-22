@@ -29,35 +29,37 @@ namespace Terminal
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.tbSessionName = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProfileName));
+            this.lblBigHeading = new System.Windows.Forms.Label();
+            this.tbEditString = new System.Windows.Forms.TextBox();
             this.btnApply = new System.Windows.Forms.Button();
-            this.lblSourceName = new System.Windows.Forms.Label();
+            this.lblSmallHeading = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lblTitle
+            // lblBigHeading
             // 
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(31, 23);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(269, 20);
-            this.lblTitle.TabIndex = 9;
-            this.lblTitle.Text = "XXXXXXXXXXXXX";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblBigHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBigHeading.Location = new System.Drawing.Point(31, 23);
+            this.lblBigHeading.Name = "lblBigHeading";
+            this.lblBigHeading.Size = new System.Drawing.Size(269, 20);
+            this.lblBigHeading.TabIndex = 9;
+            this.lblBigHeading.Text = "XXXXXXXXXXXXX";
+            this.lblBigHeading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tbSessionName
+            // tbEditString
             // 
-            this.tbSessionName.Location = new System.Drawing.Point(31, 69);
-            this.tbSessionName.MaxLength = 40;
-            this.tbSessionName.Name = "tbSessionName";
-            this.tbSessionName.Size = new System.Drawing.Size(269, 20);
-            this.tbSessionName.TabIndex = 10;
-            this.tbSessionName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbSessionName.TextChanged += new System.EventHandler(this.TbSessionName_TextChanged);
-            this.tbSessionName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbSessionName_KeyDown);
+            this.tbEditString.Location = new System.Drawing.Point(31, 69);
+            this.tbEditString.MaxLength = 40;
+            this.tbEditString.Name = "tbEditString";
+            this.tbEditString.Size = new System.Drawing.Size(269, 20);
+            this.tbEditString.TabIndex = 10;
+            this.tbEditString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbEditString.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.tbEditString.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // btnApply
             // 
+            this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnApply.Enabled = false;
             this.btnApply.Location = new System.Drawing.Point(225, 95);
             this.btnApply.Name = "btnApply";
@@ -67,14 +69,14 @@ namespace Terminal
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
-            // lblSourceName
+            // lblSmallHeading
             // 
-            this.lblSourceName.Location = new System.Drawing.Point(31, 43);
-            this.lblSourceName.Name = "lblSourceName";
-            this.lblSourceName.Size = new System.Drawing.Size(269, 23);
-            this.lblSourceName.TabIndex = 12;
-            this.lblSourceName.Text = "xxxxxxx";
-            this.lblSourceName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSmallHeading.Location = new System.Drawing.Point(31, 43);
+            this.lblSmallHeading.Name = "lblSmallHeading";
+            this.lblSmallHeading.Size = new System.Drawing.Size(269, 23);
+            this.lblSmallHeading.TabIndex = 12;
+            this.lblSmallHeading.Text = "xxxxxxx";
+            this.lblSmallHeading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FrmProfileName
             // 
@@ -82,11 +84,12 @@ namespace Terminal
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 141);
-            this.Controls.Add(this.lblSourceName);
+            this.Controls.Add(this.lblSmallHeading);
             this.Controls.Add(this.btnApply);
-            this.Controls.Add(this.tbSessionName);
-            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.tbEditString);
+            this.Controls.Add(this.lblBigHeading);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmProfileName";
@@ -99,9 +102,9 @@ namespace Terminal
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.TextBox tbSessionName;
+        private System.Windows.Forms.Label lblBigHeading;
+        private System.Windows.Forms.TextBox tbEditString;
         private System.Windows.Forms.Button btnApply;
-        private System.Windows.Forms.Label lblSourceName;
+        private System.Windows.Forms.Label lblSmallHeading;
     }
 }

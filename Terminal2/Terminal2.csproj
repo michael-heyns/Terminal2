@@ -59,14 +59,13 @@
     <ApplicationIcon>Terminal.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0FB42D27122F9EB8F45502D5C7CF7132270A1862</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>74F130268C1A19746F7F78CEB82E073CBF380E7B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>Terminal2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -78,11 +77,10 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Signature.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -147,6 +145,12 @@
     <Compile Include="FrmProfileName.Designer.cs">
       <DependentUpon>FrmProfileName.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSearch.Designer.cs">
+      <DependentUpon>FrmSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Options.cs" />
@@ -186,6 +190,9 @@
     <EmbeddedResource Include="FrmProfileName.resx">
       <DependentUpon>FrmProfileName.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmSearch.resx">
+      <DependentUpon>FrmSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -212,6 +219,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Signature.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

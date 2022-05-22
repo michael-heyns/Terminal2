@@ -75,8 +75,8 @@ namespace Terminal
     {
         public int mode = 0;
         public string text = string.Empty;
-        public Color color = Color.Black;
-        public bool freeze = false;
+        public Color foreColor = Color.Black;
+        public Color backColor = Color.White;
         public ColorFilter Clone()
         {
             return (ColorFilter)MemberwiseClone();
@@ -88,7 +88,7 @@ namespace Terminal
         public ColorFilter[] filter = new ColorFilter[12];
 
         public Font inputFont;
-        public Color inputText = Color.Black;
+        public Color inputDefaultForeground = Color.Black;
         public Color inputBackground = Color.White;
 
         public Font outputFont;
@@ -96,7 +96,7 @@ namespace Terminal
 
         public bool timestampOutputLines = true;
 
-        public int maxLines = 1500;
+        public int maxLines = 2000;
         public int cutXtraLines = 500;
 
         public DisplayOptions()

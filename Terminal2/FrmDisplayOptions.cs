@@ -15,39 +15,46 @@ namespace Terminal
         public readonly CheckBox[] FreezeList;
         public readonly ComboBox[] ModeList;
         public readonly TextBox[] TextList;
-        public readonly Panel[] PanelList;
+        public readonly Panel[] ForePanelList;
+        public readonly Panel[] BackPanelList;
         public readonly Label[] SampleList;
+
+        private const int SEARCH_INDEX = 11;
+
         public FrmDisplayOptions()
         {
             InitializeComponent();
             ModeList = new ComboBox[] { m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12 };
             TextList = new TextBox[] { t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12 };
-            PanelList = new Panel[] { c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12 };
+            ForePanelList = new Panel[] { c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12 };
+            BackPanelList = new Panel[] { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12 };
             SampleList = new Label[] { sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12 };
-            FreezeList = new CheckBox[] { e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, e11, e12 };
         }
 
         private void RefreshScreenFromDatabase()
         {
+            TextColorInput.BackColor = Options.inputDefaultForeground;
+            BackColorInput.BackColor = Options.inputBackground;
+
             BackColorOutput.BackColor = Options.outputBackground;
 
             sampleInput.BackColor = Options.inputBackground;
             sampleInput.Font = Options.inputFont;
-            sampleInput.ForeColor = Options.inputText;
-            TextColorInput.BackColor = Options.inputText;
-            BackColorInput.BackColor = Options.inputBackground;
-            foreach (Label lbl in SampleList)
-                lbl.BackColor = Options.inputBackground;
+            sampleInput.ForeColor = Options.inputDefaultForeground;
 
             for (int i = 0; i < Options.filter.Length; i++)
             {
                 ModeList[i].SelectedIndex = Options.filter[i].mode;
-                PanelList[i].BackColor = Options.filter[i].color;
-                SampleList[i].Font = Options.inputFont;
-                SampleList[i].ForeColor = Options.filter[i].color;
-                TextList[i].Text = Options.filter[i].text;
                 ModeList[i].Enabled = (Options.filter[i].text.Length > 0);
-                FreezeList[i].Checked = Options.filter[i].freeze;
+
+                TextList[i].Text = Options.filter[i].text;
+
+                ForePanelList[i].BackColor = Options.filter[i].foreColor;
+                BackPanelList[i].BackColor = Options.filter[i].backColor;
+
+                SampleList[i].Font = Options.inputFont;
+                SampleList[i].ForeColor = Options.filter[i].foreColor;
+                SampleList[i].BackColor = Options.filter[i].backColor;
             }
 
             tbMaxLines.Text = Options.maxLines.ToString();
@@ -105,6 +112,16 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.inputBackground = colorDialog.Color;
+
+                DialogResult yn = MessageBox.Show("Do you want to set all filter backgrounds to this color as well?", "Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (yn == DialogResult.Yes)
+                {
+                    for (int i = 0; i < Options.filter.Length; i++)
+                    {
+                        if (i != SEARCH_INDEX)
+                            Options.filter[i].backColor = colorDialog.Color;
+                    }
+                }
                 RefreshScreenFromDatabase();
             }
         }
@@ -124,12 +141,25 @@ namespace Terminal
         {
             Panel p = (Panel)sender;
             int i = Utils.Int(p.Tag.ToString());
-            colorDialog.Color = Options.filter[i].color;
+            colorDialog.Color = Options.filter[i].foreColor;
             DialogResult ok = colorDialog.ShowDialog();
             if (ok == DialogResult.OK)
             {
-                PanelList[i].BackColor = colorDialog.Color;
-                Options.filter[i].color = colorDialog.Color;
+                ForePanelList[i].BackColor = colorDialog.Color;
+                Options.filter[i].foreColor = colorDialog.Color;
+                RefreshScreenFromDatabase();
+            }
+        }
+        private void BackColorClick(object sender, EventArgs e)
+        {
+            Panel p = (Panel)sender;
+            int i = Utils.Int(p.Tag.ToString());
+            colorDialog.Color = Options.filter[i].backColor;
+            DialogResult ok = colorDialog.ShowDialog();
+            if (ok == DialogResult.OK)
+            {
+                BackPanelList[i].BackColor = colorDialog.Color;
+                Options.filter[i].backColor = colorDialog.Color;
                 RefreshScreenFromDatabase();
             }
         }
@@ -151,37 +181,35 @@ namespace Terminal
 
         private void TextColorInput_Click(object sender, EventArgs e)
         {
-            colorDialog.Color = Options.inputText;
+            colorDialog.Color = Options.inputDefaultForeground;
             DialogResult ok = colorDialog.ShowDialog();
             if (ok == DialogResult.OK)
             {
-                Options.inputText = colorDialog.Color;
+                Options.inputDefaultForeground = colorDialog.Color;
                 RefreshScreenFromDatabase();
             }
         }
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            DialogResult yn = MessageBox.Show("Are you sure?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult yn = MessageBox.Show("Are you sure?", "Please Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (yn != DialogResult.Yes)
                 return;
 
-            Options.filter[11].color = Color.BlueViolet;
-            Options.filter[10].color = Color.SeaGreen;
-            Options.filter[9].color = Color.LightSalmon;
-            Options.filter[8].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            Options.filter[7].color = Color.Green;
-            Options.filter[6].color = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            Options.filter[5].color = Color.Olive;
-            Options.filter[4].color = Color.Fuchsia;
-            Options.filter[3].color = Color.Yellow;
-            Options.filter[2].color = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            Options.filter[1].color = Color.Blue;
-            Options.filter[0].color = Color.Red;
+            Options.filter[9].foreColor = Color.LightSalmon;
+            Options.filter[8].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            Options.filter[7].foreColor = Color.Green;
+            Options.filter[6].foreColor = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            Options.filter[5].foreColor = Color.Olive;
+            Options.filter[4].foreColor = Color.Fuchsia;
+            Options.filter[3].foreColor = Color.DarkGreen;
+            Options.filter[2].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            Options.filter[1].foreColor = Color.Blue;
+            Options.filter[0].foreColor = Color.DarkOrange;
 
             Options.outputBackground = Color.White;
 
-            Options.inputText = Color.Black;
+            Options.inputDefaultForeground = Color.Black;
             Options.inputBackground = Color.White;
 
             Options.outputBackground = Color.Gainsboro;
@@ -194,12 +222,21 @@ namespace Terminal
             {
                 Options.filter[i].mode = 1;
                 Options.filter[i].text = string.Empty;
-                Options.filter[i].freeze = false;
+                Options.filter[i].backColor = Color.White;
             }
+
+            // search option
+            Options.filter[SEARCH_INDEX].foreColor = Color.Black;
+            Options.filter[SEARCH_INDEX].backColor = Color.Lime;
+
+            // suggest error condition
+            Options.filter[10].foreColor = Color.Yellow;
+            Options.filter[10].backColor = Color.Red;
+            Options.filter[10].text = "ERROR";
 
             RefreshScreenFromDatabase();
 
-            if (Utils.Int(tbMaxLines.Text) != 1500 || Utils.Int(tbXtraLinesToRemove.Text) != 500)
+            if (Utils.Int(tbMaxLines.Text) != 2000 || Utils.Int(tbXtraLinesToRemove.Text) != 500)
             {
                 yn = MessageBox.Show("Do you want to reset the maximum line count as well?", "Reset buffer sizes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (yn == DialogResult.Yes)
@@ -209,7 +246,7 @@ namespace Terminal
 
         private void BtnFTReset_Click(object sender, EventArgs e)
         {
-            tbMaxLines.Text = "1500";
+            tbMaxLines.Text = "2000";
             tbXtraLinesToRemove.Text = "500";
 
             Options.maxLines = Utils.Int(tbMaxLines.Text);
@@ -248,11 +285,14 @@ namespace Terminal
         {
             LimitBufferSizes();
         }
-        private void E1_CheckedChanged(object sender, EventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            CheckBox cb = (CheckBox)sender;
-            int i = Utils.Int(cb.Tag.ToString());
-            Options.filter[i].freeze = cb.Checked;
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

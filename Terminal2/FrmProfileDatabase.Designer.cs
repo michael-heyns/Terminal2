@@ -29,6 +29,7 @@ namespace Terminal
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmProfileDatabase));
             this.btnSelect = new System.Windows.Forms.Button();
             this.lbProfileList = new System.Windows.Forms.ListBox();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -169,6 +170,7 @@ namespace Terminal
             this.Controls.Add(this.lbProfileList);
             this.Controls.Add(this.btnSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmProfileDatabase";

@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+
 namespace Terminal
 {
     public partial class FrmMain : Form
@@ -17,27 +19,22 @@ namespace Terminal
         public EnqueuedDelegate UIOutputQHandlerInstance;
         private readonly EventQueue _uiOutputQueue = null;
 
-        private delegate void ColoringDelegate();
-        private readonly ColoringDelegate ColoringInstance;
-        private volatile bool _stopColoring = false;
-
         public bool ExitFlag = false;
         private Profile _activeProfile = new Profile();
+        private FrmDisplayOptions _config = new FrmDisplayOptions();
+        private FrmHelp _help = new FrmHelp();
 
         private int _ticks = 0;
         private int _tock = 0;
         private readonly Comms _comms = null;
 
-        private readonly static object _dollarLock = new object();
-        private readonly static object _rtbLock = new object();
+        private bool _lbInputAppend = false;
 
+        private readonly static object _dollarLock = new object();
+
+        private FrmSearch search = new FrmSearch();
         private enum State { Changing, Disconnected, Connected, Listening };
         private State _state = State.Disconnected;
-
-        // Coloring thread
-        private Thread _colorThread = null;
-        private static readonly AutoResetEvent _colorSemaphore = new AutoResetEvent(false);
-        private int _colorEnd = 0;
 
         // MACRO threads
         private readonly Thread[] _macroThread = new Thread[48];
@@ -66,9 +63,28 @@ namespace Terminal
         private static bool _terminateFlag = false;
         private static int _localThreadCount = 0;
 
-        private bool _frozen = false;
+        private volatile bool _frozen = false;
+
+        private const int SEARCH_INDEX = 11;
+        private Brush[] _filterFrontBrush = new Brush[12];
+        private Brush[] _filterBackBrush = new Brush[12];
+        private Brush _inputDefaultFrontBrush;
+        private Brush _inputBackBrush;
+        private Brush _outputFrontBrush;
+        private Brush _outputBackBrush;
+
 
         // ==============================================
+        private void SetSearchText(string str)
+        {
+            if (Utils.HasTimestamp(str))
+                _activeProfile.displayOptions.filter[SEARCH_INDEX].text = str.Substring(Utils.TimestampLength());
+            else
+                _activeProfile.displayOptions.filter[SEARCH_INDEX].text = str;
+            _activeProfile.displayOptions.filter[SEARCH_INDEX].mode = 1;
+            lbInput.Refresh();
+        }
+
         private int FindApplicableFilter(string str, int offset)
         {
             if (offset >= str.Length)
@@ -76,22 +92,19 @@ namespace Terminal
 
             for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
             {
-                if (_stopColoring)
-                    return -1;
-
                 if (_activeProfile.displayOptions.filter[i].text.Length > 0)
                 {
                     // starts with
                     if (_activeProfile.displayOptions.filter[i].mode == 0)
                     {
-                        if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text))
+                        if (str.ToLower().Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text.ToLower()))
                             return i;
                     }
 
                     // contains
                     else if (_activeProfile.displayOptions.filter[i].mode == 1)
                     {
-                        if (str.Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text))
+                        if (str.ToLower().Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text.ToLower()))
                             return i;
                     }
                 }
@@ -99,134 +112,9 @@ namespace Terminal
             return -1;
         }
 
-        private void ColoringHandler()
-        {
-            lock (_rtbLock)
-            {
-                if (rtb.Lines.Length == 0)
-                    return;
-
-                int topIndex = rtb.GetCharIndexFromPosition(new Point(1, 1));
-                int bottomIndex = rtb.GetCharIndexFromPosition(new Point(1, rtb.Height - 1));
-                int topLine = rtb.GetLineFromCharIndex(topIndex);
-                int bottomLine = rtb.GetLineFromCharIndex(bottomIndex);
-
-                for (int i = bottomLine; i >= topLine; i--)
-                {
-                    // if something changed, quit immediately
-                    if (i >= rtb.Lines.Length)
-                        i = Math.Max(0, rtb.Lines.Length - 1);
-
-                    string str = rtb.Lines[i];
-                    if (str.Length > 0)
-                    {
-                        int offset = 0;
-                        if (Utils.HasTimestamp(str))
-                            offset += Utils.TimestampLength();
-
-                        int index = FindApplicableFilter(str, offset);
-                        if (index >= 0)
-                        {
-                            int start = rtb.GetFirstCharIndexFromLine(i) + offset;
-                            int len = str.Length - offset;
-                            rtb.Select(start, len);
-                            rtb.SelectionColor = _activeProfile.displayOptions.filter[index].color;
-                            Application.DoEvents();
-
-                            if (_activeProfile.displayOptions.filter[index].freeze)
-                            {
-                                if (!_frozen)
-                                {
-                                    cbFreeze.Checked = true;
-                                    Application.DoEvents();
-                                    int scrollTo = Math.Min(i + 5, rtb.Lines.Length - 1);
-                                    rtb.SelectionStart = rtb.GetFirstCharIndexFromLine(scrollTo);
-                                    rtb.ScrollToCaret();
-                                    MessageBox.Show("The text \"" + _activeProfile.displayOptions.filter[index].text + "\"" +
-                                        " has been detected at\n" +
-                                        rtb.Lines[i].Substring(0, 40) + "...", 
-                                        "Freeze condition detected", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }
-                            }
-                        }
-                    }
-                    if (i == _colorEnd)
-                        break;
-                }
-                _colorEnd = bottomLine;
-            }
-        }
-
-        private void ColorThread()
-        {
-            _localThreadCount++;
-            try
-            {
-                while (!_terminateFlag)
-                {
-                    _colorSemaphore.WaitOne();
-                    if (_terminateFlag)
-                        break;
-
-                    _stopColoring = false;
-                    this.Invoke(this.ColoringInstance);
-                }
-            }
-            catch { }
-            _localThreadCount--;
-        }
-
-        // ==============================================
-
         private void UpdateLineCounter()
         {
-            lock (_rtbLock)
-            {
-                stsSize.Text = $"  {rtb.Text.Length}  ";
-                stsLineCount.Text = $"  {rtb.Lines.Length}  ";
-            }
-        }
-
-        private void ProcessChunk(string chunk)
-        {
-            Log.Add(chunk);
-            if (!_frozen)
-            {
-                lock (_rtbLock)
-                {
-                    int lastLine = Math.Max(0, rtb.Lines.Length - 1);
-                    rtb.AppendText(chunk, _activeProfile.displayOptions.inputText);
-                    if (rtb.Lines.Length < 100)
-                        _colorSemaphore.Set();
-
-                    // limit our line count
-                    if (rtb.Lines.Length > _activeProfile.displayOptions.maxLines)
-                    {
-                        // mandatory cut
-                        int tocut = rtb.Lines.Length - _activeProfile.displayOptions.maxLines;
-
-                        // plus additional cut
-                        tocut += _activeProfile.displayOptions.cutXtraLines;
-                        if (tocut >= rtb.Lines.Length)
-                        {
-                            rtb.Clear();
-                            lastLine = 0;
-                            _colorEnd = 0;
-                        }
-                        else
-                        {
-                            rtb.ReadOnly = false;
-                            {
-                                rtb.Select(0, rtb.GetFirstCharIndexFromLine(tocut));
-                                rtb.SelectedText = string.Empty;
-                            }
-                            rtb.ReadOnly = true;
-                            lastLine -= tocut;
-                            _colorEnd = lastLine;
-                        }
-                    }
-                }
-            }
+            stsLineCount.Text = $"  {lbInput.Items.Count}  ";
         }
 
         private void UIInputQueueHandler()
@@ -234,18 +122,49 @@ namespace Terminal
             while (!_terminateFlag && _uiInputQueue.Count > 0)
             {
                 string str = (string)_uiInputQueue.Dequeue();
-                ProcessChunk(str);
-            }
+                Log.Add(str);
 
-            // and put the caret back to the bottom
-            if (!_frozen)
-            {
-                lock (_rtbLock)
+                if (!_frozen)
                 {
-                    rtb.SelectionStart = rtb.Text.Length;
-                    rtb.ScrollToCaret();
+                    string[] delim = { "\n" };
+                    string[] lines = str.Split(delim, StringSplitOptions.RemoveEmptyEntries);
+
+                    lbInput.BeginUpdate();
+                    if (lines.Length == 0)
+                    {
+
+                        if (lbInput.Items.Count >= _activeProfile.displayOptions.maxLines)
+                            lbInput.Items.RemoveAt(0);
+
+                        // we only received a single "\n"
+                        lbInput.Items.Add(string.Empty);
+                        _lbInputAppend = true;
+                        lbInput.TopIndex = lbInput.Items.Count - 1;
+                    }
+                    else
+                    {
+                        if (_lbInputAppend)
+                        {
+                            lbInput.Items[lbInput.Items.Count - 1] = lbInput.Items[lbInput.Items.Count - 1] + lines[0];
+                            for (int i = 1; i < lines.Length; i++)
+                                lbInput.Items.Add(lines[i]);
+                            _lbInputAppend = false;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < lines.Length; i++)
+                                lbInput.Items.Add(lines[i]);
+                        }
+                        while (lbInput.Items.Count >= _activeProfile.displayOptions.maxLines)
+                            lbInput.Items.RemoveAt(0);
+
+                        lbInput.TopIndex = lbInput.Items.Count - 1;
+                        if (!str.EndsWith("\n"))
+                            _lbInputAppend = true;
+                    }
+                    lbInput.EndUpdate();
+                    UpdateLineCounter();
                 }
-                UpdateLineCounter();
             }
         }
         private void UIOutputQueueHandler()
@@ -255,11 +174,12 @@ namespace Terminal
                 string str = (string)_uiOutputQueue.Dequeue();
                 string tm = Utils.Timestamp();
                 if (_activeProfile.displayOptions.timestampOutputLines)
-                {
                     lbOutput.Items.Add(tm + str);
-                }
                 else
                     lbOutput.Items.Add(str);
+
+                while (lbOutput.Items.Count > _activeProfile.displayOptions.maxLines)
+                    lbOutput.Items.RemoveAt(0);
 
                 Log.Add("\r\n----> Tx: " + tm + str + "\r\n");
                 lbOutput.TopIndex = lbOutput.Items.Count - 1;
@@ -297,8 +217,6 @@ namespace Terminal
             UIOutputQHandlerInstance = new EnqueuedDelegate(UIOutputQueueHandler);
             _uiOutputQueue = new EventQueue(this, UIOutputQHandlerInstance);
 
-            ColoringInstance = new ColoringDelegate(ColoringHandler);
-
             Database.Initialise();
 
             if (!Database.Find("Default"))
@@ -309,8 +227,8 @@ namespace Terminal
                 };
 
                 FrmDisplayOptions conf = new FrmDisplayOptions();
-                for (int i = 0; i < conf.PanelList.Length; i++)
-                    s.displayOptions.filter[i].color = conf.PanelList[i].BackColor;
+                for (int i = 0; i < conf.ForePanelList.Length; i++)
+                    s.displayOptions.filter[i].foreColor = conf.ForePanelList[i].BackColor;
 
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
                 s.displayOptions.inputFont = (Font)converter.ConvertFromString(Utils.DefaultInputFont);
@@ -340,34 +258,40 @@ namespace Terminal
             btnColorConfig.Enabled = false;
             {
                 SaveThisProfile();
-                FrmDisplayOptions cfg = new FrmDisplayOptions
-                {
-                    Options = _activeProfile.displayOptions.Clone()
-                };
 
                 TopMost = false;
-                cfg.ShowDialog();
+                _config.Options = _activeProfile.displayOptions.Clone();
+                _config.ShowDialog();
                 TopMost = cbStayOnTop.Checked;
 
-                if (cfg.Result == DialogResult.OK)
+                if (_config.Result == DialogResult.OK)
                 {
-                    _activeProfile.displayOptions = cfg.Options.Clone();
+                    _activeProfile.displayOptions = _config.Options.Clone();
                     SaveThisProfile();
 
-                    lock (_rtbLock)
+                    lbInput.BackColor = _activeProfile.displayOptions.inputBackground;
+                    lbInput.Font = _activeProfile.displayOptions.inputFont;
+                    _inputBackBrush = new SolidBrush(_activeProfile.displayOptions.inputBackground);
+                    _inputDefaultFrontBrush = new SolidBrush(_activeProfile.displayOptions.inputDefaultForeground);
+                    lbInput.Refresh();
+
+                    lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
+                    lbOutput.Font = _activeProfile.displayOptions.outputFont;
+                    _outputBackBrush = new SolidBrush(_activeProfile.displayOptions.outputBackground);
+                    _outputFrontBrush = Brushes.Black;
+                    lbOutput.Refresh();
+
+                    for (int f = 0; f < _filterFrontBrush.Length; f++)
                     {
-                        rtb.BackColor = _activeProfile.displayOptions.inputBackground;
-                        lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
-                        rtb.Font = _activeProfile.displayOptions.inputFont;
-                        lbOutput.Font = _activeProfile.displayOptions.outputFont;
+                        _filterFrontBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].foreColor);
+                        _filterBackBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].backColor);
                     }
-                    _colorEnd = 0;
-                    _stopColoring = false;
-                    this.Invoke(this.ColoringInstance);
                 }
             }
             stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             btnColorConfig.Enabled = true;
+            lbInput.Refresh();
+            lbOutput.Refresh();
             tbCommand.Focus();
         }
 
@@ -418,7 +342,7 @@ namespace Terminal
                 bool rc = _comms.Connect(_activeProfile);
                 if (rc)
                 {
-                    btnConnect.Text = "&Disconnect";
+                    btnConnect.Text = "Dis&connect";
                     btnConnectOptions.Enabled = false;
                     pdPort.Enabled = false;
                     lblProfileName.Enabled = false;
@@ -440,6 +364,7 @@ namespace Terminal
 
         private void ActionDisconnect()
         {
+            SetSearchText(string.Empty);
             _comms.Disconnect();
             if (_state == State.Listening)
             {
@@ -474,7 +399,9 @@ namespace Terminal
             }
             btnConnect.Enabled = false;
             if (_state == State.Disconnected)
+            {
                 ActionConnect();
+            }
             else
             {
                 _abortFileSend = true;
@@ -482,6 +409,9 @@ namespace Terminal
 
                 ActionDisconnect();
                 RefreshPortPulldown();
+
+                if (_frozen)
+                    UnFreeze();
             }
             btnConnect.Enabled = true;
             tbCommand.Focus();
@@ -603,14 +533,14 @@ namespace Terminal
             {
                 btnLogOptions.Enabled = false;
                 btnStartLog.BackColor = Color.Lime;
-                btnStartLog.Text = "Stop Log";
+                btnStartLog.Text = "Stop &Log";
                 stsLogfile.Text = "   " + Log.Filename + "   ";
             }
             else
             {
                 btnLogOptions.Enabled = true;
                 btnStartLog.BackColor = Color.Transparent;
-                btnStartLog.Text = "Start Log";
+                btnStartLog.Text = "Start &Log";
             }
             tbCommand.Focus();
         }
@@ -653,30 +583,41 @@ namespace Terminal
         }
         #endregion
 
-        private void CbFreeze_CheckedChanged(object sender, EventArgs e)
+        private void Freeze()
         {
-            if (cbFreeze.Checked)
+            _frozen = true;
+            lbInput.Items.Add("====== 'Freeze' activated here ======");
+            lbInput.TopIndex = lbInput.Items.Count - 1;
+            btnFreeze.ForeColor = Color.Red;
+            btnFreeze.Text = "&GO";
+            _lbInputAppend = false;
+            btnSearch.Enabled = true;
+        }
+        private void UnFreeze()
+        {
+            SetSearchText(string.Empty);
+            _uiInputQueue.Clear();
+            btnFreeze.ForeColor = Color.Black;
+            btnFreeze.Text = "&Freeze";
+            _frozen = false;
+            btnSearch.Enabled = false;
+        }
+
+        private void BtnFreeze_Click(object sender, EventArgs e)
+        {
+            btnFreeze.Enabled = false;
+            if (!_frozen)
             {
-                _frozen = true;
-                rtb.AppendText("\n====== 'Freeze' activated here ======\n", _activeProfile.displayOptions.inputText);
-                cbFreeze.BackColor = Color.Tomato;
-                cbFreeze.Text = "    Run   ";
-                rtb.SelectionStart = rtb.Text.Length;
-                rtb.ScrollToCaret();
+                if (_comms.Connected() && lbInput.Items.Count > 0)
+                    Freeze();
             }
             else
             {
-                _uiInputQueue.Clear();
-                cbFreeze.Text = " Freeze ";
-                cbFreeze.BackColor = PanelOne.BackColor;
-                this.Invoke(this.UIInputQHandlerInstance);
-                _frozen = false;
-
-                _colorSemaphore.Set();
+                UnFreeze();
             }
+            btnFreeze.Enabled = true;
             tbCommand.Focus();
         }
-
         private void CbStayOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = cbStayOnTop.Checked;
@@ -794,8 +735,6 @@ namespace Terminal
                 };
                 _macroThread[t].Start();
             }
-            _colorThread = new Thread(new ThreadStart(ColorThread));
-            _colorThread.Start();
         }
 
         private void DoMacro(int m)
@@ -822,8 +761,8 @@ namespace Terminal
         }
         private void DgMacroTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            UnFreeze();
             _macroIsMoving = false;
-            cbFreeze.Checked = false;
             if (e.RowIndex < 1 || e.RowIndex > 4)
             {
                 tbCommand.Focus();
@@ -940,13 +879,21 @@ namespace Terminal
                 _activeProfile = Database.ReadProfile(name);
                 Database.SaveAsActiveProfile(name);
 
-                lock (_rtbLock)
-                {
-                    rtb.BackColor = _activeProfile.displayOptions.inputBackground;
-                    lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
-                    rtb.Font = _activeProfile.displayOptions.inputFont;
-                }
+                lbInput.BackColor = _activeProfile.displayOptions.inputBackground;
+                lbInput.Font = _activeProfile.displayOptions.inputFont;
+                _inputBackBrush = new SolidBrush(_activeProfile.displayOptions.inputBackground);
+                _inputDefaultFrontBrush = new SolidBrush(_activeProfile.displayOptions.inputDefaultForeground);
+
+                lbOutput.BackColor = _activeProfile.displayOptions.outputBackground;
                 lbOutput.Font = _activeProfile.displayOptions.outputFont;
+                _outputBackBrush = new SolidBrush(_activeProfile.displayOptions.outputBackground);
+                _outputFrontBrush = Brushes.Black;
+
+                for (int f = 0; f < _filterFrontBrush.Length; f++)
+                {
+                    _filterFrontBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].foreColor);
+                    _filterBackBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].backColor);
+                }
 
                 lblProfileName.Text = _activeProfile.name;
                 cbStayOnTop.Checked = _activeProfile.stayontop;
@@ -961,7 +908,7 @@ namespace Terminal
                 cbShowCR.Checked = _activeProfile.embellishments.ShowCR;
                 cbShowLF.Checked = _activeProfile.embellishments.ShowLF;
 
-                cbFreeze.Checked = false;
+                UnFreeze();
 
                 int i = 0;
                 for (int r = 1; r <= 4; r++)
@@ -982,53 +929,51 @@ namespace Terminal
         }
         private void TbCommand_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.PageUp)
             {
-                if (lbOutput.SelectedIndex > 0)
-                    lbOutput.SelectedIndex--;
+                if ((lbInput.TopIndex - 10) > 0)
+                    lbInput.TopIndex -= 10;
+            }
+            else if (e.KeyCode == Keys.PageDown)
+            {
+                if ((lbInput.TopIndex + 10) < lbInput.Items.Count)
+                    lbInput.TopIndex += 10;
                 else
-                    lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
+                    lbInput.TopIndex = lbInput.Items.Count - 1;
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                if (e.Control)
+                {
+                    if (lbOutput.SelectedIndex > 0)
+                        lbOutput.SelectedIndex--;
+                    else
+                        lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
+                }
+                else
+                {
+                    if ((lbInput.TopIndex - 1) > 0)
+                        lbInput.TopIndex -= 1;
+                }
             }
             else if (e.KeyCode == Keys.Down)
             {
-                if (lbOutput.SelectedIndex > 0)
+                if (e.Control)
                 {
-                    if (lbOutput.SelectedIndex < lbOutput.Items.Count - 1)
-                        lbOutput.SelectedIndex++;
+                    if (lbOutput.SelectedIndex > 0)
+                    {
+                        if (lbOutput.SelectedIndex < lbOutput.Items.Count - 1)
+                            lbOutput.SelectedIndex++;
+                    }
+                    else
+                        lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
                 }
                 else
-                    lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
-            }
-            else if (e.KeyCode == Keys.C)
-            {
-                if (e.Control)
                 {
-                    lock (_rtbLock)
-                    {
-                        rtb.Copy();
-                    }
-                }
-            }
-            else if (e.KeyCode == Keys.A)
-            {
-                if (e.Control)
-                {
-                    lock (_rtbLock)
-                    {
-                        rtb.SelectAll();
-                    }
-                }
-            }
-            else if (e.KeyCode == Keys.X)
-            {
-                if (e.Control)
-                {
-                    lock (_rtbLock)
-                    {
-                        rtb.Copy();
-                        rtb.Clear();
-                        _colorEnd = 0;
-                    }
+                    if ((lbInput.TopIndex + 1) < lbInput.Items.Count)
+                        lbInput.TopIndex += 1;
+                    else
+                        lbInput.TopIndex = lbInput.Items.Count - 1;
                 }
             }
             else if (e.KeyCode == Keys.Enter)
@@ -1176,7 +1121,7 @@ namespace Terminal
                     if (_threadResult)
                     {
                         _state = State.Connected;
-                        btnConnect.Text = "Disconnect";
+                        btnConnect.Text = "Dis&connect";
                         btnConnectOptions.Enabled = false;
                         pdPort.Enabled = false;
                         lblProfileName.Enabled = false;
@@ -1220,8 +1165,7 @@ namespace Terminal
 
         private void BtnHelp_Click(object sender, EventArgs e)
         {
-            FrmHelp help = new FrmHelp();
-            help.ShowDialog();
+            _help.ShowDialog();
             tbCommand.Focus();
         }
 
@@ -1237,14 +1181,11 @@ namespace Terminal
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            lock (_rtbLock)
-            {
-                _uiInputQueue.Clear();
-                rtb.Clear();
-                rtb.ZoomFactor = 1;
-                _colorEnd = 0;
-            }
-            cbFreeze.Checked = false;
+            SetSearchText(string.Empty);
+            _lbInputAppend = false;
+            _uiInputQueue.Clear();
+            lbInput.Items.Clear();
+            UnFreeze();
             UpdateLineCounter();
         }
 
@@ -1354,10 +1295,10 @@ namespace Terminal
         {
             btnNew.Enabled = false;
             {
-                string source = "(Your Default profile will be copied)";
-                FrmProfileName askname = new FrmProfileName(source, "Name of the New Profile");
-                askname.ShowDialog();
-                if (!askname.NewName.Equals(source))
+                string heading = "(The \"Default\" profile is used as base)";
+                FrmProfileName askname = new FrmProfileName("MyProfile", "Add a New Profile", heading);
+                DialogResult rc = askname.ShowDialog();
+                if (rc == DialogResult.OK)
                 {
                     if (!Database.Find(askname.NewName))
                         Database.Copy("Default", askname.NewName);
@@ -1371,14 +1312,6 @@ namespace Terminal
                 }
             }
             btnNew.Enabled = true;
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            lock (_rtbLock)
-            {
-                rtb.Copy();
-            }
         }
 
         private void StsLogfile_Click(object sender, EventArgs e)
@@ -1414,32 +1347,34 @@ namespace Terminal
         }
         private void LblProfileName_Click(object sender, EventArgs e)
         {
-            BtnProfileSelect_Click(sender, e);
+            //BtnProfileSelect_Click(sender, e);
         }
 
         private void BtnExport_Click(object sender, EventArgs e)
         {
             btnExport.Enabled = false;
             {
-                bool initFreeze = cbFreeze.Checked;
+                bool initFreeze = _frozen;
                 if (!initFreeze)
-                    cbFreeze.Checked = true;
+                    Freeze();
 
                 if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
                 {
                     try
                     {
                         string fname = saveFileDialog.FileName;
-                        lock (_rtbLock)
-                        {
-                            if (fname.ToLower().EndsWith(".rtf"))
-                                rtb.SaveFile(saveFileDialog.FileName);
-                            else
-                            {
-                                string[] lines = rtb.Lines;
-                                File.WriteAllLines(fname, lines);
-                            }
-                        }
+
+                        AssemblyInfo info = new AssemblyInfo();
+                        string text = $"\r\n";
+                        text += $"# -----------------------------------------------------\r\n";
+                        text += $"# {info.Title} - v{info.AssemblyVersion} - {info.Copyright}\r\n";
+                        text += $"# {DateTime.Now}\r\n";
+                        text += $"# -----------------------------------------------------\r\n";
+                        text += $"\r\n";
+                        for (int i = 0; i < lbInput.Items.Count; i++)
+                            text += lbInput.Items[i].ToString() + "\r\n";
+                        File.WriteAllText(fname, text);
+
                         MessageBox.Show("The buffer has been exported to file", "Buffer Exported", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch
@@ -1449,7 +1384,7 @@ namespace Terminal
                 }
 
                 if (!initFreeze)
-                    cbFreeze.Checked = false;
+                    UnFreeze();
             }
             btnExport.Enabled = true;
         }
@@ -1457,35 +1392,6 @@ namespace Terminal
         private void DgMacroTable_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dgMacroTable.ClearSelection();
-        }
-
-        private void Rtb_MouseClick(object sender, MouseEventArgs e)
-        {
-            string line = string.Empty;
-            lock (_rtbLock)
-            {
-                if (rtb.SelectionLength > 0)
-                    return;
-                if (rtb.Lines.Length == 0)
-                    return;
-
-                line = rtb.Lines[rtb.GetLineFromCharIndex(rtb.SelectionStart)];
-            }
-            if (Utils.HasTimestamp(line))
-            {
-                int i = line.IndexOf(": ");
-                tbCommand.Text = line.Substring(i + 2);
-            }
-            else
-                tbCommand.Text = line;
-            tbCommand.Focus();
-        }
-
-        private void CbFreeze_MouseDown(object sender, MouseEventArgs e)
-        {
-            bool newState = !cbFreeze.Checked;
-            cbFreeze.Checked = newState;
-            Application.DoEvents();
         }
 
         private void PdPort_SelectedValueChanged(object sender, EventArgs e)
@@ -1570,16 +1476,6 @@ namespace Terminal
             btnPauseFile.Enabled = true;
         }
 
-        private void Rtb_VScroll(object sender, EventArgs e)
-        {
-            try
-            {
-                _stopColoring = false;
-                this.Invoke(this.ColoringInstance);
-            }
-            catch { }
-        }
-
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -1601,7 +1497,6 @@ namespace Terminal
                     _uiInputQueue.Clear();
                 }
 
-                _colorSemaphore.Set();
                 for (int t = 0; t < _macroThread.Length; t++)
                     _macroTrigger[t].Set();
                 Thread.Sleep(20);
@@ -1622,17 +1517,149 @@ namespace Terminal
             }
             catch { }
         }
-    }
-    public static class RichTextBoxExtensions
-    {
-        public static void AppendText(this RichTextBox box, string text, Color color)
-        {
-            box.SelectionStart = box.TextLength;
-            box.SelectionLength = 0;
 
-            box.SelectionColor = color;
-            box.AppendText(text);
-            box.SelectionColor = box.ForeColor;
+        private void lbInput_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+                return;
+
+            string str = lbInput.Items[e.Index].ToString();
+
+            int offset = 0;
+            if (Utils.HasTimestamp(str))
+                offset += Utils.TimestampLength();
+
+            e.DrawBackground();
+            Graphics g = e.Graphics;
+
+            int filter = FindApplicableFilter(str, offset);
+            if (filter >= 0)
+            {
+                g.FillRectangle(_filterBackBrush[filter], e.Bounds);
+                e.Graphics.DrawString(str.Substring(Math.Min(hScrollBar.Value, str.Length)), e.Font, _filterFrontBrush[filter], e.Bounds, StringFormat.GenericDefault);
+            }
+            else
+            {
+                g.FillRectangle(_inputBackBrush, e.Bounds);
+                e.Graphics.DrawString(str.Substring(Math.Min(hScrollBar.Value, str.Length)), e.Font, _inputDefaultFrontBrush, e.Bounds, StringFormat.GenericDefault);
+            }
+        }
+
+        private void lbOutput_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+                return;
+
+            e.DrawBackground();
+            Graphics g = e.Graphics;
+            g.FillRectangle(_outputBackBrush, e.Bounds);
+            e.Graphics.DrawString(lbOutput.Items[e.Index].ToString(), e.Font, _outputFrontBrush, e.Bounds, StringFormat.GenericDefault);
+        }
+        private void lbInput_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lbInput.SelectedIndex < 0)
+                return;
+
+            string line = lbInput.SelectedItem.ToString();
+            if (Utils.HasTimestamp(line))
+            {
+                int i = line.IndexOf(": ");
+                tbCommand.Text = line.Substring(i + 2);
+            }
+            else
+                tbCommand.Text = line;
+            tbCommand.Focus();
+        }
+
+        private void lbInput_Resize(object sender, EventArgs e)
+        {
+            lbInput.TopIndex = lbInput.Items.Count - 1;
+        }
+
+        private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            stsColumnStart.Text = $"  x:{hScrollBar.Value}  ";
+            lbInput.Refresh();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            SetSearchText(string.Empty);
+            DialogResult rc = search.ShowDialog();
+            if (rc == DialogResult.OK)
+            {
+                int line = -1;
+                for (int i = lbInput.Items.Count - 1; i > 0; i--)
+                {
+                    if (search.IgnoreCase.Checked)
+                    {
+                        if (lbInput.Items[i].ToString().ToLower().Contains(search.SearchText.Text.ToLower()))
+                        {
+                            line = i;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (lbInput.Items[i].ToString().Contains(search.SearchText.Text))
+                        {
+                            line = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (line > -1)
+                {
+                    SetSearchText(search.SearchText.Text);
+
+                    if (line > 5)
+                        lbInput.TopIndex = line - 5;
+                    else
+                        lbInput.TopIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("Not found", "String \"" + search.SearchText.Text + "\"", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+    }
+    internal class FlickerFreeListBox : System.Windows.Forms.ListBox
+    {
+        public FlickerFreeListBox()
+        {
+            this.SetStyle(
+                ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.ResizeRedraw |
+                ControlStyles.UserPaint,
+                true);
+            this.DrawMode = DrawMode.OwnerDrawFixed;
+        }
+        protected override void OnDrawItem(DrawItemEventArgs e)
+        {
+            base.OnDrawItem(e); // owner draw only
+        }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Region iRegion = new Region(e.ClipRectangle);
+            e.Graphics.FillRegion(new SolidBrush(this.BackColor), iRegion);
+            if (this.Items.Count > 0)
+            {
+                for (int i = 0; i < this.Items.Count; ++i)
+                {
+                    System.Drawing.Rectangle irect = this.GetItemRectangle(i);
+                    if (e.ClipRectangle.IntersectsWith(irect))
+                    {
+                        OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font,
+                            irect, i,
+                            DrawItemState.Default, this.ForeColor,
+                            this.BackColor));
+                        iRegion.Complement(irect);
+                    }
+                }
+            }
+            base.OnPaint(e);
         }
     }
 }

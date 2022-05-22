@@ -10,6 +10,7 @@ namespace Terminal
     {
         private enum FSection { None, Profile, Connections, Macros };
         private static readonly string _directory = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2";
+        private const int SEARCH_INDEX = 11;
 
         public static void Initialise()
         {
@@ -154,6 +155,10 @@ namespace Terminal
         }
         public static bool SaveProfile(Profile profile, string filename)
         {
+            // search string is special case
+            profile.displayOptions.filter[SEARCH_INDEX].text = String.Empty;
+            profile.displayOptions.filter[SEARCH_INDEX].mode = 1;
+
             try
             {
                 AssemblyInfo info = new AssemblyInfo();
@@ -195,7 +200,7 @@ namespace Terminal
 
                 data += $"# Input panel colours\n";
                 data += $"InBackColor={profile.displayOptions.inputBackground.ToArgb()}\n";
-                data += $"InTextColor={profile.displayOptions.inputText.ToArgb()}\n";
+                data += $"InTextColor={profile.displayOptions.inputDefaultForeground.ToArgb()}\n";
 
                 data += $"# Output panel colours\n";
                 data += $"OutBackColor={profile.displayOptions.outputBackground.ToArgb()}\n";
@@ -207,8 +212,8 @@ namespace Terminal
                     {
                         data += $"F{i}Mode={profile.displayOptions.filter[i].mode}\n";
                         data += $"F{i}Text={profile.displayOptions.filter[i].text}\n";
-                        data += $"F{i}Color={profile.displayOptions.filter[i].color.ToArgb()}\n";
-                        data += $"F{i}Freeze={profile.displayOptions.filter[i].freeze}\n";
+                        data += $"F{i}Color={profile.displayOptions.filter[i].foreColor.ToArgb()}\n";
+                        data += $"F{i}Back={profile.displayOptions.filter[i].backColor.ToArgb()}\n";
                     }
                 }
 
@@ -397,7 +402,7 @@ namespace Terminal
                         }
                         else if (line.StartsWith("InTextColor="))
                         {
-                            profile.displayOptions.inputText = Color.FromArgb(Utils.Int(line.Substring(12)));
+                            profile.displayOptions.inputDefaultForeground = Color.FromArgb(Utils.Int(line.Substring(12)));
                         }
                         else if (line.StartsWith("OutBackColor="))
                         {
@@ -430,13 +435,13 @@ namespace Terminal
                                 key = $"F{i}Color=";
                                 if (line.StartsWith(key))
                                 {
-                                    profile.displayOptions.filter[i].color = Color.FromArgb(Utils.Int(line.Substring(key.Length)));
+                                    profile.displayOptions.filter[i].foreColor = Color.FromArgb(Utils.Int(line.Substring(key.Length)));
                                 }
 
-                                key = $"F{i}Freeze=";
+                                key = $"F{i}Back=";
                                 if (line.StartsWith(key))
                                 {
-                                    profile.displayOptions.filter[i].freeze = line.Contains("True");
+                                    profile.displayOptions.filter[i].backColor = Color.FromArgb(Utils.Int(line.Substring(key.Length)));
                                 }
                             }
                         }

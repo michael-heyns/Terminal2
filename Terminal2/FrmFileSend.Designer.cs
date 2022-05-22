@@ -29,6 +29,7 @@ namespace Terminal
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFileSend));
             this.label1 = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -49,7 +50,7 @@ namespace Terminal
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(161, 23);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 16);
+            this.label1.Size = new System.Drawing.Size(73, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Send File";
             // 
@@ -172,6 +173,7 @@ namespace Terminal
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmFileSend";

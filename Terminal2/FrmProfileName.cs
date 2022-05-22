@@ -15,27 +15,36 @@ namespace Terminal
         private string _name;
 
         public string NewName { get { return _name; } }
-        public FrmProfileName(string srcname, string title)
+        public FrmProfileName(string str, string title)
         {
             InitializeComponent();
-            lblTitle.Text = title;
-            lblSourceName.Text = srcname;
-            _name = srcname;
-            tbSessionName.Text = srcname;
+            lblBigHeading.Text = title;
+            lblSmallHeading.Text = str;
+            _name = str;
+            tbEditString.Text = str;
+        }
+
+        public FrmProfileName(string str, string title, string heading)
+        {
+            InitializeComponent();
+            lblBigHeading.Text = title;
+            lblSmallHeading.Text = heading;
+            _name = str;
+            tbEditString.Text = str;
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
-            _name = tbSessionName.Text;
+            _name = tbEditString.Text;
             Close();
         }
 
-        private void TbSessionName_TextChanged(object sender, EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            btnApply.Enabled = (tbSessionName.Text.Length > 0);
+            btnApply.Enabled = (tbEditString.Text.Length > 0);
         }
 
-        private void TbSessionName_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && btnApply.Enabled)
                 BtnApply_Click(sender, e);

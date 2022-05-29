@@ -147,7 +147,14 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.1.0.0
+    <value>v1.2.0.0
+    * Recoded handling of CR-LF
+    * Removed max line option - fixed at 100k lines
+
+v1.1.0.1
+    * Search option now also works when disconnected
+
+v1.1.0.0
     * Major redesign of the display. No longer using RichTextBox.  Now using FlickerFree ListBox
     * See Help for shortcuts
     
@@ -204,6 +211,7 @@ v1.0.2.0
 
 v1.0.1.1
     * Added "Clear" checkbox.  When checked, will clear the command line when ENTER is pressed.
+    * Able to import old .TMF files
 
 v1.0.1.0
     * Added fine-tuning options and history

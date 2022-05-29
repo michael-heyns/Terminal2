@@ -32,138 +32,124 @@ namespace Terminal
         private Thread _serialThread = null;
         private static int _localThreadCount = 0;
 
-        private bool _ignoreNextLF = false;
+        private bool _halfCRLF = false;
         private bool _showTimestamp = false;
         private int _hexColumn = 0;
+        private string _embelished;
 
         private void Enqueue(string str)
         {
-            string embelished = string.Empty;
+            _embelished = string.Empty;
 
-            foreach (char c in str)
+            // only HEX
+            if (!_embellishments.ShowASCII && _embellishments.ShowHEX)
             {
-                if (c == '\r')
+                foreach (char c in str)
                 {
-                    if (_embellishments.ShowASCII)
+                    if (_hexColumn == 0 && _embellishments.ShowTimestamp)
+                        _embelished += Utils.Timestamp();
+
+                    byte b = Convert.ToByte(c);
+                    _embelished += $"{b:X2} ";
+
+                    _hexColumn++;
+                    if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
                     {
-                        if (_showTimestamp)
-                        {
-                            embelished += Utils.Timestamp();
-                            _showTimestamp = false;
-                        }
-
-                        if (_embellishments.ShowCR)
-                            embelished += "{CR}";
-
-                        embelished += "\n";
+                        _embelished += " - ";
                     }
-
-                    if (_embellishments.ShowHEX)
+                    else if (_hexColumn == 32)
                     {
-                        if (!_embellishments.ShowASCII && _hexColumn == 0)
-                            embelished += Utils.Timestamp();
-
-                        byte b = Convert.ToByte(c);
-                        embelished += $"{b:X2} ";
-
-                        if (!_embellishments.ShowASCII)
-                        {
-                            _hexColumn++;
-                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
-                            {
-                                embelished += " - ";
-                            }
-                            else if (_hexColumn == 32)
-                            {
-                                embelished += "\n";
-                                _hexColumn = 0;
-                            }
-                        }
+                        _embelished += "\n";
+                        _hexColumn = 0;
                     }
-
-                    _ignoreNextLF = true;
-
-                    if (_embellishments.ShowTimestamp)
-                        _showTimestamp = true;
                 }
-                else if (c == '\n')
-                {
-                    if (_embellishments.ShowASCII && _embellishments.ShowLF)
-                        embelished += "{LF}";
+            }
 
-                    if (!_ignoreNextLF)
+            // ASCI with or without HEX
+            else
+            {
+                foreach (char c in str)
+                {
+                    // if we did not complete the previous CRLF, do it now
+                    if (_halfCRLF)
                     {
-                        if (_embellishments.ShowASCII)
+                        switch (c)
                         {
-                            if (_showTimestamp)
-                            {
-                                embelished += Utils.Timestamp();
+                            case '\n':
                                 _showTimestamp = false;
-                            }
-                            embelished += "\n";
-                        }
-                    }
-                    if (_embellishments.ShowHEX)
-                    {
-                        if (!_embellishments.ShowASCII && _hexColumn == 0)
-                            embelished += Utils.Timestamp();
+                                break;
 
-                        byte b = Convert.ToByte(c);
-                        embelished += $"{b:X2} ";
-
-                        if (!_embellishments.ShowASCII)
-                        {
-                            _hexColumn++;
-                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
-                            {
-                                embelished += " - ";
-                            }
-                            else if (_hexColumn == 32)
-                            {
-                                embelished += "\n";
-                                _hexColumn = 0;
-                            }
+                            default:
+                                // it was NOT a CR-LF sequence - so treat it as an EOL
+                                _embelished += "\n";
+                                if (_embellishments.ShowTimestamp)
+                                    _showTimestamp = true;
+                                break;
                         }
+                        _halfCRLF = false;
                     }
-                    _ignoreNextLF = false;
-                }
-                else
-                {
-                    if (_embellishments.ShowASCII && _showTimestamp)
+
+                    // add timestamp
+                    if (_showTimestamp)
                     {
-                        embelished += Utils.Timestamp();
+                        _embelished += Utils.Timestamp();
                         _showTimestamp = false;
                     }
 
-                    if (_embellishments.ShowASCII)
-                        embelished += c;
-
-                    if (_embellishments.ShowHEX)
+                    // deal with CR only
+                    switch (c)
                     {
-                        if (!_embellishments.ShowASCII && _hexColumn == 0)
-                            embelished += Utils.Timestamp();
+                        case '\r':
+                            // add the ASCII version of the character
+                            if (_embellishments.ShowCR)
+                                _embelished += "{CR}";
 
-                        byte b = Convert.ToByte(c);
-                        embelished += $"{b:X2} ";
+                            // add the HEX version of the character
+                            if (_embellishments.ShowHEX)
+                            {
+                                byte b = Convert.ToByte(c);
+                                _embelished += $"{b:X2} ";
+                            }
 
-                        if (!_embellishments.ShowASCII)
-                        {
-                            _hexColumn++;
-                            if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
+                            _halfCRLF = true;
+                            break;
+
+                        case '\n':
+                            // add the ASCII version of the character
+                            if (_embellishments.ShowLF)
+                                _embelished += "{LF}";
+
+                            // add the HEX version of the character
+                            if (_embellishments.ShowHEX)
                             {
-                                embelished += " - ";
+                                byte b = Convert.ToByte(c);
+                                _embelished += $"{b:X2} ";
                             }
-                            else if (_hexColumn == 32)
+
+                            _embelished += "\n";
+                            _halfCRLF = false;
+                            if (_embellishments.ShowTimestamp)
+                                _showTimestamp = true;
+                            break;
+
+                        default:
+                            // add the ASCII version of the character
+                            _embelished += c;
+
+                            // add the HEX version of the character
+                            if (_embellishments.ShowHEX)
                             {
-                                embelished += "\n";
-                                _hexColumn = 0;
+                                byte b = Convert.ToByte(c);
+                                _embelished += $"{b:X2} ";
                             }
-                        }
+
+                            // back to normal
+                            _halfCRLF = false;
+                            break;
                     }
-                    _ignoreNextLF = false;
                 }
             }
-            _inputQueue.Enqueue(embelished);
+            _inputQueue.Enqueue(_embelished);
         }
 
         private void SerialReaderThread()
@@ -235,6 +221,7 @@ namespace Terminal
         public void SetEmbellishments(Embellishments embellishments)
         {
             _embellishments = embellishments;
+            _showTimestamp = _embellishments.ShowTimestamp;
         }
 
         private enum CommType
@@ -243,6 +230,11 @@ namespace Terminal
         public string ConnectionString
         {
             get { return _connectionString; }
+        }
+
+        public void ResetHexColumn()
+        {
+            _hexColumn = 0;
         }
         public bool Connect(Profile profile)
         {

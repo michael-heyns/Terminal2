@@ -56,9 +56,6 @@ namespace Terminal
                 SampleList[i].ForeColor = Options.filter[i].foreColor;
                 SampleList[i].BackColor = Options.filter[i].backColor;
             }
-
-            tbMaxLines.Text = Options.maxLines.ToString();
-            tbXtraLinesToRemove.Text = Options.cutXtraLines.ToString();
         }
 
         private void Config_Load(object sender, EventArgs e)
@@ -72,9 +69,6 @@ namespace Terminal
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
-            LimitBufferSizes();
-            Options.maxLines = Utils.Int(tbMaxLines.Text);
-            Options.cutXtraLines = Utils.Int(tbXtraLinesToRemove.Text);
             Result = DialogResult.OK;
             Close();
         }
@@ -235,56 +229,8 @@ namespace Terminal
             Options.filter[10].text = "ERROR";
 
             RefreshScreenFromDatabase();
-
-            if (Utils.Int(tbMaxLines.Text) != 2000 || Utils.Int(tbXtraLinesToRemove.Text) != 500)
-            {
-                yn = MessageBox.Show("Do you want to reset the maximum line count as well?", "Reset buffer sizes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (yn == DialogResult.Yes)
-                    BtnFTReset_Click(sender, e);
-            }
         }
 
-        private void BtnFTReset_Click(object sender, EventArgs e)
-        {
-            tbMaxLines.Text = "2000";
-            tbXtraLinesToRemove.Text = "500";
-
-            Options.maxLines = Utils.Int(tbMaxLines.Text);
-            Options.cutXtraLines = Utils.Int(tbXtraLinesToRemove.Text);
-        }
-        private void LimitBufferSizes()
-        {
-            int v = Utils.Int(tbMaxLines.Text);
-            if (v < 10)
-                tbMaxLines.Text = "10";
-            else if (v > 10000)
-                tbMaxLines.Text = "10000";
-
-            v = Utils.Int(tbXtraLinesToRemove.Text);
-            if (v < 0)
-                tbXtraLinesToRemove.Text = "0";
-            else if (v > 10000)
-                tbXtraLinesToRemove.Text = "10000";
-        }
-
-        private void TbMaxBufSize_Leave(object sender, EventArgs e)
-        {
-            LimitBufferSizes();
-        }
-
-        private void TbCutSize_Leave(object sender, EventArgs e)
-        {
-            LimitBufferSizes();
-        }
-
-        private void TbFreezeSize_Leave(object sender, EventArgs e)
-        {
-            LimitBufferSizes();
-        }
-        private void TextBox2_Leave(object sender, EventArgs e)
-        {
-            LimitBufferSizes();
-        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)

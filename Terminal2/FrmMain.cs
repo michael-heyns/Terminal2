@@ -13,6 +13,9 @@ namespace Terminal
 {
     public partial class FrmMain : Form
     {
+        private const int MAX_INPUT_LINE_COUNT = 100000;
+        private const int MAX_OUTPUT_LINE_COUNT = 1000;
+
         public delegate void EnqueuedDelegate();
         public EnqueuedDelegate UIInputQHandlerInstance;
         private readonly EventQueue _uiInputQueue = null;
@@ -73,6 +76,7 @@ namespace Terminal
         private Brush _outputFrontBrush;
         private Brush _outputBackBrush;
 
+        private bool _lineFinished = true;
 
         // ==============================================
         private void SetSearchText(string str)
@@ -114,7 +118,7 @@ namespace Terminal
 
         private void UpdateLineCounter()
         {
-            stsLineCount.Text = $"  {lbInput.Items.Count}  ";
+            stsLineCount.Text = lbInput.Items.Count.ToString();
         }
 
         private void UIInputQueueHandler()
@@ -126,43 +130,48 @@ namespace Terminal
 
                 if (!_frozen)
                 {
-                    string[] delim = { "\n" };
-                    string[] lines = str.Split(delim, StringSplitOptions.RemoveEmptyEntries);
+                    char[] delim = { '\n' };
+                    string[] lines = str.Split(delim);
 
-                    lbInput.BeginUpdate();
-                    if (lines.Length == 0)
+                    int start = 0;
+                    if (!_lineFinished)
                     {
+                        lbInput.BeginUpdate();
+                        lbInput.Items[lbInput.Items.Count - 1] += lines[0];
+                        lbInput.EndUpdate();
+                        start = 1;
+                    }
 
-                        if (lbInput.Items.Count >= _activeProfile.displayOptions.maxLines)
+                    if (str.EndsWith("\n"))
+                    {
+                        lbInput.BeginUpdate();
+                        {
+                            for (int i = start; i < lines.Length - 1; i++)
+                                lbInput.Items.Add(lines[i]);
+                        }
+
+                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
                             lbInput.Items.RemoveAt(0);
 
-                        // we only received a single "\n"
-                        lbInput.Items.Add(string.Empty);
-                        _lbInputAppend = true;
-                        lbInput.TopIndex = lbInput.Items.Count - 1;
+                        lbInput.EndUpdate();
+                        _lineFinished = true;
                     }
                     else
                     {
-                        if (_lbInputAppend)
+                        lbInput.BeginUpdate();
                         {
-                            lbInput.Items[lbInput.Items.Count - 1] = lbInput.Items[lbInput.Items.Count - 1] + lines[0];
-                            for (int i = 1; i < lines.Length; i++)
-                                lbInput.Items.Add(lines[i]);
-                            _lbInputAppend = false;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < lines.Length; i++)
+                            for (int i = start; i < lines.Length; i++)
                                 lbInput.Items.Add(lines[i]);
                         }
-                        while (lbInput.Items.Count >= _activeProfile.displayOptions.maxLines)
+
+                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
                             lbInput.Items.RemoveAt(0);
 
-                        lbInput.TopIndex = lbInput.Items.Count - 1;
-                        if (!str.EndsWith("\n"))
-                            _lbInputAppend = true;
+                        lbInput.EndUpdate();
+                        _lineFinished = false;
                     }
-                    lbInput.EndUpdate();
+
+                    lbInput.TopIndex = lbInput.Items.Count - 1;
                     UpdateLineCounter();
                 }
             }
@@ -173,17 +182,20 @@ namespace Terminal
             {
                 string str = (string)_uiOutputQueue.Dequeue();
                 string tm = Utils.Timestamp();
-                if (_activeProfile.displayOptions.timestampOutputLines)
-                    lbOutput.Items.Add(tm + str);
-                else
-                    lbOutput.Items.Add(str);
-
-                while (lbOutput.Items.Count > _activeProfile.displayOptions.maxLines)
-                    lbOutput.Items.RemoveAt(0);
-
                 Log.Add("\r\n----> Tx: " + tm + str + "\r\n");
-                lbOutput.TopIndex = lbOutput.Items.Count - 1;
-                Application.DoEvents();
+
+                lbOutput.BeginUpdate();
+                {
+                    if (_activeProfile.displayOptions.timestampOutputLines)
+                        lbOutput.Items.Add(tm + str);
+                    else
+                        lbOutput.Items.Add(str);
+
+                    while (lbOutput.Items.Count > MAX_OUTPUT_LINE_COUNT)
+                        lbOutput.Items.RemoveAt(0);
+                    lbOutput.TopIndex = lbOutput.Items.Count - 1;
+                }
+                lbOutput.EndUpdate();
             }
         }
 
@@ -209,7 +221,7 @@ namespace Terminal
             dgMacroTable.Rows[3].Cells[0].Value = "Ctrl+";
             dgMacroTable.Rows[4].Cells[0].Value = "Alt+";
             dgMacroTable.ClearSelection();
-            stsLogfile.Text = string.Empty;
+            stsLogfile.Text = "----";
 
             UIInputQHandlerInstance = new EnqueuedDelegate(UIInputQueueHandler);
             _uiInputQueue = new EventQueue(this, UIInputQHandlerInstance);
@@ -288,7 +300,6 @@ namespace Terminal
                     }
                 }
             }
-            stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             btnColorConfig.Enabled = true;
             lbInput.Refresh();
             lbOutput.Refresh();
@@ -329,6 +340,7 @@ namespace Terminal
                 pdPort.Enabled = false;
                 lblProfileName.Enabled = false;
                 btnProfileSelect.Enabled = false;
+                btnSearch.Enabled = false;
 
                 _threadDone = false;
                 _connectThread = new Thread(new ThreadStart(ConnectionThread));
@@ -348,6 +360,7 @@ namespace Terminal
                     lblProfileName.Enabled = false;
                     btnProfileSelect.Enabled = false;
                     btnFile.Enabled = true;
+                    btnSearch.Enabled = false;
                     btnConnect.BackColor = Color.Lime;
 
                     Log.Add(Utils.Timestamp() + "{CONNECTED}");
@@ -382,6 +395,7 @@ namespace Terminal
             lblProfileName.Enabled = true;
             btnProfileSelect.Enabled = true;
             btnFile.Enabled = false;
+            btnSearch.Enabled = true;
             Application.DoEvents();
 
             RestartAllMacros();
@@ -554,6 +568,7 @@ namespace Terminal
         }
         private void CbASCII_CheckedChanged(object sender, EventArgs e)
         {
+            _comms.ResetHexColumn();
             if (!cbASCII.Checked && !cbHEX.Checked)
                 cbHEX.Checked = true;
             _activeProfile.embellishments.ShowASCII = cbASCII.Checked;
@@ -562,6 +577,7 @@ namespace Terminal
         }
         private void CbHEX_CheckedChanged(object sender, EventArgs e)
         {
+            _comms.ResetHexColumn();
             if (!cbASCII.Checked && !cbHEX.Checked)
                 cbASCII.Checked = true;
             _activeProfile.embellishments.ShowHEX = cbHEX.Checked;
@@ -735,6 +751,7 @@ namespace Terminal
                 };
                 _macroThread[t].Start();
             }
+            lbInput.Items.Add(string.Empty);
         }
 
         private void DoMacro(int m)
@@ -924,7 +941,6 @@ namespace Terminal
                 }
                 RefreshPortPulldown();
                 _comms.SetEmbellishments(_activeProfile.embellishments);
-                stsMaxSize.Text = $"  Max: {_activeProfile.displayOptions.maxLines} lines  ";
             }
         }
         private void TbCommand_KeyDown(object sender, KeyEventArgs e)
@@ -1295,13 +1311,13 @@ namespace Terminal
         {
             btnNew.Enabled = false;
             {
-                string heading = "(The \"Default\" profile is used as base)";
+                string heading = "Give a descriptive name for the new profile";
                 FrmProfileName askname = new FrmProfileName("MyProfile", "Add a New Profile", heading);
                 DialogResult rc = askname.ShowDialog();
                 if (rc == DialogResult.OK)
                 {
                     if (!Database.Find(askname.NewName))
-                        Database.Copy("Default", askname.NewName);
+                        Database.NewProfile(askname.NewName);
 
                     try
                     {
@@ -1578,12 +1594,15 @@ namespace Terminal
 
         private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
-            stsColumnStart.Text = $"  x:{hScrollBar.Value}  ";
+            stsColumnStart.Text = hScrollBar.Value.ToString();
             lbInput.Refresh();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            if (lbInput.Items.Count == 0)
+                return;
+
             SetSearchText(string.Empty);
             DialogResult rc = search.ShowDialog();
             if (rc == DialogResult.OK)

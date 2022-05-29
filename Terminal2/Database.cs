@@ -2,7 +2,11 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
+using System.Xml.Linq;
+
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Terminal
 {
@@ -107,9 +111,57 @@ namespace Terminal
                     MessageBox.Show($"The profile '{name}' already exists", "Duplicate Profile", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
-                else if (File.Exists(fullpath))
+                else
                 {
-                    File.Copy(fullpath, dstf);
+                    if (fullpath.ToLower().EndsWith(".tmf"))
+                    {
+                        Database.NewProfile(name);
+                        string[] lines = File.ReadAllLines(fullpath);
+                        if (!lines[0].StartsWith("# Terminal macro file v2"))
+                        {
+                            MessageBox.Show($"The TMF file is not valid", "Invalid File Format", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+
+                        string data = "\n";
+                        int number = 0;
+                        for (int i = 1; i < lines.Length; i += 2)
+                        {
+                            string title = lines[i];
+                            if (i < lines.Length - 1)
+                            {
+                                string macro = lines[i + 1];
+
+                                data += $"[{number++}]\n";
+                                data += $"Title={title}\n";
+                                data += "ICD=0\n";
+                                data += "ILD=0\n";
+                                data += "RepeatON=False\n";
+                                data += "Delta=0\n";
+                                data += "Repeats=0\n";
+                                if (macro.EndsWith("$0D"))
+                                {
+                                    data += $"Text={macro.Substring(0, macro.Length - 3)}\n";
+                                    data += "AddCR=True\n";
+                                }
+                                else
+                                {
+                                    data += $"Text={macro}\n";
+                                    data += "AddCR=False\n";
+                                }
+                                data += "AddLF=False\n";
+
+                                string filename = _directory + $"\\{name}.profile";
+                                File.AppendAllText(filename, data);
+                            }
+                        }
+                        string currentExecutable = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                        System.Diagnostics.Process.Start(currentExecutable, "\"" + name + "\"");
+                    }
+                    else if (File.Exists(fullpath))
+                    {
+                        File.Copy(fullpath, dstf);
+                    }
                     return true;
                 }
             }
@@ -153,6 +205,112 @@ namespace Terminal
             string filename = _directory + $"\\{profile.name}.profile";
             return SaveProfile(profile, filename);
         }
+
+        public static bool NewProfile(string name)
+        {
+            try
+            {
+                string data = string.Empty;
+                data += "# -----------------------------------------------------\n";
+                data += "# Terminal2 - Copyright ©2022 Michael Heyns\n";
+                data += $"# New profile for {name}\n";
+                data += "# -----------------------------------------------------\n";
+                data += "\n";
+                data += "[Profile]\n";
+                data += $"Name={name}\n";
+                data += "SendCR=True\n";
+                data += "SendLF=False\n";
+                data += "ClearCMD=False\n";
+                data += "OnTop=False\n";
+                data += "TimeOutput=True\n";
+                data += "MaxLines=2000\n";
+                data += "CutLines=500\n";
+                data += "ShowCR=False\n";
+                data += "ShowLF=False\n";
+                data += "ShowASCII=True\n";
+                data += "ShowHEX=False\n";
+                data += "TimeInput=True\n";
+                data += "LogDir=C:\\Temp\n";
+                data += "LogPrefix=Default_\n";
+                data += "OutFont=Courier New, 8.25pt\n";
+                data += "InFont=Courier New, 11.25pt\n";
+                data += "# Input panel colours\n";
+                data += "InBackColor=-1\n";
+                data += "InTextColor=-16777216\n";
+                data += "# Output panel colours\n";
+                data += "OutBackColor=-2302756\n";
+                data += "# Color filters\n";
+                data += "F0Mode=1\n";
+                data += "F0Text=\n";
+                data += "F0Color=-29696\n";
+                data += "F0Back=-1\n";
+                data += "F1Mode=1\n";
+                data += "F1Text=\n";
+                data += "F1Color=-16776961\n";
+                data += "F1Back=-1\n";
+                data += "F2Mode=1\n";
+                data += "F2Text=\n";
+                data += "F2Color=-16728064\n";
+                data += "F2Back=-1\n";
+                data += "F3Mode=1\n";
+                data += "F3Text=\n";
+                data += "F3Color=-16751616\n";
+                data += "F3Back=-1\n";
+                data += "F4Mode=1\n";
+                data += "F4Text=\n";
+                data += "F4Color=-65281\n";
+                data += "F4Back=-1\n";
+                data += "F5Mode=1\n";
+                data += "F5Text=\n";
+                data += "F5Color=-8355840\n";
+                data += "F5Back=-1\n";
+                data += "F6Mode=1\n";
+                data += "F6Text=\n";
+                data += "F6Color=-4194112\n";
+                data += "F6Back=-1\n";
+                data += "F7Mode=1\n";
+                data += "F7Text=\n";
+                data += "F7Color=-16744448\n";
+                data += "F7Back=-1\n";
+                data += "F8Mode=1\n";
+                data += "F8Text=\n";
+                data += "F8Color=-16727872\n";
+                data += "F8Back=-1\n";
+                data += "F9Mode=1\n";
+                data += "F9Text=\n";
+                data += "F9Color=-24454\n";
+                data += "F9Back=-1\n";
+                data += "F10Mode=1\n";
+                data += "F10Text=ERROR\n";
+                data += "F10Color=-256\n";
+                data += "F10Back=-65536\n";
+                data += "F11Mode=1\n";
+                data += "F11Text=\n";
+                data += "F11Color=-16777216\n";
+                data += "F11Back=-16711936\n";
+                data += "\n";
+                data += "[Connect]\n";
+                data += "Type=TCPServer\n";
+                data += "Serial=COM1\n";
+                data += "Baudrate=115200\n";
+                data += "DataBits=8\n";
+                data += "Handshaking=None\n";
+                data += "Parity=None\n";
+                data += "StopBits=1\n";
+                data += "InitialRTS=False\n";
+                data += "InitialDTR=False\n";
+                data += "TCPConnectAddress=localhost\n";
+                data += "TCPConnectPort=5000\n";
+                data += "TCPListenPort=5000\n";
+                data += "\n";
+
+                string filename = _directory + $"\\{name}.profile";
+                File.WriteAllText(filename, data);
+                return true;
+            }
+            catch { }
+            return false;
+        }
         public static bool SaveProfile(Profile profile, string filename)
         {
             // search string is special case
@@ -175,8 +333,6 @@ namespace Terminal
                 data += $"ClearCMD={profile.clearCMD}\n";
                 data += $"OnTop={profile.stayontop}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
-                data += $"MaxLines={profile.displayOptions.maxLines}\n";
-                data += $"CutLines={profile.displayOptions.cutXtraLines}\n";
 
                 data += $"ShowCR={profile.embellishments.ShowCR}\n";
                 data += $"ShowLF={profile.embellishments.ShowLF}\n";
@@ -384,14 +540,6 @@ namespace Terminal
                             }
                         }
 
-                        else if (line.StartsWith("MaxLines="))
-                        {
-                            profile.displayOptions.maxLines = Utils.Int(line.Substring(9));
-                        }
-                        else if (line.StartsWith("CutLines="))
-                        {
-                            profile.displayOptions.cutXtraLines = Utils.Int(line.Substring(9));
-                        }
                         else if (line.StartsWith("TimeOutput="))
                         {
                             profile.displayOptions.timestampOutputLines = line.Contains("True");

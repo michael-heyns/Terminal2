@@ -113,7 +113,7 @@ namespace Terminal
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
-            this.openFileDialog.Filter = "Profiles|*.profile|TXT files|*.txt|All files|*.*";
+            this.openFileDialog.Filter = "Profiles|*.profile|TMF files|*.tmf|TXT files|*.txt|All files|*.*";
             this.openFileDialog.Title = "Import a profile from file";
             // 
             // saveFileDialog

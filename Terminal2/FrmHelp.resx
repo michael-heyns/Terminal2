@@ -145,7 +145,7 @@ Rules for EOL (End-Of-Line) handling
 Rules for {CR} and {LF} embellishments
     1) xxxxx[CR]xxxxx          --&gt;     xxxxx{CR}[EOL] + xxxxx
     2) xxxxx[LF]xxxxx           --&gt;     xxxxx{LF}[EOL] + xxxxx
-    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx{CR}[EOL]{LF} + xxxxx
+    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx{CR}{LF}{EOL} + xxxxx
     
 Rules for Timestamping
     1) xxxxx[CR]xxxxx          --&gt;     xxxxx[EOL] + [Timestamp]xxxxx

@@ -114,14 +114,6 @@ namespace Terminal
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbXtraLinesToRemove = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbMaxLines = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btnFTReset = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.lblThisVersion = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -133,8 +125,6 @@ namespace Terminal
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1087,7 +1077,6 @@ namespace Terminal
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 37);
             this.tabControl1.Name = "tabControl1";
@@ -1107,89 +1096,6 @@ namespace Terminal
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors and Fonts";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(610, 537);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Fine tuning";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.tbXtraLinesToRemove);
-            this.groupBox1.Controls.Add(this.label15);
-            this.groupBox1.Controls.Add(this.tbMaxLines);
-            this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.btnFTReset);
-            this.groupBox1.Location = new System.Drawing.Point(28, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(548, 203);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parameters";
-            // 
-            // tbXtraLinesToRemove
-            // 
-            this.tbXtraLinesToRemove.Location = new System.Drawing.Point(393, 92);
-            this.tbXtraLinesToRemove.Name = "tbXtraLinesToRemove";
-            this.tbXtraLinesToRemove.Size = new System.Drawing.Size(64, 20);
-            this.tbXtraLinesToRemove.TabIndex = 15;
-            this.tbXtraLinesToRemove.Text = "500";
-            this.tbXtraLinesToRemove.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(25, 92);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(269, 13);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "Additional lines to remove when buffer is full (0 - 10000) ";
-            // 
-            // tbMaxLines
-            // 
-            this.tbMaxLines.Location = new System.Drawing.Point(393, 44);
-            this.tbMaxLines.Name = "tbMaxLines";
-            this.tbMaxLines.Size = new System.Drawing.Size(64, 20);
-            this.tbMaxLines.TabIndex = 13;
-            this.tbMaxLines.Text = "2000";
-            this.tbMaxLines.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tbMaxLines.Leave += new System.EventHandler(this.TextBox2_Leave);
-            // 
-            // label14
-            // 
-            this.label14.Location = new System.Drawing.Point(25, 44);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(300, 34);
-            this.label14.TabIndex = 12;
-            this.label14.Text = "Number of lines to keep in the display buffer (10 - 10000)\r\nFor every extra line," +
-    " one line will be removes from the start.";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(25, 147);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(305, 13);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "(Changes to these numbers take effect when this dialog closes)";
-            // 
-            // btnFTReset
-            // 
-            this.btnFTReset.Location = new System.Drawing.Point(393, 142);
-            this.btnFTReset.Name = "btnFTReset";
-            this.btnFTReset.Size = new System.Drawing.Size(64, 23);
-            this.btnFTReset.TabIndex = 10;
-            this.btnFTReset.Text = "&Reset";
-            this.btnFTReset.UseVisualStyleBackColor = true;
-            this.btnFTReset.Click += new System.EventHandler(this.BtnFTReset_Click);
             // 
             // tabPage3
             // 
@@ -1270,9 +1176,6 @@ namespace Terminal
             this.groupBox3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -1350,20 +1253,12 @@ namespace Terminal
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnFTReset;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lblThisVersion;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox tbMaxLines;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox tbXtraLinesToRemove;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel b12;
         private System.Windows.Forms.Panel b11;

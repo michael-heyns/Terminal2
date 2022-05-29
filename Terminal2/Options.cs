@@ -96,9 +96,6 @@ namespace Terminal
 
         public bool timestampOutputLines = true;
 
-        public int maxLines = 2000;
-        public int cutXtraLines = 500;
-
         public DisplayOptions()
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));

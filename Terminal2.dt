@@ -1,0 +1,2867 @@
+<?xml version="1.0" encoding="utf-16"?>
+<DevTrackerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" SolutionTotalEditTime="PT11H23M7.2715745S" SolutionTotalViewTime="PT22H27M17.2561907S" SolutionTotalDebugTime="PT33M23.640677S">
+  <FileVersion>
+    <Major>1</Major>
+    <Minor>0</Minor>
+  </FileVersion>
+  <SolutionFolder>C:\SVN\Software-Private\Terminal2-Releases</SolutionFolder>
+  <SolutionCreattionDate>2022-03-14T08:45:32.3815697+13:00</SolutionCreattionDate>
+  <ProjectsCreatedDateList>
+    <ProjectCreated>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-12T23:17:00.6257532+13:00</CreatedDate>
+    </ProjectCreated>
+    <ProjectCreated>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T14:12:48.310899+13:00</CreatedDate>
+    </ProjectCreated>
+  </ProjectsCreatedDateList>
+  <SessionTimeList />
+  <LastSessionTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT7.5698173S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-13T14:28:57.1504482+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT37.5841062S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-13T14:29:04.7212631+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+  </LastSessionTimeList>
+  <TotalTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT5M32.4234351S" EditActiveTime="PT27.0077418S">
+      <ModifiedDate>2022-03-30T22:23:31.3534041+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\App.config</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:29:57.0574547+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M17.5761475S" EditActiveTime="PT19.4508716S">
+      <ModifiedDate>2022-03-30T22:21:30.9368673+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\app.manifest</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:47:06.4004888+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26M44.8731292S" EditActiveTime="PT1M44.5185234S">
+      <ModifiedDate>2022-04-12T16:03:43.4535186+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>13</EditedCount>
+      <ViewedCount>16</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:46:57.828807+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1H46M1.1346049S" EditActiveTime="PT1H1M4.1927698S">
+      <ModifiedDate>2022-04-11T19:53:33.6445911+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>6</EditedCount>
+      <ViewedCount>11</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:52:14.3762534+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10M50.4302702S" EditActiveTime="PT6M40.4872045S">
+      <ModifiedDate>2022-04-11T23:35:20.6253347+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>6</EditedCount>
+      <ViewedCount>10</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T12:26:09.248938+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.9622136S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>DataGridView.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-10T22:10:18.8344842+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT33M23.640677S" EditActiveTime="PT6H9M17.8554576S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>10</EditedCount>
+      <ViewedCount>21</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-15T11:08:15.2326759+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7M4.1265219S" EditActiveTime="PT1M22.7201038S">
+      <ModifiedDate>2022-03-29T15:32:38.3676045+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>2</EditedCount>
+      <ViewedCount>9</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T13:13:35.569593+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8M15.7856991S" EditActiveTime="PT1M52.7963813S">
+      <ModifiedDate>2022-04-01T09:56:07.4742252+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>15</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:22.5555629+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.1825015S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmConnectOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:32:22.6407384+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2H25M29.8488616S" EditActiveTime="PT24M50.0594378S">
+      <ModifiedDate>2022-04-11T23:36:45.681314+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>17</EditedCount>
+      <ViewedCount>21</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:31.6202625+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT52.5217229S" EditActiveTime="PT0.4469641S">
+      <ModifiedDate>2022-04-10T21:05:23.7158446+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>9</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-18T21:02:33.8078119+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.7413847S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmFileSend.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:36.8205513+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24M3.4206504S" EditActiveTime="PT2M59.221226S">
+      <ModifiedDate>2022-04-04T14:07:19.9714714+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>4</EditedCount>
+      <ViewedCount>11</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-20T20:56:41.3986575+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT23.5108375S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmLogOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:45.6720018+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT29M15.9907721S" EditActiveTime="PT6M32.4968676S">
+      <ModifiedDate>2022-04-04T14:01:10.9125599+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>8</EditedCount>
+      <ViewedCount>16</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:52.5581377+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15H5M38.580181S" EditActiveTime="PT9H24M47.1414S">
+      <ModifiedDate>2022-04-12T16:03:19.4555141+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>21</EditedCount>
+      <ViewedCount>26</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:01.8158335+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17M16.5483667S" EditActiveTime="PT1M7.6505517S">
+      <ModifiedDate>2022-04-11T17:02:02.3041275+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>4</EditedCount>
+      <ViewedCount>7</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T14:09:42.5761626+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M35.9070266S" EditActiveTime="PT6.7285868S">
+      <ModifiedDate>2022-03-19T17:47:29.6233115+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>4</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileDatabase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:06.5150107+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19.2909053S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileDatabase.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:20:17.1379877+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M34.3623223S" EditActiveTime="PT1M31.3417145S">
+      <ModifiedDate>2022-03-15T11:09:48.8350699+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>4</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileName.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:17.9058196+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT22.886763S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>2</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileName.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:08:42.027947+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M45.8973025S" EditActiveTime="PT4M13.7032516S">
+      <ModifiedDate>2022-03-17T20:49:15.2264152+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>4</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Log.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T17:04:06.0158243+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT42.3750929S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Math.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-18T23:15:17.8196531+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M46.1347439S" EditActiveTime="PT3M25.4140116S">
+      <ModifiedDate>2022-04-11T23:35:45.8962012+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>5</EditedCount>
+      <ViewedCount>10</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T12:24:03.2769859+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15M14.5912181S" EditActiveTime="PT1.8939666S">
+      <ModifiedDate>2022-03-30T22:13:43.1366597+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>7</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T17:20:31.8745154+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M32.041281S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>10</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:31:11.8024613+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.4338706S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>3</ViewedCount>
+      <Item>SerialPort.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-21T20:01:09.2365428+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13M31.5477486S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>5</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:31:14.3606164+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.3365297S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>TextBoxBase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-20T16:51:04.1562366+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.7950831S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Thread.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T11:58:39.7827806+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+  </TotalTimeList>
+  <HistoryTimeList>
+    <DevTrackerDataItem ViewActiveTime="PT37.5801015S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-13T14:29:04.7212631+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7.5698173S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-13T14:28:57.1504482+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5.6976727S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-12T16:03:31.3989991+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M19.0250506S" EditActiveTime="PT17.3152485S">
+      <ModifiedDate>2022-04-12T16:03:19.4555141+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-12T16:01:55.734227+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.8360156S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-12T16:01:52.8972132+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT35.8144443S" EditActiveTime="PT3.6986851S">
+      <ModifiedDate>2022-04-12T16:03:43.4535186+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-12T16:01:41.6966211+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.9489633S" EditActiveTime="PT2.6132174S">
+      <ModifiedDate>2022-04-12T09:30:08.6765722+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-12T09:30:03.4841647+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT21.5840243S" EditActiveTime="PT16.2989768S">
+      <ModifiedDate>2022-04-12T09:29:59.4280097+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-12T09:29:25.6003777+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13.4081865S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T21:06:19.8900061+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT23.4000778S" EditActiveTime="PT1.8169474S">
+      <ModifiedDate>2022-04-11T23:35:45.8962012+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T20:29:36.2129084+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0199116S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T20:24:20.8930672+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M55.8325174S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T20:21:31.1269057+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M37.8976426S" EditActiveTime="PT59.3790151S">
+      <ModifiedDate>2022-04-11T23:36:45.681314+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T20:11:00.6240738+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.5621815S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T19:22:04.4861263+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M22.4191155S" EditActiveTime="PT27.5882262S">
+      <ModifiedDate>2022-04-11T23:35:20.6253347+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T19:20:06.5623012+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.6602085S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T19:00:11.2045366+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5M51.4573906S" EditActiveTime="PT2M42.0147624S">
+      <ModifiedDate>2022-04-11T19:53:33.6445911+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T18:01:17.5953908+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6.6664827S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T17:30:32.3679633+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT47.0580873S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T17:30:19.6261335+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M3.9380737S" EditActiveTime="PT18M4.1586875S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-11T17:29:10.7211459+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT54M24.1267291S" EditActiveTime="PT21M15.8379473S">
+      <ModifiedDate>2022-04-11T23:30:49.8502477+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T17:27:40.7766899+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT40.8691796S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T17:06:56.5285334+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT14.8652905S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T16:47:17.5567666+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.2816253S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T16:38:19.9073868+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT49.8781543S" EditActiveTime="PT11M3.1335635S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-11T15:28:47.7054419+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT50M10.1810726S" EditActiveTime="PT29M46.113534S">
+      <ModifiedDate>2022-04-11T17:26:30.8549799+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T15:20:57.5627854+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M49.3765518S" EditActiveTime="PT0.4104345S">
+      <ModifiedDate>2022-04-11T17:02:02.3041275+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-11T15:20:29.7780639+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.9622136S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>DataGridView.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-10T22:10:18.8344842+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5.4670102S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SerialPort.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-10T18:16:02.1793059+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.9417662S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T21:21:20.2471467+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT48.086724S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T21:03:26.6661958+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT42.7928273S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T17:34:33.8890043+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT21.7876026S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T16:49:08.5887564+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M41.5878679S" EditActiveTime="PT2M13.376652S">
+      <ModifiedDate>2022-04-11T10:46:46.2160149+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T15:10:25.7746386+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT43.4520643S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T15:08:34.3220232+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M29.8179394S" EditActiveTime="PT53.2621129S">
+      <ModifiedDate>2022-04-11T10:45:46.573193+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T14:59:41.3018327+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19.4991881S" EditActiveTime="PT0.4469641S">
+      <ModifiedDate>2022-04-10T21:05:23.7158446+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T14:17:04.9402496+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1H8M53.4848235S" EditActiveTime="PT20M8.3123832S">
+      <ModifiedDate>2022-04-11T10:47:11.5920198+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T14:06:01.7873051+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1H6M47.64852S" EditActiveTime="PT34M14.5173918S">
+      <ModifiedDate>2022-04-11T11:07:09.74642+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T13:51:22.3537182+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.1570028S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T13:44:06.1904618+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10M29.5208901S" EditActiveTime="PT3.0918768S">
+      <ModifiedDate>2022-04-09T20:49:50.8537621+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T13:37:04.1105685+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.8605837S" EditActiveTime="PT2H18M49.7006256S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-09T13:29:43.1265233+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3H49M33.4796201S" EditActiveTime="PT2H9M58.1837337S">
+      <ModifiedDate>2022-04-11T11:07:17.2015513+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-09T13:28:26.5287111+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT37.2081277S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T15:44:38.6676261+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12.8922365S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T15:05:36.5712677+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.2724871S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T14:39:10.1836128+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT31.2663293S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T14:10:45.2222015+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M36.7195253S" EditActiveTime="PT11M20.6885895S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-08T14:01:10.4242783+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT49M20.0811359S" EditActiveTime="PT28M57.8988582S">
+      <ModifiedDate>2022-04-08T16:13:33.9215143+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T13:59:45.5537059+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0936164S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T13:38:29.282031+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7.6930552S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T13:38:02.5025492+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M58.7776015S" EditActiveTime="PT2M39.0387546S">
+      <ModifiedDate>2022-04-08T13:43:55.6969791+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T13:37:26.3802845+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT25.9399739S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-08T11:12:48.0837748+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.8633571S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SerialPort.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-07T22:54:59.2222617+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M44.5979549S" EditActiveTime="PT1M1.5300583S">
+      <ModifiedDate>2022-04-07T23:00:43.9869142+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:54:45.1189016+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0827448S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:27:56.6360289+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M51.570827S" EditActiveTime="PT2M55.2315551S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-07T22:19:15.3799037+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0198968S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:19:11.8094802+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M58.2211961S" EditActiveTime="PT0.0598294S">
+      <ModifiedDate>2022-04-07T22:22:41.5639451+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:16:43.8772954+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M52.6225457S" EditActiveTime="PT1M46.7775924S">
+      <ModifiedDate>2022-04-07T22:54:13.6318361+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:16:43.8602918+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT38.0109163S" EditActiveTime="PT6.8737655S">
+      <ModifiedDate>2022-04-07T22:19:06.6328821+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-07T22:16:27.2225251+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.8978358S" EditActiveTime="PT3.4298275S">
+      <ModifiedDate>2022-04-05T15:36:52.8927751+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-05T15:36:47.2059841+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT33.4021574S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-05T15:28:37.056152+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.2609538S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-05T15:28:22.3142972+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT31.925822S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-05T15:28:20.7855918+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT54.8440003S" EditActiveTime="PT0.0289223S">
+      <ModifiedDate>2022-04-05T15:37:50.0886611+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-05T15:28:20.7676426+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M11.2367153S" EditActiveTime="PT1M44.6091719S">
+      <ModifiedDate>2022-04-05T15:33:41.0542811+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-05T15:28:11.7168458+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.2129413S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:08:07.8854068+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT34.767801S" EditActiveTime="PT0.0149602S">
+      <ModifiedDate>2022-04-04T14:08:35.9497745+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:08:07.368532+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.1900747S" EditActiveTime="PT0.0408911S">
+      <ModifiedDate>2022-04-04T14:07:19.9714714+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:07:10.3410045+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT30.2936836S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-04T14:03:27.949148+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M47.7408955S" EditActiveTime="PT46.9452467S">
+      <ModifiedDate>2022-04-04T14:06:58.5697217+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:03:05.8247293+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0249323S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:03:05.7988+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.1805068S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:03:05.6172957+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0209455S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:00:34.2033335+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT49.6874012S" EditActiveTime="PT0.044657S">
+      <ModifiedDate>2022-04-04T14:01:10.9125599+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T14:00:27.3066212+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.8165684S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:56:14.029512+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT18.4179746S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:55:29.6514862+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT38.9796974S" EditActiveTime="PT0.0149913S">
+      <ModifiedDate>2022-04-04T13:56:48.7319838+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:54:58.5325559+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT58.1800148S" EditActiveTime="PT0.0338774S">
+      <ModifiedDate>2022-04-04T13:56:48.7200145+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:54:57.3756724+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M4.6251602S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:59.6465213+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.5073552S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:58.1381689+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.5125054S" EditActiveTime="PT5.4160565S">
+      <ModifiedDate>2022-04-04T13:33:56.5530523+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:48.1917043+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3.3683453S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:44.8223833+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.020942S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:18.2647581+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT34.2503913S" EditActiveTime="PT0.3012158S">
+      <ModifiedDate>2022-04-04T13:35:57.5587209+12:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-04T13:33:10.4383416+12:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0309173S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T15:43:51.4277834+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M29.3281769S" EditActiveTime="PT27.954581S">
+      <ModifiedDate>2022-04-01T15:44:58.8096138+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T15:43:09.2206624+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT16.3813881S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T15:42:41.9397007+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT39.5917435S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T15:42:32.6471282+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT51.2627262S" EditActiveTime="PT7.4161996S">
+      <ModifiedDate>2022-04-01T14:40:37.60895+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T14:40:06.8516183+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0069809S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T14:37:41.3244637+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M41.1605577S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T14:37:29.4361182+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT18.5179888S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T14:36:17.2348095+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6.1216142S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T14:36:16.799334+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M57.5440819S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T14:28:23.2342834+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT53.4699776S" EditActiveTime="PT0.0169556S">
+      <ModifiedDate>2022-04-01T13:09:02.9544321+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T13:08:13.5267779+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.5552929S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T13:05:54.4175394+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3.1386481S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileName.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T13:02:51.6721118+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT42.8558542S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T13:02:10.9789173+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26.1891238S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T13:01:44.7897935+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M30.6649021S" EditActiveTime="PT2M3.0836154S">
+      <ModifiedDate>2022-04-01T13:05:50.5907181+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T13:01:21.7894382+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5.9589286S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T12:53:31.2078413+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M30.8931393S" EditActiveTime="PT2M51.3375326S">
+      <ModifiedDate>2022-04-01T12:56:03.5897662+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T12:50:26.8858963+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.9966594S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T12:17:51.1782516+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0349065S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T12:16:20.6103027+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M24.9459311S" EditActiveTime="PT29.8850537S">
+      <ModifiedDate>2022-04-01T12:18:43.7110617+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T12:16:20.4158218+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.7950831S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Thread.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T11:58:39.7827806+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.1645285S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T11:58:25.0450502+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.9032754S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:38:32.2264979+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT39.8455515S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:37:52.3799532+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT27.1825015S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmConnectOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:32:22.6407384+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.60587S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:31:59.5966971+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M23.2700362S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:31:52.5518343+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.6991376S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Log.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:14:19.4530334+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT23.0392817S" EditActiveTime="PT0.8842563S">
+      <ModifiedDate>2022-04-01T11:52:39.0417744+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T10:14:16.3525828+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24M4.1318791S" EditActiveTime="PT17M37.3083566S">
+      <ModifiedDate>2022-04-01T11:59:24.1301174+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:57:54.2574734+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M24.4245756S" EditActiveTime="PT3M46.9025462S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-04-01T09:56:23.106897+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13.6730452S" EditActiveTime="PT4.3067543S">
+      <ModifiedDate>2022-04-01T09:56:19.2054835+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:56:11.1397153+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT28.0728502S" EditActiveTime="PT1M52.7963813S">
+      <ModifiedDate>2022-04-01T09:56:07.4742252+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:53:56.9433302+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M7.9441969S" EditActiveTime="PT0.0129651S">
+      <ModifiedDate>2022-04-01T12:08:19.3197329+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:53:44.4574808+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6M6.5336957S" EditActiveTime="PT2M42.8528337S">
+      <ModifiedDate>2022-04-01T09:53:31.8151187+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:47:05.9613379+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT14.4628982S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\app.manifest</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-04-01T09:45:58.5973272+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.346132S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T22:28:16.5490713+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.6307683S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T22:26:46.6968888+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M48.4249712S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T22:26:17.5942883+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M10.6920731S" EditActiveTime="PT1.8939666S">
+      <ModifiedDate>2022-03-30T22:13:43.1366597+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T22:02:41.4251814+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M59.0437869S" EditActiveTime="PT19.4508716S">
+      <ModifiedDate>2022-03-30T22:21:30.9368673+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\app.manifest</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T21:59:15.5836488+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT51.9756364S" EditActiveTime="PT17.3146509S">
+      <ModifiedDate>2022-03-30T20:14:24.8280793+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T20:12:04.0693739+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0189189S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T19:53:22.4880713+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9M58.0985641S" EditActiveTime="PT2M1.7665622S">
+      <ModifiedDate>2022-03-30T18:21:12.5116169+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T18:12:19.329422+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT59.3389258S" EditActiveTime="PT4.4785991S">
+      <ModifiedDate>2022-03-30T20:12:10.5209318+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T18:07:15.5527773+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3.7655873S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:36:53.8617283+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26.4575152S" EditActiveTime="PT13.0018033S">
+      <ModifiedDate>2022-03-30T22:00:42.641213+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:36:39.2884078+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M17.6824199S" EditActiveTime="PT27.0077418S">
+      <ModifiedDate>2022-03-30T22:23:31.3534041+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\App.config</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:12:37.8159418+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6M32.4783798S" EditActiveTime="PT5M38.2845913S">
+      <ModifiedDate>2022-03-30T17:34:02.7795895+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:08:16.8469211+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26M25.8425251S" EditActiveTime="PT13M24.0783399S">
+      <ModifiedDate>2022-03-30T22:21:30.9298853+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:07:02.6785772+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M13.4820055S" EditActiveTime="PT16M31.218512S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-30T17:06:18.8016506+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19M50.8617257S" EditActiveTime="PT1M9.6906291S">
+      <ModifiedDate>2022-03-30T22:35:19.846637+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T17:06:17.1721832+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7.5696045S" EditActiveTime="PT3.4281451S">
+      <ModifiedDate>2022-03-30T14:48:38.3502382+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T14:48:31.8319099+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0259314S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T14:46:11.2567866+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5M27.1557721S" EditActiveTime="PT33.3838074S">
+      <ModifiedDate>2022-03-30T14:48:08.1549446+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T14:43:04.601027+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.6426127S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T14:42:54.9584143+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26.9606788S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-30T14:42:27.9967381+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT14.5514537S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T18:11:24.1163135+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M44.882645S" EditActiveTime="PT0.0269277S">
+      <ModifiedDate>2022-03-29T18:09:00.8399731+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T18:07:30.4366648+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M36.4994748S" EditActiveTime="PT0.0159584S">
+      <ModifiedDate>2022-03-29T17:50:31.3771332+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T17:48:43.2246871+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5M13.0695552S" EditActiveTime="PT2M23.944252S">
+      <ModifiedDate>2022-03-29T18:04:47.4538572+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T17:32:48.9181691+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.2413023S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmLogOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T17:32:48.3387389+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.1573592S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileDatabase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T17:32:47.7512475+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.0820286S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T17:31:58.83123+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M10.7686392S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-29T17:21:46.8676572+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.081791S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:54:25.0435181+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M57.6676627S" EditActiveTime="PT14M19.8842379S">
+      <ModifiedDate>2022-03-29T17:51:02.7260736+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:54:16.8884845+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT7M47.2440899S" EditActiveTime="PT4.5121975S">
+      <ModifiedDate>2022-03-29T17:50:24.2690931+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:46:34.5579689+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.002993S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:32:14.5031072+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT58.5680221S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:28:18.7891573+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M33.7109729S" EditActiveTime="PT46.7863957S">
+      <ModifiedDate>2022-03-29T16:29:31.8367475+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:26:20.961255+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT56.5087803S" EditActiveTime="PT5.485683S">
+      <ModifiedDate>2022-03-29T16:30:31.8910141+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:25:27.1424682+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT5M13.4742624S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:20:27.609284+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M32.4248652S" EditActiveTime="PT0.1377806S">
+      <ModifiedDate>2022-03-29T16:33:12.7861924+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:20:27.5823564+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.1206776S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmFileSend.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T16:20:27.4596841+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.0341181S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:53:22.4893061+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M50.5400504S" EditActiveTime="PT3.0090726S">
+      <ModifiedDate>2022-03-29T15:52:51.1424421+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:52:41.3110435+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.3375402S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:52:38.9725045+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT44.7407047S" EditActiveTime="PT9.7015255S">
+      <ModifiedDate>2022-03-29T15:32:38.3676045+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:31:58.6223259+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.7330223S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:22:55.5458372+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M31.6395182S" EditActiveTime="PT34.7321205S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-29T15:20:58.7811448+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.0029933S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:20:28.1498918+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8M17.3863548S" EditActiveTime="PT0.207445S">
+      <ModifiedDate>2022-03-29T15:55:22.2990936+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:10:22.6866751+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11M32.8974613S" EditActiveTime="PT3M30.2249422S">
+      <ModifiedDate>2022-03-29T15:50:40.3060026+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-29T15:10:09.2384282+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT30.1514202S" EditActiveTime="PT5.2091368S">
+      <ModifiedDate>2022-03-21T20:51:37.1018389+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T20:51:27.1592298+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.1035033S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>SerialPort.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-21T20:01:09.2365428+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9M16.2515552S" EditActiveTime="PT14M44.9931323S">
+      <ModifiedDate>2022-03-21T20:37:22.4012799+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:34:00.664037+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT54.4227402S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:33:06.240298+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT20.984139S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:32:45.2552025+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.9300044S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:32:42.5448491+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M53.6593275S" EditActiveTime="PT0.0638296S">
+      <ModifiedDate>2022-03-21T21:33:04.6542369+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:32:30.0596512+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT17.9670955S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:32:21.5727295+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M7.1123014S" EditActiveTime="PT6.0013785S">
+      <ModifiedDate>2022-03-21T21:03:47.7120623+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:32:20.8136033+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6M0.3283261S" EditActiveTime="PT1M7.9205712S">
+      <ModifiedDate>2022-03-21T21:14:38.7808441+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:45.2745283+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.623019S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileDatabase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:44.1057487+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT35.9489069S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileName.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:43.3505897+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.8728758S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Log.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:42.4777139+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.9513763S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:40.5634524+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.3013806S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:31:39.2610822+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.8482073S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:28:07.1922332+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT24.5949858S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:20:36.4298902+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19.2909053S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileDatabase.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:20:17.1379877+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.0581742S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileName.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:20:06.0798135+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M22.0036066S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T18:19:40.3524236+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT26.3050189S" EditActiveTime="PT29M41.5535213S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-21T17:53:05.2093621+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT32M32.5516414S" EditActiveTime="PT15M26.4140266S">
+      <ModifiedDate>2022-03-21T21:29:49.7940505+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-21T17:42:52.8265745+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19M20.0692426S" EditActiveTime="PT2M53.162998S">
+      <ModifiedDate>2022-03-20T21:40:54.3814317+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmHelp.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-20T20:56:41.3986575+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT48.5191684S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileName.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-20T20:51:20.7021317+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.3365297S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>TextBoxBase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-20T16:51:04.1562366+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2.813588S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmLogOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T17:46:06.1443515+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.7692566S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmFileSend.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T17:46:05.4674621+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.12085S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T17:46:03.6890387+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.0427874S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T16:28:12.5726317+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10.0663335S" EditActiveTime="PT1M3.2639841S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T14:09:42.5761626+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M55.7649771S" EditActiveTime="PT1M13.0185783S">
+      <ModifiedDate>2022-03-19T13:15:59.8982931+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\EventQueue.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T13:13:35.569593+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M16.5349955S" EditActiveTime="PT51.0695324S">
+      <ModifiedDate>2022-03-20T22:03:56.4258598+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-19T11:08:26.4961796+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT42.3750929S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Math.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-18T23:15:17.8196531+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT14.9647943S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-18T21:02:33.8078119+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M9.8271004S" EditActiveTime="PT6.7285868S">
+      <ModifiedDate>2022-03-19T17:47:29.6233115+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmProfileDatabase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-18T09:53:43.8782127+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT55.7229286S" EditActiveTime="PT2M22.9524694S">
+      <ModifiedDate>2022-03-17T21:10:00.7604202+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T21:07:25.7566813+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M46.6216014S" EditActiveTime="PT2M11.8093457S">
+      <ModifiedDate>2022-03-20T20:54:03.7311208+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T21:04:58.1833236+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M27.3572615S" EditActiveTime="PT4M13.7032516S">
+      <ModifiedDate>2022-03-17T20:49:15.2264152+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Log.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T19:06:17.6248036+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.0704922S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\app.manifest</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:47:06.4004888+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6.7926673S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:47:04.5214782+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT12M56.3894442S" EditActiveTime="PT43.5341788S">
+      <ModifiedDate>2022-03-20T21:53:14.2675193+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\AssemblyInfo.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:46:57.828807+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1.6573232S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-17T14:46:56.1705001+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6M29.6691932S" EditActiveTime="PT1M28.7843213S">
+      <ModifiedDate>2022-03-20T22:07:40.6313285+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-16T20:21:38.6369675+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M31.0293384S" EditActiveTime="PT2H16M30.5366972S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-16T20:16:27.2979162+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4M8.5439038S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-16T20:12:12.3613336+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6H8M31.6281865S" EditActiveTime="PT4H34M37.8017815S">
+      <ModifiedDate>2022-03-20T21:40:54.407398+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-16T20:11:16.0901246+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6.8097608S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>0</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T22:16:46.7802331+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10M50.6845487S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Program.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T17:20:31.8745154+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT15.9680276S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Log.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T17:04:06.0158243+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6.0216876S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T17:04:00.8653794+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT2M43.9105887S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Comms.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:52:14.3762534+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9M38.9141812S" EditActiveTime="PT17.084525S">
+      <ModifiedDate>2022-03-15T17:18:37.7483789+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\svn\software-private\terminal2-releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:50:25.0187863+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT0.4876949S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>0</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:50:24.3894662+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT10M46.5223562S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-15T16:48:10.9241037+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT13M14.6207363S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Settings.settings</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:31:14.3606164+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT4.3358883S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Properties\Resources.resx</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:31:11.8024613+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M14.7410152S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\App.config</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>C:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T16:29:57.0574547+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M21.1209172S" EditActiveTime="PT32.4688103S">
+      <ModifiedDate>2022-03-15T12:26:54.7026734+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Database.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T12:26:09.248938+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT25.5434126S" EditActiveTime="PT14.0470065S">
+      <ModifiedDate>2022-03-15T12:24:35.1171535+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Options.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T12:24:03.2769859+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.8285888S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileName.Designer.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:08:42.027947+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT39.6982895S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>Debug Mode</Item>
+      <ItemType>DebugModeItem</ItemType>
+      <ProjectName />
+      <CreatedDate>2022-03-15T11:08:15.2326759+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M6.7555989S" EditActiveTime="PT1M31.3417145S">
+      <ModifiedDate>2022-03-15T11:09:48.8350699+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileName.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:17.9058196+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT1M24.299548S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmProfileDatabase.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:06.5150107+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT6M2.1314471S" EditActiveTime="PT2M42.9503972S">
+      <ModifiedDate>2022-03-15T12:27:01.8837925+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMain.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:04:01.8158335+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT11.5592329S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmMacroOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:52.5581377+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT19.4559472S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmLogOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:45.6720018+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT8.8514505S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmFileSend.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:36.8205513+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT3M46.7229802S" EditActiveTime="PT0.0396212S">
+      <ModifiedDate>2022-03-15T12:34:47.3762583+13:00</ModifiedDate>
+      <ModifiedBy>Michael.Heyns</ModifiedBy>
+      <EditedCount>1</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmDisplayOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:31.6202625+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+    <DevTrackerDataItem ViewActiveTime="PT9.9450023S" EditActiveTime="PT0S">
+      <ModifiedDate>0001-01-01T00:00:00</ModifiedDate>
+      <EditedCount>0</EditedCount>
+      <ViewedCount>1</ViewedCount>
+      <Item>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\FrmConnectOptions.cs</Item>
+      <ItemType>ProjectItem</ItemType>
+      <ProjectName>c:\SVN\Software-Private\Terminal2-Releases\Terminal2\Terminal2.csproj</ProjectName>
+      <CreatedDate>2022-03-15T11:03:22.5555629+13:00</CreatedDate>
+      <ViewedBy>Michael.Heyns</ViewedBy>
+    </DevTrackerDataItem>
+  </HistoryTimeList>
+</DevTrackerData>

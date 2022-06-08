@@ -147,7 +147,11 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.0.0
+    <value>v1.2.1.0
+    * Critical bug fix: The program was wasting CPU cycles repainting text that is not visible - and the more
+      lines in memory, the more time it would waste.
+
+v1.2.0.0
     * Recoded handling of CR-LF
     * Removed max line option - fixed at 100k lines
 

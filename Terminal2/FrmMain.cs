@@ -31,11 +31,9 @@ namespace Terminal
         private int _tock = 0;
         private readonly Comms _comms = null;
 
-        private bool _lbInputAppend = false;
-
         private readonly static object _dollarLock = new object();
 
-        private FrmSearch search = new FrmSearch();
+        private readonly FrmSearch _search = new FrmSearch();
         private enum State { Changing, Disconnected, Connected, Listening };
         private State _state = State.Disconnected;
 
@@ -77,6 +75,8 @@ namespace Terminal
         private Brush _outputBackBrush;
 
         private bool _lineFinished = true;
+
+        private ToolTip toolTip = new ToolTip();
 
         // ==============================================
         private void SetSearchText(string str)
@@ -147,12 +147,12 @@ namespace Terminal
                         lbInput.BeginUpdate();
                         {
                             for (int i = start; i < lines.Length - 1; i++)
+                            {
                                 lbInput.Items.Add(lines[i]);
+                                lbInput.TopIndex = lbInput.Items.Count - 1;
+                                Application.DoEvents();
+                            }
                         }
-
-                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                            lbInput.Items.RemoveAt(0);
-
                         lbInput.EndUpdate();
                         _lineFinished = true;
                     }
@@ -161,17 +161,24 @@ namespace Terminal
                         lbInput.BeginUpdate();
                         {
                             for (int i = start; i < lines.Length; i++)
+                            {
                                 lbInput.Items.Add(lines[i]);
+                                lbInput.TopIndex = lbInput.Items.Count - 1;
+                                Application.DoEvents();
+                            }
                         }
-
-                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                            lbInput.Items.RemoveAt(0);
-
                         lbInput.EndUpdate();
                         _lineFinished = false;
                     }
 
-                    lbInput.TopIndex = lbInput.Items.Count - 1;
+                    if (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                    {
+                        lbInput.BeginUpdate();
+                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                            lbInput.Items.RemoveAt(0);
+                        lbInput.TopIndex = lbInput.Items.Count - 1;
+                        lbInput.EndUpdate();
+                    }
                     UpdateLineCounter();
                 }
             }
@@ -538,7 +545,10 @@ namespace Terminal
             if (!Log.Enabled)
             {
                 string dir = _activeProfile.logOptions.Directory;
-                Log.Start(dir + @"\" + _activeProfile.logOptions.Prefix + Utils.TimestampForFilename() + ".log");
+                if (!Directory.Exists(dir))
+                    MessageBox.Show($"The directory {dir} does not exist.  Please reconfigure logging", "Directory does not exist", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    Log.Start(dir + @"\" + _activeProfile.logOptions.Prefix + Utils.TimestampForFilename() + ".log");
             }
             else
                 Log.Stop();
@@ -604,9 +614,9 @@ namespace Terminal
             _frozen = true;
             lbInput.Items.Add("====== 'Freeze' activated here ======");
             lbInput.TopIndex = lbInput.Items.Count - 1;
-            btnFreeze.ForeColor = Color.Red;
+            btnFreeze.ForeColor = Color.Blue;
+            btnFreeze.BackColor = Color.IndianRed;
             btnFreeze.Text = "&GO";
-            _lbInputAppend = false;
             btnSearch.Enabled = true;
         }
         private void UnFreeze()
@@ -614,6 +624,7 @@ namespace Terminal
             SetSearchText(string.Empty);
             _uiInputQueue.Clear();
             btnFreeze.ForeColor = Color.Black;
+            btnFreeze.BackColor = Color.Transparent;
             btnFreeze.Text = "&Freeze";
             _frozen = false;
             btnSearch.Enabled = false;
@@ -738,6 +749,21 @@ namespace Terminal
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            toolTip.AutomaticDelay = 1000; 
+            toolTip.InitialDelay = 100; // dT till show
+            toolTip.ReshowDelay = 100;  // dT from one tip to another
+            toolTip.ShowAlways = true;
+            toolTip.UseFading = true;
+            toolTip.BackColor = Color.Gold;
+            toolTip.ForeColor = Color.Red;
+            toolTip.UseAnimation = true;
+            toolTip.SetToolTip(this.btnConnectOptions, "Define connection options");
+            toolTip.SetToolTip(this.btnLogOptions, "Configure logging options");
+            toolTip.SetToolTip(this.btnProfileSelect, "Configure the CURRENT profile");
+            toolTip.SetToolTip(this.btnNew, "Add a NEW profile");
+            toolTip.SetToolTip(this.btnQuickLaunch, "Launch ANOTHER session");
+            toolTip.SetToolTip(this.btnColorConfig, "Look-and-Feel configuration");
+
             lblSaving.Text = string.Empty;
             MacroPanel.Height = (dgMacroTable.Rows[0].Height * 5) + 2; // +2 for horizontal lines
             dgMacroTable.Dock = DockStyle.Fill;
@@ -1198,7 +1224,6 @@ namespace Terminal
         private void BtnClear_Click(object sender, EventArgs e)
         {
             SetSearchText(string.Empty);
-            _lbInputAppend = false;
             _uiInputQueue.Clear();
             lbInput.Items.Clear();
             UnFreeze();
@@ -1604,15 +1629,15 @@ namespace Terminal
                 return;
 
             SetSearchText(string.Empty);
-            DialogResult rc = search.ShowDialog();
+            DialogResult rc = _search.ShowDialog();
             if (rc == DialogResult.OK)
             {
                 int line = -1;
                 for (int i = lbInput.Items.Count - 1; i > 0; i--)
                 {
-                    if (search.IgnoreCase.Checked)
+                    if (_search.IgnoreCase.Checked)
                     {
-                        if (lbInput.Items[i].ToString().ToLower().Contains(search.SearchText.Text.ToLower()))
+                        if (lbInput.Items[i].ToString().ToLower().Contains(_search.SearchText.Text.ToLower()))
                         {
                             line = i;
                             break;
@@ -1620,7 +1645,7 @@ namespace Terminal
                     }
                     else
                     {
-                        if (lbInput.Items[i].ToString().Contains(search.SearchText.Text))
+                        if (lbInput.Items[i].ToString().Contains(_search.SearchText.Text))
                         {
                             line = i;
                             break;
@@ -1630,7 +1655,7 @@ namespace Terminal
 
                 if (line > -1)
                 {
-                    SetSearchText(search.SearchText.Text);
+                    SetSearchText(_search.SearchText.Text);
 
                     if (line > 5)
                         lbInput.TopIndex = line - 5;
@@ -1639,7 +1664,7 @@ namespace Terminal
                 }
                 else
                 {
-                    MessageBox.Show("Not found", "String \"" + search.SearchText.Text + "\"", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Not found", "String \"" + _search.SearchText.Text + "\"", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -1665,7 +1690,7 @@ namespace Terminal
             e.Graphics.FillRegion(new SolidBrush(this.BackColor), iRegion);
             if (this.Items.Count > 0)
             {
-                for (int i = 0; i < this.Items.Count; ++i)
+                for (int i = this.Items.Count - 1; i >= 0; i--)
                 {
                     System.Drawing.Rectangle irect = this.GetItemRectangle(i);
                     if (e.ClipRectangle.IntersectsWith(irect))
@@ -1675,6 +1700,10 @@ namespace Terminal
                             DrawItemState.Default, this.ForeColor,
                             this.BackColor));
                         iRegion.Complement(irect);
+                    }
+                    else if (irect.Top < 0)
+                    {
+                        break;
                     }
                 }
             }

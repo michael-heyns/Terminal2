@@ -1,5 +1,6 @@
 ![Letter-T-icon](https://user-images.githubusercontent.com/4144679/169688149-106da035-d4bd-4b1e-a290-c2a2885a9959.png)
-# Terminal2 - v1.2.0.0 
+# Terminal2 - v1.2.1.0 
+### << CRITICAL BUG FIX >>
 
 Terminal emulator for Engineers (with Serial and TCP socket capabilities)
 

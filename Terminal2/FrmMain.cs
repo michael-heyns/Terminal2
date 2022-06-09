@@ -78,6 +78,8 @@ namespace Terminal
 
         private ToolTip toolTip = new ToolTip();
 
+        private int _stopLine = -1;
+
         // ==============================================
         private void SetSearchText(string str)
         {
@@ -94,22 +96,47 @@ namespace Terminal
             if (offset >= str.Length)
                 return -1;
 
-            for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
+            if (_activeProfile.displayOptions.IgnoreCase)
             {
-                if (_activeProfile.displayOptions.filter[i].text.Length > 0)
+                for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
                 {
-                    // starts with
-                    if (_activeProfile.displayOptions.filter[i].mode == 0)
+                    if (_activeProfile.displayOptions.filter[i].text.Length > 0)
                     {
-                        if (str.ToLower().Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text.ToLower()))
-                            return i;
-                    }
+                        // starts with
+                        if (_activeProfile.displayOptions.filter[i].mode == 0)
+                        {
+                            if (str.ToLower().Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text.ToLower()))
+                                return i;
+                        }
 
-                    // contains
-                    else if (_activeProfile.displayOptions.filter[i].mode == 1)
+                        // contains
+                        else if (_activeProfile.displayOptions.filter[i].mode == 1)
+                        {
+                            if (str.ToLower().Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text.ToLower()))
+                                return i;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
+                {
+                    if (_activeProfile.displayOptions.filter[i].text.Length > 0)
                     {
-                        if (str.ToLower().Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text.ToLower()))
-                            return i;
+                        // starts with
+                        if (_activeProfile.displayOptions.filter[i].mode == 0)
+                        {
+                            if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text))
+                                return i;
+                        }
+
+                        // contains
+                        else if (_activeProfile.displayOptions.filter[i].mode == 1)
+                        {
+                            if (str.Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text))
+                                return i;
+                        }
                     }
                 }
             }
@@ -119,6 +146,51 @@ namespace Terminal
         private void UpdateLineCounter()
         {
             stsLineCount.Text = lbInput.Items.Count.ToString();
+        }
+
+        private void ScrollToBottom()
+        {
+            if (!_frozen)
+                lbInput.TopIndex = lbInput.Items.Count - 1;
+        }
+
+        private void TestForFreeze()
+        {
+            if (!cbFreezeAt.Checked || freezeText.Text.Length == 0)
+                return;
+
+            int line = lbInput.Items.Count - 1;
+            if (cbFreezeCase.Checked)
+            {
+                string strC = lbInput.Items[lbInput.Items.Count - 1].ToString();
+                if (!strC.Contains(freezeText.Text))
+                    return;
+            }
+            else
+            {
+                string str = lbInput.Items[lbInput.Items.Count - 1].ToString().ToLower();
+                if (!str.Contains(freezeText.Text.ToLower()))
+                    return;
+
+            }
+
+            // freeze
+            if (!_frozen)
+            {
+                if (line > _stopLine)
+                {
+                    _stopLine = line;
+                    Freeze(_stopLine - 5);
+
+                    // add it to our archive list
+                    if (cbFreezeAt.Checked)
+                    {
+                        int index = freezeText.FindString(freezeText.Text);
+                        if (index < 0)
+                            freezeText.Items.Add(freezeText.Text);
+                    }
+                }
+            }
         }
 
         private void UIInputQueueHandler()
@@ -137,8 +209,11 @@ namespace Terminal
                     if (!_lineFinished)
                     {
                         lbInput.BeginUpdate();
-                        lbInput.Items[lbInput.Items.Count - 1] += lines[0];
+                        {
+                            lbInput.Items[lbInput.Items.Count - 1] += lines[0];
+                        }
                         lbInput.EndUpdate();
+                        TestForFreeze();
                         start = 1;
                     }
 
@@ -149,8 +224,7 @@ namespace Terminal
                             for (int i = start; i < lines.Length - 1; i++)
                             {
                                 lbInput.Items.Add(lines[i]);
-                                lbInput.TopIndex = lbInput.Items.Count - 1;
-                                Application.DoEvents();
+                                TestForFreeze();
                             }
                         }
                         lbInput.EndUpdate();
@@ -163,8 +237,7 @@ namespace Terminal
                             for (int i = start; i < lines.Length; i++)
                             {
                                 lbInput.Items.Add(lines[i]);
-                                lbInput.TopIndex = lbInput.Items.Count - 1;
-                                Application.DoEvents();
+                                TestForFreeze();
                             }
                         }
                         lbInput.EndUpdate();
@@ -174,12 +247,15 @@ namespace Terminal
                     if (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
                     {
                         lbInput.BeginUpdate();
-                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                            lbInput.Items.RemoveAt(0);
-                        lbInput.TopIndex = lbInput.Items.Count - 1;
+                        {
+                            while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                                lbInput.Items.RemoveAt(0);
+                        }
                         lbInput.EndUpdate();
                     }
+                    ScrollToBottom();
                     UpdateLineCounter();
+                    Application.DoEvents();
                 }
             }
         }
@@ -609,15 +685,15 @@ namespace Terminal
         }
         #endregion
 
-        private void Freeze()
+        private void Freeze(int topLine)
         {
             _frozen = true;
-            lbInput.Items.Add("====== 'Freeze' activated here ======");
-            lbInput.TopIndex = lbInput.Items.Count - 1;
+            lbInput.Items.Add("====== 'Freeze' triggered here ======");
             btnFreeze.ForeColor = Color.Blue;
             btnFreeze.BackColor = Color.IndianRed;
             btnFreeze.Text = "&GO";
             btnSearch.Enabled = true;
+            lbInput.TopIndex = topLine;
         }
         private void UnFreeze()
         {
@@ -627,6 +703,7 @@ namespace Terminal
             btnFreeze.BackColor = Color.Transparent;
             btnFreeze.Text = "&Freeze";
             _frozen = false;
+            _stopLine = lbInput.Items.Count - 1;
             btnSearch.Enabled = false;
         }
 
@@ -636,7 +713,9 @@ namespace Terminal
             if (!_frozen)
             {
                 if (_comms.Connected() && lbInput.Items.Count > 0)
-                    Freeze();
+                {
+                    Freeze(lbInput.Items.Count - 1);
+                }
             }
             else
             {
@@ -750,19 +829,23 @@ namespace Terminal
         private void FrmMain_Load(object sender, EventArgs e)
         {
             toolTip.AutomaticDelay = 1000; 
-            toolTip.InitialDelay = 100; // dT till show
+            toolTip.InitialDelay = 500; // dT till show
             toolTip.ReshowDelay = 100;  // dT from one tip to another
-            toolTip.ShowAlways = true;
             toolTip.UseFading = true;
-            toolTip.BackColor = Color.Gold;
-            toolTip.ForeColor = Color.Red;
             toolTip.UseAnimation = true;
-            toolTip.SetToolTip(this.btnConnectOptions, "Define connection options");
-            toolTip.SetToolTip(this.btnLogOptions, "Configure logging options");
-            toolTip.SetToolTip(this.btnProfileSelect, "Configure the CURRENT profile");
-            toolTip.SetToolTip(this.btnNew, "Add a NEW profile");
-            toolTip.SetToolTip(this.btnQuickLaunch, "Launch ANOTHER session");
-            toolTip.SetToolTip(this.btnColorConfig, "Look-and-Feel configuration");
+            //toolTip.SetToolTip(this.pdPort, "A list of available communication channels - this list is updated in whenever this puldown is opened");
+            //toolTip.SetToolTip(this.btnConnect, "Click to Connect or Disconnect the selected communications channel");
+            //toolTip.SetToolTip(this.btnStartLog, "Click to start logging data to file");
+            toolTip.SetToolTip(this.cbStayOnTop, "Check this to prevent this program (window) from being hidden by other windows");
+            toolTip.SetToolTip(this.cbFreezeAt, "Check this to trigger FREEZE when next the search string is received");
+            toolTip.SetToolTip(this.freezeText, "Enter the search string which will trigger a FREEZE.  It will be added to the list once it has caused a freeze.");
+            toolTip.SetToolTip(this.cbFreezeCase, "Check this to enable Case Sensitive search");
+            toolTip.SetToolTip(this.btnConnectOptions, "Click to define Connection Options");
+            toolTip.SetToolTip(this.btnLogOptions, "Click to configure Logging Options");
+            toolTip.SetToolTip(this.btnProfileSelect, "Click to configure the CURRENT profile");
+            toolTip.SetToolTip(this.btnNew, "Click to add a NEW profile (without closing this one)");
+            toolTip.SetToolTip(this.btnQuickLaunch, "Click to launch ANOTHER session (without closing this one)");
+            toolTip.SetToolTip(this.btnColorConfig, "Click to change the Look-and-Feel");
 
             lblSaving.Text = string.Empty;
             MacroPanel.Height = (dgMacroTable.Rows[0].Height * 5) + 2; // +2 for horizontal lines
@@ -778,6 +861,7 @@ namespace Terminal
                 _macroThread[t].Start();
             }
             lbInput.Items.Add(string.Empty);
+            _lineFinished = false;
         }
 
         private void DoMacro(int m)
@@ -1223,11 +1307,17 @@ namespace Terminal
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            SetSearchText(string.Empty);
-            _uiInputQueue.Clear();
-            lbInput.Items.Clear();
-            UnFreeze();
-            UpdateLineCounter();
+            lbInput.BeginUpdate();
+            {
+                SetSearchText(string.Empty);
+                _uiInputQueue.Clear();
+                lbInput.Items.Clear();
+                UnFreeze();
+                UpdateLineCounter();
+                lbInput.Items.Add(string.Empty);
+                _lineFinished = false;
+            }
+            lbInput.EndUpdate();
         }
 
         private void BtnFile_Click(object sender, EventArgs e)
@@ -1397,7 +1487,7 @@ namespace Terminal
             {
                 bool initFreeze = _frozen;
                 if (!initFreeze)
-                    Freeze();
+                    Freeze(lbInput.Items.Count - 1);
 
                 if (saveFileDialog.ShowDialog() != DialogResult.Cancel)
                 {
@@ -1614,7 +1704,7 @@ namespace Terminal
 
         private void lbInput_Resize(object sender, EventArgs e)
         {
-            lbInput.TopIndex = lbInput.Items.Count - 1;
+            ScrollToBottom();
         }
 
         private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
@@ -1682,10 +1772,12 @@ namespace Terminal
         }
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
+            this.ItemHeight = this.FontHeight;
             base.OnDrawItem(e); // owner draw only
         }
         protected override void OnPaint(PaintEventArgs e)
         {
+            this.ItemHeight = this.FontHeight;
             Region iRegion = new Region(e.ClipRectangle);
             e.Graphics.FillRegion(new SolidBrush(this.BackColor), iRegion);
             if (this.Items.Count > 0)

@@ -36,7 +36,6 @@ namespace Terminal
             this.btnOk = new System.Windows.Forms.Button();
             this.btnSelectFontInput = new System.Windows.Forms.Button();
             this.grpColourFilters = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.BackColorInput = new System.Windows.Forms.Panel();
@@ -54,7 +53,6 @@ namespace Terminal
             this.b1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.m12 = new System.Windows.Forms.ComboBox();
             this.m11 = new System.Windows.Forms.ComboBox();
@@ -119,6 +117,7 @@ namespace Terminal
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cbFilterCase = new System.Windows.Forms.CheckBox();
             this.grpColourFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -133,7 +132,7 @@ namespace Terminal
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(375, 14);
+            this.label1.Location = new System.Drawing.Point(316, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(164, 25);
@@ -142,7 +141,7 @@ namespace Terminal
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(826, 932);
+            this.btnOk.Location = new System.Drawing.Point(710, 887);
             this.btnOk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(112, 35);
@@ -165,7 +164,7 @@ namespace Terminal
             // 
             // grpColourFilters
             // 
-            this.grpColourFilters.Controls.Add(this.label4);
+            this.grpColourFilters.Controls.Add(this.cbFilterCase);
             this.grpColourFilters.Controls.Add(this.label3);
             this.grpColourFilters.Controls.Add(this.btnSelectFontInput);
             this.grpColourFilters.Controls.Add(this.pictureBox2);
@@ -184,7 +183,6 @@ namespace Terminal
             this.grpColourFilters.Controls.Add(this.b1);
             this.grpColourFilters.Controls.Add(this.pictureBox1);
             this.grpColourFilters.Controls.Add(this.label18);
-            this.grpColourFilters.Controls.Add(this.label23);
             this.grpColourFilters.Controls.Add(this.label16);
             this.grpColourFilters.Controls.Add(this.m12);
             this.grpColourFilters.Controls.Add(this.m11);
@@ -237,24 +235,14 @@ namespace Terminal
             this.grpColourFilters.Controls.Add(this.t2);
             this.grpColourFilters.Controls.Add(this.c1);
             this.grpColourFilters.Controls.Add(this.t1);
-            this.grpColourFilters.Location = new System.Drawing.Point(28, 28);
+            this.grpColourFilters.Location = new System.Drawing.Point(8, 10);
             this.grpColourFilters.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grpColourFilters.Name = "grpColourFilters";
             this.grpColourFilters.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.grpColourFilters.Size = new System.Drawing.Size(855, 660);
+            this.grpColourFilters.Size = new System.Drawing.Size(780, 660);
             this.grpColourFilters.TabIndex = 15;
             this.grpColourFilters.TabStop = false;
             this.grpColourFilters.Text = "Input panel";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(204, 146);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 20);
-            this.label4.TabIndex = 100;
-            this.label4.Text = "** Case Ignored **";
             // 
             // label3
             // 
@@ -453,16 +441,6 @@ namespace Terminal
             this.label18.TabIndex = 54;
             this.label18.Text = "Click to change the color";
             // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(238, 126);
-            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(74, 20);
-            this.label23.TabIndex = 70;
-            this.label23.Text = "Filter text";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -644,170 +622,183 @@ namespace Terminal
             // 
             // sampleInput
             // 
+            this.sampleInput.AutoEllipsis = true;
             this.sampleInput.BackColor = System.Drawing.Color.White;
             this.sampleInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sampleInput.Location = new System.Drawing.Point(496, 85);
             this.sampleInput.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sampleInput.Name = "sampleInput";
-            this.sampleInput.Size = new System.Drawing.Size(329, 33);
+            this.sampleInput.Size = new System.Drawing.Size(250, 33);
             this.sampleInput.TabIndex = 51;
-            this.sampleInput.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sampleInput.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sampleInput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample12
             // 
+            this.sample12.AutoEllipsis = true;
             this.sample12.BackColor = System.Drawing.Color.Lime;
             this.sample12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample12.ForeColor = System.Drawing.Color.Black;
             this.sample12.Location = new System.Drawing.Point(495, 603);
             this.sample12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample12.Name = "sample12";
-            this.sample12.Size = new System.Drawing.Size(329, 33);
+            this.sample12.Size = new System.Drawing.Size(250, 33);
             this.sample12.TabIndex = 50;
-            this.sample12.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample12.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample11
             // 
+            this.sample11.AutoEllipsis = true;
             this.sample11.BackColor = System.Drawing.Color.White;
             this.sample11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample11.ForeColor = System.Drawing.Color.SeaGreen;
             this.sample11.Location = new System.Drawing.Point(495, 563);
             this.sample11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample11.Name = "sample11";
-            this.sample11.Size = new System.Drawing.Size(329, 33);
+            this.sample11.Size = new System.Drawing.Size(250, 33);
             this.sample11.TabIndex = 49;
-            this.sample11.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample11.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample10
             // 
+            this.sample10.AutoEllipsis = true;
             this.sample10.BackColor = System.Drawing.Color.White;
             this.sample10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample10.ForeColor = System.Drawing.Color.LightSalmon;
             this.sample10.Location = new System.Drawing.Point(495, 523);
             this.sample10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample10.Name = "sample10";
-            this.sample10.Size = new System.Drawing.Size(329, 33);
+            this.sample10.Size = new System.Drawing.Size(250, 33);
             this.sample10.TabIndex = 48;
-            this.sample10.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample10.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample9
             // 
+            this.sample9.AutoEllipsis = true;
             this.sample9.BackColor = System.Drawing.Color.White;
             this.sample9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.sample9.Location = new System.Drawing.Point(495, 483);
             this.sample9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample9.Name = "sample9";
-            this.sample9.Size = new System.Drawing.Size(329, 33);
+            this.sample9.Size = new System.Drawing.Size(250, 33);
             this.sample9.TabIndex = 47;
-            this.sample9.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample9.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample8
             // 
+            this.sample8.AutoEllipsis = true;
             this.sample8.BackColor = System.Drawing.Color.White;
             this.sample8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample8.ForeColor = System.Drawing.Color.Green;
             this.sample8.Location = new System.Drawing.Point(495, 443);
             this.sample8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample8.Name = "sample8";
-            this.sample8.Size = new System.Drawing.Size(329, 33);
+            this.sample8.Size = new System.Drawing.Size(250, 33);
             this.sample8.TabIndex = 46;
-            this.sample8.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample8.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample7
             // 
+            this.sample7.AutoEllipsis = true;
             this.sample7.BackColor = System.Drawing.Color.White;
             this.sample7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.sample7.Location = new System.Drawing.Point(495, 403);
             this.sample7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample7.Name = "sample7";
-            this.sample7.Size = new System.Drawing.Size(329, 33);
+            this.sample7.Size = new System.Drawing.Size(250, 33);
             this.sample7.TabIndex = 45;
-            this.sample7.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample7.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample6
             // 
+            this.sample6.AutoEllipsis = true;
             this.sample6.BackColor = System.Drawing.Color.White;
             this.sample6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample6.ForeColor = System.Drawing.Color.Olive;
             this.sample6.Location = new System.Drawing.Point(495, 363);
             this.sample6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample6.Name = "sample6";
-            this.sample6.Size = new System.Drawing.Size(329, 33);
+            this.sample6.Size = new System.Drawing.Size(250, 33);
             this.sample6.TabIndex = 44;
-            this.sample6.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample6.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample5
             // 
+            this.sample5.AutoEllipsis = true;
             this.sample5.BackColor = System.Drawing.Color.White;
             this.sample5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample5.ForeColor = System.Drawing.Color.Fuchsia;
             this.sample5.Location = new System.Drawing.Point(495, 323);
             this.sample5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample5.Name = "sample5";
-            this.sample5.Size = new System.Drawing.Size(329, 33);
+            this.sample5.Size = new System.Drawing.Size(250, 33);
             this.sample5.TabIndex = 43;
-            this.sample5.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample5.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample4
             // 
+            this.sample4.AutoEllipsis = true;
             this.sample4.BackColor = System.Drawing.Color.White;
             this.sample4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample4.ForeColor = System.Drawing.Color.Yellow;
             this.sample4.Location = new System.Drawing.Point(495, 283);
             this.sample4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample4.Name = "sample4";
-            this.sample4.Size = new System.Drawing.Size(329, 33);
+            this.sample4.Size = new System.Drawing.Size(250, 33);
             this.sample4.TabIndex = 42;
-            this.sample4.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample4.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample3
             // 
+            this.sample3.AutoEllipsis = true;
             this.sample3.BackColor = System.Drawing.Color.White;
             this.sample3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.sample3.Location = new System.Drawing.Point(495, 243);
             this.sample3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample3.Name = "sample3";
-            this.sample3.Size = new System.Drawing.Size(329, 33);
+            this.sample3.Size = new System.Drawing.Size(250, 33);
             this.sample3.TabIndex = 41;
-            this.sample3.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample3.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample2
             // 
+            this.sample2.AutoEllipsis = true;
             this.sample2.BackColor = System.Drawing.Color.White;
             this.sample2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample2.ForeColor = System.Drawing.Color.Blue;
             this.sample2.Location = new System.Drawing.Point(495, 203);
             this.sample2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample2.Name = "sample2";
-            this.sample2.Size = new System.Drawing.Size(329, 33);
+            this.sample2.Size = new System.Drawing.Size(250, 33);
             this.sample2.TabIndex = 40;
-            this.sample2.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample2.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // sample1
             // 
+            this.sample1.AutoEllipsis = true;
             this.sample1.BackColor = System.Drawing.Color.White;
             this.sample1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.sample1.ForeColor = System.Drawing.Color.Red;
             this.sample1.Location = new System.Drawing.Point(495, 163);
             this.sample1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.sample1.Name = "sample1";
-            this.sample1.Size = new System.Drawing.Size(329, 33);
+            this.sample1.Size = new System.Drawing.Size(250, 33);
             this.sample1.TabIndex = 39;
-            this.sample1.Text = "\"Lorem ipsum dolor sit amet, consectetur...\"";
+            this.sample1.Text = "\"Lorem ipsum dolor sit amet...\"";
             this.sample1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -1098,7 +1089,7 @@ namespace Terminal
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(772, 726);
+            this.btnReset.Location = new System.Drawing.Point(677, 680);
             this.btnReset.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(111, 35);
@@ -1147,7 +1138,7 @@ namespace Terminal
             this.groupBox3.Controls.Add(this.btnSelectFontOutput);
             this.groupBox3.Controls.Add(this.cbTimestampOutputLines);
             this.groupBox3.Controls.Add(this.BackColorOutput);
-            this.groupBox3.Location = new System.Drawing.Point(28, 697);
+            this.groupBox3.Location = new System.Drawing.Point(8, 680);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -1164,7 +1155,7 @@ namespace Terminal
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(927, 866);
+            this.tabControl1.Size = new System.Drawing.Size(808, 820);
             this.tabControl1.TabIndex = 72;
             // 
             // tabPage1
@@ -1176,7 +1167,7 @@ namespace Terminal
             this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(919, 833);
+            this.tabPage1.Size = new System.Drawing.Size(800, 787);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Colors and Fonts";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1191,7 +1182,7 @@ namespace Terminal
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Size = new System.Drawing.Size(919, 833);
+            this.tabPage3.Size = new System.Drawing.Size(800, 787);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "History";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1199,7 +1190,7 @@ namespace Terminal
             // lblThisVersion
             // 
             this.lblThisVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThisVersion.Location = new System.Drawing.Point(159, 25);
+            this.lblThisVersion.Location = new System.Drawing.Point(122, 6);
             this.lblThisVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblThisVersion.Name = "lblThisVersion";
             this.lblThisVersion.Size = new System.Drawing.Size(693, 37);
@@ -1210,7 +1201,7 @@ namespace Terminal
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(50, 34);
+            this.label11.Location = new System.Drawing.Point(18, 14);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(96, 20);
@@ -1220,7 +1211,7 @@ namespace Terminal
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(50, 82);
+            this.label10.Location = new System.Drawing.Point(18, 43);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(118, 20);
@@ -1230,22 +1221,35 @@ namespace Terminal
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(54, 106);
+            this.textBox1.Location = new System.Drawing.Point(22, 68);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(796, 572);
+            this.textBox1.Size = new System.Drawing.Size(750, 703);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
+            // cbFilterCase
+            // 
+            this.cbFilterCase.AutoSize = true;
+            this.cbFilterCase.Checked = true;
+            this.cbFilterCase.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbFilterCase.Location = new System.Drawing.Point(217, 139);
+            this.cbFilterCase.Name = "cbFilterCase";
+            this.cbFilterCase.Size = new System.Drawing.Size(122, 24);
+            this.cbFilterCase.TabIndex = 100;
+            this.cbFilterCase.Text = "Ignore Case";
+            this.cbFilterCase.UseVisualStyleBackColor = true;
+            this.cbFilterCase.CheckedChanged += new System.EventHandler(this.cbFilterCase_CheckedChanged);
             // 
             // FrmDisplayOptions
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 989);
+            this.ClientSize = new System.Drawing.Size(846, 942);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOk);
@@ -1283,7 +1287,6 @@ namespace Terminal
         private System.Windows.Forms.GroupBox grpColourFilters;
         private System.Windows.Forms.Button btnSelectFontOutput;
         private System.Windows.Forms.CheckBox cbTimestampOutputLines;
-        private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox m12;
         private System.Windows.Forms.ComboBox m11;
@@ -1363,6 +1366,6 @@ namespace Terminal
         private System.Windows.Forms.Panel b2;
         private System.Windows.Forms.Panel b1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox cbFilterCase;
     }
 }

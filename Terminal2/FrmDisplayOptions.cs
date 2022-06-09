@@ -42,6 +42,8 @@ namespace Terminal
             sampleInput.Font = Options.inputFont;
             sampleInput.ForeColor = Options.inputDefaultForeground;
 
+            cbFilterCase.Checked = Options.IgnoreCase;
+
             for (int i = 0; i < Options.filter.Length; i++)
             {
                 ModeList[i].SelectedIndex = Options.filter[i].mode;
@@ -218,6 +220,7 @@ namespace Terminal
                 Options.filter[i].text = string.Empty;
                 Options.filter[i].backColor = Color.White;
             }
+            Options.IgnoreCase = true;
 
             // search option
             Options.filter[SEARCH_INDEX].foreColor = Color.Black;
@@ -239,6 +242,12 @@ namespace Terminal
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void cbFilterCase_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.IgnoreCase = cbFilterCase.Checked;
+            RefreshScreenFromDatabase();
         }
     }
 }

@@ -97,30 +97,35 @@
             this.ctrlOne = new System.Windows.Forms.Label();
             this.ctrlTwo = new System.Windows.Forms.Label();
             this.PanelTwo = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.cbFreezeCase = new System.Windows.Forms.CheckBox();
+            this.freezeText = new System.Windows.Forms.ComboBox();
+            this.cbFreezeAt = new System.Windows.Forms.CheckBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbShowCR = new System.Windows.Forms.CheckBox();
+            this.cbShowLF = new System.Windows.Forms.CheckBox();
+            this.cbHEX = new System.Windows.Forms.CheckBox();
+            this.cbASCII = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnFreeze = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sep1 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.btnExport = new System.Windows.Forms.Button();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.cbShowCR = new System.Windows.Forms.CheckBox();
-            this.cbShowLF = new System.Windows.Forms.CheckBox();
             this.cbTimestamp = new System.Windows.Forms.CheckBox();
-            this.cbHEX = new System.Windows.Forms.CheckBox();
-            this.cbASCII = new System.Windows.Forms.CheckBox();
-            this.LED3 = new System.Windows.Forms.Label();
+            this.btnHelp = new System.Windows.Forms.Button();
             this.LED4 = new System.Windows.Forms.Label();
             this.LED1 = new System.Windows.Forms.Label();
             this.LED2 = new System.Windows.Forms.Label();
+            this.LED3 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnAbortFile = new System.Windows.Forms.Button();
             this.lblLineCounter = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnPauseFile = new System.Windows.Forms.Button();
-            this.lbInput = new Terminal.FlickerFreeListBox();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
+            this.lbInput = new Terminal.FlickerFreeListBox();
             this.lbOutput = new Terminal.FlickerFreeListBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -152,7 +157,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 1012);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1389, 36);
+            this.statusStrip1.Size = new System.Drawing.Size(1445, 36);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "0";
             // 
@@ -225,12 +230,14 @@
             // btnConnect
             // 
             this.btnConnect.BackColor = System.Drawing.Color.Transparent;
+            this.btnConnect.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnConnect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConnect.ForeColor = System.Drawing.Color.Blue;
             this.btnConnect.Location = new System.Drawing.Point(144, 5);
             this.btnConnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(134, 35);
+            this.btnConnect.Size = new System.Drawing.Size(134, 30);
             this.btnConnect.TabIndex = 2;
             this.btnConnect.Text = "&Connect";
             this.btnConnect.UseVisualStyleBackColor = false;
@@ -238,19 +245,21 @@
             // 
             // btnConnectOptions
             // 
-            this.btnConnectOptions.AutoSize = true;
-            this.btnConnectOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnConnectOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnConnectOptions.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnConnectOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnConnectOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnConnectOptions.Image")));
             this.btnConnectOptions.Location = new System.Drawing.Point(286, 6);
             this.btnConnectOptions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnConnectOptions.Name = "btnConnectOptions";
-            this.btnConnectOptions.Size = new System.Drawing.Size(22, 22);
+            this.btnConnectOptions.Size = new System.Drawing.Size(28, 28);
             this.btnConnectOptions.TabIndex = 3;
-            this.btnConnectOptions.UseVisualStyleBackColor = true;
+            this.btnConnectOptions.UseVisualStyleBackColor = false;
             this.btnConnectOptions.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // PanelOne
             // 
+            this.PanelOne.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.PanelOne.Controls.Add(this.panel7);
             this.PanelOne.Controls.Add(this.panel5);
             this.PanelOne.Controls.Add(this.lblSaving);
@@ -270,25 +279,25 @@
             this.PanelOne.Location = new System.Drawing.Point(0, 0);
             this.PanelOne.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PanelOne.Name = "PanelOne";
-            this.PanelOne.Size = new System.Drawing.Size(1389, 45);
+            this.PanelOne.Size = new System.Drawing.Size(1445, 41);
             this.PanelOne.TabIndex = 4;
             // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel7.Location = new System.Drawing.Point(1050, 5);
+            this.panel7.Location = new System.Drawing.Point(1051, 4);
             this.panel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(4, 35);
+            this.panel7.Size = new System.Drawing.Size(4, 30);
             this.panel7.TabIndex = 26;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel5.Location = new System.Drawing.Point(328, 6);
+            this.panel5.Location = new System.Drawing.Point(329, 5);
             this.panel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(4, 35);
+            this.panel5.Size = new System.Drawing.Size(4, 30);
             this.panel5.TabIndex = 25;
             // 
             // lblSaving
@@ -297,7 +306,7 @@
             this.lblSaving.AutoSize = true;
             this.lblSaving.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaving.ForeColor = System.Drawing.Color.Red;
-            this.lblSaving.Location = new System.Drawing.Point(1228, 15);
+            this.lblSaving.Location = new System.Drawing.Point(1284, 15);
             this.lblSaving.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSaving.Name = "lblSaving";
             this.lblSaving.Size = new System.Drawing.Size(21, 25);
@@ -308,23 +317,24 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Location = new System.Drawing.Point(507, 6);
+            this.panel2.Location = new System.Drawing.Point(508, 5);
             this.panel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(4, 35);
+            this.panel2.Size = new System.Drawing.Size(4, 30);
             this.panel2.TabIndex = 20;
             // 
             // btnQuickLaunch
             // 
-            this.btnQuickLaunch.AutoSize = true;
-            this.btnQuickLaunch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQuickLaunch.BackColor = System.Drawing.Color.Transparent;
+            this.btnQuickLaunch.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnQuickLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnQuickLaunch.Image = ((System.Drawing.Image)(resources.GetObject("btnQuickLaunch.Image")));
-            this.btnQuickLaunch.Location = new System.Drawing.Point(1004, 5);
+            this.btnQuickLaunch.Location = new System.Drawing.Point(1002, 8);
             this.btnQuickLaunch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnQuickLaunch.Name = "btnQuickLaunch";
-            this.btnQuickLaunch.Size = new System.Drawing.Size(22, 22);
+            this.btnQuickLaunch.Size = new System.Drawing.Size(28, 28);
             this.btnQuickLaunch.TabIndex = 23;
-            this.btnQuickLaunch.UseVisualStyleBackColor = true;
+            this.btnQuickLaunch.UseVisualStyleBackColor = false;
             this.btnQuickLaunch.Click += new System.EventHandler(this.BtnQuickLaunch_Click);
             // 
             // pdPort
@@ -342,51 +352,56 @@
             // 
             // btnColorConfig
             // 
+            this.btnColorConfig.BackColor = System.Drawing.Color.Transparent;
+            this.btnColorConfig.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnColorConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnColorConfig.Image = global::Terminal.Properties.Resources.Gear;
             this.btnColorConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnColorConfig.Location = new System.Drawing.Point(1065, 5);
             this.btnColorConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnColorConfig.Name = "btnColorConfig";
-            this.btnColorConfig.Size = new System.Drawing.Size(99, 37);
+            this.btnColorConfig.Size = new System.Drawing.Size(93, 30);
             this.btnColorConfig.TabIndex = 15;
             this.btnColorConfig.Text = "&Options";
             this.btnColorConfig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnColorConfig.UseVisualStyleBackColor = true;
+            this.btnColorConfig.UseVisualStyleBackColor = false;
             this.btnColorConfig.Click += new System.EventHandler(this.BtnColorConfig_Click);
             // 
             // btnNew
             // 
-            this.btnNew.AutoSize = true;
-            this.btnNew.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNew.BackColor = System.Drawing.Color.Transparent;
+            this.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.Location = new System.Drawing.Point(966, 5);
+            this.btnNew.Location = new System.Drawing.Point(964, 8);
             this.btnNew.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(22, 22);
+            this.btnNew.Size = new System.Drawing.Size(28, 28);
             this.btnNew.TabIndex = 21;
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.BtnNew_Click);
             // 
             // btnProfileSelect
             // 
-            this.btnProfileSelect.AutoSize = true;
-            this.btnProfileSelect.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnProfileSelect.BackColor = System.Drawing.Color.Transparent;
+            this.btnProfileSelect.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnProfileSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnProfileSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnProfileSelect.Image")));
-            this.btnProfileSelect.Location = new System.Drawing.Point(928, 6);
+            this.btnProfileSelect.Location = new System.Drawing.Point(926, 8);
             this.btnProfileSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnProfileSelect.Name = "btnProfileSelect";
-            this.btnProfileSelect.Size = new System.Drawing.Size(22, 22);
+            this.btnProfileSelect.Size = new System.Drawing.Size(28, 28);
             this.btnProfileSelect.TabIndex = 20;
-            this.btnProfileSelect.UseVisualStyleBackColor = true;
+            this.btnProfileSelect.UseVisualStyleBackColor = false;
             this.btnProfileSelect.Click += new System.EventHandler(this.BtnProfileSelect_Click);
             // 
             // cbStayOnTop
             // 
             this.cbStayOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbStayOnTop.AutoSize = true;
-            this.cbStayOnTop.BackColor = System.Drawing.SystemColors.Control;
+            this.cbStayOnTop.BackColor = System.Drawing.Color.Transparent;
             this.cbStayOnTop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbStayOnTop.Location = new System.Drawing.Point(1260, 11);
+            this.cbStayOnTop.Location = new System.Drawing.Point(1316, 11);
             this.cbStayOnTop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbStayOnTop.Name = "cbStayOnTop";
             this.cbStayOnTop.Size = new System.Drawing.Size(116, 24);
@@ -397,14 +412,14 @@
             // 
             // lblProfileName
             // 
-            this.lblProfileName.BackColor = System.Drawing.SystemColors.Control;
+            this.lblProfileName.BackColor = System.Drawing.Color.LightGray;
             this.lblProfileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileName.ForeColor = System.Drawing.Color.Black;
             this.lblProfileName.Location = new System.Drawing.Point(520, 5);
             this.lblProfileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblProfileName.Name = "lblProfileName";
-            this.lblProfileName.Size = new System.Drawing.Size(398, 34);
+            this.lblProfileName.Size = new System.Drawing.Size(398, 30);
             this.lblProfileName.TabIndex = 18;
             this.lblProfileName.Text = "Default";
             this.lblProfileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -412,26 +427,29 @@
             // 
             // btnLogOptions
             // 
-            this.btnLogOptions.AutoSize = true;
-            this.btnLogOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogOptions.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnLogOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnLogOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOptions.Image")));
-            this.btnLogOptions.Location = new System.Drawing.Point(465, 6);
+            this.btnLogOptions.Location = new System.Drawing.Point(463, 8);
             this.btnLogOptions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLogOptions.Name = "btnLogOptions";
-            this.btnLogOptions.Size = new System.Drawing.Size(22, 22);
+            this.btnLogOptions.Size = new System.Drawing.Size(28, 28);
             this.btnLogOptions.TabIndex = 11;
-            this.btnLogOptions.UseVisualStyleBackColor = true;
+            this.btnLogOptions.UseVisualStyleBackColor = false;
             this.btnLogOptions.Click += new System.EventHandler(this.BtnLogfile_Click);
             // 
             // btnStartLog
             // 
             this.btnStartLog.BackColor = System.Drawing.Color.Transparent;
+            this.btnStartLog.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnStartLog.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnStartLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartLog.ForeColor = System.Drawing.Color.Blue;
             this.btnStartLog.Location = new System.Drawing.Point(344, 5);
             this.btnStartLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStartLog.Name = "btnStartLog";
-            this.btnStartLog.Size = new System.Drawing.Size(112, 35);
+            this.btnStartLog.Size = new System.Drawing.Size(112, 30);
             this.btnStartLog.TabIndex = 10;
             this.btnStartLog.Text = "Start &Log";
             this.btnStartLog.UseVisualStyleBackColor = false;
@@ -447,7 +465,7 @@
             this.MacroPanel.Location = new System.Drawing.Point(0, 844);
             this.MacroPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MacroPanel.Name = "MacroPanel";
-            this.MacroPanel.Size = new System.Drawing.Size(1389, 168);
+            this.MacroPanel.Size = new System.Drawing.Size(1445, 168);
             this.MacroPanel.TabIndex = 6;
             // 
             // dgMacroTable
@@ -504,7 +522,7 @@
             this.dgMacroTable.ShowCellToolTips = false;
             this.dgMacroTable.ShowEditingIcon = false;
             this.dgMacroTable.ShowRowErrors = false;
-            this.dgMacroTable.Size = new System.Drawing.Size(1359, 132);
+            this.dgMacroTable.Size = new System.Drawing.Size(1415, 132);
             this.dgMacroTable.TabIndex = 0;
             this.dgMacroTable.TabStop = false;
             this.dgMacroTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgMacroTable_CellClick);
@@ -628,7 +646,7 @@
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(1374, 0);
+            this.panel6.Location = new System.Drawing.Point(1430, 0);
             this.panel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(15, 168);
@@ -648,11 +666,13 @@
             this.btnFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFile.BackColor = System.Drawing.Color.Transparent;
             this.btnFile.Enabled = false;
+            this.btnFile.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnFile.ForeColor = System.Drawing.Color.Blue;
-            this.btnFile.Location = new System.Drawing.Point(1233, 3);
+            this.btnFile.Location = new System.Drawing.Point(1289, 3);
             this.btnFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFile.Name = "btnFile";
-            this.btnFile.Size = new System.Drawing.Size(112, 35);
+            this.btnFile.Size = new System.Drawing.Size(112, 30);
             this.btnFile.TabIndex = 1;
             this.btnFile.Text = "Fil&e";
             this.btnFile.UseVisualStyleBackColor = false;
@@ -661,18 +681,21 @@
             // btnEditMacro
             // 
             this.btnEditMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditMacro.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditMacro.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnEditMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnEditMacro.Image = ((System.Drawing.Image)(resources.GetObject("btnEditMacro.Image")));
-            this.btnEditMacro.Location = new System.Drawing.Point(1347, 3);
+            this.btnEditMacro.Location = new System.Drawing.Point(1404, 6);
             this.btnEditMacro.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEditMacro.Name = "btnEditMacro";
-            this.btnEditMacro.Size = new System.Drawing.Size(38, 35);
+            this.btnEditMacro.Size = new System.Drawing.Size(28, 28);
             this.btnEditMacro.TabIndex = 0;
-            this.btnEditMacro.UseVisualStyleBackColor = true;
+            this.btnEditMacro.UseVisualStyleBackColor = false;
             this.btnEditMacro.Click += new System.EventHandler(this.BtnEditMacro_Click);
             // 
             // SendPanel
             // 
-            this.SendPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.SendPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.SendPanel.Controls.Add(this.cbClearCMD);
             this.SendPanel.Controls.Add(this.btnEditMacro);
             this.SendPanel.Controls.Add(this.btnFile);
@@ -681,10 +704,10 @@
             this.SendPanel.Controls.Add(this.tbCommand);
             this.SendPanel.Controls.Add(this.btnSend);
             this.SendPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SendPanel.Location = new System.Drawing.Point(0, 802);
+            this.SendPanel.Location = new System.Drawing.Point(0, 806);
             this.SendPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.SendPanel.Name = "SendPanel";
-            this.SendPanel.Size = new System.Drawing.Size(1389, 42);
+            this.SendPanel.Size = new System.Drawing.Size(1445, 38);
             this.SendPanel.TabIndex = 10;
             // 
             // cbClearCMD
@@ -692,7 +715,7 @@
             this.cbClearCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbClearCMD.AutoSize = true;
             this.cbClearCMD.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbClearCMD.Location = new System.Drawing.Point(966, 9);
+            this.cbClearCMD.Location = new System.Drawing.Point(1022, 9);
             this.cbClearCMD.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbClearCMD.Name = "cbClearCMD";
             this.cbClearCMD.Size = new System.Drawing.Size(136, 24);
@@ -708,7 +731,7 @@
             this.cbSendCR.Checked = true;
             this.cbSendCR.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbSendCR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbSendCR.Location = new System.Drawing.Point(816, 9);
+            this.cbSendCR.Location = new System.Drawing.Point(872, 9);
             this.cbSendCR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbSendCR.Name = "cbSendCR";
             this.cbSendCR.Size = new System.Drawing.Size(67, 24);
@@ -722,7 +745,7 @@
             this.cbSendLF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSendLF.AutoSize = true;
             this.cbSendLF.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbSendLF.Location = new System.Drawing.Point(891, 9);
+            this.cbSendLF.Location = new System.Drawing.Point(947, 9);
             this.cbSendLF.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbSendLF.Name = "cbSendLF";
             this.cbSendLF.Size = new System.Drawing.Size(63, 24);
@@ -738,10 +761,10 @@
             this.tbCommand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbCommand.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCommand.ForeColor = System.Drawing.Color.Blue;
-            this.tbCommand.Location = new System.Drawing.Point(15, 5);
+            this.tbCommand.Location = new System.Drawing.Point(5, 5);
             this.tbCommand.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbCommand.Name = "tbCommand";
-            this.tbCommand.Size = new System.Drawing.Size(788, 28);
+            this.tbCommand.Size = new System.Drawing.Size(854, 28);
             this.tbCommand.TabIndex = 1;
             this.tbCommand.WordWrap = false;
             this.tbCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
@@ -751,12 +774,13 @@
             this.btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSend.BackColor = System.Drawing.Color.Transparent;
             this.btnSend.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Yellow;
+            this.btnSend.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnSend.ForeColor = System.Drawing.Color.Blue;
-            this.btnSend.Location = new System.Drawing.Point(1112, 3);
+            this.btnSend.Location = new System.Drawing.Point(1168, 3);
             this.btnSend.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(112, 35);
+            this.btnSend.Size = new System.Drawing.Size(112, 30);
             this.btnSend.TabIndex = 0;
             this.btnSend.Text = "Sen&d";
             this.btnSend.UseVisualStyleBackColor = false;
@@ -768,10 +792,11 @@
             this.ctrlOne.BackColor = System.Drawing.Color.White;
             this.ctrlOne.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ctrlOne.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ctrlOne.Location = new System.Drawing.Point(1212, 6);
+            this.ctrlOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ctrlOne.Location = new System.Drawing.Point(1298, 5);
             this.ctrlOne.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ctrlOne.Name = "ctrlOne";
-            this.ctrlOne.Size = new System.Drawing.Size(64, 28);
+            this.ctrlOne.Size = new System.Drawing.Size(48, 28);
             this.ctrlOne.TabIndex = 1;
             this.ctrlOne.Text = "#1";
             this.ctrlOne.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -784,10 +809,11 @@
             this.ctrlTwo.BackColor = System.Drawing.Color.White;
             this.ctrlTwo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ctrlTwo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ctrlTwo.Location = new System.Drawing.Point(1286, 6);
+            this.ctrlTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ctrlTwo.Location = new System.Drawing.Point(1353, 5);
             this.ctrlTwo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ctrlTwo.Name = "ctrlTwo";
-            this.ctrlTwo.Size = new System.Drawing.Size(64, 28);
+            this.ctrlTwo.Size = new System.Drawing.Size(48, 28);
             this.ctrlTwo.TabIndex = 0;
             this.ctrlTwo.Text = "#2";
             this.ctrlTwo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -796,163 +822,122 @@
             // 
             // PanelTwo
             // 
-            this.PanelTwo.BackColor = System.Drawing.SystemColors.Control;
+            this.PanelTwo.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.PanelTwo.Controls.Add(this.panel9);
+            this.PanelTwo.Controls.Add(this.cbFreezeCase);
+            this.PanelTwo.Controls.Add(this.freezeText);
+            this.PanelTwo.Controls.Add(this.cbFreezeAt);
+            this.PanelTwo.Controls.Add(this.panel8);
+            this.PanelTwo.Controls.Add(this.panel3);
+            this.PanelTwo.Controls.Add(this.cbShowCR);
+            this.PanelTwo.Controls.Add(this.cbShowLF);
+            this.PanelTwo.Controls.Add(this.cbHEX);
+            this.PanelTwo.Controls.Add(this.cbASCII);
             this.PanelTwo.Controls.Add(this.btnSearch);
             this.PanelTwo.Controls.Add(this.btnFreeze);
             this.PanelTwo.Controls.Add(this.panel1);
             this.PanelTwo.Controls.Add(this.sep1);
-            this.PanelTwo.Controls.Add(this.panel3);
             this.PanelTwo.Controls.Add(this.btnExport);
-            this.PanelTwo.Controls.Add(this.btnHelp);
             this.PanelTwo.Controls.Add(this.btnClear);
-            this.PanelTwo.Controls.Add(this.cbShowCR);
-            this.PanelTwo.Controls.Add(this.cbShowLF);
             this.PanelTwo.Controls.Add(this.cbTimestamp);
-            this.PanelTwo.Controls.Add(this.cbHEX);
-            this.PanelTwo.Controls.Add(this.cbASCII);
+            this.PanelTwo.Controls.Add(this.btnHelp);
             this.PanelTwo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelTwo.Location = new System.Drawing.Point(0, 45);
+            this.PanelTwo.Location = new System.Drawing.Point(0, 41);
             this.PanelTwo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PanelTwo.Name = "PanelTwo";
-            this.PanelTwo.Size = new System.Drawing.Size(1389, 43);
+            this.PanelTwo.Size = new System.Drawing.Size(1445, 35);
             this.PanelTwo.TabIndex = 8;
             // 
-            // btnSearch
+            // panel9
             // 
-            this.btnSearch.Enabled = false;
-            this.btnSearch.Location = new System.Drawing.Point(111, 2);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(96, 37);
-            this.btnSearch.TabIndex = 24;
-            this.btnSearch.Text = "&Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.panel9.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel9.Location = new System.Drawing.Point(1333, 2);
+            this.panel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(4, 30);
+            this.panel9.TabIndex = 29;
             // 
-            // btnFreeze
+            // cbFreezeCase
             // 
-            this.btnFreeze.BackColor = System.Drawing.SystemColors.Control;
-            this.btnFreeze.Location = new System.Drawing.Point(6, 2);
-            this.btnFreeze.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnFreeze.Name = "btnFreeze";
-            this.btnFreeze.Size = new System.Drawing.Size(96, 37);
-            this.btnFreeze.TabIndex = 22;
-            this.btnFreeze.Text = "&Freeze";
-            this.btnFreeze.UseVisualStyleBackColor = false;
-            this.btnFreeze.Click += new System.EventHandler(this.BtnFreeze_Click);
+            this.cbFreezeCase.AutoSize = true;
+            this.cbFreezeCase.Location = new System.Drawing.Point(1271, 6);
+            this.cbFreezeCase.Name = "cbFreezeCase";
+            this.cbFreezeCase.Size = new System.Drawing.Size(55, 24);
+            this.cbFreezeCase.TabIndex = 28;
+            this.cbFreezeCase.Text = "Aa";
+            this.cbFreezeCase.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // freezeText
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Location = new System.Drawing.Point(430, 5);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(4, 35);
-            this.panel1.TabIndex = 21;
+            this.freezeText.FormattingEnabled = true;
+            this.freezeText.Location = new System.Drawing.Point(1056, 3);
+            this.freezeText.Name = "freezeText";
+            this.freezeText.Size = new System.Drawing.Size(209, 28);
+            this.freezeText.Sorted = true;
+            this.freezeText.TabIndex = 27;
             // 
-            // sep1
+            // cbFreezeAt
             // 
-            this.sep1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.sep1.Location = new System.Drawing.Point(213, 5);
-            this.sep1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.sep1.Name = "sep1";
-            this.sep1.Size = new System.Drawing.Size(4, 35);
-            this.sep1.TabIndex = 18;
+            this.cbFreezeAt.AutoSize = true;
+            this.cbFreezeAt.Location = new System.Drawing.Point(952, 6);
+            this.cbFreezeAt.Name = "cbFreezeAt";
+            this.cbFreezeAt.Size = new System.Drawing.Size(103, 24);
+            this.cbFreezeAt.TabIndex = 26;
+            this.cbFreezeAt.Text = "Freeze at";
+            this.cbFreezeAt.UseVisualStyleBackColor = true;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel8.Location = new System.Drawing.Point(940, 2);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(4, 30);
+            this.panel8.TabIndex = 25;
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel3.Location = new System.Drawing.Point(744, 3);
+            this.panel3.Location = new System.Drawing.Point(701, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(4, 35);
+            this.panel3.Size = new System.Drawing.Size(4, 30);
             this.panel3.TabIndex = 19;
-            // 
-            // btnExport
-            // 
-            this.btnExport.BackColor = System.Drawing.Color.Transparent;
-            this.btnExport.Location = new System.Drawing.Point(224, 2);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(96, 37);
-            this.btnExport.TabIndex = 17;
-            this.btnExport.Text = "E&xport";
-            this.btnExport.UseVisualStyleBackColor = false;
-            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.Location = new System.Drawing.Point(1317, 3);
-            this.btnHelp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(68, 37);
-            this.btnHelp.TabIndex = 1;
-            this.btnHelp.Text = "&Help";
-            this.btnHelp.UseVisualStyleBackColor = false;
-            this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
-            // 
-            // btnClear
-            // 
-            this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.Location = new System.Drawing.Point(328, 2);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(96, 37);
-            this.btnClear.TabIndex = 16;
-            this.btnClear.Text = "Cl&ear";
-            this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // cbShowCR
             // 
             this.cbShowCR.AutoSize = true;
+            this.cbShowCR.BackColor = System.Drawing.Color.Transparent;
             this.cbShowCR.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbShowCR.Location = new System.Drawing.Point(764, 9);
+            this.cbShowCR.Location = new System.Drawing.Point(713, 6);
             this.cbShowCR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbShowCR.Name = "cbShowCR";
             this.cbShowCR.Size = new System.Drawing.Size(112, 24);
             this.cbShowCR.TabIndex = 10;
             this.cbShowCR.Text = "Show &{CR}";
-            this.cbShowCR.UseVisualStyleBackColor = true;
+            this.cbShowCR.UseVisualStyleBackColor = false;
             this.cbShowCR.CheckedChanged += new System.EventHandler(this.cbShowCR_CheckedChanged);
             // 
             // cbShowLF
             // 
             this.cbShowLF.AutoSize = true;
+            this.cbShowLF.BackColor = System.Drawing.Color.Transparent;
             this.cbShowLF.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbShowLF.Location = new System.Drawing.Point(891, 9);
+            this.cbShowLF.Location = new System.Drawing.Point(832, 6);
             this.cbShowLF.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbShowLF.Name = "cbShowLF";
             this.cbShowLF.Size = new System.Drawing.Size(108, 24);
             this.cbShowLF.TabIndex = 9;
             this.cbShowLF.Text = "Show {LF&}";
-            this.cbShowLF.UseVisualStyleBackColor = true;
+            this.cbShowLF.UseVisualStyleBackColor = false;
             this.cbShowLF.CheckedChanged += new System.EventHandler(this.cbShowLF_CheckedChanged);
-            // 
-            // cbTimestamp
-            // 
-            this.cbTimestamp.AutoSize = true;
-            this.cbTimestamp.BackColor = System.Drawing.SystemColors.Control;
-            this.cbTimestamp.Checked = true;
-            this.cbTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbTimestamp.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbTimestamp.Location = new System.Drawing.Point(453, 9);
-            this.cbTimestamp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbTimestamp.Name = "cbTimestamp";
-            this.cbTimestamp.Size = new System.Drawing.Size(113, 24);
-            this.cbTimestamp.TabIndex = 8;
-            this.cbTimestamp.Text = "&Timestamp";
-            this.cbTimestamp.UseVisualStyleBackColor = false;
-            this.cbTimestamp.CheckedChanged += new System.EventHandler(this.cbTimestamp_CheckedChanged);
             // 
             // cbHEX
             // 
             this.cbHEX.AutoSize = true;
-            this.cbHEX.BackColor = System.Drawing.SystemColors.Control;
+            this.cbHEX.BackColor = System.Drawing.Color.Transparent;
             this.cbHEX.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbHEX.Location = new System.Drawing.Point(663, 9);
+            this.cbHEX.Location = new System.Drawing.Point(627, 6);
             this.cbHEX.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbHEX.Name = "cbHEX";
             this.cbHEX.Size = new System.Drawing.Size(69, 24);
@@ -964,11 +949,11 @@
             // cbASCII
             // 
             this.cbASCII.AutoSize = true;
-            this.cbASCII.BackColor = System.Drawing.SystemColors.Control;
+            this.cbASCII.BackColor = System.Drawing.Color.Transparent;
             this.cbASCII.Checked = true;
             this.cbASCII.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbASCII.Cursor = System.Windows.Forms.Cursors.Default;
-            this.cbASCII.Location = new System.Drawing.Point(574, 9);
+            this.cbASCII.Location = new System.Drawing.Point(550, 6);
             this.cbASCII.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbASCII.Name = "cbASCII";
             this.cbASCII.Size = new System.Drawing.Size(78, 24);
@@ -977,20 +962,100 @@
             this.cbASCII.UseVisualStyleBackColor = false;
             this.cbASCII.CheckedChanged += new System.EventHandler(this.CbASCII_CheckedChanged);
             // 
-            // LED3
+            // btnSearch
             // 
-            this.LED3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LED3.BackColor = System.Drawing.SystemColors.Control;
-            this.LED3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LED3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LED3.Location = new System.Drawing.Point(1212, 5);
-            this.LED3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LED3.Name = "LED3";
-            this.LED3.Size = new System.Drawing.Size(64, 28);
-            this.LED3.TabIndex = 4;
-            this.LED3.Text = "#3";
-            this.LED3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.LED3.Visible = false;
+            this.btnSearch.Enabled = false;
+            this.btnSearch.Location = new System.Drawing.Point(111, 2);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(96, 30);
+            this.btnSearch.TabIndex = 24;
+            this.btnSearch.Text = "&Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnFreeze
+            // 
+            this.btnFreeze.BackColor = System.Drawing.SystemColors.Control;
+            this.btnFreeze.Location = new System.Drawing.Point(6, 2);
+            this.btnFreeze.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnFreeze.Name = "btnFreeze";
+            this.btnFreeze.Size = new System.Drawing.Size(96, 30);
+            this.btnFreeze.TabIndex = 22;
+            this.btnFreeze.Text = "&Freeze";
+            this.btnFreeze.UseVisualStyleBackColor = false;
+            this.btnFreeze.Click += new System.EventHandler(this.BtnFreeze_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Location = new System.Drawing.Point(428, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(4, 30);
+            this.panel1.TabIndex = 21;
+            // 
+            // sep1
+            // 
+            this.sep1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.sep1.Location = new System.Drawing.Point(211, 2);
+            this.sep1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sep1.Name = "sep1";
+            this.sep1.Size = new System.Drawing.Size(4, 30);
+            this.sep1.TabIndex = 18;
+            // 
+            // btnExport
+            // 
+            this.btnExport.BackColor = System.Drawing.Color.Transparent;
+            this.btnExport.Location = new System.Drawing.Point(224, 2);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(96, 30);
+            this.btnExport.TabIndex = 17;
+            this.btnExport.Text = "E&xport";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
+            // btnClear
+            // 
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.Location = new System.Drawing.Point(328, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(96, 30);
+            this.btnClear.TabIndex = 16;
+            this.btnClear.Text = "Cl&ear";
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
+            // 
+            // cbTimestamp
+            // 
+            this.cbTimestamp.AutoSize = true;
+            this.cbTimestamp.BackColor = System.Drawing.Color.Transparent;
+            this.cbTimestamp.Checked = true;
+            this.cbTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbTimestamp.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cbTimestamp.Location = new System.Drawing.Point(440, 6);
+            this.cbTimestamp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbTimestamp.Name = "cbTimestamp";
+            this.cbTimestamp.Size = new System.Drawing.Size(113, 24);
+            this.cbTimestamp.TabIndex = 8;
+            this.cbTimestamp.Text = "&Timestamp";
+            this.cbTimestamp.UseVisualStyleBackColor = false;
+            this.cbTimestamp.CheckedChanged += new System.EventHandler(this.cbTimestamp_CheckedChanged);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
+            this.btnHelp.Location = new System.Drawing.Point(1369, 2);
+            this.btnHelp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(61, 30);
+            this.btnHelp.TabIndex = 1;
+            this.btnHelp.Text = "&Help";
+            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.Click += new System.EventHandler(this.BtnHelp_Click);
             // 
             // LED4
             // 
@@ -998,10 +1063,11 @@
             this.LED4.BackColor = System.Drawing.SystemColors.Control;
             this.LED4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LED4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LED4.Location = new System.Drawing.Point(1286, 5);
+            this.LED4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LED4.Location = new System.Drawing.Point(1353, 5);
             this.LED4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LED4.Name = "LED4";
-            this.LED4.Size = new System.Drawing.Size(64, 28);
+            this.LED4.Size = new System.Drawing.Size(48, 28);
             this.LED4.TabIndex = 3;
             this.LED4.Text = "#4";
             this.LED4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1013,10 +1079,11 @@
             this.LED1.BackColor = System.Drawing.SystemColors.Control;
             this.LED1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LED1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LED1.Location = new System.Drawing.Point(1065, 5);
+            this.LED1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LED1.Location = new System.Drawing.Point(1188, 5);
             this.LED1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LED1.Name = "LED1";
-            this.LED1.Size = new System.Drawing.Size(64, 28);
+            this.LED1.Size = new System.Drawing.Size(48, 28);
             this.LED1.TabIndex = 2;
             this.LED1.Text = "#1";
             this.LED1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1028,19 +1095,36 @@
             this.LED2.BackColor = System.Drawing.SystemColors.Control;
             this.LED2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LED2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.LED2.Location = new System.Drawing.Point(1138, 5);
+            this.LED2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LED2.Location = new System.Drawing.Point(1243, 5);
             this.LED2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LED2.Name = "LED2";
-            this.LED2.Size = new System.Drawing.Size(64, 28);
+            this.LED2.Size = new System.Drawing.Size(48, 28);
             this.LED2.TabIndex = 1;
             this.LED2.Text = "#2";
             this.LED2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LED2.Visible = false;
             // 
+            // LED3
+            // 
+            this.LED3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LED3.BackColor = System.Drawing.SystemColors.Control;
+            this.LED3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.LED3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.LED3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LED3.Location = new System.Drawing.Point(1298, 5);
+            this.LED3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LED3.Name = "LED3";
+            this.LED3.Size = new System.Drawing.Size(48, 28);
+            this.LED3.TabIndex = 4;
+            this.LED3.Text = "#3";
+            this.LED3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LED3.Visible = false;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 88);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 76);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -1048,30 +1132,30 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.LED4);
+            this.splitContainer1.Panel1.Controls.Add(this.LED1);
             this.splitContainer1.Panel1.Controls.Add(this.LED3);
             this.splitContainer1.Panel1.Controls.Add(this.LED2);
-            this.splitContainer1.Panel1.Controls.Add(this.LED1);
             this.splitContainer1.Panel1.Controls.Add(this.btnAbortFile);
             this.splitContainer1.Panel1.Controls.Add(this.lblLineCounter);
             this.splitContainer1.Panel1.Controls.Add(this.progressBar);
             this.splitContainer1.Panel1.Controls.Add(this.btnPauseFile);
-            this.splitContainer1.Panel1.Controls.Add(this.lbInput);
             this.splitContainer1.Panel1.Controls.Add(this.hScrollBar);
+            this.splitContainer1.Panel1.Controls.Add(this.lbInput);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.ctrlOne);
             this.splitContainer1.Panel2.Controls.Add(this.ctrlTwo);
+            this.splitContainer1.Panel2.Controls.Add(this.ctrlOne);
             this.splitContainer1.Panel2.Controls.Add(this.lbOutput);
-            this.splitContainer1.Size = new System.Drawing.Size(1389, 714);
-            this.splitContainer1.SplitterDistance = 555;
+            this.splitContainer1.Size = new System.Drawing.Size(1445, 730);
+            this.splitContainer1.SplitterDistance = 567;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 11;
             // 
             // btnAbortFile
             // 
             this.btnAbortFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAbortFile.Location = new System.Drawing.Point(741, 209);
+            this.btnAbortFile.Location = new System.Drawing.Point(776, 213);
             this.btnAbortFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAbortFile.Name = "btnAbortFile";
             this.btnAbortFile.Size = new System.Drawing.Size(112, 35);
@@ -1085,7 +1169,7 @@
             // 
             this.lblLineCounter.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblLineCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLineCounter.Location = new System.Drawing.Point(651, 123);
+            this.lblLineCounter.Location = new System.Drawing.Point(686, 127);
             this.lblLineCounter.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLineCounter.Name = "lblLineCounter";
             this.lblLineCounter.Size = new System.Drawing.Size(100, 35);
@@ -1097,7 +1181,7 @@
             // progressBar
             // 
             this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.progressBar.Location = new System.Drawing.Point(476, 165);
+            this.progressBar.Location = new System.Drawing.Point(511, 169);
             this.progressBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(442, 35);
@@ -1109,7 +1193,7 @@
             // btnPauseFile
             // 
             this.btnPauseFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnPauseFile.Location = new System.Drawing.Point(558, 209);
+            this.btnPauseFile.Location = new System.Drawing.Point(593, 213);
             this.btnPauseFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPauseFile.Name = "btnPauseFile";
             this.btnPauseFile.Size = new System.Drawing.Size(112, 35);
@@ -1119,34 +1203,34 @@
             this.btnPauseFile.Visible = false;
             this.btnPauseFile.Click += new System.EventHandler(this.BtnPauseFile_Click);
             // 
+            // hScrollBar
+            // 
+            this.hScrollBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.hScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.hScrollBar.Location = new System.Drawing.Point(0, 557);
+            this.hScrollBar.Maximum = 240;
+            this.hScrollBar.Name = "hScrollBar";
+            this.hScrollBar.Size = new System.Drawing.Size(1445, 10);
+            this.hScrollBar.TabIndex = 18;
+            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
+            // 
             // lbInput
             // 
             this.lbInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbInput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbInput.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbInput.FormattingEnabled = true;
-            this.lbInput.ItemHeight = 16;
+            this.lbInput.ItemHeight = 28;
             this.lbInput.Location = new System.Drawing.Point(0, 0);
             this.lbInput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lbInput.Name = "lbInput";
             this.lbInput.ScrollAlwaysVisible = true;
-            this.lbInput.Size = new System.Drawing.Size(1389, 545);
+            this.lbInput.Size = new System.Drawing.Size(1445, 567);
             this.lbInput.TabIndex = 17;
             this.lbInput.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbInput_MouseClick);
             this.lbInput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbInput_DrawItem);
             this.lbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             this.lbInput.Resize += new System.EventHandler(this.lbInput_Resize);
-            // 
-            // hScrollBar
-            // 
-            this.hScrollBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hScrollBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.hScrollBar.Location = new System.Drawing.Point(0, 545);
-            this.hScrollBar.Maximum = 240;
-            this.hScrollBar.Name = "hScrollBar";
-            this.hScrollBar.Size = new System.Drawing.Size(1389, 10);
-            this.hScrollBar.TabIndex = 18;
-            this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
             // 
             // lbOutput
             // 
@@ -1155,11 +1239,11 @@
             this.lbOutput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbOutput.FormattingEnabled = true;
-            this.lbOutput.ItemHeight = 14;
+            this.lbOutput.ItemHeight = 19;
             this.lbOutput.Location = new System.Drawing.Point(0, 0);
             this.lbOutput.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(1389, 153);
+            this.lbOutput.Size = new System.Drawing.Size(1445, 157);
             this.lbOutput.TabIndex = 0;
             this.lbOutput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbOutput_DrawItem);
             this.lbOutput.SelectedIndexChanged += new System.EventHandler(this.LbOutput_SelectedIndexChanged);
@@ -1182,7 +1266,7 @@
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1389, 1048);
+            this.ClientSize = new System.Drawing.Size(1445, 1048);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.SendPanel);
             this.Controls.Add(this.PanelTwo);
@@ -1299,6 +1383,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.CheckBox cbFreezeCase;
+        private System.Windows.Forms.ComboBox freezeText;
+        private System.Windows.Forms.CheckBox cbFreezeAt;
     }
 }
 

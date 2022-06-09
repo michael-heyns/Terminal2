@@ -147,7 +147,14 @@
 </value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.1.0
+    <value>v1.2.3.0
+    * Display is now DPI-aware - which means the text is clear and the RS232 buttons are back
+    * Major look-and-feel update
+
+v1.2.1.1
+    * Fixed bug in "Clear" button press
+
+v1.2.1.0
     * Critical bug fix: The program was wasting CPU cycles repainting text that is not visible - and the more
       lines in memory, the more time it would waste.
 
@@ -225,6 +232,9 @@ v1.0.1.0
     * Ability to freeze the display when a specified key word is detected
 </value>
   </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>42</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAgAAAAAAAEAIABqlgAAhgAAAICAAAABACAAKAgBAPCWAABISAAAAQAgAIhUAAAYnwEAQEAAAAEA

@@ -239,6 +239,7 @@ namespace Terminal
                 data += "InTextColor=-16777216\n";
                 data += "# Output panel colours\n";
                 data += "OutBackColor=-2302756\n";
+                data += "IgnoreCase=True\n";
                 data += "# Color filters\n";
                 data += "F0Mode=1\n";
                 data += "F0Text=\n";
@@ -360,6 +361,7 @@ namespace Terminal
 
                 data += $"# Output panel colours\n";
                 data += $"OutBackColor={profile.displayOptions.outputBackground.ToArgb()}\n";
+                data += $"IgnoreCase={profile.displayOptions.IgnoreCase}\n";
 
                 data += $"# Color filters\n";
                 for (int i = 0; i < profile.displayOptions.filter.Length; i++)
@@ -455,6 +457,8 @@ namespace Terminal
                 string[] lines = data.Split(new char[] { '\r', '\n' });
                 FSection section = FSection.None;
                 int mid = -1;
+
+                profile.displayOptions.IgnoreCase = true;   // unless overwritten
 
                 foreach (string line in lines)
                 {
@@ -555,6 +559,10 @@ namespace Terminal
                         else if (line.StartsWith("OutBackColor="))
                         {
                             profile.displayOptions.outputBackground = Color.FromArgb(Utils.Int(line.Substring(13)));
+                        }
+                        else if (line.StartsWith("IgnoreCase="))
+                        {
+                            profile.displayOptions.IgnoreCase = line.Contains("True");
                         }
                         else if (line.StartsWith("LogDir="))
                         {

@@ -86,6 +86,7 @@ namespace Terminal
     public class DisplayOptions
     {
         public ColorFilter[] filter = new ColorFilter[12];
+        public bool IgnoreCase = true;
 
         public Font inputFont;
         public Color inputDefaultForeground = Color.Black;

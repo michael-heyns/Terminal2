@@ -29,7 +29,7 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 The font face has been kept clean and the settings have been moved one layer down.
 
 Here is a real example where I configured a U-Blox WiFi device
-![Picture1](https://user-images.githubusercontent.com/4144679/172826183-eb5c1158-1a4d-43d8-bebd-024cabcf8eec.png)
+<img width="734" alt="Picture1" src="https://user-images.githubusercontent.com/4144679/172826885-75045f30-2391-4fcb-93d6-b20e4d5e0054.png">
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.

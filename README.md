@@ -28,10 +28,8 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 ## Terminal2
 The font face has been kept clean and the settings have been moved one layer down.
 
-Here is an example from Scotty's emulator on Enterprise (NCC-1701-B)
-
-![Terminal2](https://user-images.githubusercontent.com/4144679/169687630-1322d9c9-d6b1-4153-bdc0-1c23693d5d6e.png)
-![Connect](https://user-images.githubusercontent.com/4144679/169687784-2598f967-dc87-4b64-9938-7c0a5b8c7c3f.png)
+Here is a real example where I configured a U-Blox WiFi device
+![Picture1](https://user-images.githubusercontent.com/4144679/172826183-eb5c1158-1a4d-43d8-bebd-024cabcf8eec.png)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.

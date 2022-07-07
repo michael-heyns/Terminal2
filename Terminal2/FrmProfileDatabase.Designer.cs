@@ -47,9 +47,10 @@ namespace Terminal
             // 
             this.btnSelect.Enabled = false;
             this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(270, 73);
+            this.btnSelect.Location = new System.Drawing.Point(405, 112);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.Size = new System.Drawing.Size(112, 35);
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "&Switch To...";
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -59,9 +60,11 @@ namespace Terminal
             // 
             this.lbProfileList.FormattingEnabled = true;
             this.lbProfileList.HorizontalScrollbar = true;
-            this.lbProfileList.Location = new System.Drawing.Point(27, 44);
+            this.lbProfileList.ItemHeight = 20;
+            this.lbProfileList.Location = new System.Drawing.Point(40, 68);
+            this.lbProfileList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lbProfileList.Name = "lbProfileList";
-            this.lbProfileList.Size = new System.Drawing.Size(237, 264);
+            this.lbProfileList.Size = new System.Drawing.Size(354, 404);
             this.lbProfileList.Sorted = true;
             this.lbProfileList.TabIndex = 4;
             this.lbProfileList.SelectedIndexChanged += new System.EventHandler(this.ProfileList_SelectedIndexChanged);
@@ -70,9 +73,10 @@ namespace Terminal
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(270, 286);
+            this.btnDelete.Location = new System.Drawing.Point(405, 440);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(112, 35);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -82,9 +86,10 @@ namespace Terminal
             // 
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            this.lblTitle.Location = new System.Drawing.Point(18, 14);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(345, 21);
+            this.lblTitle.Size = new System.Drawing.Size(518, 32);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Profile Database";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -92,9 +97,10 @@ namespace Terminal
             // btnExport
             // 
             this.btnExport.Enabled = false;
-            this.btnExport.Location = new System.Drawing.Point(269, 228);
+            this.btnExport.Location = new System.Drawing.Point(404, 351);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.Size = new System.Drawing.Size(112, 35);
             this.btnExport.TabIndex = 9;
             this.btnExport.Text = "E&xport";
             this.btnExport.UseVisualStyleBackColor = true;
@@ -102,9 +108,10 @@ namespace Terminal
             // 
             // btnImport
             // 
-            this.btnImport.Location = new System.Drawing.Point(270, 257);
+            this.btnImport.Location = new System.Drawing.Point(405, 395);
+            this.btnImport.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
+            this.btnImport.Size = new System.Drawing.Size(112, 35);
             this.btnImport.TabIndex = 10;
             this.btnImport.Text = "&Import";
             this.btnImport.UseVisualStyleBackColor = true;
@@ -124,9 +131,10 @@ namespace Terminal
             // btnRename
             // 
             this.btnRename.Enabled = false;
-            this.btnRename.Location = new System.Drawing.Point(270, 199);
+            this.btnRename.Location = new System.Drawing.Point(405, 306);
+            this.btnRename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRename.Name = "btnRename";
-            this.btnRename.Size = new System.Drawing.Size(75, 23);
+            this.btnRename.Size = new System.Drawing.Size(112, 35);
             this.btnRename.TabIndex = 11;
             this.btnRename.Text = "&Rename";
             this.btnRename.UseVisualStyleBackColor = true;
@@ -135,9 +143,10 @@ namespace Terminal
             // btnCopy
             // 
             this.btnCopy.Enabled = false;
-            this.btnCopy.Location = new System.Drawing.Point(270, 170);
+            this.btnCopy.Location = new System.Drawing.Point(405, 262);
+            this.btnCopy.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.Size = new System.Drawing.Size(112, 35);
             this.btnCopy.TabIndex = 12;
             this.btnCopy.Text = "&Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
@@ -146,9 +155,10 @@ namespace Terminal
             // btnStart
             // 
             this.btnStart.Enabled = false;
-            this.btnStart.Location = new System.Drawing.Point(269, 44);
+            this.btnStart.Location = new System.Drawing.Point(404, 68);
+            this.btnStart.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(112, 35);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "&Start";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -157,9 +167,9 @@ namespace Terminal
             // FrmProfileDatabase
             // 
             this.AcceptButton = this.btnSelect;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 338);
+            this.ClientSize = new System.Drawing.Size(554, 520);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnRename);
@@ -171,10 +181,11 @@ namespace Terminal
             this.Controls.Add(this.btnSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmProfileDatabase";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profile Database";
             this.Shown += new System.EventHandler(this.FrmProfileDatabase_Shown);
             this.ResumeLayout(false);

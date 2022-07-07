@@ -13,7 +13,7 @@ namespace Terminal
 {
     public partial class FrmMain : Form
     {
-        private const int MAX_INPUT_LINE_COUNT = 100000;
+        private const int MAX_INPUT_LINE_COUNT = 10000;
         private const int MAX_OUTPUT_LINE_COUNT = 1000;
 
         public delegate void EnqueuedDelegate();
@@ -357,6 +357,7 @@ namespace Terminal
                 TopMost = false;
                 _config.Options = _activeProfile.displayOptions.Clone();
                 _config.ShowDialog();
+
                 TopMost = cbStayOnTop.Checked;
 
                 if (_config.Result == DialogResult.OK)
@@ -423,7 +424,6 @@ namespace Terminal
                 pdPort.Enabled = false;
                 lblProfileName.Enabled = false;
                 btnProfileSelect.Enabled = false;
-                btnSearch.Enabled = false;
 
                 _threadDone = false;
                 _connectThread = new Thread(new ThreadStart(ConnectionThread));
@@ -443,7 +443,6 @@ namespace Terminal
                     lblProfileName.Enabled = false;
                     btnProfileSelect.Enabled = false;
                     btnFile.Enabled = true;
-                    btnSearch.Enabled = false;
                     btnConnect.BackColor = Color.Lime;
 
                     Log.Add(Utils.Timestamp() + "{CONNECTED}");
@@ -460,7 +459,6 @@ namespace Terminal
 
         private void ActionDisconnect()
         {
-            SetSearchText(string.Empty);
             _comms.Disconnect();
             if (_state == State.Listening)
             {
@@ -478,7 +476,6 @@ namespace Terminal
             lblProfileName.Enabled = true;
             btnProfileSelect.Enabled = true;
             btnFile.Enabled = false;
-            btnSearch.Enabled = true;
             Application.DoEvents();
 
             RestartAllMacros();
@@ -692,19 +689,16 @@ namespace Terminal
             btnFreeze.ForeColor = Color.Blue;
             btnFreeze.BackColor = Color.IndianRed;
             btnFreeze.Text = "&GO";
-            btnSearch.Enabled = true;
             lbInput.TopIndex = topLine;
         }
         private void UnFreeze()
         {
-            SetSearchText(string.Empty);
             _uiInputQueue.Clear();
             btnFreeze.ForeColor = Color.Black;
             btnFreeze.BackColor = Color.Transparent;
             btnFreeze.Text = "&Freeze";
             _frozen = false;
             _stopLine = lbInput.Items.Count - 1;
-            btnSearch.Enabled = false;
         }
 
         private void BtnFreeze_Click(object sender, EventArgs e)
@@ -836,6 +830,12 @@ namespace Terminal
             //toolTip.SetToolTip(this.pdPort, "A list of available communication channels - this list is updated in whenever this puldown is opened");
             //toolTip.SetToolTip(this.btnConnect, "Click to Connect or Disconnect the selected communications channel");
             //toolTip.SetToolTip(this.btnStartLog, "Click to start logging data to file");
+            toolTip.SetToolTip(this.ctrlOne, "Click this LED to toggle it's outgoing state");
+            toolTip.SetToolTip(this.ctrlTwo, "Click this LED to toggle it's outgoing state");
+            toolTip.SetToolTip(this.LED1, "View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED2, "View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED3, "View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED4, "View-only status of the incoming hardware line");
             toolTip.SetToolTip(this.cbStayOnTop, "Check this to prevent this program (window) from being hidden by other windows");
             toolTip.SetToolTip(this.cbFreezeAt, "Check this to trigger FREEZE when next the search string is received");
             toolTip.SetToolTip(this.freezeText, "Enter the search string which will trigger a FREEZE.  It will be added to the list once it has caused a freeze.");
@@ -862,6 +862,9 @@ namespace Terminal
             }
             lbInput.Items.Add(string.Empty);
             _lineFinished = false;
+
+            //if (this.Width > 1050)
+            //    this.Width = 1050;
         }
 
         private void DoMacro(int m)
@@ -939,17 +942,24 @@ namespace Terminal
 
         private void DgMacroTable_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
+            dgMacroTable.Enabled = false;
+
             if (!_macroIsMoving)
+            {
+                dgMacroTable.Enabled = true;
                 return;
+            }
 
             if (e.RowIndex < 1 || e.RowIndex > 4)
             {
                 tbCommand.Focus();
+                dgMacroTable.Enabled = true;
                 return;
             }
             if (e.ColumnIndex < 1 || e.ColumnIndex > 12)
             {
                 tbCommand.Focus();
+                dgMacroTable.Enabled = true;
                 return;
             }
 
@@ -960,6 +970,7 @@ namespace Terminal
             if (dst.title.Length > 0)
             {
                 MessageBox.Show("You can only move macros to empty spots on the table", "Target spot is not empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                dgMacroTable.Enabled = true;
                 return;
             }
 
@@ -977,6 +988,7 @@ namespace Terminal
 
                 SaveThisProfile();
             }
+            dgMacroTable.Enabled = true;
         }
         private void SaveThisProfile()
         {
@@ -1307,17 +1319,20 @@ namespace Terminal
 
         private void BtnClear_Click(object sender, EventArgs e)
         {
-            lbInput.BeginUpdate();
+            btnClear.Enabled = false;
             {
-                SetSearchText(string.Empty);
-                _uiInputQueue.Clear();
-                lbInput.Items.Clear();
-                UnFreeze();
-                UpdateLineCounter();
-                lbInput.Items.Add(string.Empty);
-                _lineFinished = false;
+                lbInput.BeginUpdate();
+                {
+                    _uiInputQueue.Clear();
+                    lbInput.Items.Clear();
+                    UnFreeze();
+                    UpdateLineCounter();
+                    lbInput.Items.Add(string.Empty);
+                    _lineFinished = false;
+                }
+                lbInput.EndUpdate();
             }
-            lbInput.EndUpdate();
+            btnClear.Enabled = true;
         }
 
         private void BtnFile_Click(object sender, EventArgs e)
@@ -1522,7 +1537,9 @@ namespace Terminal
 
         private void DgMacroTable_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dgMacroTable.Enabled = false;
             dgMacroTable.ClearSelection();
+            dgMacroTable.Enabled = true; ;
         }
 
         private void PdPort_SelectedValueChanged(object sender, EventArgs e)
@@ -1715,48 +1732,54 @@ namespace Terminal
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (lbInput.Items.Count == 0)
-                return;
-
-            SetSearchText(string.Empty);
-            DialogResult rc = _search.ShowDialog();
-            if (rc == DialogResult.OK)
+            btnSearch.Enabled = false;
             {
-                int line = -1;
-                for (int i = lbInput.Items.Count - 1; i > 0; i--)
+                DialogResult rc = _search.ShowDialog();
+                if (rc == DialogResult.OK)
                 {
-                    if (_search.IgnoreCase.Checked)
+                    int line = -1;
+                    for (int i = lbInput.Items.Count - 1; i > 0; i--)
                     {
-                        if (lbInput.Items[i].ToString().ToLower().Contains(_search.SearchText.Text.ToLower()))
+                        if (_search.IgnoreCase.Checked)
                         {
-                            line = i;
-                            break;
+                            if (lbInput.Items[i].ToString().ToLower().Contains(_search.SearchText.Text.ToLower()))
+                            {
+                                line = i;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (lbInput.Items[i].ToString().Contains(_search.SearchText.Text))
+                            {
+                                line = i;
+                                break;
+                            }
                         }
                     }
-                    else
+
+                    if (line > -1)
                     {
-                        if (lbInput.Items[i].ToString().Contains(_search.SearchText.Text))
-                        {
-                            line = i;
-                            break;
-                        }
+                        SetSearchText(_search.SearchText.Text);
+
+                        if (line > 5)
+                            lbInput.TopIndex = line - 5;
+                        else
+                            lbInput.TopIndex = 0;
                     }
-                }
-
-                if (line > -1)
-                {
-                    SetSearchText(_search.SearchText.Text);
-
-                    if (line > 5)
-                        lbInput.TopIndex = line - 5;
-                    else
-                        lbInput.TopIndex = 0;
-                }
-                else
-                {
-                    MessageBox.Show("Not found", "String \"" + _search.SearchText.Text + "\"", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else if (lbInput.Items.Count > 10)
+                    {
+                        MessageBox.Show("Not found", "String \"" + _search.SearchText.Text + "\"", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
+            btnSearch.Enabled = true;
+        }
+
+        private void backupTimer_Tick(object sender, EventArgs e)
+        {
+            backupTimer.Interval = 36000000;    // every hour from now on
+            Database.Backup();
         }
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox
@@ -1785,6 +1808,7 @@ namespace Terminal
                 for (int i = this.Items.Count - 1; i >= 0; i--)
                 {
                     System.Drawing.Rectangle irect = this.GetItemRectangle(i);
+                    irect.Offset(0, -this.FontHeight / 2);
                     if (e.ClipRectangle.IntersectsWith(irect))
                     {
                         OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font,

@@ -28,6 +28,9 @@ namespace Terminal
 
         private void FrmHelp_Load(object sender, EventArgs e)
         {
+            AssemblyInfo info = new AssemblyInfo();
+            lblThisVersion.Text = $"v{info.AssemblyVersion}";
+
             for (int i = 0; i <= 255; i++)
             {
                 string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";

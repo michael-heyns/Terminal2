@@ -48,18 +48,20 @@ namespace Terminal
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(161, 23);
+            this.label1.Location = new System.Drawing.Point(239, 19);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 16);
+            this.label1.Size = new System.Drawing.Size(104, 25);
             this.label1.TabIndex = 9;
             this.label1.Text = "Send File";
             // 
             // btnSend
             // 
             this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(314, 134);
+            this.btnSend.Location = new System.Drawing.Point(444, 139);
+            this.btnSend.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.Size = new System.Drawing.Size(112, 35);
             this.btnSend.TabIndex = 10;
             this.btnSend.Text = "&Send";
             this.btnSend.UseVisualStyleBackColor = true;
@@ -74,25 +76,28 @@ namespace Terminal
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 54);
+            this.label2.Location = new System.Drawing.Point(12, 68);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(51, 20);
             this.label2.TabIndex = 12;
             this.label2.Text = "Name";
             // 
             // tbFilename
             // 
-            this.tbFilename.Location = new System.Drawing.Point(66, 51);
+            this.tbFilename.Location = new System.Drawing.Point(73, 63);
+            this.tbFilename.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbFilename.Name = "tbFilename";
-            this.tbFilename.Size = new System.Drawing.Size(285, 20);
+            this.tbFilename.Size = new System.Drawing.Size(426, 26);
             this.tbFilename.TabIndex = 13;
             this.tbFilename.TextChanged += new System.EventHandler(this.TbFilename_TextChanged);
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(357, 49);
+            this.btnSelect.Location = new System.Drawing.Point(510, 60);
+            this.btnSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(31, 23);
+            this.btnSelect.Size = new System.Drawing.Size(46, 35);
             this.btnSelect.TabIndex = 14;
             this.btnSelect.Text = "...";
             this.btnSelect.UseVisualStyleBackColor = true;
@@ -101,9 +106,10 @@ namespace Terminal
             // cbSendCR
             // 
             this.cbSendCR.AutoSize = true;
-            this.cbSendCR.Location = new System.Drawing.Point(106, 83);
+            this.cbSendCR.Location = new System.Drawing.Point(133, 113);
+            this.cbSendCR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbSendCR.Name = "cbSendCR";
-            this.cbSendCR.Size = new System.Drawing.Size(41, 17);
+            this.cbSendCR.Size = new System.Drawing.Size(58, 24);
             this.cbSendCR.TabIndex = 15;
             this.cbSendCR.Text = "CR";
             this.cbSendCR.UseVisualStyleBackColor = true;
@@ -111,19 +117,21 @@ namespace Terminal
             // cbSendLF
             // 
             this.cbSendLF.AutoSize = true;
-            this.cbSendLF.Location = new System.Drawing.Point(144, 83);
+            this.cbSendLF.Location = new System.Drawing.Point(190, 113);
+            this.cbSendLF.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbSendLF.Name = "cbSendLF";
-            this.cbSendLF.Size = new System.Drawing.Size(38, 17);
+            this.cbSendLF.Size = new System.Drawing.Size(54, 24);
             this.cbSendLF.TabIndex = 16;
             this.cbSendLF.Text = "LF";
             this.cbSendLF.UseVisualStyleBackColor = true;
             // 
             // msDelay
             // 
-            this.msDelay.Location = new System.Drawing.Point(68, 106);
+            this.msDelay.Location = new System.Drawing.Point(76, 148);
+            this.msDelay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.msDelay.MaxLength = 5;
             this.msDelay.Name = "msDelay";
-            this.msDelay.Size = new System.Drawing.Size(55, 20);
+            this.msDelay.Size = new System.Drawing.Size(80, 26);
             this.msDelay.TabIndex = 17;
             this.msDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.msDelay.TextChanged += new System.EventHandler(this.MsDelay_TextChanged);
@@ -131,36 +139,39 @@ namespace Terminal
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(68, 84);
+            this.label3.Location = new System.Drawing.Point(76, 114);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(47, 20);
             this.label3.TabIndex = 18;
             this.label3.Text = "Send";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(180, 83);
+            this.label4.Location = new System.Drawing.Point(244, 113);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(115, 13);
+            this.label4.Size = new System.Drawing.Size(168, 20);
             this.label4.TabIndex = 19;
             this.label4.Text = "at the end of every line";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(129, 109);
+            this.label5.Location = new System.Drawing.Point(168, 153);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 13);
+            this.label5.Size = new System.Drawing.Size(175, 20);
             this.label5.TabIndex = 20;
             this.label5.Text = "ms Delay between lines";
             // 
             // FrmFileSend
             // 
             this.AcceptButton = this.btnSend;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 176);
+            this.ClientSize = new System.Drawing.Size(576, 206);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -174,10 +185,11 @@ namespace Terminal
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmFileSend";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "File Send";
             this.Shown += new System.EventHandler(this.FileSend_Shown);
             this.ResumeLayout(false);

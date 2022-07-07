@@ -26,6 +26,52 @@ namespace Terminal
             Directory.SetCurrentDirectory(_directory);
         }
 
+        public static void Backup()
+        {
+            string lastDay = string.Empty;
+            string lastDayFilename = _directory + $"\\Backup";
+            if (File.Exists(lastDayFilename))
+            {
+                try
+                {
+                    lastDay = File.ReadAllText(lastDayFilename);
+                }
+                catch { }
+            }
+
+            string today = DateTime.Now.DayOfWeek.ToString();
+
+            if (lastDay != today)
+            {
+                string backupDir = _directory + $"\\{today}";
+                if (!Directory.Exists(backupDir))
+                    Directory.CreateDirectory(backupDir);
+
+                if (Directory.Exists(backupDir))
+                {
+                    try
+                    {
+                        var dir = Directory.EnumerateFiles(_directory);
+                        foreach (string s in dir)
+                        {
+                            if (s.EndsWith(".profile"))
+                            {
+                                string name = Path.GetFileNameWithoutExtension(s);
+                                string newName = backupDir + $"\\{name}.profile";
+                                if (File.Exists(newName))
+                                    File.Delete(newName);
+
+                                if (!File.Exists(newName))
+                                    File.Copy(s, newName);
+                            }
+                        }
+                        File.WriteAllText(lastDayFilename, today);
+                    }
+                    catch { }
+                }
+            }
+        }
+
         public static bool Find(string name)
         {
             try

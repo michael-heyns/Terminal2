@@ -140,17 +140,17 @@
 Rules for EOL (End-Of-Line) handling
     1) xxxxx[CR]xxxxx          --&gt;     xxxxx[EOL] + xxxxx
     2) xxxxx[LF]xxxxx           --&gt;     xxxxx[EOL] + xxxxx
-    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx[EOL] + xxxxx
+    3) xxxxx[CR][LF]xxxxx    --&gt;     xxxxx[EOL] + xxxxx
     
 Rules for {CR} and {LF} embellishments
     1) xxxxx[CR]xxxxx          --&gt;     xxxxx{CR}[EOL] + xxxxx
     2) xxxxx[LF]xxxxx           --&gt;     xxxxx{LF}[EOL] + xxxxx
-    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx{CR}{LF}{EOL} + xxxxx
+    3) xxxxx[CR][LF]xxxxx    --&gt;     xxxxx{CR}{LF}{EOL} + xxxxx
     
 Rules for Timestamping
     1) xxxxx[CR]xxxxx          --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
     2) xxxxx[LF]xxxxx           --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
-    3) xxxxx[CR][LF]xxxxx  --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
+    3) xxxxx[CR][LF]xxxxx    --&gt;     xxxxx[EOL] + [Timestamp]xxxxx
 
 Profiles
     1) Profiles remember all the settings and colour options
@@ -184,6 +184,109 @@ Source Code:
     https://github.com/michael-heyns/Terminal2
 
 ----</value>
+  </data>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>v1.2.3.4
+    * Moved the incoming and outgoing display panel text up by half a fon height so
+      characters won't be cut off at the bottom
+    * Moved the RTS/DTR controls to the OUTPUT bar
+    * Changed the startup position and size to prevent incorrect positional on high-resolution screens
+
+v1.2.3.3
+    * Added daily backups of profiles with a one-week roll-over
+    * Limit the startup width
+    * Increased the RS232 status LEDs
+
+v1.2.3.2
+    * General cleanup and visual improvements. No major code changes.
+
+v1.2.3.1
+    * Moved the status and control line LEDs to the top.  (Not all monitors scaled well with them below)
+
+v1.2.3.0
+    * Display is now DPI-aware - which means the text is clear and the RS232 buttons are back
+    * Major look-and-feel update
+
+v1.2.1.1
+    * Fixed bug in "Clear" button press
+
+v1.2.1.0
+    * Critical bug fix: The program was wasting CPU cycles repainting text that is not visible - and the more
+      lines in memory, the more time it would waste.
+
+v1.2.0.0
+    * Recoded handling of CR-LF
+    * Removed max line option - fixed at 100k lines
+
+v1.1.0.1
+    * Search option now also works when disconnected
+
+v1.1.0.0
+    * Major redesign of the display. No longer using RichTextBox.  Now using FlickerFree ListBox
+    * See Help for shortcuts
+    
+v1.0.4.1
+    * Improved handling of single-character input
+
+v1.0.4.0
+    * Moved timestamping to the point of entry of serial and TCP data. Much more accurate now.
+    * Other embellishments done at the point of entry as well. Faster and cleaner solution.
+
+v1.0.3.0
+    * Major re-write of the display and comms processes
+
+v1.0.2.9
+    * Fixed a silly bug that crashed the program when you pressed HELP
+
+v1.0.2.8
+    * Removed 'accept' flag on the MACRO screen so we can press ENTER to start a new line as before
+    * Changed the font of the macro editor to Courier New 10pt
+    * Make HELP form non-modal
+
+v1.0.2.7
+    * Removed annoying BEEP when pressning ENTER and ESCAPE
+    * Search for ports when the window opens
+
+v1.0.2.6
+    * Added size and connection detail in the status bar.
+    * When the mouse enters the region of the port pull-down control, it will quickly refresh the port list
+    * Color filters "StartWith" option works properly now
+
+v1.0.2.5
+    * 64bit and better DPI handling
+    * Macros can contain comments
+    * Tuning parameters have bigger ranges
+    * Bugfix Closing a serial port was done twice
+
+v1.0.2.4
+    * You can move macros around by pressing CTRL and then drag and drop to an empty spot
+
+v1.0.2.3
+    * Missed saving "Initial RTS and DTR" states to disk as well
+
+v1.0.2.2
+    * Moved FREEZE button to the left margin (on request) and changed it to a button instead of checkbox
+    * Freeze is now triggered on mouse DOWN instead of waiting for the complete click to be processed
+
+v1.0.2.1
+    * Fixed race condition when closing serial port
+    * small improvements
+
+v1.0.2.0
+    * Major update.
+    * Fixed a memory leak in v1.0.1.x
+
+v1.0.1.1
+    * Added "Clear" checkbox.  When checked, will clear the command line when ENTER is pressed.
+    * Able to import old .TMF files
+
+v1.0.1.0
+    * Added fine-tuning options and history
+    * Added Quick Launch button to start another session without having to close the current connection
+    * Added 'Export'  to *.rtf/*.txt option.  (.RTF files retain colors information and are opened by Word).
+    * Pressing 'Escape' will close a dialog box
+    * Ability to freeze the display when a specified key word is detected
+</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

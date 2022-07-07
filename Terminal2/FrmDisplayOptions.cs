@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using static System.Resources.ResXFileRef;
 
@@ -12,11 +13,11 @@ namespace Terminal
         public DisplayOptions Options;
         public DialogResult Result = DialogResult.Cancel;
 
-        public readonly CheckBox[] FreezeList;
         public readonly ComboBox[] ModeList;
         public readonly TextBox[] TextList;
         public readonly Panel[] ForePanelList;
         public readonly Panel[] BackPanelList;
+        public readonly ComboBox[] MacroList;
         public readonly Label[] SampleList;
 
         private const int SEARCH_INDEX = 11;
@@ -58,15 +59,6 @@ namespace Terminal
                 SampleList[i].ForeColor = Options.filter[i].foreColor;
                 SampleList[i].BackColor = Options.filter[i].backColor;
             }
-        }
-
-        private void Config_Load(object sender, EventArgs e)
-        {
-            AssemblyInfo info = new AssemblyInfo();
-            lblThisVersion.Text = $"v{info.AssemblyVersion}";
-
-            cbTimestampOutputLines.Checked = Options.timestampOutputLines;
-            RefreshScreenFromDatabase();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
@@ -247,6 +239,11 @@ namespace Terminal
         private void cbFilterCase_CheckedChanged(object sender, EventArgs e)
         {
             Options.IgnoreCase = cbFilterCase.Checked;
+            RefreshScreenFromDatabase();
+        }
+        private void FrmDisplayOptions_Shown(object sender, EventArgs e)
+        {
+            cbTimestampOutputLines.Checked = Options.timestampOutputLines;
             RefreshScreenFromDatabase();
         }
     }

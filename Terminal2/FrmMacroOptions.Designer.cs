@@ -98,7 +98,7 @@ namespace Terminal
             this.rbAltPlus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbAltPlus.Name = "rbAltPlus";
             this.rbAltPlus.Size = new System.Drawing.Size(66, 24);
-            this.rbAltPlus.TabIndex = 3;
+            this.rbAltPlus.TabIndex = 12;
             this.rbAltPlus.TabStop = true;
             this.rbAltPlus.Tag = "36";
             this.rbAltPlus.Text = "Alt +";
@@ -112,7 +112,7 @@ namespace Terminal
             this.rbControlPlus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbControlPlus.Name = "rbControlPlus";
             this.rbControlPlus.Size = new System.Drawing.Size(71, 24);
-            this.rbControlPlus.TabIndex = 2;
+            this.rbControlPlus.TabIndex = 11;
             this.rbControlPlus.TabStop = true;
             this.rbControlPlus.Tag = "24";
             this.rbControlPlus.Text = "Ctrl +";
@@ -126,7 +126,7 @@ namespace Terminal
             this.rbShiftPlus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbShiftPlus.Name = "rbShiftPlus";
             this.rbShiftPlus.Size = new System.Drawing.Size(80, 24);
-            this.rbShiftPlus.TabIndex = 1;
+            this.rbShiftPlus.TabIndex = 10;
             this.rbShiftPlus.TabStop = true;
             this.rbShiftPlus.Tag = "12";
             this.rbShiftPlus.Text = "Shift +";
@@ -140,7 +140,7 @@ namespace Terminal
             this.rbNormal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbNormal.Name = "rbNormal";
             this.rbNormal.Size = new System.Drawing.Size(84, 24);
-            this.rbNormal.TabIndex = 0;
+            this.rbNormal.TabIndex = 9;
             this.rbNormal.TabStop = true;
             this.rbNormal.Tag = "0";
             this.rbNormal.Text = "Normal";
@@ -177,7 +177,7 @@ namespace Terminal
             this.F12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F12.Name = "F12";
             this.F12.Size = new System.Drawing.Size(62, 24);
-            this.F12.TabIndex = 11;
+            this.F12.TabIndex = 24;
             this.F12.TabStop = true;
             this.F12.Tag = "11";
             this.F12.Text = "F12";
@@ -191,7 +191,7 @@ namespace Terminal
             this.F11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F11.Name = "F11";
             this.F11.Size = new System.Drawing.Size(62, 24);
-            this.F11.TabIndex = 10;
+            this.F11.TabIndex = 23;
             this.F11.TabStop = true;
             this.F11.Tag = "10";
             this.F11.Text = "F11";
@@ -205,7 +205,7 @@ namespace Terminal
             this.F10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F10.Name = "F10";
             this.F10.Size = new System.Drawing.Size(62, 24);
-            this.F10.TabIndex = 9;
+            this.F10.TabIndex = 22;
             this.F10.TabStop = true;
             this.F10.Tag = "9";
             this.F10.Text = "F10";
@@ -219,7 +219,7 @@ namespace Terminal
             this.F9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F9.Name = "F9";
             this.F9.Size = new System.Drawing.Size(53, 24);
-            this.F9.TabIndex = 8;
+            this.F9.TabIndex = 21;
             this.F9.TabStop = true;
             this.F9.Tag = "8";
             this.F9.Text = "F9";
@@ -233,7 +233,7 @@ namespace Terminal
             this.F8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F8.Name = "F8";
             this.F8.Size = new System.Drawing.Size(53, 24);
-            this.F8.TabIndex = 7;
+            this.F8.TabIndex = 20;
             this.F8.TabStop = true;
             this.F8.Tag = "7";
             this.F8.Text = "F8";
@@ -247,7 +247,7 @@ namespace Terminal
             this.F7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F7.Name = "F7";
             this.F7.Size = new System.Drawing.Size(53, 24);
-            this.F7.TabIndex = 6;
+            this.F7.TabIndex = 19;
             this.F7.TabStop = true;
             this.F7.Tag = "6";
             this.F7.Text = "F7";
@@ -261,7 +261,7 @@ namespace Terminal
             this.F6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F6.Name = "F6";
             this.F6.Size = new System.Drawing.Size(53, 24);
-            this.F6.TabIndex = 5;
+            this.F6.TabIndex = 18;
             this.F6.TabStop = true;
             this.F6.Tag = "5";
             this.F6.Text = "F6";
@@ -275,7 +275,7 @@ namespace Terminal
             this.F5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F5.Name = "F5";
             this.F5.Size = new System.Drawing.Size(53, 24);
-            this.F5.TabIndex = 4;
+            this.F5.TabIndex = 17;
             this.F5.TabStop = true;
             this.F5.Tag = "4";
             this.F5.Text = "F5";
@@ -289,7 +289,7 @@ namespace Terminal
             this.F4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F4.Name = "F4";
             this.F4.Size = new System.Drawing.Size(53, 24);
-            this.F4.TabIndex = 3;
+            this.F4.TabIndex = 16;
             this.F4.TabStop = true;
             this.F4.Tag = "3";
             this.F4.Text = "F4";
@@ -303,7 +303,7 @@ namespace Terminal
             this.F3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F3.Name = "F3";
             this.F3.Size = new System.Drawing.Size(53, 24);
-            this.F3.TabIndex = 2;
+            this.F3.TabIndex = 15;
             this.F3.TabStop = true;
             this.F3.Tag = "2";
             this.F3.Text = "F3";
@@ -317,7 +317,7 @@ namespace Terminal
             this.F2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F2.Name = "F2";
             this.F2.Size = new System.Drawing.Size(53, 24);
-            this.F2.TabIndex = 1;
+            this.F2.TabIndex = 14;
             this.F2.TabStop = true;
             this.F2.Tag = "1";
             this.F2.Text = "F2";
@@ -331,7 +331,7 @@ namespace Terminal
             this.F1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.F1.Name = "F1";
             this.F1.Size = new System.Drawing.Size(53, 24);
-            this.F1.TabIndex = 0;
+            this.F1.TabIndex = 13;
             this.F1.TabStop = true;
             this.F1.Tag = "0";
             this.F1.Text = "F1";
@@ -363,7 +363,7 @@ namespace Terminal
             this.tbMacroText.Name = "tbMacroText";
             this.tbMacroText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbMacroText.Size = new System.Drawing.Size(781, 339);
-            this.tbMacroText.TabIndex = 4;
+            this.tbMacroText.TabIndex = 1;
             this.tbMacroText.WordWrap = false;
             this.tbMacroText.TextChanged += new System.EventHandler(this.MacroText_TextChanged);
             // 
@@ -375,7 +375,7 @@ namespace Terminal
             this.tbTitle.MaxLength = 40;
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(202, 26);
-            this.tbTitle.TabIndex = 5;
+            this.tbTitle.TabIndex = 0;
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbTitle.TextChanged += new System.EventHandler(this.Title_TextChanged);
             // 
@@ -397,7 +397,7 @@ namespace Terminal
             this.btnClear.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(176, 35);
-            this.btnClear.TabIndex = 7;
+            this.btnClear.TabIndex = 26;
             this.btnClear.Text = "&Clear THIS macro";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
@@ -411,7 +411,7 @@ namespace Terminal
             this.btnApply.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(112, 35);
-            this.btnApply.TabIndex = 8;
+            this.btnApply.TabIndex = 25;
             this.btnApply.Text = "&Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
@@ -433,7 +433,7 @@ namespace Terminal
             this.tbDelayBetweenChars.MaxLength = 5;
             this.tbDelayBetweenChars.Name = "tbDelayBetweenChars";
             this.tbDelayBetweenChars.Size = new System.Drawing.Size(61, 26);
-            this.tbDelayBetweenChars.TabIndex = 10;
+            this.tbDelayBetweenChars.TabIndex = 4;
             this.tbDelayBetweenChars.Text = "0";
             this.tbDelayBetweenChars.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDelayBetweenChars.TextChanged += new System.EventHandler(this.Title_TextChanged);
@@ -465,7 +465,7 @@ namespace Terminal
             this.tbDelayBetweenLines.MaxLength = 5;
             this.tbDelayBetweenLines.Name = "tbDelayBetweenLines";
             this.tbDelayBetweenLines.Size = new System.Drawing.Size(61, 26);
-            this.tbDelayBetweenLines.TabIndex = 13;
+            this.tbDelayBetweenLines.TabIndex = 5;
             this.tbDelayBetweenLines.Text = "0";
             this.tbDelayBetweenLines.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDelayBetweenLines.TextChanged += new System.EventHandler(this.Title_TextChanged);
@@ -498,7 +498,7 @@ namespace Terminal
             this.tbResendEveryMs.MaxLength = 5;
             this.tbResendEveryMs.Name = "tbResendEveryMs";
             this.tbResendEveryMs.Size = new System.Drawing.Size(61, 26);
-            this.tbResendEveryMs.TabIndex = 16;
+            this.tbResendEveryMs.TabIndex = 6;
             this.tbResendEveryMs.Text = "0";
             this.tbResendEveryMs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbResendEveryMs.TextChanged += new System.EventHandler(this.Title_TextChanged);
@@ -521,7 +521,7 @@ namespace Terminal
             this.tbStopAfterRepeats.MaxLength = 5;
             this.tbStopAfterRepeats.Name = "tbStopAfterRepeats";
             this.tbStopAfterRepeats.Size = new System.Drawing.Size(61, 26);
-            this.tbStopAfterRepeats.TabIndex = 19;
+            this.tbStopAfterRepeats.TabIndex = 8;
             this.tbStopAfterRepeats.Text = "0";
             this.tbStopAfterRepeats.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbStopAfterRepeats.TextChanged += new System.EventHandler(this.Title_TextChanged);
@@ -543,7 +543,7 @@ namespace Terminal
             this.btnClearAll.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(178, 35);
-            this.btnClearAll.TabIndex = 21;
+            this.btnClearAll.TabIndex = 27;
             this.btnClearAll.Text = "Clear &ALL macros";
             this.btnClearAll.UseVisualStyleBackColor = true;
             this.btnClearAll.Click += new System.EventHandler(this.BtnClearAll_Click);
@@ -565,7 +565,7 @@ namespace Terminal
             this.cbAddCR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbAddCR.Name = "cbAddCR";
             this.cbAddCR.Size = new System.Drawing.Size(58, 24);
-            this.cbAddCR.TabIndex = 25;
+            this.cbAddCR.TabIndex = 2;
             this.cbAddCR.Text = "CR";
             this.cbAddCR.UseVisualStyleBackColor = true;
             this.cbAddCR.CheckedChanged += new System.EventHandler(this.CbAddCR_CheckedChanged);
@@ -577,7 +577,7 @@ namespace Terminal
             this.cbAddLF.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbAddLF.Name = "cbAddLF";
             this.cbAddLF.Size = new System.Drawing.Size(54, 24);
-            this.cbAddLF.TabIndex = 26;
+            this.cbAddLF.TabIndex = 3;
             this.cbAddLF.Text = "LF";
             this.cbAddLF.UseVisualStyleBackColor = true;
             this.cbAddLF.CheckedChanged += new System.EventHandler(this.CbAddCR_CheckedChanged);
@@ -599,7 +599,7 @@ namespace Terminal
             this.cbRepeat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbRepeat.Name = "cbRepeat";
             this.cbRepeat.Size = new System.Drawing.Size(128, 24);
-            this.cbRepeat.TabIndex = 21;
+            this.cbRepeat.TabIndex = 7;
             this.cbRepeat.Text = "Resend after";
             this.cbRepeat.UseVisualStyleBackColor = true;
             this.cbRepeat.CheckedChanged += new System.EventHandler(this.CheckBox1_CheckedChanged);
@@ -650,7 +650,7 @@ namespace Terminal
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimizeBox = false;
             this.Name = "FrmMacroOptions";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Macros";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMacroOptions_FormClosing);
             this.Load += new System.EventHandler(this.FrmMacroOptions_Load);

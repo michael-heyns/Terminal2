@@ -213,9 +213,19 @@ namespace Terminal
             _controls = controls;
             _inputQueue = inputQueue;
             foreach (Label led in _leds)
-                led.Visible = false;
+            {
+                led.Text = "-";
+                led.Visible = true;
+                led.Enabled = false;
+                led.BackColor = Color.LightGray;
+            }
             foreach (Label control in _controls)
-                control.Visible = false;
+            {
+                control.Text = "-";
+                control.Visible = true;
+                control.Enabled = false;
+                control.BackColor = Color.LightGray;
+            }
         }
 
         public void SetEmbellishments(Embellishments embellishments)
@@ -438,9 +448,19 @@ namespace Terminal
             // don't check - always force - might be waiting
 
             foreach (Label led in _leds)
-                led.Visible = false;
+            {
+                led.Text = "-";
+                led.Visible = true;
+                led.Enabled = false;
+                led.BackColor = Color.LightGray;
+            }
             foreach (Label control in _controls)
-                control.Visible = false;
+            {
+                control.Text = "-";
+                control.Visible = true;
+                control.Enabled = false;
+                control.BackColor = Color.LightGray;
+            }
 
             _connected = false;
             _connectionString = "Disconnected";
@@ -663,40 +683,40 @@ namespace Terminal
         private void SetupSerialControls()
         {
             _controls[0].Text = "DTR";
-            _controls[0].Visible = true;
+            _controls[0].Enabled = true;
             _controls[0].BackColor = Color.White;
 
             _controls[1].Text = "RTS";
-            _controls[1].Visible = true;
+            _controls[1].Enabled = true;
             _controls[1].BackColor = Color.White;
         }
 
         private void SetupSerialLEDs()
         {
             _leds[0].Text = "CTS";
-            _leds[0].Visible = true;
+            _leds[0].Enabled = true;
             if (_com.CtsHolding)
                 _leds[0].BackColor = Color.Lime;
             else
-                _leds[0].BackColor = Color.White;
+                _leds[0].BackColor = Color.LightGray;
 
             _leds[1].Text = "DSR";
-            _leds[1].Visible = true;
+            _leds[1].Enabled = true;
             if (_com.DsrHolding)
                 _leds[1].BackColor = Color.Lime;
             else
-                _leds[1].BackColor = Color.White;
+                _leds[1].BackColor = Color.LightGray;
 
             _leds[2].Text = "CD";
-            _leds[2].Visible = true;
+            _leds[2].Enabled = true;
             if (_com.CDHolding)
                 _leds[2].BackColor = Color.Lime;
             else
-                _leds[2].BackColor = Color.White;
+                _leds[2].BackColor = Color.LightGray;
 
             _leds[3].Text = "RI";
-            _leds[3].Visible = true;
-            _leds[3].BackColor = Color.White;
+            _leds[3].Enabled = true;
+            _leds[3].BackColor = Color.LightGray;
         }
  
         public int DataWaiting()

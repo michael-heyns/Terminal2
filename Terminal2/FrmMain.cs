@@ -30,8 +30,6 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
-
 namespace Terminal
 {
     public partial class FrmMain : Form
@@ -1358,6 +1356,122 @@ namespace Terminal
             btnClear.Enabled = true;
         }
 
+        /* Calculate the 16bit CRC for XMODEM */
+        /* buffer = data buffer in the xmodem block */
+        /* count = number of data bytes */
+        /* offset = where to start the calculation */
+        private ushort xmodemCalcrc(byte[] buffer, int offset, int count)
+        {
+            ushort crc, i;
+            int j;
+            crc = 0;
+            for (j = offset; j < count + offset; j++)
+            {
+                crc = (ushort)(crc ^ (buffer[j] << 8));
+                for (i = 0; i < 8; i++)
+                {
+                    if ((crc & 0x8000) > 0)
+                    {
+                        crc = (ushort)((crc << 1) ^ 0x1021);
+                    }
+                    else
+                    {
+                        crc = (ushort)(crc << 1);
+                    }
+                }
+            }
+            return (ushort)(crc & 0xFFFF);
+        }
+
+        private const int XMODEM_SOH = 1;
+        private const int XMODEM_ACK = 6;
+        private const int XMODEM_NAK = 21;
+        private const int XMODEM_EOT = 4;
+        private bool XModemSend(byte[] data)
+        {
+            byte blockCnt = 0;
+            bool result = false;
+            byte[] block = new Byte[133];
+            int bytesRead;
+            int remaining = data.Length;
+            int index = 0;
+            do
+            {
+                bytesRead = Math.Min(128, remaining);
+                remaining -= bytesRead;
+
+                for (int i = 0; i < bytesRead; i++)
+                    block[i + 3] = (byte)(data[index++] & 0xff);
+                for (int i = bytesRead; i < 128; i++)
+                    block[i + 3] = 0;
+
+                blockCnt++;
+
+                block[0] = XMODEM_SOH;
+                block[1] = blockCnt;
+                block[2] = (byte)(255 - blockCnt);
+
+                ushort crc = xmodemCalcrc(block, 3, 128);
+                block[131] = (Byte)((crc >> 8) & 0xFF);
+                block[132] = (Byte)(crc & 0xFF);
+
+                try
+                {
+                    _comms.Write(block);
+                }
+                catch (Exception)
+                {
+                    result = false;
+                    break;
+                }
+                try
+                {
+                    
+                    Byte res = _comms.ReadByte();
+                    while (res == 'C')
+                    {
+                        res = _comms.ReadByte();
+                    }
+
+                    if (res == XMODEM_ACK)
+                    {
+                        progressBar.Value += bytesRead;
+                        Application.DoEvents();
+
+                        if (bytesRead < 128)
+                        {
+                            byte[] eot = new byte[1];
+                            eot[0] = XMODEM_EOT;
+                            _comms.Write(eot);
+                            res = _comms.ReadByte();
+                            if (res == XMODEM_ACK)
+                            {
+                                /* File sent ok */
+                                result = true;
+                            }
+                            else
+                            {
+                                result = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // No ACK received, stop transmission no retransmission implemented
+                        result = false;
+                        break;
+                    }
+                }
+                catch (TimeoutException)
+                {
+                    result = false;
+                    break;
+                }
+            }
+            while (bytesRead == 128);
+            return result;
+        }
+
         private void BtnFile_Click(object sender, EventArgs e)
         {
             btnFile.Enabled = false;
@@ -1369,55 +1483,89 @@ namespace Terminal
                 SendLF = _lastSendLF
             };
             TopMost = false;
+            fs.cbXmodem.Enabled = (_activeProfile.conOptions.Type == ConOptions.ConType.Serial);
             fs.ShowDialog();
             TopMost = cbStayOnTop.Checked;
             if (fs.Result == DialogResult.OK)
             {
                 _lastFileSend = fs.Filename;
-                _lastFileSendILD = fs.InterLineDelay;
-                _lastSendCR = fs.SendCR;
-                _lastSendLF = fs.SendLF;
 
-                try
+                if (fs.XModem)
                 {
-                    string data = File.ReadAllText(fs.Filename);
-                    string[] lines = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                    btnPauseFile.Text = "Pause";
-                    lblLineCounter.Text = "0";
-                    progressBar.Value = 0;
-                    progressBar.Maximum = lines.Length;
-                    progressBar.Visible = true;
-                    btnAbortFile.Visible = true;
-                    btnPauseFile.Visible = true;
-                    lblLineCounter.Visible = true;
-                    SendPanel.Enabled = false;
-                    _abortFileSend = false;
-                    Application.DoEvents();
-
-                    for (int i = 0; i < lines.Length; i++)
+                    try
                     {
-                        while (!_terminateFlag && _pauseFileSend)
-                        {
-                            Application.DoEvents();
-                            Thread.Sleep(100);
-                        }
-                        if (_abortFileSend)
-                            break;
-                        string str = lines[i];
-                        if (fs.SendCR)
-                            str += "$0D";
-                        if (fs.SendLF)
-                            str += "$0A";
-                        SendDollarString(str, 0);
-                        lblLineCounter.Text = (i + 1).ToString();
-                        progressBar.Value++;
+                        byte[] data = File.ReadAllBytes(fs.Filename);
+                        btnPauseFile.Text = "Pause";
+                        lblLineCounter.Text = "0";
+                        progressBar.Value = 0;
+                        progressBar.Maximum = data.Length;
+                        progressBar.Visible = true;
+                        btnAbortFile.Visible = true;
+                        btnPauseFile.Visible = true;
+                        btnPauseFile.Enabled = false;
+                        lblLineCounter.Visible = true;
+                        SendPanel.Enabled = false;
+                        _abortFileSend = false;
                         Application.DoEvents();
-                        Thread.Sleep(fs.InterLineDelay);
+
+                        _comms.FreezeReaderThread();
+                        XModemSend(data);
+                        _comms.UnFreezeReaderThread();
+
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"The file could not be sent successfully", "Send error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                catch
+                else
                 {
-                    MessageBox.Show($"The file could not be sent successfully", "Send error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _lastFileSendILD = fs.InterLineDelay;
+                    _lastSendCR = fs.SendCR;
+                    _lastSendLF = fs.SendLF;
+
+                    try
+                    {
+                        string data = File.ReadAllText(fs.Filename);
+                        string[] lines = data.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                        btnPauseFile.Text = "Pause";
+                        lblLineCounter.Text = "0";
+                        progressBar.Value = 0;
+                        progressBar.Maximum = lines.Length;
+                        progressBar.Visible = true;
+                        btnAbortFile.Visible = true;
+                        btnPauseFile.Visible = true;
+                        btnPauseFile.Enabled = true;
+                        lblLineCounter.Visible = true;
+                        SendPanel.Enabled = false;
+                        _abortFileSend = false;
+                        Application.DoEvents();
+
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            while (!_terminateFlag && _pauseFileSend)
+                            {
+                                Application.DoEvents();
+                                Thread.Sleep(100);
+                            }
+                            if (_abortFileSend)
+                                break;
+                            string str = lines[i];
+                            if (fs.SendCR)
+                                str += "$0D";
+                            if (fs.SendLF)
+                                str += "$0A";
+                            SendDollarString(str, 0);
+                            lblLineCounter.Text = (i + 1).ToString();
+                            progressBar.Value++;
+                            Application.DoEvents();
+                            Thread.Sleep(fs.InterLineDelay);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show($"The file could not be sent successfully", "Send error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             lblLineCounter.Visible = false;
@@ -1831,7 +1979,6 @@ namespace Terminal
                 for (int i = this.Items.Count - 1; i >= 0; i--)
                 {
                     System.Drawing.Rectangle irect = this.GetItemRectangle(i);
-                    irect.Offset(0, -this.FontHeight / 2);
                     if (e.ClipRectangle.IntersectsWith(irect))
                     {
                         OnDrawItem(new DrawItemEventArgs(e.Graphics, this.Font,

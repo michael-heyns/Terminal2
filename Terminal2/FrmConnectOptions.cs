@@ -140,6 +140,15 @@ namespace Terminal
                     cbTcpServer.Checked = true;
                     break;
             }
+
+            if (pdHandshaking.SelectedIndex == 0 || pdHandshaking.SelectedIndex == 2)
+            {
+                cbInitialRTS.Enabled = true;
+            }
+            else
+            {
+                cbInitialRTS.Enabled = false;
+            }
         }
 
         private void FrmConnectOptions_Shown(object sender, EventArgs e)
@@ -187,12 +196,10 @@ namespace Terminal
         {
             if (pdHandshaking.SelectedIndex == 0 || pdHandshaking.SelectedIndex == 2)
             {
-                cbInitialDTR.Enabled = true;
                 cbInitialRTS.Enabled = true;
             }
             else
             {
-                cbInitialDTR.Enabled = false;
                 cbInitialRTS.Enabled = false;
             }
         }

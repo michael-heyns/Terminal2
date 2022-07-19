@@ -186,7 +186,17 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.3.4
+    <value>v1.2.3.7
+    * New feature:L Send file with XMODEM protocol
+      (useful when loading firmware in uBlox chipsets)
+
+v1.2.3.6
+    * Fixed first line cut-off
+
+v1.2.3.5
+    * Don't disble DTR manual control if RTS/CTS handshaking is selected
+
+v1.2.3.4
     * Moved the incoming and outgoing display panel text up by half a fon height so
       characters won't be cut off at the bottom
     * Moved the RTS/DTR controls to the OUTPUT bar

@@ -42,6 +42,7 @@ namespace Terminal
         public bool SendLF = true;
         public int MinimumDelay = 0;
         public int MaximumDelay = 10000;
+        public bool XModem = false;
         public FrmFileSend()
         {
             InitializeComponent();
@@ -103,6 +104,18 @@ namespace Terminal
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void cbText_CheckedChanged(object sender, EventArgs e)
+        {
+            grpText.Enabled = cbText.Checked;
+            XModem = cbXmodem.Checked;
+        }
+
+        private void cbXmodem_CheckedChanged(object sender, EventArgs e)
+        {
+            grpText.Enabled = cbText.Checked;
+            XModem = cbXmodem.Checked;
         }
     }
 }

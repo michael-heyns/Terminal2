@@ -60,6 +60,8 @@ namespace Terminal
         private int _hexColumn = 0;
         private string _embelished;
 
+        private bool _suspendReadThread = false;
+
         private void Enqueue(string str)
         {
             _embelished = string.Empty;
@@ -192,6 +194,9 @@ namespace Terminal
                     {
                         Thread.Sleep(1);
                     }
+
+                    while (_suspendReadThread)
+                        Thread.Sleep(10);
                 }
             }
             catch { }
@@ -330,61 +335,65 @@ namespace Terminal
                 }
 
                 SetupSerialControls();
-                bool SetInitialRTSCTR = false;
-                switch (_profile.conOptions.Handshaking)
+
+                // set RTS
                 {
-                    default:
-                    case "None":
-                        _com.Handshake = Handshake.None;
-                        _controls[0].Enabled = true;
-                        _controls[1].Enabled = true;
-                        SetInitialRTSCTR = true;
-                        break;
+                    bool SetInitialRTS = false;
+                    switch (_profile.conOptions.Handshaking)
+                    {
+                        default:
+                        case "None":
+                            _com.Handshake = Handshake.None;
+                            _controls[1].Enabled = true;
+                            SetInitialRTS = true;
+                            break;
 
-                    case "RTS/CTS":
-                        _com.Handshake = Handshake.RequestToSend;
-                        _controls[0].Enabled = false;
-                        _controls[1].Enabled = false;
-                        break;
+                        case "RTS/CTS":
+                            _com.Handshake = Handshake.RequestToSend;
+                            _controls[1].Enabled = false;
+                            break;
 
-                    case "RTS/CTS + Xon/Xoff":
-                        _com.Handshake = Handshake.RequestToSendXOnXOff;
-                        _controls[0].Enabled = false;
-                        _controls[1].Enabled = false;
-                        break;
+                        case "RTS/CTS + Xon/Xoff":
+                            _com.Handshake = Handshake.RequestToSendXOnXOff;
+                            _controls[1].Enabled = false;
+                            break;
 
-                    case "Xon/Xoff":
-                        _com.Handshake = Handshake.XOnXOff;
-                        _controls[0].Enabled = true;
-                        _controls[1].Enabled = true;
-                        SetInitialRTSCTR = false;
-                        break;
+                        case "Xon/Xoff":
+                            _com.Handshake = Handshake.XOnXOff;
+                            _controls[1].Enabled = true;
+                            SetInitialRTS = true;
+                            break;
+                    }
+
+                    if (SetInitialRTS)
+                    {
+
+                        if (_profile.conOptions.InitialRTS)
+                        {
+                            _com.RtsEnable = true;
+                            _controls[1].BackColor = Color.Lime;
+                        }
+                        else
+                        {
+                            _com.RtsEnable = false;
+                            _controls[1].BackColor = Color.White;
+                        }
+                    }
                 }
 
-                if (SetInitialRTSCTR)
+                // set DTR
+                _controls[0].Enabled = true;
+                if (_profile.conOptions.InitialDTR)
                 {
-                    if (_profile.conOptions.InitialDTR)
-                    {
-                        _com.DtrEnable = true;
-                        _controls[0].BackColor = Color.Lime;
-                    }
-                    else
-                    {
-                        _com.DtrEnable = false;
-                        _controls[0].BackColor = Color.White;
-                    }
-
-                    if (_profile.conOptions.InitialRTS)
-                    {
-                        _com.RtsEnable = true;
-                        _controls[1].BackColor = Color.Lime;
-                    }
-                    else
-                    {
-                        _com.RtsEnable = false;
-                        _controls[1].BackColor = Color.White;
-                    }
+                    _com.DtrEnable = true;
+                    _controls[0].BackColor = Color.Lime;
                 }
+                else
+                {
+                    _com.DtrEnable = false;
+                    _controls[0].BackColor = Color.White;
+                }
+
 
                 try
                 {
@@ -445,6 +454,29 @@ namespace Terminal
                 }
             }
             return _connected;
+        }
+
+        public void FreezeReaderThread()
+        {
+            if (_profile.conOptions.Type != ConOptions.ConType.Serial)
+                return;
+
+            if (_com.IsOpen && _connected)
+            {
+                _suspendReadThread = true;
+                Thread.Sleep(1);
+            }
+        }
+        public void UnFreezeReaderThread()
+        {
+            if (_profile.conOptions.Type != ConOptions.ConType.Serial)
+                return;
+
+            if (_com.IsOpen && _connected)
+            {
+                _suspendReadThread = false;
+                Thread.Sleep(1);
+            }
         }
 
         // always performs a clean close
@@ -783,8 +815,7 @@ namespace Terminal
                     case CommType.ctSERVER:
                     case CommType.ctCLIENT:
                         byte[] tcp_data = null;
-                        int tcp_count = 0;
-                        tcp_count = _socket.Available;
+                        int tcp_count = _socket.Available;
                         if (tcp_count > 0)
                         {
                             tcp_data = new byte[tcp_count];
@@ -798,6 +829,39 @@ namespace Terminal
             }
             catch { }
             return null;
+        }
+
+        public byte ReadByte()
+        {
+            if (!_connected)
+                return 0;
+
+            try
+            {
+                switch (_comType)
+                {
+                    case CommType.ctSERIAL:
+                        byte[] ser_data = new byte[1];
+                        _com.Read(ser_data, 0, 1);
+                        return ser_data[0];
+
+                    case CommType.ctSERVER:
+                    case CommType.ctCLIENT:
+                        byte[] tcp_data = null;
+                        int tcp_count = _socket.Available;
+                        if (tcp_count > 0)
+                        {
+                            tcp_data = new byte[1];
+                            _socket.Receive(tcp_data, 1, SocketFlags.None);
+                        }
+                        return tcp_data[0];
+
+                    default:
+                        break;
+                }
+            }
+            catch { }
+            return 0;
         }
 
         public void FillPortNames(ComboBox cb)

@@ -186,7 +186,16 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.3.7
+    <value>v1.2.4.0
+    * Moved ASCII table to its own window
+
+v1.2.3.9
+    * Some cosmetic improvements
+
+v1.2.3.8
+    * Better XMODEM implementation
+
+v1.2.3.7
     * New feature:L Send file with XMODEM protocol
       (useful when loading firmware in uBlox chipsets)
 

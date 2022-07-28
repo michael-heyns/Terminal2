@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -1387,10 +1388,54 @@ namespace Terminal
         private const int XMODEM_ACK = 6;
         private const int XMODEM_NAK = 21;
         private const int XMODEM_EOT = 4;
+
+        enum SEND_RESPONSE
+        {
+            RES_OK = 0,
+            RES_TIMEOUT,
+            RES_RESEND,
+            RES_FAIL,
+        };
+
+        private SEND_RESPONSE SendBlock(byte[] block)
+        {
+            try
+            {
+                _comms.Write(block);
+            }
+            catch (Exception)
+            {
+                return SEND_RESPONSE.RES_FAIL;
+            }
+            try
+            {
+                Byte res = _comms.ReadByte();
+                while (res == 'C')
+                {
+                    res = _comms.ReadByte();
+                }
+
+                if (res == XMODEM_ACK)
+                {
+                    return SEND_RESPONSE.RES_OK;
+                }
+                else if (res == XMODEM_NAK)
+                {
+                    return SEND_RESPONSE.RES_RESEND;
+                }
+                else
+                {
+                    return SEND_RESPONSE.RES_FAIL;
+                }
+            }
+            catch (TimeoutException)
+            {
+                return SEND_RESPONSE.RES_TIMEOUT;
+            }
+        }
         private bool XModemSend(byte[] data)
         {
             byte blockCnt = 0;
-            bool result = false;
             byte[] block = new Byte[133];
             int bytesRead;
             int remaining = data.Length;
@@ -1415,61 +1460,41 @@ namespace Terminal
                 block[131] = (Byte)((crc >> 8) & 0xFF);
                 block[132] = (Byte)(crc & 0xFF);
 
-                try
-                {
-                    _comms.Write(block);
-                }
-                catch (Exception)
-                {
-                    result = false;
-                    break;
-                }
-                try
-                {
-                    
-                    Byte res = _comms.ReadByte();
-                    while (res == 'C')
-                    {
-                        res = _comms.ReadByte();
-                    }
+                SEND_RESPONSE res = SendBlock(block);
+                while (res == SEND_RESPONSE.RES_RESEND)
+                    res = SendBlock(block);
 
-                    if (res == XMODEM_ACK)
-                    {
-                        progressBar.Value += bytesRead;
-                        Application.DoEvents();
+                if (res != SEND_RESPONSE.RES_OK)
+                    return false;
 
-                        if (bytesRead < 128)
-                        {
-                            byte[] eot = new byte[1];
-                            eot[0] = XMODEM_EOT;
-                            _comms.Write(eot);
-                            res = _comms.ReadByte();
-                            if (res == XMODEM_ACK)
-                            {
-                                /* File sent ok */
-                                result = true;
-                            }
-                            else
-                            {
-                                result = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        // No ACK received, stop transmission no retransmission implemented
-                        result = false;
-                        break;
-                    }
-                }
-                catch (TimeoutException)
+                lblLineCounter.Text = remaining.ToString();
+                progressBar.Value += bytesRead;
+                Application.DoEvents();
+
+                if (_abortFileSend)
                 {
-                    result = false;
-                    break;
+                    DialogResult yn = MessageBox.Show("Aborting halfway like this could have serious consequences. ARE YOU SURE?", "WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (yn == DialogResult.Yes)
+                    {
+                        Log.Add("XMODEM file transfer aborted by user");
+                        return false;
+                    }
                 }
+
+            } while (remaining > 0);
+
+            // send EOT
+            byte[] eot = new byte[1];
+            eot[0] = XMODEM_EOT;
+            try
+            {
+                _comms.Write(eot);
+                Byte res = _comms.ReadByte();
+                if (res == XMODEM_ACK)
+                    return true;
             }
-            while (bytesRead == 128);
-            return result;
+            catch { }
+            return false;
         }
 
         private void BtnFile_Click(object sender, EventArgs e)
@@ -1773,6 +1798,11 @@ namespace Terminal
 
         private void PdPort_MouseEnter(object sender, EventArgs e)
         {
+            pdPort.Items.Clear();
+            pdPort.Items.Add("Updating");
+            pdPort.SelectedIndex = 0;
+            Application.DoEvents();
+            Thread.Sleep(100);
             RefreshPortPulldown();
         }
 
@@ -1951,6 +1981,19 @@ namespace Terminal
         {
             backupTimer.Interval = 36000000;    // every hour from now on
             Database.Backup();
+        }
+
+        private void btnASCII_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<frmASCII>().Count() == 1)
+                return;
+                // this will close it:
+                // Application.OpenForms.OfType<frmASCII>().First().Close();
+
+            frmASCII frmASCII = new frmASCII();
+            frmASCII.Left = (this.Left + this.Width) - 50;
+            frmASCII.Top = this.Top + 100;
+            frmASCII.Show();
         }
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox

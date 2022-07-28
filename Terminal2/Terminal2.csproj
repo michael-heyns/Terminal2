@@ -103,6 +103,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmASCII.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmASCII.Designer.cs">
+      <DependentUpon>frmASCII.cs</DependentUpon>
+    </Compile>
     <Compile Include="Comms.cs" />
     <Compile Include="FrmDisplayOptions.cs">
       <SubType>Form</SubType>
@@ -171,6 +177,9 @@
     <Compile Include="FrmProfileDatabase.Designer.cs">
       <DependentUpon>FrmProfileDatabase.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmASCII.resx">
+      <DependentUpon>frmASCII.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDisplayOptions.resx">
       <DependentUpon>FrmDisplayOptions.cs</DependentUpon>
       <SubType>Designer</SubType>

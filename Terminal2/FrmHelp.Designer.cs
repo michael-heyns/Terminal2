@@ -54,8 +54,6 @@ namespace Terminal
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHelp));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.helpASCII = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -78,25 +76,6 @@ namespace Terminal
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
-            // helpASCII
-            // 
-            this.helpASCII.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpASCII.FormattingEnabled = true;
-            this.helpASCII.ItemHeight = 15;
-            this.helpASCII.Location = new System.Drawing.Point(519, 31);
-            this.helpASCII.Name = "helpASCII";
-            this.helpASCII.Size = new System.Drawing.Size(131, 394);
-            this.helpASCII.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(519, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "ASCII table";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -117,7 +96,7 @@ namespace Terminal
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(507, 438);
+            this.tabControl1.Size = new System.Drawing.Size(516, 438);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -128,7 +107,7 @@ namespace Terminal
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(499, 412);
+            this.tabPage1.Size = new System.Drawing.Size(508, 412);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Notes";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -143,7 +122,7 @@ namespace Terminal
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage2.Size = new System.Drawing.Size(499, 412);
+            this.tabPage2.Size = new System.Drawing.Size(508, 412);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "History";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -193,10 +172,8 @@ namespace Terminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(662, 454);
+            this.ClientSize = new System.Drawing.Size(527, 454);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.helpASCII);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -212,15 +189,12 @@ namespace Terminal
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ListBox helpASCII;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;

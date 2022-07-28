@@ -53,12 +53,6 @@ namespace Terminal
         {
             AssemblyInfo info = new AssemblyInfo();
             lblThisVersion.Text = $"v{info.AssemblyVersion}";
-
-            for (int i = 0; i <= 255; i++)
-            {
-                string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";
-                helpASCII.Items.Add(str);
-            }
         }
     }
 }

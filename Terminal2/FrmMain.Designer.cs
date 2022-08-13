@@ -78,8 +78,8 @@ namespace Terminal
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLogfile = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.btnConnectOptions = new System.Windows.Forms.Button();
             this.PanelOne = new System.Windows.Forms.Panel();
+            this.btnRescan = new System.Windows.Forms.Button();
             this.btnASCII = new System.Windows.Forms.Button();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -93,6 +93,7 @@ namespace Terminal
             this.pdPort = new System.Windows.Forms.ComboBox();
             this.btnLogOptions = new System.Windows.Forms.Button();
             this.btnStartLog = new System.Windows.Forms.Button();
+            this.btnConnectOptions = new System.Windows.Forms.Button();
             this.lblSaving = new System.Windows.Forms.Label();
             this.cbStayOnTop = new System.Windows.Forms.CheckBox();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -114,10 +115,10 @@ namespace Terminal
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnFile = new System.Windows.Forms.Button();
-            this.btnEditMacro = new System.Windows.Forms.Button();
             this.SendPanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.cbClearCMD = new System.Windows.Forms.CheckBox();
+            this.btnEditMacro = new System.Windows.Forms.Button();
             this.cbSendCR = new System.Windows.Forms.CheckBox();
             this.cbSendLF = new System.Windows.Forms.CheckBox();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -154,7 +155,9 @@ namespace Terminal
             this.lblLineCounter = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnPauseFile = new System.Windows.Forms.Button();
+            this.lbInput = new Terminal.FlickerFreeListBox();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
+            this.lbOutput = new Terminal.FlickerFreeListBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -163,8 +166,8 @@ namespace Terminal
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.backupTimer = new System.Windows.Forms.Timer(this.components);
-            this.lbInput = new Terminal.FlickerFreeListBox();
-            this.lbOutput = new Terminal.FlickerFreeListBox();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stsPending = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -186,6 +189,8 @@ namespace Terminal
             this.stsConnectionDetail,
             this.toolStripStatusLabel1,
             this.stsColumnStart,
+            this.toolStripStatusLabel5,
+            this.stsPending,
             this.toolStripStatusLabel2,
             this.stsLineCount,
             this.toolStripStatusLabel3,
@@ -227,8 +232,8 @@ namespace Terminal
             // 
             this.stsColumnStart.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.stsColumnStart.Name = "stsColumnStart";
-            this.stsColumnStart.Size = new System.Drawing.Size(26, 19);
-            this.stsColumnStart.Text = " 0  ";
+            this.stsColumnStart.Size = new System.Drawing.Size(29, 19);
+            this.stsColumnStart.Text = "  0  ";
             this.stsColumnStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusLabel2
@@ -269,7 +274,7 @@ namespace Terminal
             this.btnConnect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConnect.ForeColor = System.Drawing.Color.Blue;
-            this.btnConnect.Location = new System.Drawing.Point(96, 4);
+            this.btnConnect.Location = new System.Drawing.Point(128, 4);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(75, 21);
             this.btnConnect.TabIndex = 2;
@@ -277,22 +282,10 @@ namespace Terminal
             this.btnConnect.UseVisualStyleBackColor = false;
             this.btnConnect.Click += new System.EventHandler(this.BtnConnect_Click);
             // 
-            // btnConnectOptions
-            // 
-            this.btnConnectOptions.BackColor = System.Drawing.Color.Transparent;
-            this.btnConnectOptions.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnConnectOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnConnectOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnConnectOptions.Image")));
-            this.btnConnectOptions.Location = new System.Drawing.Point(171, 4);
-            this.btnConnectOptions.Name = "btnConnectOptions";
-            this.btnConnectOptions.Size = new System.Drawing.Size(21, 21);
-            this.btnConnectOptions.TabIndex = 3;
-            this.btnConnectOptions.UseVisualStyleBackColor = false;
-            this.btnConnectOptions.Click += new System.EventHandler(this.BtnSettings_Click);
-            // 
             // PanelOne
             // 
             this.PanelOne.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.PanelOne.Controls.Add(this.btnRescan);
             this.PanelOne.Controls.Add(this.btnASCII);
             this.PanelOne.Controls.Add(this.panel10);
             this.PanelOne.Controls.Add(this.panel7);
@@ -317,6 +310,19 @@ namespace Terminal
             this.PanelOne.Size = new System.Drawing.Size(1164, 28);
             this.PanelOne.TabIndex = 4;
             // 
+            // btnRescan
+            // 
+            this.btnRescan.BackColor = System.Drawing.Color.Transparent;
+            this.btnRescan.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnRescan.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.btnRescan.Image = global::Terminal.Properties.Resources.rescan;
+            this.btnRescan.Location = new System.Drawing.Point(94, 4);
+            this.btnRescan.Name = "btnRescan";
+            this.btnRescan.Size = new System.Drawing.Size(21, 21);
+            this.btnRescan.TabIndex = 29;
+            this.btnRescan.UseVisualStyleBackColor = false;
+            this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
+            // 
             // btnASCII
             // 
             this.btnASCII.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -332,7 +338,7 @@ namespace Terminal
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel10.Location = new System.Drawing.Point(404, 3);
+            this.panel10.Location = new System.Drawing.Point(436, 3);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(3, 20);
             this.panel10.TabIndex = 27;
@@ -340,7 +346,7 @@ namespace Terminal
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel7.Location = new System.Drawing.Point(759, 3);
+            this.panel7.Location = new System.Drawing.Point(791, 3);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(3, 20);
             this.panel7.TabIndex = 26;
@@ -351,7 +357,7 @@ namespace Terminal
             this.btnQuickLaunch.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnQuickLaunch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnQuickLaunch.Image = ((System.Drawing.Image)(resources.GetObject("btnQuickLaunch.Image")));
-            this.btnQuickLaunch.Location = new System.Drawing.Point(735, 4);
+            this.btnQuickLaunch.Location = new System.Drawing.Point(767, 4);
             this.btnQuickLaunch.Name = "btnQuickLaunch";
             this.btnQuickLaunch.Size = new System.Drawing.Size(21, 21);
             this.btnQuickLaunch.TabIndex = 23;
@@ -365,7 +371,7 @@ namespace Terminal
             this.btnColorConfig.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnColorConfig.Image = global::Terminal.Properties.Resources.Gear;
             this.btnColorConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnColorConfig.Location = new System.Drawing.Point(322, 4);
+            this.btnColorConfig.Location = new System.Drawing.Point(354, 4);
             this.btnColorConfig.Name = "btnColorConfig";
             this.btnColorConfig.Size = new System.Drawing.Size(75, 21);
             this.btnColorConfig.TabIndex = 15;
@@ -380,7 +386,7 @@ namespace Terminal
             this.btnNew.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnNew.Image = ((System.Drawing.Image)(resources.GetObject("btnNew.Image")));
-            this.btnNew.Location = new System.Drawing.Point(709, 4);
+            this.btnNew.Location = new System.Drawing.Point(741, 4);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(21, 21);
             this.btnNew.TabIndex = 21;
@@ -392,8 +398,8 @@ namespace Terminal
             this.btnProfileSelect.BackColor = System.Drawing.Color.Transparent;
             this.btnProfileSelect.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnProfileSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnProfileSelect.Image = ((System.Drawing.Image)(resources.GetObject("btnProfileSelect.Image")));
-            this.btnProfileSelect.Location = new System.Drawing.Point(684, 4);
+            this.btnProfileSelect.Image = global::Terminal.Properties.Resources.Gear;
+            this.btnProfileSelect.Location = new System.Drawing.Point(716, 4);
             this.btnProfileSelect.Name = "btnProfileSelect";
             this.btnProfileSelect.Size = new System.Drawing.Size(21, 21);
             this.btnProfileSelect.TabIndex = 20;
@@ -406,18 +412,19 @@ namespace Terminal
             this.lblProfileName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblProfileName.ForeColor = System.Drawing.Color.Black;
-            this.lblProfileName.Location = new System.Drawing.Point(413, 4);
+            this.lblProfileName.Location = new System.Drawing.Point(445, 4);
             this.lblProfileName.Name = "lblProfileName";
             this.lblProfileName.Size = new System.Drawing.Size(266, 20);
             this.lblProfileName.TabIndex = 18;
             this.lblProfileName.Text = "Default";
             this.lblProfileName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProfileName.Click += new System.EventHandler(this.BtnProfileSelect_Click);
             this.lblProfileName.MouseHover += new System.EventHandler(this.LblProfileName_Click);
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel5.Location = new System.Drawing.Point(198, 3);
+            this.panel5.Location = new System.Drawing.Point(230, 3);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(3, 20);
             this.panel5.TabIndex = 25;
@@ -425,7 +432,7 @@ namespace Terminal
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel2.Location = new System.Drawing.Point(312, 3);
+            this.panel2.Location = new System.Drawing.Point(344, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(3, 20);
             this.panel2.TabIndex = 20;
@@ -442,15 +449,14 @@ namespace Terminal
             this.pdPort.Sorted = true;
             this.pdPort.TabIndex = 22;
             this.pdPort.SelectedValueChanged += new System.EventHandler(this.PdPort_SelectedValueChanged);
-            this.pdPort.MouseEnter += new System.EventHandler(this.PdPort_MouseEnter);
             // 
             // btnLogOptions
             // 
             this.btnLogOptions.BackColor = System.Drawing.Color.Transparent;
             this.btnLogOptions.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnLogOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnLogOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLogOptions.Image")));
-            this.btnLogOptions.Location = new System.Drawing.Point(284, 4);
+            this.btnLogOptions.Image = global::Terminal.Properties.Resources.Gear;
+            this.btnLogOptions.Location = new System.Drawing.Point(316, 4);
             this.btnLogOptions.Name = "btnLogOptions";
             this.btnLogOptions.Size = new System.Drawing.Size(21, 21);
             this.btnLogOptions.TabIndex = 11;
@@ -464,13 +470,26 @@ namespace Terminal
             this.btnStartLog.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.btnStartLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartLog.ForeColor = System.Drawing.Color.Blue;
-            this.btnStartLog.Location = new System.Drawing.Point(208, 4);
+            this.btnStartLog.Location = new System.Drawing.Point(240, 4);
             this.btnStartLog.Name = "btnStartLog";
             this.btnStartLog.Size = new System.Drawing.Size(75, 21);
             this.btnStartLog.TabIndex = 10;
             this.btnStartLog.Text = "Start &Log";
             this.btnStartLog.UseVisualStyleBackColor = false;
             this.btnStartLog.Click += new System.EventHandler(this.BtnStartLog_Click);
+            // 
+            // btnConnectOptions
+            // 
+            this.btnConnectOptions.BackColor = System.Drawing.Color.Transparent;
+            this.btnConnectOptions.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnConnectOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.btnConnectOptions.Image = global::Terminal.Properties.Resources.Gear;
+            this.btnConnectOptions.Location = new System.Drawing.Point(203, 4);
+            this.btnConnectOptions.Name = "btnConnectOptions";
+            this.btnConnectOptions.Size = new System.Drawing.Size(21, 21);
+            this.btnConnectOptions.TabIndex = 3;
+            this.btnConnectOptions.UseVisualStyleBackColor = false;
+            this.btnConnectOptions.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // lblSaving
             // 
@@ -731,20 +750,6 @@ namespace Terminal
             this.btnFile.UseVisualStyleBackColor = false;
             this.btnFile.Click += new System.EventHandler(this.BtnFile_Click);
             // 
-            // btnEditMacro
-            // 
-            this.btnEditMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditMacro.BackColor = System.Drawing.Color.Transparent;
-            this.btnEditMacro.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.btnEditMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnEditMacro.Image = ((System.Drawing.Image)(resources.GetObject("btnEditMacro.Image")));
-            this.btnEditMacro.Location = new System.Drawing.Point(1137, 4);
-            this.btnEditMacro.Name = "btnEditMacro";
-            this.btnEditMacro.Size = new System.Drawing.Size(19, 18);
-            this.btnEditMacro.TabIndex = 0;
-            this.btnEditMacro.UseVisualStyleBackColor = false;
-            this.btnEditMacro.Click += new System.EventHandler(this.BtnEditMacro_Click);
-            // 
             // SendPanel
             // 
             this.SendPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
@@ -787,6 +792,20 @@ namespace Terminal
             this.cbClearCMD.Text = "Clear on Send";
             this.cbClearCMD.UseVisualStyleBackColor = true;
             this.cbClearCMD.CheckedChanged += new System.EventHandler(this.ResetFocus);
+            // 
+            // btnEditMacro
+            // 
+            this.btnEditMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditMacro.BackColor = System.Drawing.Color.Transparent;
+            this.btnEditMacro.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnEditMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.btnEditMacro.Image = global::Terminal.Properties.Resources.Gear;
+            this.btnEditMacro.Location = new System.Drawing.Point(1138, 2);
+            this.btnEditMacro.Name = "btnEditMacro";
+            this.btnEditMacro.Size = new System.Drawing.Size(21, 21);
+            this.btnEditMacro.TabIndex = 0;
+            this.btnEditMacro.UseVisualStyleBackColor = false;
+            this.btnEditMacro.Click += new System.EventHandler(this.BtnEditMacro_Click);
             // 
             // cbSendCR
             // 
@@ -1268,6 +1287,23 @@ namespace Terminal
             this.btnPauseFile.Visible = false;
             this.btnPauseFile.Click += new System.EventHandler(this.BtnPauseFile_Click);
             // 
+            // lbInput
+            // 
+            this.lbInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbInput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lbInput.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInput.FormattingEnabled = true;
+            this.lbInput.ItemHeight = 19;
+            this.lbInput.Location = new System.Drawing.Point(0, 0);
+            this.lbInput.Name = "lbInput";
+            this.lbInput.ScrollAlwaysVisible = true;
+            this.lbInput.Size = new System.Drawing.Size(1164, 356);
+            this.lbInput.TabIndex = 17;
+            this.lbInput.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbInput_MouseClick);
+            this.lbInput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbInput_DrawItem);
+            this.lbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
+            this.lbInput.Resize += new System.EventHandler(this.lbInput_Resize);
+            // 
             // hScrollBar
             // 
             this.hScrollBar.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1278,6 +1314,21 @@ namespace Terminal
             this.hScrollBar.Size = new System.Drawing.Size(1164, 10);
             this.hScrollBar.TabIndex = 18;
             this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
+            // 
+            // lbOutput
+            // 
+            this.lbOutput.BackColor = System.Drawing.Color.Gainsboro;
+            this.lbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbOutput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.lbOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOutput.FormattingEnabled = true;
+            this.lbOutput.Location = new System.Drawing.Point(0, 0);
+            this.lbOutput.Name = "lbOutput";
+            this.lbOutput.Size = new System.Drawing.Size(1164, 102);
+            this.lbOutput.TabIndex = 0;
+            this.lbOutput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbOutput_DrawItem);
+            this.lbOutput.SelectedIndexChanged += new System.EventHandler(this.LbOutput_SelectedIndexChanged);
+            this.lbOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
             // 
             // timer
             // 
@@ -1333,37 +1384,19 @@ namespace Terminal
             this.backupTimer.Interval = 10000;
             this.backupTimer.Tick += new System.EventHandler(this.backupTimer_Tick);
             // 
-            // lbInput
+            // toolStripStatusLabel5
             // 
-            this.lbInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbInput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.lbInput.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbInput.FormattingEnabled = true;
-            this.lbInput.ItemHeight = 19;
-            this.lbInput.Location = new System.Drawing.Point(0, 0);
-            this.lbInput.Name = "lbInput";
-            this.lbInput.ScrollAlwaysVisible = true;
-            this.lbInput.Size = new System.Drawing.Size(1164, 356);
-            this.lbInput.TabIndex = 17;
-            this.lbInput.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbInput_MouseClick);
-            this.lbInput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbInput_DrawItem);
-            this.lbInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
-            this.lbInput.Resize += new System.EventHandler(this.lbInput_Resize);
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(54, 19);
+            this.toolStripStatusLabel5.Text = "Pending:";
             // 
-            // lbOutput
+            // stsPending
             // 
-            this.lbOutput.BackColor = System.Drawing.Color.Gainsboro;
-            this.lbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbOutput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.lbOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbOutput.FormattingEnabled = true;
-            this.lbOutput.Location = new System.Drawing.Point(0, 0);
-            this.lbOutput.Name = "lbOutput";
-            this.lbOutput.Size = new System.Drawing.Size(1164, 102);
-            this.lbOutput.TabIndex = 0;
-            this.lbOutput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbOutput_DrawItem);
-            this.lbOutput.SelectedIndexChanged += new System.EventHandler(this.LbOutput_SelectedIndexChanged);
-            this.lbOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
+            this.stsPending.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.stsPending.Name = "stsPending";
+            this.stsPending.Size = new System.Drawing.Size(23, 19);
+            this.stsPending.Text = " 0 ";
+            this.stsPending.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmMain
             // 
@@ -1383,6 +1416,7 @@ namespace Terminal
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmMain_FormClosed);
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
             this.statusStrip1.ResumeLayout(false);
@@ -1503,6 +1537,9 @@ namespace Terminal
         private System.Windows.Forms.Timer backupTimer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnASCII;
+        private System.Windows.Forms.Button btnRescan;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+        private System.Windows.Forms.ToolStripStatusLabel stsPending;
     }
 }
 

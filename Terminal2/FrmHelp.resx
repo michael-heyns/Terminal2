@@ -186,7 +186,18 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.4.0
+    <value>v1.2.4.3
+    * The macro shortcut Alt-F4 activates it's macro now - and is no longer intercepted by the operating system to close the program
+    * Improved the serial port opening and closing mechanism
+    * FREEZE keeps the incoming data in the queue and updates the status line with a pending line indicator
+
+v1.2.4.2
+    * Ensure the serial port and macros are properly closed down when the form closes
+
+v1.2.4.1
+    * Some small tweaks
+
+v1.2.4.0
     * Moved ASCII table to its own window
 
 v1.2.3.9

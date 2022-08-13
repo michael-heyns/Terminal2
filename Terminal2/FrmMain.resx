@@ -121,16 +121,6 @@
     <value>11, 13</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnConnectOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAAd0SU1FB+YCDAIaJl17Fa8AAADSSURBVDhPnZJNDoIwEIW9W7uup+BaHIBDsNDo
-        ShM8gZ5AKX9CgcanL9akFglOuph23tcOw1vlea61LoqiLMuqquq6bprm/oq2bbuuM8b0fT8MwziO1tow
-        IKUUQswASZIQQAI1Io5jAjjxASeKokgpxRwJtswh8F9gYSoCLfEy3JpusuvNYKXbk1JrHKLkA2iXnUAE
-        6f54wSIjhEQJgg/wfPIdVEOEfHc4Y8uJMf4FOKXfLQWmtOyjF4918Y8jQzs5eNIaZNCV89+M+b4BOjwA
-        WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="btnQuickLaunch.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAmpJREFUOE+V
@@ -159,26 +149,6 @@
         mKVn7kcuPXvfd96p+17zTt83Csu0gGrHDlLXXH6bsevZ/6y9L/9nrL9GejRmrL/6Nm/vi//5B17/z950
         gxwDrr3NBtqee+AN0ICbpBuQuu7am9TdL/+n7339P3X9ddINsAlNMnGKybZ0is22sA1PMYYKUxswMAAA
         WFvuqzyOd0cAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnProfileSelect.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAAd0SU1FB+YCDAIaJl17Fa8AAADSSURBVDhPnZJNDoIwEIW9W7uup+BaHIBDsNDo
-        ShM8gZ5AKX9CgcanL9akFglOuph23tcOw1vlea61LoqiLMuqquq6bprm/oq2bbuuM8b0fT8MwziO1tow
-        IKUUQswASZIQQAI1Io5jAjjxASeKokgpxRwJtswh8F9gYSoCLfEy3JpusuvNYKXbk1JrHKLkA2iXnUAE
-        6f54wSIjhEQJgg/wfPIdVEOEfHc4Y8uJMf4FOKXfLQWmtOyjF4918Y8jQzs5eNIaZNCV89+M+b4BOjwA
-        WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnLogOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAAd0SU1FB+YCDAIaJl17Fa8AAADSSURBVDhPnZJNDoIwEIW9W7uup+BaHIBDsNDo
-        ShM8gZ5AKX9CgcanL9akFglOuph23tcOw1vlea61LoqiLMuqquq6bprm/oq2bbuuM8b0fT8MwziO1tow
-        IKUUQswASZIQQAI1Io5jAjjxASeKokgpxRwJtswh8F9gYSoCLfEy3JpusuvNYKXbk1JrHKLkA2iXnUAE
-        6f54wSIjhEQJgg/wfPIdVEOEfHc4Y8uJMf4FOKXfLQWmtOyjF4918Y8jQzs5eNIaZNCV89+M+b4BOjwA
-        WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="Mode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -220,16 +190,6 @@
   <metadata name="scF12.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="btnEditMacro.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAAd0SU1FB+YCDAIaJl17Fa8AAADSSURBVDhPnZJNDoIwEIW9W7uup+BaHIBDsNDo
-        ShM8gZ5AKX9CgcanL9akFglOuph23tcOw1vlea61LoqiLMuqquq6bprm/oq2bbuuM8b0fT8MwziO1tow
-        IKUUQswASZIQQAI1Io5jAjjxASeKokgpxRwJtswh8F9gYSoCLfEy3JpusuvNYKXbk1JrHKLkA2iXnUAE
-        6f54wSIjhEQJgg/wfPIdVEOEfHc4Y8uJMf4FOKXfLQWmtOyjF4918Y8jQzs5eNIaZNCV89+M+b4BOjwA
-        WPsAz6IYQ1R1M6sAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>127, 13</value>
   </metadata>

@@ -102,6 +102,8 @@ namespace Terminal
 
         private int _stopLine = -1;
 
+        private bool _interceptAltF4 = false;
+
         // ==============================================
         private void SetSearchText(string str)
         {
@@ -165,6 +167,26 @@ namespace Terminal
             return -1;
         }
 
+        private void UpdatePendingCounter()
+        {
+            stsPending.Text = _uiInputQueue.Count.ToString();
+            if (_uiInputQueue.Count > 2000)
+            {
+                stsPending.ForeColor = Color.Yellow;
+                stsPending.BackColor = Color.Red;
+            }
+            else if (_uiInputQueue.Count > 1000)
+            {
+                stsPending.ForeColor = Color.Red;
+                stsPending.BackColor = Color.Yellow;
+            }
+            else
+            {
+                stsPending.ForeColor = SystemColors.ControlText;
+                stsPending.BackColor = SystemColors.Control;
+            }
+        }
+
         private void UpdateLineCounter()
         {
             stsLineCount.Text = lbInput.Items.Count.ToString();
@@ -217,68 +239,72 @@ namespace Terminal
 
         private void UIInputQueueHandler()
         {
+            if (_frozen)
+            {
+                UpdatePendingCounter();
+                return;
+            }
+
             while (!_terminateFlag && _uiInputQueue.Count > 0)
             {
                 string str = (string)_uiInputQueue.Dequeue();
                 Log.Add(str);
 
-                if (!_frozen)
+                char[] delim = { '\n' };
+                string[] lines = str.Split(delim);
+
+                int start = 0;
+                if (!_lineFinished)
                 {
-                    char[] delim = { '\n' };
-                    string[] lines = str.Split(delim);
-
-                    int start = 0;
-                    if (!_lineFinished)
+                    lbInput.BeginUpdate();
                     {
-                        lbInput.BeginUpdate();
-                        {
-                            lbInput.Items[lbInput.Items.Count - 1] += lines[0];
-                        }
-                        lbInput.EndUpdate();
-                        TestForFreeze();
-                        start = 1;
+                        lbInput.Items[lbInput.Items.Count - 1] += lines[0];
                     }
-
-                    if (str.EndsWith("\n"))
-                    {
-                        lbInput.BeginUpdate();
-                        {
-                            for (int i = start; i < lines.Length - 1; i++)
-                            {
-                                lbInput.Items.Add(lines[i]);
-                                TestForFreeze();
-                            }
-                        }
-                        lbInput.EndUpdate();
-                        _lineFinished = true;
-                    }
-                    else
-                    {
-                        lbInput.BeginUpdate();
-                        {
-                            for (int i = start; i < lines.Length; i++)
-                            {
-                                lbInput.Items.Add(lines[i]);
-                                TestForFreeze();
-                            }
-                        }
-                        lbInput.EndUpdate();
-                        _lineFinished = false;
-                    }
-
-                    if (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                    {
-                        lbInput.BeginUpdate();
-                        {
-                            while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                                lbInput.Items.RemoveAt(0);
-                        }
-                        lbInput.EndUpdate();
-                    }
-                    ScrollToBottom();
-                    UpdateLineCounter();
-                    Application.DoEvents();
+                    lbInput.EndUpdate();
+                    TestForFreeze();
+                    start = 1;
                 }
+
+                if (str.EndsWith("\n"))
+                {
+                    lbInput.BeginUpdate();
+                    {
+                        for (int i = start; i < lines.Length - 1; i++)
+                        {
+                            lbInput.Items.Add(lines[i]);
+                            TestForFreeze();
+                        }
+                    }
+                    lbInput.EndUpdate();
+                    _lineFinished = true;
+                }
+                else
+                {
+                    lbInput.BeginUpdate();
+                    {
+                        for (int i = start; i < lines.Length; i++)
+                        {
+                            lbInput.Items.Add(lines[i]);
+                            TestForFreeze();
+                        }
+                    }
+                    lbInput.EndUpdate();
+                    _lineFinished = false;
+                }
+
+                if (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                {
+                    lbInput.BeginUpdate();
+                    {
+                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                            lbInput.Items.RemoveAt(0);
+                    }
+                    lbInput.EndUpdate();
+                }
+                ScrollToBottom();
+                UpdateLineCounter();
+                UpdatePendingCounter();
+                Application.DoEvents();
             }
         }
         private void UIOutputQueueHandler()
@@ -424,6 +450,9 @@ namespace Terminal
 
         private void ActionConnect()
         {
+            btnConnect.Text = "------";
+            Application.DoEvents();
+
             _state = State.Changing;
 
             if (pdPort.Text.Equals("TCP Server"))
@@ -444,6 +473,7 @@ namespace Terminal
                 btnConnect.BackColor = Color.Yellow;
                 btnConnectOptions.Enabled = false;
                 pdPort.Enabled = false;
+                btnRescan.Enabled = false;
                 lblProfileName.Enabled = false;
                 btnProfileSelect.Enabled = false;
 
@@ -462,6 +492,7 @@ namespace Terminal
                     btnConnect.Text = "Dis&connect";
                     btnConnectOptions.Enabled = false;
                     pdPort.Enabled = false;
+                    btnRescan.Enabled=false;
                     lblProfileName.Enabled = false;
                     btnProfileSelect.Enabled = false;
                     btnFile.Enabled = true;
@@ -472,7 +503,8 @@ namespace Terminal
                 }
                 else
                 {
-                    MessageBox.Show("Cannot connect.  The port may be used by another application.  Please verify the configuration options", "Cannot connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnConnect.Text = "&Connect";
+                    MessageBox.Show("The port may be used by another application\nor Windows is busy re-allocating resources.\n\nWait a while and try again", "Cannot connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Log.Add(Utils.Timestamp() + "{FAILED}");
                     _state = State.Disconnected;
                 }
@@ -481,7 +513,10 @@ namespace Terminal
 
         private void ActionDisconnect()
         {
+            btnConnect.Text = "------";
+            Application.DoEvents();
             _comms.Disconnect();
+
             if (_state == State.Listening)
             {
                 Thread.Sleep(10);
@@ -495,6 +530,7 @@ namespace Terminal
             RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
+            btnRescan.Enabled = true;
             lblProfileName.Enabled = true;
             btnProfileSelect.Enabled = true;
             btnFile.Enabled = false;
@@ -606,6 +642,7 @@ namespace Terminal
         {
             btnConnectOptions.Enabled = false;
             pdPort.Enabled = false;
+            btnRescan.Enabled = false;
             {
                 SaveThisProfile();
 
@@ -632,6 +669,7 @@ namespace Terminal
             RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
+            btnRescan.Enabled=true;
             tbCommand.Focus();
         }
 
@@ -707,7 +745,6 @@ namespace Terminal
         private void Freeze(int topLine)
         {
             _frozen = true;
-            lbInput.Items.Add("====== 'Freeze' triggered here ======");
             btnFreeze.ForeColor = Color.Blue;
             btnFreeze.BackColor = Color.IndianRed;
             btnFreeze.Text = "&GO";
@@ -715,12 +752,12 @@ namespace Terminal
         }
         private void UnFreeze()
         {
-            _uiInputQueue.Clear();
             btnFreeze.ForeColor = Color.Black;
             btnFreeze.BackColor = Color.Transparent;
             btnFreeze.Text = "&Freeze";
             _frozen = false;
             _stopLine = lbInput.Items.Count - 1;
+            UIInputQueueHandler();
         }
 
         private void BtnFreeze_Click(object sender, EventArgs e)
@@ -778,6 +815,7 @@ namespace Terminal
                 {
                     _macroBusy[m] = false;
                     _macroTrigger[m].WaitOne();
+                    Thread.Sleep(10);
                     if (_terminateFlag)
                         break;
 
@@ -835,11 +873,11 @@ namespace Terminal
                 }
             }
             catch { }
-            if (!_terminateFlag)
-            {
+
+            if (dgMacroTable.SelectedCells.Count > 0)
                 dgMacroTable.ClearSelection();
-                _localThreadCount--;
-            }
+
+            _localThreadCount--;
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -881,6 +919,8 @@ namespace Terminal
                     Name = t.ToString()
                 };
                 _macroThread[t].Start();
+                Thread.Sleep(2);
+                Application.DoEvents();
             }
             lbInput.Items.Add(string.Empty);
             _lineFinished = false;
@@ -1169,6 +1209,10 @@ namespace Terminal
                     {
                         index += 36;
                         row += 3;
+
+                        // intercept <Alt>-F4
+                        if (index == 39 && row == 4)
+                            _interceptAltF4 = true;
                     }
 
                     Macro mac = _activeProfile.macros[index];
@@ -1284,6 +1328,7 @@ namespace Terminal
                         btnConnect.Text = "Dis&connect";
                         btnConnectOptions.Enabled = false;
                         pdPort.Enabled = false;
+                        btnRescan.Enabled = false;
                         lblProfileName.Enabled = false;
                         btnProfileSelect.Enabled = false;
                         btnFile.Enabled = true;
@@ -1729,6 +1774,7 @@ namespace Terminal
                     UnFreeze();
             }
             btnExport.Enabled = true;
+            tbCommand.Focus();
         }
 
         private void DgMacroTable_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -1736,6 +1782,7 @@ namespace Terminal
             dgMacroTable.Enabled = false;
             dgMacroTable.ClearSelection();
             dgMacroTable.Enabled = true; ;
+            tbCommand.Focus();
         }
 
         private void PdPort_SelectedValueChanged(object sender, EventArgs e)
@@ -1796,16 +1843,6 @@ namespace Terminal
             }
         }
 
-        private void PdPort_MouseEnter(object sender, EventArgs e)
-        {
-            pdPort.Items.Clear();
-            pdPort.Items.Add("Updating");
-            pdPort.SelectedIndex = 0;
-            Application.DoEvents();
-            Thread.Sleep(100);
-            RefreshPortPulldown();
-        }
-
         private void BtnAbortFile_Click(object sender, EventArgs e)
         {
             btnAbortFile.Enabled = false;
@@ -1814,6 +1851,7 @@ namespace Terminal
                 _pauseFileSend = false;
             }
             btnAbortFile.Enabled = true;
+            tbCommand.Focus();
         }
         private void BtnPauseFile_Click(object sender, EventArgs e)
         {
@@ -1823,10 +1861,19 @@ namespace Terminal
                 btnPauseFile.Text = (_pauseFileSend) ? "GO" : "Pause";
             }
             btnPauseFile.Enabled = true;
+            tbCommand.Focus();
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //if (e.CloseReason == CloseReason.UserClosing)
+            if (_interceptAltF4)
+            {
+                _interceptAltF4 = false;
+                e.Cancel = true;
+                return;
+            }
+
             try
             {
                 _terminateFlag = true;
@@ -1839,15 +1886,25 @@ namespace Terminal
                 timer.Enabled = false;
 
                 if (_comms.Connected())
-                    DoConnectDisconnect();
-                Thread.Sleep(50);
-                lock (_uiInputQueue)
                 {
-                    _uiInputQueue.Clear();
+                    DoConnectDisconnect();
+                    Thread.Sleep(50);
+                    lock (_uiInputQueue)
+                    {
+                        _uiInputQueue.Clear();
+                    }
                 }
 
                 for (int t = 0; t < _macroThread.Length; t++)
+                {
                     _macroTrigger[t].Set();
+                    Thread.Sleep(2);
+                    Application.DoEvents();
+                    // do it a second time to make sure
+                    _macroTrigger[t].Set();
+                    Thread.Sleep(2);
+                    Application.DoEvents();
+                }
                 Thread.Sleep(20);
                 if (_localThreadCount != 0)
                 {
@@ -1933,8 +1990,17 @@ namespace Terminal
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            btnFreeze.Enabled = false;
             btnSearch.Enabled = false;
             {
+                if (!_frozen)
+                {
+                    if (_comms.Connected() && lbInput.Items.Count > 0)
+                    {
+                        Freeze(lbInput.Items.Count - 1);
+                    }
+                }
+
                 DialogResult rc = _search.ShowDialog();
                 if (rc == DialogResult.OK)
                 {
@@ -1975,6 +2041,8 @@ namespace Terminal
                 }
             }
             btnSearch.Enabled = true;
+            btnFreeze.Enabled = true;
+            tbCommand.Focus();
         }
 
         private void backupTimer_Tick(object sender, EventArgs e)
@@ -1994,6 +2062,25 @@ namespace Terminal
             frmASCII.Left = (this.Left + this.Width) - 50;
             frmASCII.Top = this.Top + 100;
             frmASCII.Show();
+            tbCommand.Focus();
+        }
+
+        private void btnRescan_Click(object sender, EventArgs e)
+        {
+            pdPort.Enabled = false;
+            btnRescan.Enabled = false;
+            {
+                RefreshPortPulldown();
+            }
+            btnRescan.Enabled=true;
+            pdPort.Enabled = true;
+            tbCommand.Focus();
+        }
+
+        private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
+            Application.ExitThread();
         }
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox

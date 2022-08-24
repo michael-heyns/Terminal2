@@ -186,7 +186,10 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.4.3
+    <value>v1.2.4.4
+    * The title bar changes to the port name when connected - to make it easy to identify when selecting an open session
+
+v1.2.4.3
     * The macro shortcut Alt-F4 activates it's macro now - and is no longer intercepted by the operating system to close the program
     * Improved the serial port opening and closing mechanism
     * FREEZE keeps the incoming data in the queue and updates the status line with a pending line indicator

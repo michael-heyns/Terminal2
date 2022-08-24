@@ -500,6 +500,7 @@ namespace Terminal
 
                     Log.Add(Utils.Timestamp() + "{CONNECTED}");
                     _state = State.Connected;
+                    this.Text = pdPort.Text;
                 }
                 else
                 {
@@ -537,6 +538,7 @@ namespace Terminal
             Application.DoEvents();
 
             RestartAllMacros();
+            this.Text = VersionLabel;
 
             Log.Add(Utils.Timestamp() + "{DISCONNECTED}");
             _state = State.Disconnected;

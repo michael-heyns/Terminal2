@@ -25,6 +25,7 @@
 using System;
 using System.Collections;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
 using System.Threading;
@@ -35,43 +36,35 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Terminal
 {
-    enum SerialStates
-    {
-        CLOSED = 0,
-        OPENING,
-        OPEN,
-        CLOSING
-    }
-
     internal class Comms
     {
-        private SerialStates _serState = SerialStates.CLOSED;
-        private readonly EventQueue _inputQueue = null;
+        private static EventQueue _inputQueue = null;
 
-        private readonly Label[] _leds;
-        private readonly Label[] _controls;
+        private static Label[] _leds;
+        private static Label[] _controls;
 
         private static SerialPort _com = null;
 
-        private bool _connected = false;
-        private string _connectionString = "Disconnected";
-        private CommType _comType = CommType.cNONE;
-        private TcpListener _server = null;
-        private TcpClient _client = null;
-        private Socket _socket = null;
-        private Profile _profile;
-        private Embellishments _embellishments;
+        private static bool _connected = false;
+        private static string _connectionString = "Disconnected";
+        private static CommType _comType = CommType.cNONE;
+        private static TcpListener _server = null;
+        private static TcpClient _client = null;
+        private static Socket _socket = null;
+        private static Profile _profile;
+        private static Embellishments _embellishments;
 
-        private Thread _tcpThread = null;
-        private Thread _serialThread = null;
+        private static Thread _tcpThread = null;
+        private static Thread _serialThread = null;
         private static int _localThreadCount = 0;
 
-        private bool _halfCRLF = false;
-        private bool _showTimestamp = false;
-        private int _hexColumn = 0;
-        private string _embelished;
+        private static bool _halfCRLF = false;
+        private static bool _showTimestamp = false;
+        private static int _hexColumn = 0;
+        private static string _embelished;
 
-        private bool _suspendReadThread = false;
+        private static bool _suspendReadThread = false;
+        public static bool _terminateFlag = false;
 
         private void Enqueue(string str)
         {
@@ -194,31 +187,15 @@ namespace Terminal
                 return;
 
             _localThreadCount++;
-            using (_com)
             {
-                _connected = false;
-
-                // open the port
                 try
                 {
-                    _com.Close();
-                    Thread.Sleep(250);
-                    _com.Open();
-                    //break;
-                }
-                catch
-                {
-                }
-
-                // do the work
-                if (_com.IsOpen)
-                {
-                    _serState = SerialStates.OPEN;
-                    _connected = true;
-                    _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                    try
+                    // do the work
+                    if (_com.IsOpen)
                     {
-                        while (_com.IsOpen)
+                        _terminateFlag = false;
+                        _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
+                        while (_com.IsOpen && !_terminateFlag)
                         {
                             int count = _com.BytesToRead;
                             if (count > 0)
@@ -235,17 +212,9 @@ namespace Terminal
                                 Thread.Sleep(10);
                         }
                     }
-                    catch { }
-                    _com.Close();
                 }
-
-                // if we were connected, remove the event handler and change state
-                if (_connected)
-                {
-                    _connected = false;
-                    _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                }
-                _serState = SerialStates.CLOSED;
+                catch { }
+                _connected = false;
             }
             _localThreadCount--;
         }
@@ -253,32 +222,35 @@ namespace Terminal
         private void TCPReaderThread()
         {
             _localThreadCount++;
-            try
             {
-                while (_connected && _socket != null)
+                try
                 {
-                    int count = DataWaiting();
-                    if (count > 0)
+                    while (SocketOpen(_socket))
                     {
-                        string str = string.Empty;
-                        byte[] tcp_data = null;
-                        int tcp_count = 0;
-                        tcp_count = _socket.Available;
-                        if (tcp_count > 0)
+                        int count = DataWaiting();
+                        if (count > 0)
                         {
-                            tcp_data = new byte[tcp_count];
-                            _socket.Receive(tcp_data);
-                            str = System.Text.Encoding.Default.GetString(tcp_data);
+                            string str = string.Empty;
+                            byte[] tcp_data = null;
+                            int tcp_count = 0;
+                            tcp_count = _socket.Available;
+                            if (tcp_count > 0)
+                            {
+                                tcp_data = new byte[tcp_count];
+                                _socket.Receive(tcp_data);
+                                str = System.Text.Encoding.Default.GetString(tcp_data);
+                            }
+                            Enqueue(str);
                         }
-                        Enqueue(str);
-                    }
-                    else
-                    {
-                        Thread.Sleep(1);
+                        else
+                        {
+                            Thread.Sleep(1);
+                        }
                     }
                 }
+                catch { }
+                _connected = false;
             }
-            catch { }
             _localThreadCount--;
         }
 
@@ -335,17 +307,16 @@ namespace Terminal
             if (_profile.conOptions.Type == ConOptions.ConType.Serial)
             {
                 _comType = CommType.ctSERIAL;
-                _com = new SerialPort
-                {
-                    PortName = _profile.conOptions.SerialPort,
-                    BaudRate = Utils.Int(_profile.conOptions.Baudrate),
-                    DataBits = Utils.Int(_profile.conOptions.DataBits)
-                };
 
+                _com = new SerialPort();
+                _com.PortName = _profile.conOptions.SerialPort;
+                _com.BaudRate = Utils.Int(_profile.conOptions.Baudrate);
+                _com.DataBits = Utils.Int(_profile.conOptions.DataBits);
                 _com.ReadBufferSize = 100000;
                 _com.WriteBufferSize = 100000;
                 _com.WriteTimeout = 1000;
                 _com.ReadTimeout = 1000;
+
                 switch (_profile.conOptions.Parity)
                 {
                     default:
@@ -386,8 +357,6 @@ namespace Terminal
                         break;
                 }
 
-                SetupSerialControls();
-
                 // set RTS
                 {
                     bool SetInitialRTS = false;
@@ -419,58 +388,48 @@ namespace Terminal
 
                     if (SetInitialRTS)
                     {
-
                         if (_profile.conOptions.InitialRTS)
-                        {
                             _com.RtsEnable = true;
-                            _controls[1].BackColor = Color.Lime;
-                        }
                         else
-                        {
                             _com.RtsEnable = false;
-                            _controls[1].BackColor = Color.White;
+                    }
+
+                    // set initial DTR
+                    if (_profile.conOptions.InitialDTR)
+                        _com.DtrEnable = true;
+                    else
+                        _com.DtrEnable = false;
+                }
+
+                // open the port
+                _connected = false;
+                for (int i = 0; i < 4; i++)
+                {
+                    try
+                    {
+                        _com.Open();
+                        if (_com.IsOpen)
+                        {
+                            _connected = true;
+                            break;
                         }
                     }
-                }
-
-                // set DTR
-                _controls[0].Enabled = true;
-                if (_profile.conOptions.InitialDTR)
-                {
-                    _com.DtrEnable = true;
-                    _controls[0].BackColor = Color.Lime;
-                }
-                else
-                {
-                    _com.DtrEnable = false;
-                    _controls[0].BackColor = Color.White;
+                    catch { }
                 }
 
                 // start the thread
-                _serState = SerialStates.OPENING;
-                _connected = false;
-                _serialThread = new Thread(new ThreadStart(SerialReaderThread));
-                _serialThread.Start();
-
-                // wait for the thread to respond
-                for (int i = 0; i < 10000; i++)
+                if (_connected)
                 {
-                    if (_serState != SerialStates.OPENING)
-                        break;
-                    if (i == 100)
-                        return false;
-                    Thread.Sleep(10);
-                }
-
-                if (_serState == SerialStates.OPEN)
-                {
+                    _serialThread = new Thread(new ThreadStart(SerialReaderThread));
+                    _serialThread.Start();
                     _connectionString = $"Connected to: {_profile.conOptions.SerialPort},{_profile.conOptions.Baudrate},{_profile.conOptions.DataBits},{_profile.conOptions.Parity},{_profile.conOptions.StopBits},{_profile.conOptions.Handshaking}";
-                    SetupSerialLEDs();
+                    SetupOutgoingLEDs();
+                    SetupIncomingLEDs();
                     return true;
                 }
-                _com.DtrEnable = false;
-                _com.RtsEnable = false;
-                _com.Close();
+
+                // connection failed
+                Disconnect();
                 return false;
             }
             else if (_profile.conOptions.Type == ConOptions.ConType.TCPServer)
@@ -492,6 +451,8 @@ namespace Terminal
                 }
                 catch
                 {
+                    MessageBox.Show("The server cannot start.\nAnother server may be listening on the same port.", "Cannot Start Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
             else if (_profile.conOptions.Type == ConOptions.ConType.TCPClient)
@@ -556,46 +517,61 @@ namespace Terminal
                 control.Enabled = false;
                 control.BackColor = Color.LightGray;
             }
+            Application.DoEvents();
 
             try
             {
                 switch (_comType)
                 {
                     case CommType.ctSERIAL:
-
-                        // kill the thread
-                        if (_serialThread != null)
-                        {
-                            // this also closes the serial port
-                            _serialThread.Abort();
-                            _serialThread.Join();
-                        }
+                        _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
+                        Stream s = _com.BaseStream;
+                        s.Flush();
+                        s.Close();
                         _com.DtrEnable = false;
                         _com.RtsEnable = false;
                         _com.Close();
-
-                        if (_serState != SerialStates.CLOSED)
+                        if (_serialThread != null)
                         {
-                            _localThreadCount--;
-                            _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                            _serState = SerialStates.CLOSED;
+                            _terminateFlag = true;
+                            while (_serialThread.ThreadState == ThreadState.Running)
+                                Thread.Sleep(20);
+                            Thread.Sleep(20);
+                            _serialThread.Abort();
+                            Thread.Sleep(20);
+                            _serialThread.Join();
+                            _serialThread = null;
                         }
-
+                        _com = null;
                         _connected = false;
                         break;
 
                     case CommType.ctSERVER:
+                        if (_socket != null)
+                        {
+                            try
+                            {
+                                _socket.Shutdown(SocketShutdown.Both);
+                            }
+                            finally
+                            {
+                                _socket.Close();
+                            }
+                        }
+
                         if (_tcpThread != null)
                         {
+                            while (_tcpThread.ThreadState == ThreadState.Running)
+                                Thread.Sleep(20);
+                            Thread.Sleep(20);
                             _tcpThread.Abort();
+                            Thread.Sleep(20);
                             _tcpThread.Join();
+                            _tcpThread = null;
                         }
 
                         if (_server != null)
                             _server.Stop();
-
-                        if (_socket != null)
-                            _socket.Shutdown(SocketShutdown.Both);
 
                         _socket = null;
                         _server = null;
@@ -605,17 +581,26 @@ namespace Terminal
                         break;
 
                     case CommType.ctCLIENT:
-                        if (_tcpThread != null)
-                        {
-                            _tcpThread.Abort();
-                            _tcpThread.Join();
-                        }
-
                         if (_socket != null)
                         {
-                            _socket.Shutdown(SocketShutdown.Both);
-                            _client.Close();
+                            try
+                            {
+                                _socket.Shutdown(SocketShutdown.Both);
+                            }
+                            finally
+                            {
+                                _socket.Close();
+                            }
                         }
+
+                        if (_tcpThread != null)
+                        {
+                            while (_tcpThread.ThreadState == ThreadState.Running)
+                                Thread.Sleep(20);
+                            _tcpThread.Join();
+                            _tcpThread = null;
+                        }
+
                         _socket = null;
                         _server = null;
                         _connected = false;
@@ -782,18 +767,26 @@ namespace Terminal
             }
         }
 
-        private void SetupSerialControls()
+        private void SetupOutgoingLEDs()
         {
+            // set DTR LED
             _controls[0].Text = "DTR";
             _controls[0].Enabled = true;
-            _controls[0].BackColor = Color.White;
+            if (_profile.conOptions.InitialDTR)
+                _controls[0].BackColor = Color.Lime;
+            else
+                _controls[0].BackColor = Color.White;
 
+            // set RTS LED
             _controls[1].Text = "RTS";
             _controls[1].Enabled = true;
-            _controls[1].BackColor = Color.White;
+            if (_profile.conOptions.InitialRTS)
+                _controls[1].BackColor = Color.Lime;
+            else
+                _controls[1].BackColor = Color.White;
         }
 
-        private void SetupSerialLEDs()
+        private void SetupIncomingLEDs()
         {
             _leds[0].Text = "CTS";
             _leds[0].Enabled = true;

@@ -186,7 +186,19 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.2.4.4
+    <value>v1.2.4.8
+    * Fixed DTR/RTS control Buttons/LEDs
+
+v1.2.4.7
+    * Improved the Port Closing mechanism when using serial.  Allows for better port opening next time
+
+v1.2.4.6
+    * Fixed an issue which left the serial port open and prevented a re-connect
+
+v1.2.4.5
+    * Fixed an exception condition when a field in the macro edit screen is left blank (instead of containing text/numbers)
+
+v1.2.4.4
     * The title bar changes to the port name when connected - to make it easy to identify when selecting an open session
 
 v1.2.4.3

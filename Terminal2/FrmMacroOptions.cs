@@ -51,12 +51,22 @@ namespace Terminal
 
         private int ApplyNumbers(TextBox tb, int min, int max)
         {
-            int v = int.Parse(tb.Text);
-            if (v < min)
-                v = min;
-            else if (v > max)
-                v = max;
-            tb.Text = v.ToString();
+            int v = min;
+            try
+            {
+                if (tb == null)
+                    return min;
+                if (tb.MaxLength == 0)
+                    return min;
+
+                v = int.Parse(tb.Text);
+                if (v < min)
+                    v = min;
+                else if (v > max)
+                    v = max;
+                tb.Text = v.ToString();
+            }
+            catch { }
             return v;
         }
 

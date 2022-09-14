@@ -260,7 +260,7 @@ namespace Terminal
             // 
             this.panel1.BackColor = System.Drawing.Color.LightGray;
             this.panel1.Location = new System.Drawing.Point(19, 84);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(475, 3);
             this.panel1.TabIndex = 113;
@@ -269,10 +269,11 @@ namespace Terminal
             // 
             this.x12.FormattingEnabled = true;
             this.x12.Location = new System.Drawing.Point(62, 393);
-            this.x12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.x12.Margin = new System.Windows.Forms.Padding(2);
             this.x12.Name = "x12";
             this.x12.Size = new System.Drawing.Size(27, 21);
             this.x12.TabIndex = 112;
+            this.x12.Visible = false;
             // 
             // cbFilterCase
             // 
@@ -280,7 +281,7 @@ namespace Terminal
             this.cbFilterCase.Checked = true;
             this.cbFilterCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbFilterCase.Location = new System.Drawing.Point(145, 90);
-            this.cbFilterCase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbFilterCase.Margin = new System.Windows.Forms.Padding(2);
             this.cbFilterCase.Name = "cbFilterCase";
             this.cbFilterCase.Size = new System.Drawing.Size(83, 17);
             this.cbFilterCase.TabIndex = 100;

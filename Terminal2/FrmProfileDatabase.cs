@@ -176,6 +176,8 @@ namespace Terminal
                 string selectedProfile = lbProfileList.SelectedItem.ToString();
                 string currentExecutable = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
                 System.Diagnostics.Process.Start(currentExecutable, "\"" + selectedProfile + "\"");
+                Application.DoEvents();
+                this.Close();
             }
             catch { }
         }

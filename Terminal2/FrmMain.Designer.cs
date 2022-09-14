@@ -73,6 +73,8 @@ namespace Terminal
             this.stsConnectionDetail = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsColumnStart = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.stsPending = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsLineCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -166,8 +168,6 @@ namespace Terminal
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
             this.backupTimer = new System.Windows.Forms.Timer(this.components);
-            this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.stsPending = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -235,6 +235,20 @@ namespace Terminal
             this.stsColumnStart.Size = new System.Drawing.Size(29, 19);
             this.stsColumnStart.Text = "  0  ";
             this.stsColumnStart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabel5
+            // 
+            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+            this.toolStripStatusLabel5.Size = new System.Drawing.Size(54, 19);
+            this.toolStripStatusLabel5.Text = "Pending:";
+            // 
+            // stsPending
+            // 
+            this.stsPending.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
+            this.stsPending.Name = "stsPending";
+            this.stsPending.Size = new System.Drawing.Size(23, 19);
+            this.stsPending.Text = " 0 ";
+            this.stsPending.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolStripStatusLabel2
             // 
@@ -315,7 +329,7 @@ namespace Terminal
             this.btnRescan.BackColor = System.Drawing.Color.Transparent;
             this.btnRescan.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnRescan.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
-            this.btnRescan.Image = global::Terminal.Properties.Resources.rescan;
+            this.btnRescan.Image = global::Terminal.Properties.Resources.Rescan;
             this.btnRescan.Location = new System.Drawing.Point(94, 4);
             this.btnRescan.Name = "btnRescan";
             this.btnRescan.Size = new System.Drawing.Size(21, 21);
@@ -1383,20 +1397,6 @@ namespace Terminal
             this.backupTimer.Enabled = true;
             this.backupTimer.Interval = 10000;
             this.backupTimer.Tick += new System.EventHandler(this.backupTimer_Tick);
-            // 
-            // toolStripStatusLabel5
-            // 
-            this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-            this.toolStripStatusLabel5.Size = new System.Drawing.Size(54, 19);
-            this.toolStripStatusLabel5.Text = "Pending:";
-            // 
-            // stsPending
-            // 
-            this.stsPending.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.stsPending.Name = "stsPending";
-            this.stsPending.Size = new System.Drawing.Size(23, 19);
-            this.stsPending.Text = " 0 ";
-            this.stsPending.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmMain
             // 

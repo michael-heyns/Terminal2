@@ -477,12 +477,12 @@ namespace Terminal
                 lblProfileName.Enabled = false;
                 btnProfileSelect.Enabled = false;
 
+                Log.Add(Utils.Timestamp() + "{LISTENING}");
+                _state = State.Listening;
+
                 _threadDone = false;
                 _connectThread = new Thread(new ThreadStart(ConnectionThread));
                 _connectThread.Start();
-
-                Log.Add(Utils.Timestamp() + "{LISTENING}");
-                _state = State.Listening;
             }
             else
             {
@@ -505,7 +505,7 @@ namespace Terminal
                 else
                 {
                     btnConnect.Text = "&Connect";
-                    MessageBox.Show("The port may be used by another application\nor Windows is busy re-allocating resources.\n\nWait a while and try again", "Cannot connect", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("The port may be used by another application\n** or **\nWindows is preventing access at the moment.\n\nWait a few seconds and try again", "Cannot connect right now", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Log.Add(Utils.Timestamp() + "{FAILED}");
                     _state = State.Disconnected;
                 }
@@ -520,7 +520,6 @@ namespace Terminal
 
             if (_state == State.Listening)
             {
-                Thread.Sleep(10);
                 if (!_threadDone)
                     _connectThread.Abort();
                 _connectThread.Join();
@@ -1339,7 +1338,10 @@ namespace Terminal
                     }
                     else
                     {
-                        _state = State.Disconnected;
+                        if (_state == State.Listening)
+                            ActionDisconnect();
+                        else
+                            _state = State.Disconnected;
                     }
                     return;
                 }
@@ -1889,7 +1891,7 @@ namespace Terminal
 
                 if (_comms.Connected())
                 {
-                    DoConnectDisconnect();
+                    _comms.Disconnect();
                     Thread.Sleep(50);
                     lock (_uiInputQueue)
                     {

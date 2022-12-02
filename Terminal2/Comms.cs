@@ -63,6 +63,7 @@ namespace Terminal
         private static int _hexColumn = 0;
         private static string _embelished;
 
+        private static bool _showServerFailure = false;
         private static bool _suspendReadThread = false;
         public static bool _terminateFlag = false;
 
@@ -441,6 +442,7 @@ namespace Terminal
                     _server = new TcpListener(IPAddress.Any, port);
                     _server.Start();
 
+                    _showServerFailure = true;
                     _client = _server.AcceptTcpClient();
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
@@ -451,7 +453,8 @@ namespace Terminal
                 }
                 catch
                 {
-                    MessageBox.Show("The server cannot start.\nAnother server may be listening on the same port.", "Cannot Start Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (_showServerFailure)
+                        MessageBox.Show("The server cannot start.\nAnother server may be listening on the same port.", "Cannot Start Server", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
@@ -547,6 +550,7 @@ namespace Terminal
                         break;
 
                     case CommType.ctSERVER:
+                        _showServerFailure = false;
                         if (_socket != null)
                         {
                             try

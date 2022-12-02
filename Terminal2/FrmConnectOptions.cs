@@ -55,6 +55,7 @@ namespace Terminal
             _conOptions.Handshaking = pdHandshaking.Text;
             _conOptions.InitialDTR = cbInitialDTR.Checked;
             _conOptions.InitialRTS = cbInitialRTS.Checked;
+            _conOptions.RestartServer= cbRestartServer.Checked;
 
             if (cbTcpServer.Checked)
             {
@@ -86,10 +87,12 @@ namespace Terminal
             pdHandshaking.Enabled = false;
             cbInitialDTR.Enabled = false;
             cbInitialRTS.Enabled = false;
+            cbRestartServer.Enabled = false;
 
             if (_conOptions.Type == ConOptions.ConType.TCPServer)
             {
                 tbTcpListenPort.Enabled = true;
+                cbRestartServer.Enabled = true;
             }
             else if (_conOptions.Type == ConOptions.ConType.TCPClient)
             {
@@ -124,6 +127,7 @@ namespace Terminal
             pdHandshaking.Text = _conOptions.Handshaking;
             cbInitialDTR.Checked = _conOptions.InitialDTR;
             cbInitialRTS.Checked = _conOptions.InitialRTS;
+            cbRestartServer.Checked = _conOptions.RestartServer;
 
             switch (_conOptions.Type)
             {

@@ -372,6 +372,7 @@ namespace Terminal
                 data += "TCPConnectAddress=localhost\n";
                 data += "TCPConnectPort=5000\n";
                 data += "TCPListenPort=5000\n";
+                data += "RestartOnClose=false";
                 data += "\n";
 
                 string filename = _directory + $"\\{name}.profile";
@@ -459,6 +460,7 @@ namespace Terminal
                 data += $"TCPConnectAddress={profile.conOptions.TCPConnectAdress}\n";
                 data += $"TCPConnectPort={profile.conOptions.TCPConnectPort}\n";
                 data += $"TCPListenPort={profile.conOptions.TCPListenPort}\n";
+                data += $"RestartOnClose={profile.conOptions.RestartServer}\n";
                 data += $"\n";
 
                 int index = 0;
@@ -716,6 +718,10 @@ namespace Terminal
                         else if (line.StartsWith("InitialDTR="))
                         {
                             profile.conOptions.InitialDTR = line.Contains("True");
+                        }
+                        else if (line.StartsWith("RestartOnClose="))
+                        {
+                            profile.conOptions.RestartServer = line.Contains("True");
                         }
                         else if (line.StartsWith("TCPConnectAddress="))
                         {

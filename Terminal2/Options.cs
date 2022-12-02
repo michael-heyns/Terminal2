@@ -45,6 +45,7 @@ namespace Terminal
         public string TCPConnectPort = "5000";
         public bool InitialDTR = false;
         public bool InitialRTS = false;
+        public bool RestartServer = false;
 
         public ConOptions Clone()
         {

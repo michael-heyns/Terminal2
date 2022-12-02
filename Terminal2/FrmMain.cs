@@ -95,6 +95,7 @@ namespace Terminal
         private Brush _inputBackBrush;
         private Brush _outputFrontBrush;
         private Brush _outputBackBrush;
+        private bool _cancelRestart = false;
 
         private bool _lineFinished = true;
 
@@ -453,6 +454,7 @@ namespace Terminal
             btnConnect.Text = "------";
             Application.DoEvents();
 
+            _cancelRestart = false;
             _state = State.Changing;
 
             if (pdPort.Text.Equals("TCP Server"))
@@ -551,6 +553,7 @@ namespace Terminal
                 return;
             }
             btnConnect.Enabled = false;
+            _cancelRestart = true;
             if (_state == State.Disconnected)
             {
                 ActionConnect();
@@ -1316,6 +1319,9 @@ namespace Terminal
                     if (!_comms.Connected())
                     {
                         ActionDisconnect();
+
+                        if (!_cancelRestart && _activeProfile.conOptions.RestartServer)
+                            ActionConnect();
                     }
                 }
             }

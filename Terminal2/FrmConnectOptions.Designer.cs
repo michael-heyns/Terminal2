@@ -77,6 +77,7 @@ namespace Terminal
             this.cbInitialDTR = new System.Windows.Forms.CheckBox();
             this.cbInitialRTS = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.cbRestartServer = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label8
@@ -375,12 +376,23 @@ namespace Terminal
             this.label10.TabIndex = 26;
             this.label10.Text = "before the port opens";
             // 
+            // cbRestartServer
+            // 
+            this.cbRestartServer.AutoSize = true;
+            this.cbRestartServer.Location = new System.Drawing.Point(363, 39);
+            this.cbRestartServer.Name = "cbRestartServer";
+            this.cbRestartServer.Size = new System.Drawing.Size(157, 17);
+            this.cbRestartServer.TabIndex = 27;
+            this.cbRestartServer.Text = "Restart when socket closes";
+            this.cbRestartServer.UseVisualStyleBackColor = true;
+            // 
             // FrmConnectOptions
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 186);
+            this.Controls.Add(this.cbRestartServer);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cbInitialRTS);
             this.Controls.Add(this.cbInitialDTR);
@@ -446,5 +458,6 @@ namespace Terminal
         private System.Windows.Forms.CheckBox cbInitialDTR;
         private System.Windows.Forms.CheckBox cbInitialRTS;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cbRestartServer;
     }
 }

@@ -31,8 +31,10 @@ The font face has been kept clean and the settings have been moved one layer dow
 
 Here is a real example where I configured a U-Blox WiFi device
 ![MainScreen](https://github.com/michael-heyns/Terminal2/assets/4144679/dc2192b4-6342-4ee2-98e5-28d0e780f911)
-
-<img width="734" alt="Picture1" src="https://user-images.githubusercontent.com/4144679/172826885-75045f30-2391-4fcb-93d6-b20e4d5e0054.png">
+![Inspector](https://github.com/michael-heyns/Terminal2/assets/4144679/9c1d0fa9-37d1-4205-a9f9-39830b2de457)
+![Macros](https://github.com/michael-heyns/Terminal2/assets/4144679/f99dfdbd-6cb7-4e78-82a2-ed968f34ae20)
+![Filters](https://github.com/michael-heyns/Terminal2/assets/4144679/7a4b631a-1d57-41b4-9a9e-1f958fae5cf1)
+![ConnectionTypes](https://github.com/michael-heyns/Terminal2/assets/4144679/aec5458e-8aff-439e-a8b6-b841140d08c9)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.

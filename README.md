@@ -1,6 +1,6 @@
 ![Letter-T-icon](https://user-images.githubusercontent.com/4144679/169688149-106da035-d4bd-4b1e-a290-c2a2885a9959.png)
-# Terminal2 - v1.2.4.8
-(Improved serial port handling + infinite pending buffer when freezeing the display)
+# Terminal2 - v1.2.4.9
+## Builds with Visual Studio 2022 (Community or Professional). No extras needed.
 
 Terminal emulator for Engineers (with Serial and TCP socket capabilities)
 

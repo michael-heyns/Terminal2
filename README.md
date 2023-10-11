@@ -30,6 +30,8 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 The font face has been kept clean and the settings have been moved one layer down.
 
 Here is a real example where I configured a U-Blox WiFi device
+![MainScreen](https://github.com/michael-heyns/Terminal2/assets/4144679/dc2192b4-6342-4ee2-98e5-28d0e780f911)
+
 <img width="734" alt="Picture1" src="https://user-images.githubusercontent.com/4144679/172826885-75045f30-2391-4fcb-93d6-b20e4d5e0054.png">
 
 ### The name

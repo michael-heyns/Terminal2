@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -42,6 +42,7 @@ namespace Terminal
             _logOptions.Modified = false;
             tbLogDirectory.Text = _logOptions.Directory;
             tbPrefix.Text = _logOptions.Prefix;
+            txtMaxLogSize.Text = _logOptions.MaxLogSize.ToString();
         }
 
         private void BtnLogfile_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace Terminal
             DialogResult rc = folderBrowserDialog.ShowDialog();
             if (rc == DialogResult.OK)
                 tbLogDirectory.Text = folderBrowserDialog.SelectedPath;
+            btnOk.Focus();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
@@ -58,6 +60,26 @@ namespace Terminal
             if (!Directory.Exists(dir))
             {
                 MessageBox.Show("The directory does not exist", "Invalid directory", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbLogDirectory.Focus();
+                return;
+            }
+
+            foreach (char ch in txtMaxLogSize.Text)
+            {
+                if (ch < '0' || ch > '9')
+                {
+                    MessageBox.Show("The log file limit is not a number", "Invalid number", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtMaxLogSize.Focus();
+                    return;
+                }
+            }
+
+            int len = Utils.Int(txtMaxLogSize.Text);
+            if (len > 0 && len < 10000)
+            {
+                MessageBox.Show("Impractical log file limit.  Specify 0 or a number > 10000", "Logfile limit too small", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtMaxLogSize.Text = "0";
+                txtMaxLogSize.Focus();
                 return;
             }
 
@@ -65,6 +87,7 @@ namespace Terminal
             _logOptions.Modified = true;
             _logOptions.Directory = tbLogDirectory.Text;
             _logOptions.Prefix = tbPrefix.Text;
+            _logOptions.MaxLogSize = Utils.Int(txtMaxLogSize.Text);
             Close();
         }
 

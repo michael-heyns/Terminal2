@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -33,6 +33,7 @@ using System.Net.Sockets;
 using System.Xml.Linq;
 using System.Net;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Text;
 
 namespace Terminal
 {
@@ -49,27 +50,25 @@ namespace Terminal
         private static string _connectionString = "Disconnected";
         private static CommType _comType = CommType.cNONE;
         private static TcpListener _server = null;
-        private static TcpClient _client = null;
         private static Socket _socket = null;
         private static Profile _profile;
         private static Embellishments _embellishments;
 
         private static Thread _tcpThread = null;
         private static Thread _serialThread = null;
-        private static int _localThreadCount = 0;
 
         private static bool _halfCRLF = false;
         private static bool _showTimestamp = false;
         private static int _hexColumn = 0;
-        private static string _embelished;
 
         private static bool _showServerFailure = false;
         private static bool _suspendReadThread = false;
+
         public static bool _terminateFlag = false;
 
         private void Enqueue(string str)
         {
-            _embelished = string.Empty;
+            StringBuilder sb = new StringBuilder();
 
             // only HEX
             if (!_embellishments.ShowASCII && _embellishments.ShowHEX)
@@ -77,19 +76,19 @@ namespace Terminal
                 foreach (char c in str)
                 {
                     if (_hexColumn == 0 && _embellishments.ShowTimestamp)
-                        _embelished += Utils.Timestamp();
+                        sb.Append(Utils.Timestamp());
 
                     byte b = Convert.ToByte(c);
-                    _embelished += $"{b:X2} ";
+                    sb.Append($"{b:X2} ");
 
                     _hexColumn++;
                     if (_hexColumn == 8 || _hexColumn == 16 || _hexColumn == 24)
                     {
-                        _embelished += " - ";
+                        sb.Append(" - ");
                     }
                     else if (_hexColumn == 32)
                     {
-                        _embelished += "\n";
+                        sb.Append("\n");
                         _hexColumn = 0;
                     }
                 }
@@ -111,7 +110,7 @@ namespace Terminal
 
                             default:
                                 // it was NOT a CR-LF sequence - so treat it as an EOL
-                                _embelished += "\n";
+                                sb.Append('\n');
                                 if (_embellishments.ShowTimestamp)
                                     _showTimestamp = true;
                                 break;
@@ -122,7 +121,7 @@ namespace Terminal
                     // add timestamp
                     if (_showTimestamp)
                     {
-                        _embelished += Utils.Timestamp();
+                        sb.Append(Utils.Timestamp());
                         _showTimestamp = false;
                     }
 
@@ -132,13 +131,13 @@ namespace Terminal
                         case '\r':
                             // add the ASCII version of the character
                             if (_embellishments.ShowCR)
-                                _embelished += "{CR}";
+                                sb.Append("{CR}");
 
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
                                 byte b = Convert.ToByte(c);
-                                _embelished += $"{b:X2} ";
+                                sb.Append($"{b:X2} ");
                             }
 
                             _halfCRLF = true;
@@ -147,16 +146,16 @@ namespace Terminal
                         case '\n':
                             // add the ASCII version of the character
                             if (_embellishments.ShowLF)
-                                _embelished += "{LF}";
+                                sb.Append("{LF}");
 
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
                                 byte b = Convert.ToByte(c);
-                                _embelished += $"{b:X2} ";
+                                sb.Append($"{b:X2} ");
                             }
 
-                            _embelished += "\n";
+                            sb.Append("\n");
                             _halfCRLF = false;
                             if (_embellishments.ShowTimestamp)
                                 _showTimestamp = true;
@@ -164,13 +163,13 @@ namespace Terminal
 
                         default:
                             // add the ASCII version of the character
-                            _embelished += c;
+                            sb.Append(c);
 
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
                                 byte b = Convert.ToByte(c);
-                                _embelished += $"{b:X2} ";
+                                sb.Append($"{b:X2} ");
                             }
 
                             // back to normal
@@ -179,7 +178,7 @@ namespace Terminal
                     }
                 }
             }
-            _inputQueue.Enqueue(_embelished);
+            _inputQueue.Enqueue(sb.ToString());
         }
 
         private void SerialReaderThread()
@@ -187,72 +186,67 @@ namespace Terminal
             if (_com == null)
                 return;
 
-            _localThreadCount++;
+            try
             {
-                try
+                // do the work
+                if (_com.IsOpen)
                 {
-                    // do the work
-                    if (_com.IsOpen)
+                    _terminateFlag = false;
+                    _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
+                    while (_com.IsOpen && !_terminateFlag)
                     {
-                        _terminateFlag = false;
-                        _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                        while (_com.IsOpen && !_terminateFlag)
-                        {
-                            int count = _com.BytesToRead;
-                            if (count > 0)
-                            {
-                                string str = _com.ReadExisting();
-                                Enqueue(str);
-                            }
-                            else
-                            {
-                                Thread.Sleep(1);
-                            }
-
-                            while (_suspendReadThread)
-                                Thread.Sleep(10);
-                        }
-                    }
-                }
-                catch { }
-                _connected = false;
-            }
-            _localThreadCount--;
-        }
-
-        private void TCPReaderThread()
-        {
-            _localThreadCount++;
-            {
-                try
-                {
-                    while (SocketOpen(_socket))
-                    {
-                        int count = DataWaiting();
+                        int count = _com.BytesToRead;
                         if (count > 0)
                         {
-                            string str = string.Empty;
-                            byte[] tcp_data = null;
-                            int tcp_count = 0;
-                            tcp_count = _socket.Available;
-                            if (tcp_count > 0)
-                            {
-                                tcp_data = new byte[tcp_count];
-                                _socket.Receive(tcp_data);
-                                str = System.Text.Encoding.Default.GetString(tcp_data);
-                            }
-                            Enqueue(str);
+                            byte[] ser_data = new byte[count];
+                            _com.Read(ser_data, 0, count);
+                            string utfString = Encoding.Default.GetString(ser_data);    // don't use ASCII or UTF8 encoding
+                            Enqueue(utfString);
                         }
                         else
                         {
                             Thread.Sleep(1);
                         }
+
+                        while (_suspendReadThread)
+                            Thread.Sleep(10);
                     }
                 }
-                catch { }
-                _connected = false;
             }
-            _localThreadCount--;
+            catch { }
+            _connected = false;
+        }
+
+        private void TCPReaderThread()
+        {
+            try
+            {
+                while (SocketOpen(_socket))
+                {
+                    int count = DataWaiting();
+                    if (count > 0)
+                    {
+                        string str = string.Empty;
+                        byte[] tcp_data = null;
+                        int tcp_count = 0;
+                        tcp_count = _socket.Available;
+                        if (tcp_count > 0)
+                        {
+                            tcp_data = new byte[tcp_count];
+                            if (!_socket.Connected) break;
+                            _socket.Receive(tcp_data);
+                            str = System.Text.Encoding.Default.GetString(tcp_data);
+                        }
+                        Enqueue(str);
+                    }
+                    else
+                    {
+                        Thread.Sleep(1);
+                    }
+                }
+            }
+            catch { }
+            _connected = false;
         }
 
         public Comms(Label[] leds, Label[] controls, EventQueue inputQueue)
@@ -443,7 +437,7 @@ namespace Terminal
                     _server.Start();
 
                     _showServerFailure = true;
-                    _client = _server.AcceptTcpClient();
+                    TcpClient _client = _server.AcceptTcpClient();
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;
@@ -464,7 +458,7 @@ namespace Terminal
                 try
                 {
                     int port = Utils.Int(_profile.conOptions.TCPConnectPort);
-                    _client = new TcpClient(_profile.conOptions.TCPConnectAdress, port);
+                    TcpClient _client = new TcpClient(_profile.conOptions.TCPConnectAdress, port);
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;

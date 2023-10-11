@@ -32,26 +32,18 @@ using System.Windows.Forms;
 
 namespace Terminal
 {
-    public partial class frmASCII : Form
+    public partial class FrmReplace : Form
     {
-        public int Xpos = 10;
-        public int Ypos = 10;
-        public frmASCII()
+        public FrmReplace()
         {
             InitializeComponent();
-            this.Left = Xpos;
-            this.Top = Ypos;
         }
 
-        private void ASCII_Load(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 255; i++)
-            {
-                string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";
-                helpASCII.Items.Add(str);
-            }
+            SearchText.Text = string.Empty;
+            Close();
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -62,5 +54,32 @@ namespace Terminal
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click_1(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ReplaceText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                Close();
+        }
+
+        private void ReplaceText_TextChanged(object sender, EventArgs e)
+        {
+            btnSearch.Enabled = (SearchText.Text.Length > 0 && ReplaceText.Text.Length > 0);
+        }
+
+        private void FrmReplace_Shown(object sender, EventArgs e)
+        {
+            SearchText.Focus();
+            SearchText.Select(0, 1000);
+            IgnoreCase.Checked = true;
+        }
     }
 }

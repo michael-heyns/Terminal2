@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -155,23 +155,33 @@ namespace Terminal
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(448, 515);
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnOk.FlatAppearance.BorderSize = 0;
+            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOk.ForeColor = System.Drawing.Color.Blue;
+            this.btnOk.Location = new System.Drawing.Point(448, 499);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 20);
             this.btnOk.TabIndex = 10;
             this.btnOk.Text = "&Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // btnSelectFontInput
             // 
+            this.btnSelectFontInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSelectFontInput.FlatAppearance.BorderSize = 0;
+            this.btnSelectFontInput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnSelectFontInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectFontInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnSelectFontInput.ForeColor = System.Drawing.Color.Blue;
             this.btnSelectFontInput.Location = new System.Drawing.Point(19, 50);
             this.btnSelectFontInput.Name = "btnSelectFontInput";
             this.btnSelectFontInput.Size = new System.Drawing.Size(84, 22);
             this.btnSelectFontInput.TabIndex = 12;
             this.btnSelectFontInput.Text = "Font";
-            this.btnSelectFontInput.UseVisualStyleBackColor = true;
+            this.btnSelectFontInput.UseVisualStyleBackColor = false;
             this.btnSelectFontInput.Click += new System.EventHandler(this.BtnSelectFontInput_Click);
             // 
             // grpColourFilters
@@ -1078,31 +1088,42 @@ namespace Terminal
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(358, 515);
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.ForeColor = System.Drawing.Color.Blue;
+            this.btnReset.Location = new System.Drawing.Point(358, 499);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(74, 20);
             this.btnReset.TabIndex = 71;
             this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.UseVisualStyleBackColor = false;
             this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
             // 
             // btnSelectFontOutput
             // 
+            this.btnSelectFontOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnSelectFontOutput.FlatAppearance.BorderSize = 0;
+            this.btnSelectFontOutput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnSelectFontOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectFontOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btnSelectFontOutput.ForeColor = System.Drawing.Color.Blue;
             this.btnSelectFontOutput.Location = new System.Drawing.Point(19, 22);
             this.btnSelectFontOutput.Name = "btnSelectFontOutput";
             this.btnSelectFontOutput.Size = new System.Drawing.Size(84, 21);
             this.btnSelectFontOutput.TabIndex = 12;
             this.btnSelectFontOutput.Text = "Font";
-            this.btnSelectFontOutput.UseVisualStyleBackColor = true;
+            this.btnSelectFontOutput.UseVisualStyleBackColor = false;
             this.btnSelectFontOutput.Click += new System.EventHandler(this.BtnSelectFontOutput_Click);
             // 
             // cbTimestampOutputLines
             // 
             this.cbTimestampOutputLines.AutoSize = true;
+            this.cbTimestampOutputLines.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbTimestampOutputLines.Location = new System.Drawing.Point(109, 25);
             this.cbTimestampOutputLines.Name = "cbTimestampOutputLines";
-            this.cbTimestampOutputLines.Size = new System.Drawing.Size(99, 17);
+            this.cbTimestampOutputLines.Size = new System.Drawing.Size(105, 18);
             this.cbTimestampOutputLines.TabIndex = 0;
             this.cbTimestampOutputLines.Text = "Add Timestamp";
             this.cbTimestampOutputLines.UseVisualStyleBackColor = true;

@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -66,9 +66,9 @@ namespace Terminal
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.grpText = new System.Windows.Forms.GroupBox();
-            this.cbText = new System.Windows.Forms.RadioButton();
             this.cbXmodem = new System.Windows.Forms.RadioButton();
+            this.cbText = new System.Windows.Forms.RadioButton();
+            this.grpText = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.grpText.SuspendLayout();
             this.SuspendLayout();
@@ -85,13 +85,18 @@ namespace Terminal
             // 
             // btnSend
             // 
+            this.btnSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnSend.Enabled = false;
+            this.btnSend.FlatAppearance.BorderSize = 0;
+            this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSend.ForeColor = System.Drawing.Color.Blue;
             this.btnSend.Location = new System.Drawing.Point(296, 202);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(75, 23);
             this.btnSend.TabIndex = 10;
             this.btnSend.Text = "&Send";
-            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.BtnSend_Click);
             // 
             // openFileDialog
@@ -119,17 +124,20 @@ namespace Terminal
             // 
             // btnSelect
             // 
-            this.btnSelect.Location = new System.Drawing.Point(340, 39);
+            this.btnSelect.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Location = new System.Drawing.Point(340, 41);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(31, 23);
+            this.btnSelect.Size = new System.Drawing.Size(31, 21);
             this.btnSelect.TabIndex = 14;
-            this.btnSelect.Text = "...";
-            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Text = "- -";
+            this.btnSelect.UseVisualStyleBackColor = false;
             this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // cbSendCR
             // 
-            this.cbSendCR.AutoSize = true;
+            this.cbSendCR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbSendCR.Location = new System.Drawing.Point(52, 25);
             this.cbSendCR.Name = "cbSendCR";
             this.cbSendCR.Size = new System.Drawing.Size(41, 17);
@@ -168,7 +176,7 @@ namespace Terminal
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
+            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label4.Location = new System.Drawing.Point(134, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(115, 13);
@@ -195,20 +203,17 @@ namespace Terminal
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mode";
             // 
-            // grpText
+            // cbXmodem
             // 
-            this.grpText.Controls.Add(this.label4);
-            this.grpText.Controls.Add(this.cbSendCR);
-            this.grpText.Controls.Add(this.label5);
-            this.grpText.Controls.Add(this.cbSendLF);
-            this.grpText.Controls.Add(this.msDelay);
-            this.grpText.Controls.Add(this.label3);
-            this.grpText.Location = new System.Drawing.Point(13, 135);
-            this.grpText.Name = "grpText";
-            this.grpText.Size = new System.Drawing.Size(266, 90);
-            this.grpText.TabIndex = 22;
-            this.grpText.TabStop = false;
-            this.grpText.Text = "Plain text";
+            this.cbXmodem.AutoSize = true;
+            this.cbXmodem.Location = new System.Drawing.Point(189, 14);
+            this.cbXmodem.Name = "cbXmodem";
+            this.cbXmodem.Size = new System.Drawing.Size(108, 17);
+            this.cbXmodem.TabIndex = 1;
+            this.cbXmodem.TabStop = true;
+            this.cbXmodem.Text = "XModem protocol";
+            this.cbXmodem.UseVisualStyleBackColor = true;
+            this.cbXmodem.CheckedChanged += new System.EventHandler(this.cbXmodem_CheckedChanged);
             // 
             // cbText
             // 
@@ -223,17 +228,20 @@ namespace Terminal
             this.cbText.UseVisualStyleBackColor = true;
             this.cbText.CheckedChanged += new System.EventHandler(this.cbText_CheckedChanged);
             // 
-            // cbXmodem
+            // grpText
             // 
-            this.cbXmodem.AutoSize = true;
-            this.cbXmodem.Location = new System.Drawing.Point(189, 14);
-            this.cbXmodem.Name = "cbXmodem";
-            this.cbXmodem.Size = new System.Drawing.Size(108, 17);
-            this.cbXmodem.TabIndex = 1;
-            this.cbXmodem.TabStop = true;
-            this.cbXmodem.Text = "XModem protocol";
-            this.cbXmodem.UseVisualStyleBackColor = true;
-            this.cbXmodem.CheckedChanged += new System.EventHandler(this.cbXmodem_CheckedChanged);
+            this.grpText.Controls.Add(this.label4);
+            this.grpText.Controls.Add(this.cbSendCR);
+            this.grpText.Controls.Add(this.label5);
+            this.grpText.Controls.Add(this.cbSendLF);
+            this.grpText.Controls.Add(this.msDelay);
+            this.grpText.Controls.Add(this.label3);
+            this.grpText.Location = new System.Drawing.Point(13, 135);
+            this.grpText.Name = "grpText";
+            this.grpText.Size = new System.Drawing.Size(266, 90);
+            this.grpText.TabIndex = 22;
+            this.grpText.TabStop = false;
+            this.grpText.Text = "Plain text";
             // 
             // FrmFileSend
             // 

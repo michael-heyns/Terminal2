@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -167,6 +167,7 @@ namespace Terminal
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             this.textBox1.WordWrap = false;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // FrmHelp
             // 

@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -34,6 +34,11 @@ namespace Terminal
 {
     class Log
     {
+        private static string _directory;
+        private static string _prefix;
+        private static int _maxLength = 0;
+        private static int _currentLength = 0;
+
         private static string _filename = string.Empty;
         private static bool _enabled = false;
 
@@ -42,12 +47,17 @@ namespace Terminal
             get { return _filename; }
         }
 
-        public static void Start(string filename)
+        public static void Start(string directory, string prefix, int maxLength)
         {
             if (_enabled)
                 return;
 
-            _filename = filename;
+            _directory = directory;
+            _maxLength = maxLength;
+            _prefix = prefix;
+            _currentLength = 0;
+
+            _filename = _directory + @"\" + _prefix + Utils.TimestampForFilename() + ".log";
 
             AssemblyInfo info = new AssemblyInfo();
             string text = $"\r\n";
@@ -73,19 +83,47 @@ namespace Terminal
             get { return _enabled; }
         }
 
-        public static void Add(string text)
+        public static bool Add(string text)
         {
             if (!_enabled || _filename.Length == 0)
-                return;
+                return false;
+
+            bool reply = true;
             for (int retry = 0; retry < 5; retry++)
             {
                 try
                 {
                     File.AppendAllText(_filename, text);
-                    return;
+
+                    if (_maxLength > 0)
+                    {
+                        _currentLength += text.Length;
+                        if (_currentLength >= _maxLength)
+                        {
+                            _currentLength = 0;
+
+                            string txt = $"\r\n";
+                            txt += $"# -- END ----------------------------------------------\r\n";
+                            File.AppendAllText(_filename, txt);
+
+                            _filename = _directory + @"\" + _prefix + Utils.TimestampForFilename() + ".log";
+                            reply = true;
+
+                            AssemblyInfo info = new AssemblyInfo();
+                            txt = $"\r\n";
+                            txt += $"# -----------------------------------------------------\r\n";
+                            txt += $"# {info.Title} - v{info.AssemblyVersion} - {info.Copyright}\r\n";
+                            txt += $"# {DateTime.Now}\r\n";
+                            txt += $"# -----------------------------------------------------\r\n";
+                            txt += $"\r\n";
+                            File.AppendAllText(_filename, txt);
+                        }
+                    }
+                    return reply;
                 }
                 catch { }
             }
+            return false;
         }
     }
 }

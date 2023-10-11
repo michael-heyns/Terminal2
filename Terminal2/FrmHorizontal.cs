@@ -26,32 +26,46 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Terminal
 {
-    public partial class frmASCII : Form
+    public partial class FrmHorizontal : Form
     {
-        public int Xpos = 10;
-        public int Ypos = 10;
-        public frmASCII()
+        private string _theText;
+        private int _fixedHeight = 0;
+        public FrmHorizontal()
         {
             InitializeComponent();
-            this.Left = Xpos;
-            this.Top = Ypos;
         }
 
-        private void ASCII_Load(object sender, EventArgs e)
+        private void _ShowSplitLine(int index)
         {
-            for (int i = 0; i <= 255; i++)
-            {
-                string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";
-                helpASCII.Items.Add(str);
-            }
-        }
+            if (index < 0)
+                index = 0;
+            else if (index > _theText.Length)
+                index = _theText.Length;
 
+            int countLeft = index;
+            if (countLeft > 20)
+            {
+                tbLeft.Text = "..." + _theText.Substring(countLeft - 20, 20);
+            }
+            else
+            {
+                tbLeft.Text = _theText.Substring(0, countLeft);
+            }
+            tbRight.Text = _theText.Substring(index);
+        }
+        public void Configure(string str, string theText)
+        {
+            this.Text = str;
+            _theText = theText;
+            _ShowSplitLine(0);
+        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -62,5 +76,20 @@ namespace Terminal
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void grid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _ShowSplitLine(e.ColumnIndex - 1);
+        }
+
+        private void FrmHorizontal_Shown(object sender, EventArgs e)
+        {
+            _fixedHeight = this.Height;
+        }
+
+        private void FrmHorizontal_ResizeEnd(object sender, EventArgs e)
+        {
+            if (this.Height != _fixedHeight)
+                this.Height = _fixedHeight;
+        }
     }
 }

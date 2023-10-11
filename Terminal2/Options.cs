@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -59,6 +59,7 @@ namespace Terminal
         public string Directory = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Logs";
         public string Prefix = "Default_";
         public bool ShowControl = true;
+        public int MaxLogSize = 0;   // 0 = infinite
         public LoggingOptions Clone()
         {
             return (LoggingOptions)MemberwiseClone();
@@ -72,7 +73,7 @@ namespace Terminal
         // attributes
         public string title = string.Empty;
         public int delayBetweenChars = 0;
-        public int delayBetweenLines = 0;
+        public int delayBetweenLinesMs = 0;
         public bool addCR = true;
         public bool addLF = false;
         public string macro = string.Empty;

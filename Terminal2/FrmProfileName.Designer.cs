@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -62,21 +62,19 @@ namespace Terminal
             // lblBigHeading
             // 
             this.lblBigHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBigHeading.Location = new System.Drawing.Point(13, 30);
-            this.lblBigHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBigHeading.Location = new System.Drawing.Point(9, 20);
             this.lblBigHeading.Name = "lblBigHeading";
-            this.lblBigHeading.Size = new System.Drawing.Size(404, 31);
+            this.lblBigHeading.Size = new System.Drawing.Size(269, 20);
             this.lblBigHeading.TabIndex = 9;
             this.lblBigHeading.Text = "XXXXXXXXXXXXX";
             this.lblBigHeading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tbEditString
             // 
-            this.tbEditString.Location = new System.Drawing.Point(13, 101);
-            this.tbEditString.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbEditString.Location = new System.Drawing.Point(9, 66);
             this.tbEditString.MaxLength = 40;
             this.tbEditString.Name = "tbEditString";
-            this.tbEditString.Size = new System.Drawing.Size(402, 26);
+            this.tbEditString.Size = new System.Drawing.Size(269, 20);
             this.tbEditString.TabIndex = 10;
             this.tbEditString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbEditString.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -84,23 +82,26 @@ namespace Terminal
             // 
             // btnApply
             // 
+            this.btnApply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnApply.Enabled = false;
-            this.btnApply.Location = new System.Drawing.Point(305, 141);
-            this.btnApply.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnApply.FlatAppearance.BorderSize = 0;
+            this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.ForeColor = System.Drawing.Color.Blue;
+            this.btnApply.Location = new System.Drawing.Point(203, 92);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(112, 35);
+            this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 11;
             this.btnApply.Text = "&Apply";
-            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.UseVisualStyleBackColor = false;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // lblSmallHeading
             // 
-            this.lblSmallHeading.Location = new System.Drawing.Point(13, 61);
-            this.lblSmallHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSmallHeading.Location = new System.Drawing.Point(9, 40);
             this.lblSmallHeading.Name = "lblSmallHeading";
-            this.lblSmallHeading.Size = new System.Drawing.Size(404, 35);
+            this.lblSmallHeading.Size = new System.Drawing.Size(269, 23);
             this.lblSmallHeading.TabIndex = 12;
             this.lblSmallHeading.Text = "xxxxxxx";
             this.lblSmallHeading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,16 +109,15 @@ namespace Terminal
             // FrmProfileName
             // 
             this.AcceptButton = this.btnApply;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(430, 191);
+            this.ClientSize = new System.Drawing.Size(287, 124);
             this.Controls.Add(this.lblSmallHeading);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.tbEditString);
             this.Controls.Add(this.lblBigHeading);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmProfileName";

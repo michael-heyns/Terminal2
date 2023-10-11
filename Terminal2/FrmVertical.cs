@@ -32,26 +32,18 @@ using System.Windows.Forms;
 
 namespace Terminal
 {
-    public partial class frmASCII : Form
+    public partial class FrmVertical : Form
     {
-        public int Xpos = 10;
-        public int Ypos = 10;
-        public frmASCII()
+        private int _fixedWidth = 0;
+        public FrmVertical()
         {
             InitializeComponent();
-            this.Left = Xpos;
-            this.Top = Ypos;
         }
 
-        private void ASCII_Load(object sender, EventArgs e)
+        public void SetTitle(string str)
         {
-            for (int i = 0; i <= 255; i++)
-            {
-                string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";
-                helpASCII.Items.Add(str);
-            }
+            this.Text = str;
         }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -62,5 +54,20 @@ namespace Terminal
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void FrmVertical_ResizeEnd(object sender, EventArgs e)
+        {
+            if (this.Width != _fixedWidth)
+                this.Width = _fixedWidth;
+        }
+
+        private void FrmVertical_Shown(object sender, EventArgs e)
+        {
+            _fixedWidth = this.Width;
+        }
     }
 }

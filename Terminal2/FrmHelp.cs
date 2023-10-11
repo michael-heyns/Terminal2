@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -53,6 +53,11 @@ namespace Terminal
         {
             AssemblyInfo info = new AssemblyInfo();
             lblThisVersion.Text = $"v{info.AssemblyVersion}";
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

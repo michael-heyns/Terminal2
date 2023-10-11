@@ -32,26 +32,12 @@ using System.Windows.Forms;
 
 namespace Terminal
 {
-    public partial class frmASCII : Form
+    public partial class FrmNumber : Form
     {
-        public int Xpos = 10;
-        public int Ypos = 10;
-        public frmASCII()
+        public FrmNumber()
         {
             InitializeComponent();
-            this.Left = Xpos;
-            this.Top = Ypos;
         }
-
-        private void ASCII_Load(object sender, EventArgs e)
-        {
-            for (int i = 0; i <= 255; i++)
-            {
-                string str = $"{i:d3} = {i:x2} = {Convert.ToChar(i)}";
-                helpASCII.Items.Add(str);
-            }
-        }
-
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Escape)
@@ -61,6 +47,5 @@ namespace Terminal
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
-
     }
 }

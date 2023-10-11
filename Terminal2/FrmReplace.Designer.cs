@@ -1,11 +1,11 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022-23 Michael Heyns
+ * Copyright © 2022 - 23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
- * Terminal2 is free software: you  can redistribute it and/or  modify it 
+ * Terminal2 is free software: you can redistribute it and/or  modify it 
  * under the terms of the GNU General Public License as published  by the 
  * Free Software Foundation, either version 3 of the License, or (at your
  * option) any later version.
@@ -20,11 +20,9 @@
  *
  */
 
-
-
 namespace Terminal
 {
-    partial class FrmSearch
+    partial class FrmReplace
     {
         /// <summary>
         /// Required designer variable.
@@ -52,14 +50,43 @@ namespace Terminal
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSearch));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReplace));
+            this.lblBigHeading = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.SearchText = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ReplaceText = new System.Windows.Forms.TextBox();
             this.IgnoreCase = new System.Windows.Forms.CheckBox();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // lblBigHeading
+            // 
+            this.lblBigHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBigHeading.Location = new System.Drawing.Point(81, 20);
+            this.lblBigHeading.Name = "lblBigHeading";
+            this.lblBigHeading.Size = new System.Drawing.Size(269, 20);
+            this.lblBigHeading.TabIndex = 10;
+            this.lblBigHeading.Text = "Search and Replace...";
+            this.lblBigHeading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.ForeColor = System.Drawing.Color.Blue;
+            this.btnCancel.Location = new System.Drawing.Point(275, 132);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(60, 23);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSearch
             // 
@@ -71,10 +98,10 @@ namespace Terminal
             this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.ForeColor = System.Drawing.Color.Blue;
-            this.btnSearch.Location = new System.Drawing.Point(354, 71);
+            this.btnSearch.Location = new System.Drawing.Point(344, 132);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(60, 23);
-            this.btnSearch.TabIndex = 0;
+            this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "&Ok";
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -83,23 +110,32 @@ namespace Terminal
             // 
             this.SearchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SearchText.Location = new System.Drawing.Point(22, 40);
+            this.SearchText.Location = new System.Drawing.Point(12, 43);
             this.SearchText.Name = "SearchText";
             this.SearchText.Size = new System.Drawing.Size(393, 20);
-            this.SearchText.TabIndex = 1;
-            this.SearchText.TextChanged += new System.EventHandler(this.SearchText_TextChanged);
-            this.SearchText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchText_KeyDown);
+            this.SearchText.TabIndex = 13;
+            this.SearchText.TextChanged += new System.EventHandler(this.ReplaceText_TextChanged);
             // 
-            // label2
+            // label1
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(165, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 18);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Search for...";
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(81, 75);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(269, 20);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "with...";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ReplaceText
+            // 
+            this.ReplaceText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ReplaceText.Location = new System.Drawing.Point(12, 98);
+            this.ReplaceText.Name = "ReplaceText";
+            this.ReplaceText.Size = new System.Drawing.Size(393, 20);
+            this.ReplaceText.TabIndex = 15;
+            this.ReplaceText.TextChanged += new System.EventHandler(this.ReplaceText_TextChanged);
+            this.ReplaceText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReplaceText_KeyDown);
             // 
             // IgnoreCase
             // 
@@ -108,10 +144,10 @@ namespace Terminal
             this.IgnoreCase.Checked = true;
             this.IgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.IgnoreCase.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.IgnoreCase.Location = new System.Drawing.Point(22, 70);
+            this.IgnoreCase.Location = new System.Drawing.Point(12, 137);
             this.IgnoreCase.Name = "IgnoreCase";
             this.IgnoreCase.Size = new System.Drawing.Size(88, 18);
-            this.IgnoreCase.TabIndex = 5;
+            this.IgnoreCase.TabIndex = 16;
             this.IgnoreCase.Text = "Ignore case";
             this.IgnoreCase.UseVisualStyleBackColor = true;
             // 
@@ -123,53 +159,38 @@ namespace Terminal
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.ForeColor = System.Drawing.Color.Blue;
-            this.btnClear.Location = new System.Drawing.Point(225, 71);
+            this.btnClear.Location = new System.Drawing.Point(211, 132);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(60, 23);
-            this.btnClear.TabIndex = 6;
+            this.btnClear.TabIndex = 17;
             this.btnClear.Text = "&Clear";
             this.btnClear.UseVisualStyleBackColor = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnCancel.FlatAppearance.BorderSize = 0;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.ForeColor = System.Drawing.Color.Blue;
-            this.btnCancel.Location = new System.Drawing.Point(289, 71);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(60, 23);
-            this.btnCancel.TabIndex = 13;
-            this.btnCancel.Text = "&Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // FrmSearch
+            // FrmReplace
             // 
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(437, 109);
-            this.Controls.Add(this.btnCancel);
+            this.ClientSize = new System.Drawing.Size(416, 172);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.IgnoreCase);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.ReplaceText);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.SearchText);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.lblBigHeading);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FrmSearch";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Search";
+            this.Name = "FrmReplace";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FrmReplace";
             this.TopMost = true;
-            this.Shown += new System.EventHandler(this.FrmSearch_Shown);
+            this.Shown += new System.EventHandler(this.FrmReplace_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,11 +198,13 @@ namespace Terminal
 
         #endregion
 
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Label label2;
-        public System.Windows.Forms.CheckBox IgnoreCase;
-        public System.Windows.Forms.TextBox SearchText;
-        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label lblBigHeading;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSearch;
+        public System.Windows.Forms.TextBox SearchText;
+        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.TextBox ReplaceText;
+        public System.Windows.Forms.CheckBox IgnoreCase;
+        private System.Windows.Forms.Button btnClear;
     }
 }

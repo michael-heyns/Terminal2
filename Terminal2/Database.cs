@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -281,7 +281,7 @@ namespace Terminal
             {
                 string data = string.Empty;
                 data += "# -----------------------------------------------------\n";
-                data += "# Terminal2 - Copyright ©2022 Michael Heyns\n";
+                data += "# Terminal2 - Copyright ©2022-23-23 Michael Heyns\n";
                 data += $"# New profile for {name}\n";
                 data += "# -----------------------------------------------------\n";
                 data += "\n";
@@ -301,6 +301,7 @@ namespace Terminal
                 data += "TimeInput=True\n";
                 data += "LogDir=C:\\Temp\n";
                 data += "LogPrefix=Default_\n";
+                data += "MaxLogSize=0\n";
                 data += "OutFont=Courier New, 8.25pt\n";
                 data += "InFont=Courier New, 11.25pt\n";
                 data += "# Input panel colours\n";
@@ -418,6 +419,7 @@ namespace Terminal
 
                 data += $"LogDir={profile.logOptions.Directory}\n";
                 data += $"LogPrefix={profile.logOptions.Prefix}\n";
+                data += $"MaxLogSize={profile.logOptions.MaxLogSize}\n";
 
                 TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
                 string fontString = converter.ConvertToString(profile.displayOptions.outputFont);
@@ -471,7 +473,7 @@ namespace Terminal
                         data += $"[{index}]\n";
                         data += $"Title={mac.title}\n";
                         data += $"ICD={mac.delayBetweenChars}\n";
-                        data += $"ILD={mac.delayBetweenLines}\n";
+                        data += $"ILD={mac.delayBetweenLinesMs}\n";
                         data += $"RepeatON={mac.repeatEnabled}\n";
                         data += $"Delta={mac.resendEveryMs}\n";
                         data += $"Repeats={mac.stopAfterRepeats}\n";
@@ -643,6 +645,10 @@ namespace Terminal
                         {
                             profile.logOptions.Prefix = line.Substring(10);
                         }
+                        else if (line.StartsWith("MaxLogSize="))
+                        {
+                            profile.logOptions.MaxLogSize = Utils.Int(line.Substring(11));
+                        }
                         else
                         {
                             for (int i = 0; i < profile.displayOptions.filter.Length; i++)
@@ -755,7 +761,7 @@ namespace Terminal
                         }
                         else if (line.StartsWith("ILD="))
                         {
-                            mac.delayBetweenLines = Utils.Int(line.Substring(4));
+                            mac.delayBetweenLinesMs = Utils.Int(line.Substring(4));
                         }
                         else if (line.StartsWith("RepeatON="))
                         {

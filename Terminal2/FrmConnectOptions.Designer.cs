@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -115,6 +115,7 @@ namespace Terminal
             this.pdDataBits.Cursor = System.Windows.Forms.Cursors.Default;
             this.pdDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pdDataBits.Enabled = false;
+            this.pdDataBits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdDataBits.FormattingEnabled = true;
             this.pdDataBits.Items.AddRange(new object[] {
             "6",
@@ -150,6 +151,7 @@ namespace Terminal
             this.pdHandshaking.Cursor = System.Windows.Forms.Cursors.Default;
             this.pdHandshaking.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pdHandshaking.Enabled = false;
+            this.pdHandshaking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdHandshaking.FormattingEnabled = true;
             this.pdHandshaking.Items.AddRange(new object[] {
             "None",
@@ -167,6 +169,7 @@ namespace Terminal
             this.pdStopBits.Cursor = System.Windows.Forms.Cursors.Default;
             this.pdStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pdStopBits.Enabled = false;
+            this.pdStopBits.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdStopBits.FormattingEnabled = true;
             this.pdStopBits.Items.AddRange(new object[] {
             "1",
@@ -182,6 +185,7 @@ namespace Terminal
             this.pdParity.Cursor = System.Windows.Forms.Cursors.Default;
             this.pdParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.pdParity.Enabled = false;
+            this.pdParity.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdParity.FormattingEnabled = true;
             this.pdParity.Items.AddRange(new object[] {
             "None",
@@ -198,6 +202,7 @@ namespace Terminal
             // 
             this.pdBaudrate.Cursor = System.Windows.Forms.Cursors.Default;
             this.pdBaudrate.Enabled = false;
+            this.pdBaudrate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.pdBaudrate.FormattingEnabled = true;
             this.pdBaudrate.Items.AddRange(new object[] {
             "600",
@@ -320,12 +325,17 @@ namespace Terminal
             // 
             // btnOk
             // 
+            this.btnOk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnOk.FlatAppearance.BorderSize = 0;
+            this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOk.ForeColor = System.Drawing.Color.Blue;
             this.btnOk.Location = new System.Drawing.Point(607, 146);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 20;
             this.btnOk.Text = "&Apply";
-            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.UseVisualStyleBackColor = false;
             this.btnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // label9
@@ -349,7 +359,7 @@ namespace Terminal
             // 
             // cbInitialDTR
             // 
-            this.cbInitialDTR.AutoSize = true;
+            this.cbInitialDTR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbInitialDTR.Location = new System.Drawing.Point(337, 133);
             this.cbInitialDTR.Name = "cbInitialDTR";
             this.cbInitialDTR.Size = new System.Drawing.Size(49, 17);
@@ -359,7 +369,7 @@ namespace Terminal
             // 
             // cbInitialRTS
             // 
-            this.cbInitialRTS.AutoSize = true;
+            this.cbInitialRTS.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbInitialRTS.Location = new System.Drawing.Point(383, 133);
             this.cbInitialRTS.Name = "cbInitialRTS";
             this.cbInitialRTS.Size = new System.Drawing.Size(48, 17);
@@ -378,7 +388,7 @@ namespace Terminal
             // 
             // cbRestartServer
             // 
-            this.cbRestartServer.AutoSize = true;
+            this.cbRestartServer.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbRestartServer.Location = new System.Drawing.Point(363, 39);
             this.cbRestartServer.Name = "cbRestartServer";
             this.cbRestartServer.Size = new System.Drawing.Size(157, 17);

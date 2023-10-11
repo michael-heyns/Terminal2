@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022 Michael Heyns
+ * Copyright © 2022-23 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -56,7 +56,7 @@ namespace Terminal
 
         private void SearchText_TextChanged(object sender, EventArgs e)
         {
-            btnSearch.Enabled = true;
+            btnSearch.Enabled = (SearchText.Text.Length > 0);
         }
         private void FrmSearch_Shown(object sender, EventArgs e)
         {
@@ -73,6 +73,11 @@ namespace Terminal
         private void btnClear_Click(object sender, EventArgs e)
         {
             SearchText.Text = string.Empty;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -1,5 +1,5 @@
 ![Letter-T-icon](https://user-images.githubusercontent.com/4144679/169688149-106da035-d4bd-4b1e-a290-c2a2885a9959.png)
-# Terminal2 - v1.3.4.2
+# Terminal2 - v1.3.4.2  (June 2024)
 ## Builds with Visual Studio 2022 (Community or Professional). No extras needed.
 
 Terminal emulator for Engineers (with Serial and TCP socket capabilities)

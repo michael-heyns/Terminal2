@@ -81,9 +81,9 @@ namespace Terminal
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.localHelp = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.localHelp.SuspendLayout();
             this.SuspendLayout();
@@ -415,19 +415,19 @@ namespace Terminal
             this.localHelp.TabIndex = 36;
             this.localHelp.Visible = false;
             // 
-            // textBox1
+            // textBox3
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox1.Location = new System.Drawing.Point(10, 14);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(111, 102);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "-> Empty lines\r\n->  $nn\r\n->  # comment \r\n-> ## comments\r\n-> #DELAY nn \r\n-> #MACRO" +
-    " title\r\n    ";
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox3.ForeColor = System.Drawing.Color.Red;
+            this.textBox3.Location = new System.Drawing.Point(393, 3);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(18, 20);
+            this.textBox3.TabIndex = 3;
+            this.textBox3.Text = "X";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
             // 
             // textBox2
             // 
@@ -442,19 +442,19 @@ namespace Terminal
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = resources.GetString("textBox2.Text");
             // 
-            // textBox3
+            // textBox1
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox3.ForeColor = System.Drawing.Color.Red;
-            this.textBox3.Location = new System.Drawing.Point(393, 3);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(18, 20);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "X";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox1.Location = new System.Drawing.Point(10, 14);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(111, 102);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "-> Empty lines\r\n->  $nn\r\n->  # comment \r\n-> ## comments\r\n-> #DELAY nn \r\n-> #STX t" +
+    "ext\r\n-> #MACRO title\r\n    ";
             // 
             // btnHelp
             // 

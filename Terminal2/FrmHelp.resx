@@ -186,7 +186,26 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.3.2.3
+    <value>v1.3.4.2
+  * Macro count increased from 48 to 196 in total
+
+v1.3.4.0
+  * New 'Send as I type' feature
+
+v1.3.3.4
+  * New feature: When 'Add timestamp' to output is disabled, it will only add the command to the output pane if it's not already there
+     However, it still adds it to the log file with a timestamp.
+
+v1.3.3.3
+  * Changed annoying history recall mechanism so it now always start at the bottom after ENTER is pressed
+
+v1.3.3.0
+   * Bug fix with for HEX display
+
+v1.3.2.5
+   * Added STX/ETX-LRC encapsulation option
+
+v1.3.2.3
    * Multiple small enhancements
 
 v1.3.1.0

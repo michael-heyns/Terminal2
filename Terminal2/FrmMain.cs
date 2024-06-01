@@ -62,9 +62,9 @@ namespace Terminal
         private State _state = State.Disconnected;
 
         // MACRO threads
-        private readonly Thread[] _macroThread = new Thread[48];
-        private static readonly AutoResetEvent[] _macroTrigger = new AutoResetEvent[48];
-        private static readonly bool[] _macroBusy = new bool[48];
+        private readonly Thread[] _macroThread = new Thread[48 * 4];
+        private static readonly AutoResetEvent[] _macroTrigger = new AutoResetEvent[48 * 4];
+        private static readonly bool[] _macroBusy = new bool[48 * 4];
 
         // TCP Server listening thread
         private Thread _connectThread = null;
@@ -83,6 +83,7 @@ namespace Terminal
 
         private bool _macroIsMoving = false;
         private int _macroBeingMoved;
+        private int _macroOffset = 0;
 
         private volatile bool _tickBusy = false;
         private static bool _terminateFlag = false;
@@ -103,6 +104,14 @@ namespace Terminal
         private ToolTip toolTip = new ToolTip();
         private int _stopLine = -1;
         private bool _interceptAltF4 = false;
+
+        private int _typingDollarValueIndex = 0;
+        private char _typingDollarValueCh1;
+        private string _typingHistoryBuffer = string.Empty;
+        private bool _typingPaused = false;
+        private bool _typingWarnedAboutDelete = false;
+
+        private bool _resetHistoryIndex = true;
 
         ////private int[] _appliedFilter = new int[MAX_INPUT_LINE_COUNT];
 
@@ -278,7 +287,11 @@ namespace Terminal
                 {
                     lbInput.BeginUpdate();
                     {
-                        lbInput.Items[lbInput.Items.Count - 1] += lines[0];
+                        try
+                        {
+                            lbInput.Items[lbInput.Items.Count - 1] += lines[0];
+                        }
+                        catch { }
                     }
                     lbInput.EndUpdate();
                     TestForFreeze();
@@ -289,11 +302,15 @@ namespace Terminal
                 {
                     lbInput.BeginUpdate();
                     {
-                        for (int i = start; i < lines.Length - 1; i++)
+                        try
                         {
-                            lbInput.Items.Add(lines[i]);
-                            TestForFreeze();
+                            for (int i = start; i < lines.Length - 1; i++)
+                            {
+                                lbInput.Items.Add(lines[i]);
+                                TestForFreeze();
+                            }
                         }
+                        catch { }
                     }
                     lbInput.EndUpdate();
                     _lineFinished = true;
@@ -302,11 +319,15 @@ namespace Terminal
                 {
                     lbInput.BeginUpdate();
                     {
-                        for (int i = start; i < lines.Length; i++)
+                        try
                         {
-                            lbInput.Items.Add(lines[i]);
-                            TestForFreeze();
+                            for (int i = start; i < lines.Length; i++)
+                            {
+                                lbInput.Items.Add(lines[i]);
+                                TestForFreeze();
+                            }
                         }
+                        catch { }
                     }
                     lbInput.EndUpdate();
                     _lineFinished = false;
@@ -316,8 +337,12 @@ namespace Terminal
                 {
                     lbInput.BeginUpdate();
                     {
-                        while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
-                            lbInput.Items.RemoveAt(0);
+                        try
+                        {
+                            while (lbInput.Items.Count >= MAX_INPUT_LINE_COUNT)
+                                lbInput.Items.RemoveAt(0);
+                        }
+                        catch { }
                     }
                     lbInput.EndUpdate();
                 }
@@ -340,7 +365,15 @@ namespace Terminal
                     if (_activeProfile.displayOptions.timestampOutputLines)
                         lbOutput.Items.Add(tm + str);
                     else
-                        lbOutput.Items.Add(str);
+                    {
+                        _typingHistoryBuffer += str;
+                        if (str.EndsWith("$0D") || str.EndsWith("$0A"))
+                        {
+                            if (lbOutput.Items.IndexOf(_typingHistoryBuffer) < 0)
+                                lbOutput.Items.Add(_typingHistoryBuffer);
+                            _typingHistoryBuffer = string.Empty;
+                        }
+                    }
 
                     while (lbOutput.Items.Count > MAX_OUTPUT_LINE_COUNT)
                         lbOutput.Items.RemoveAt(0);
@@ -360,17 +393,18 @@ namespace Terminal
             dgMacroTable.RowCount = 5;
             for (int f = 1; f <= 12; f++)
             {
-                dgMacroTable.Rows[0].Cells[f].Value = $"F{f}";
-                dgMacroTable.Rows[0].Cells[f].Style.BackColor = Color.Ivory;
+                dgMacroTable.Rows[0].Cells[f].Value = $"{f}";
+                dgMacroTable.Rows[0].Cells[f].Style.BackColor = Color.LightGray;// Ivory;
             }
 
             for (int r = 0; r <= 4; r++)
-                dgMacroTable.Rows[r].Cells[0].Style.BackColor = Color.Ivory;
+                dgMacroTable.Rows[r].Cells[0].Style.BackColor = Color.LightGray;// Ivory;
 
-            dgMacroTable.Rows[1].Cells[0].Value = "Plain";
-            dgMacroTable.Rows[2].Cells[0].Value = "Shift+";
-            dgMacroTable.Rows[3].Cells[0].Value = "Ctrl+";
-            dgMacroTable.Rows[4].Cells[0].Value = "Alt+";
+            //dgMacroTable.Rows[0].Cells[0].Value = " <--  --> ";
+            dgMacroTable.Rows[1].Cells[0].Value = "Plain";	// "1 - 48";
+            dgMacroTable.Rows[2].Cells[0].Value = "Shift+";	// "49 - 96";
+            dgMacroTable.Rows[3].Cells[0].Value = "Ctrl+";	// "97 - 144";
+            dgMacroTable.Rows[4].Cells[0].Value = "Alt+";	// "145 - 192";
             dgMacroTable.ClearSelection();
             stsLogfile.Text = "----";
 
@@ -615,22 +649,6 @@ namespace Terminal
             _comms.ControlPressed(1);
         }
 
-        private void BtnEditMacro_Click(object sender, EventArgs e)
-        {
-            btnEditMacro.Enabled = false;
-            {
-                FrmMacroOptions macros = new FrmMacroOptions(_activeProfile, 0, dgMacroTable);
-                TopMost = false;
-                macros.ShowDialog();
-                TopMost = cbStayOnTop.Checked;
-
-                if (macros.Modified)
-                    SaveThisProfile();
-            }
-            btnEditMacro.Enabled = true;
-            tbCommand.Focus();
-        }
-
         private void BtnLogfile_Click(object sender, EventArgs e)
         {
             btnLogOptions.Enabled = false;
@@ -657,7 +675,42 @@ namespace Terminal
             }
             if (_state == State.Connected)
             {
+                string str;
+                if (cbSendAsIType.Checked && !_typingPaused)
+                    str = string.Empty; // send only CR/LF
+                else
+                    str = tbCommand.Text;
+
+                if (cbSendCR.Checked)
+                    str += "$0D";
+                if (cbSendLF.Checked)
+                    str += "$0A";
+                SendDollarString(str, 0);
+                if (cbClearCMD.Checked || cbSendAsIType.Checked)
+                    tbCommand.Text = string.Empty;  // clear on send
+                _typingPaused = false;
+            }
+            tbCommand.Focus();
+        }
+
+        private string EncapsulateSTXETX(string line)
+        {
+            STXETX stxetx = new STXETX();
+            return stxetx.Encode(line);
+        }
+
+        private void btnSTXETX_Click(object sender, EventArgs e)
+        {
+            if (_state == State.Disconnected)
+            {
+                DialogResult yn = MessageBox.Show("Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (yn == DialogResult.Yes)
+                    BtnConnect_Click(sender, e);
+            }
+            if (_state == State.Connected)
+            {
                 string str = tbCommand.Text;
+                str = EncapsulateSTXETX(str);
                 if (cbSendCR.Checked)
                     str += "$0D";
                 if (cbSendLF.Checked)
@@ -665,9 +718,12 @@ namespace Terminal
                 SendDollarString(str, 0);
                 if (cbClearCMD.Checked)
                     tbCommand.Text = string.Empty;
+                _typingPaused = false;
             }
             tbCommand.Focus();
+
         }
+
 
         private void BtnSettings_Click(object sender, EventArgs e)
         {
@@ -929,7 +985,20 @@ namespace Terminal
                             // double comments go to input stream as well
                             int noteStart = line.IndexOf("##");
                             if (noteStart >= 0)
-                                _uiInputQueue.Enqueue("\n-NOTE-> " + line.Substring(noteStart + 2) + "\n");
+                                _uiInputQueue.Enqueue("-NOTE-> " + line.Substring(noteStart + 2) + "\n");
+
+                            // detect #STX
+                            bool encapsulateSTXETX = false;
+                            cmdIndex = line.IndexOf("#STX ");
+                            if (cmdIndex >= 0)
+                            {
+                                line = line.TrimEnd();
+                                if (line.StartsWith("#STX "))
+                                {
+                                    line = line.Substring(5);   // throw away the #STX
+                                    encapsulateSTXETX = true;
+                                }
+                            }
 
                             // remove comments altogether
                             int commentStart = line.IndexOf('#');
@@ -938,6 +1007,14 @@ namespace Terminal
 
                             // trim
                             line = line.TrimEnd();
+
+                            // encapsulate in STX/ETX packet
+                            if (encapsulateSTXETX)
+                            {
+                                line = EncapsulateSTXETX(line);
+                            }
+
+                            // add CR/LF
                             if (line.Length > 0)
                             {
                                 if (mac.addCR)
@@ -1072,7 +1149,7 @@ namespace Terminal
                 return;
             }
 
-            int m = ((e.RowIndex - 1) * 12) + (e.ColumnIndex - 1);
+            int m = ((e.RowIndex - 1) * 12) + (e.ColumnIndex - 1) + _macroOffset;
             if (_activeProfile.macros[m] == null)
                 _activeProfile.macros[m] = new Macro();
             Macro mac = _activeProfile.macros[m];
@@ -1084,11 +1161,12 @@ namespace Terminal
                 if (_macroBusy[m])
                     RestartMacro(m);
 
-                FrmMacroOptions macros = new FrmMacroOptions(_activeProfile, m, dgMacroTable);
+                FrmMacroOptions macros = new FrmMacroOptions(_activeProfile, m);
                 TopMost = false;
                 macros.ShowDialog();
                 if (macros.Modified)
                     SaveThisProfile();
+                ShowMacroTitles();
                 TopMost = cbStayOnTop.Checked;
             }
             else
@@ -1131,7 +1209,7 @@ namespace Terminal
                 return;
             }
 
-            int m = ((e.RowIndex - 1) * 12) + (e.ColumnIndex - 1);
+            int m = ((e.RowIndex - 1) * 12) + (e.ColumnIndex - 1) + _macroOffset;
             if (_activeProfile.macros[m] == null)
                 _activeProfile.macros[m] = new Macro();
             Macro dst = _activeProfile.macros[m];
@@ -1166,10 +1244,27 @@ namespace Terminal
             _activeProfile.sendCR = cbSendCR.Checked;
             _activeProfile.sendLF = cbSendLF.Checked;
             _activeProfile.clearCMD = cbClearCMD.Checked;
+            _activeProfile.sendAsIType = cbSendAsIType.Checked;
             Database.SaveProfile(_activeProfile);
             Database.SaveAsActiveProfile(_activeProfile.name);
             Thread.Sleep(50);
             lblSaving.Text = string.Empty;
+        }
+
+        private void ShowMacroTitles()
+        {
+            int i = _macroOffset;
+            for (int r = 1; r <= 4; r++)
+            {
+                for (int f = 1; f <= 12; f++)
+                {
+                    Macro m = _activeProfile.macros[i++];
+                    if (m == null)
+                        dgMacroTable.Rows[r].Cells[f].Value = string.Empty;
+                    else
+                        dgMacroTable.Rows[r].Cells[f].Value = m.title;
+                }
+            }
         }
 
         private void SwitchToProfile(string name)
@@ -1209,6 +1304,7 @@ namespace Terminal
                 cbSendCR.Checked = _activeProfile.sendCR;
                 cbSendLF.Checked = _activeProfile.sendLF;
                 cbClearCMD.Checked = _activeProfile.clearCMD;
+                cbSendAsIType.Checked = _activeProfile.sendAsIType;
 
                 cbTimestamp.Checked = _activeProfile.embellishments.ShowTimestamp;
                 cbASCII.Checked = _activeProfile.embellishments.ShowASCII;
@@ -1217,23 +1313,11 @@ namespace Terminal
                 cbShowLF.Checked = _activeProfile.embellishments.ShowLF;
 
                 UnFreeze();
-
-                int i = 0;
-                for (int r = 1; r <= 4; r++)
-                {
-                    for (int f = 1; f <= 12; f++)
-                    {
-                        Macro m = _activeProfile.macros[i++];
-                        if (m == null)
-                            dgMacroTable.Rows[r].Cells[f].Value = string.Empty;
-                        else
-                            dgMacroTable.Rows[r].Cells[f].Value = m.title;
-                    }
-                }
+                ShowMacroTitles();
                 RefreshPortPulldown();
 
                 // restore the visible port
-                i = pdPort.Items.IndexOf(currentPort);
+                int i = pdPort.Items.IndexOf(currentPort);
                 if (i >= 0)
                     pdPort.SelectedIndex = i;
 
@@ -1256,30 +1340,41 @@ namespace Terminal
             }
             else if (e.KeyCode == Keys.Up)
             {
-                if (lbOutput.SelectedIndex > 0)
-                    lbOutput.SelectedIndex--;
-                else if (lbOutput.Items.Count > 0)
-                    lbOutput.SelectedIndex = lbOutput.Items.Count - 1;  // bottom item on the list
-
-                // fixes a Windows anomaly that moves the cursor left by one
+                if (_resetHistoryIndex)
+                {
+                    if (lbOutput.Items.Count > 0)
+                        lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
+                    _resetHistoryIndex = false;
+                }
+                else
+                {
+                    if (lbOutput.SelectedIndex > 0)
+                        lbOutput.SelectedIndex--;
+                }
                 tbCommand.Focus();
                 SendKeys.Send("{RIGHT}");
             }
             else if (e.KeyCode == Keys.Down)
             {
-                if (lbOutput.SelectedIndex >= 0)
+                if (_resetHistoryIndex)
                 {
-                    if (lbOutput.SelectedIndex < lbOutput.Items.Count - 1)
-                        lbOutput.SelectedIndex++;
-                    else
-                        lbOutput.SelectedIndex = 0; // top item on the list
+                    if (lbOutput.Items.Count > 0)
+                        lbOutput.SelectedIndex = lbOutput.Items.Count - 1;
+                    _resetHistoryIndex = false;
                 }
-                else if (lbOutput.Items.Count > 0)
-                    lbOutput.SelectedIndex = 0; // top item on the list
+                else
+                {
+                    if (lbOutput.SelectedIndex >= 0)
+                    {
+                        if (lbOutput.SelectedIndex < lbOutput.Items.Count - 1)
+                            lbOutput.SelectedIndex++;
+                    }
+                }
             }
             else if (e.KeyCode == Keys.Enter)
             {
                 BtnSend_Click(sender, e);
+                _resetHistoryIndex = true;
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -1287,6 +1382,8 @@ namespace Terminal
                 e.SuppressKeyPress = true;
                 RestartAllMacros();
                 tbCommand.Text = string.Empty;
+                _typingPaused = false;
+                _resetHistoryIndex = true;
             }
             else
             {
@@ -1321,9 +1418,78 @@ namespace Terminal
                     mac.uiRow = row;
                     DoMacro(index);
                 }
+                else if (key == (int)Keys.Back || key == (int)Keys.Delete)
+                {
+                    if (cbSendAsIType.Checked && !_typingPaused)
+                    {
+                        if (!_typingWarnedAboutDelete && tbCommand.Text.Length > 0)
+                        {
+                            MessageBox.Show("You cannot retract data already sent out", "DEL and Backspace not allowed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            _typingWarnedAboutDelete = true;
+                        }
+                    }
+                }
             }
             dgMacroTable.ClearSelection();
             tbCommand.Focus();
+        }
+        private void tbCommand_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbSendAsIType.Checked && !_typingPaused)
+            {
+                char ch = e.KeyChar;
+                if (ch >= ' ' && ch <= '~')
+                {
+                    switch (_typingDollarValueIndex)
+                    {
+                        default:
+                        case 0:
+                            if (ch == '$')
+                            {
+                                _typingDollarValueIndex++;
+                            }
+                            else
+                            {
+                                SendDollarString(ch.ToString(), 0);
+                            }
+                            break;
+
+                        case 1:
+                            if (ch == '$')
+                            {
+                                _typingDollarValueIndex = 0;
+                                SendDollarString("$", 0);
+                            }
+                            else
+                            {
+                                if (ch >= '0' && ch <= '9' || ch >= 'A' && ch <= 'F' || ch >= 'a' && ch <= 'f')
+                                {
+                                    _typingDollarValueCh1 = ch;
+                                    _typingDollarValueIndex++;
+                                }
+                                else
+                                {
+                                    string cmd = "$" + ch.ToString();
+                                    SendDollarString(cmd, 0);
+                                    _typingDollarValueIndex = 0;
+                                }
+                            }
+                            break;
+
+                        case 2:
+                            {
+                                string cmd = "$" + _typingDollarValueCh1.ToString() + ch.ToString();
+                                SendDollarString(cmd, 0);
+                                _typingDollarValueIndex = 0;
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    e.Handled = true;   // this way we stop DEL or BACK from deleting the display
+                }
+            }
         }
 
         private string VersionLabel
@@ -1358,6 +1524,8 @@ namespace Terminal
 
         private void SendDollarString(string cmd, int icd)
         {
+            _resetHistoryIndex = true;
+
             lock (_dollarLock)
             {
                 if (cmd.Length == 0)
@@ -1496,6 +1664,7 @@ namespace Terminal
             {
                 lbInput.BeginUpdate();
                 {
+                    _comms.ResetHexColumn();
                     _uiInputQueue.Clear();
                     lbInput.Items.Clear();
                     UnFreeze();
@@ -1811,8 +1980,8 @@ namespace Terminal
             string cmd;
             if (Utils.HasTimestamp(line))
             {
-                int i = line.IndexOf(": ");
-                cmd = line.Substring(i + 2);
+                int i = Utils.TimestampLength();
+                cmd = line.Substring(i);
             }
             else
                 cmd = line;
@@ -1822,6 +1991,7 @@ namespace Terminal
             if (cmd.EndsWith("$0D"))
                 cmd = cmd.Substring(0, cmd.Length - 3);
             tbCommand.Text = cmd;
+            _typingPaused = true;
 
             Application.DoEvents();
             tbCommand.Focus();
@@ -1945,29 +2115,25 @@ namespace Terminal
                     }
                 }
 
-                for (int t = 0; t < _macroThread.Length; t++)
+                for (int retry = 0; retry < 2; retry++)
                 {
-                    _macroTrigger[t].Set();
-                    Thread.Sleep(2);
-                    Application.DoEvents();
-                    // do it a second time to make sure
-                    _macroTrigger[t].Set();
-                    Thread.Sleep(2);
+                    for (int t = 0; t < _macroThread.Length; t++)
+                        _macroTrigger[t].Set();
                     Application.DoEvents();
                 }
+
                 Thread.Sleep(20);
                 if (_localThreadCount != 0)
                 {
                     for (int t = 0; t < _macroThread.Length; t++)
-                        _macroThread[t].Abort();
-
+                    {
+                        _macroThread[t].Interrupt();
+                        if (_macroThread[t].IsAlive)
+                        {
+                            _macroThread[t].Abort();
+                        }
+                    }
                 }
-                for (int t = 0; t < _macroThread.Length; t++)
-                {
-                    if (_macroThread[t] != null)
-                        _macroThread[t].Join();
-                }
-
                 if (_connectThread != null)
                     _connectThread.Join();
             }
@@ -2022,11 +2188,12 @@ namespace Terminal
             string line = lbInput.SelectedItem.ToString();
             if (Utils.HasTimestamp(line))
             {
-                int i = line.IndexOf(": ");
-                tbCommand.Text = line.Substring(i + 2);
+                int i = Utils.TimestampLength();
+                tbCommand.Text = line.Substring(i);
             }
             else
                 tbCommand.Text = line;
+            _typingPaused = true;
             tbCommand.Focus();
         }
 
@@ -2251,6 +2418,53 @@ namespace Terminal
             this.Height = (rec.Height * 4) / 5;
 
             this.CenterToScreen();
+        }
+
+        private void cbSendAsIType_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSendAsIType.Checked)
+            {
+                cbClearCMD.Checked = true;
+                cbClearCMD.Enabled = false;
+            }
+            else
+            {
+                cbClearCMD.Enabled = true;
+            }
+            tbCommand.Text = string.Empty;
+            tbCommand.Focus();
+        }
+
+        private void SetMacroOffset(int N)
+        {
+            _macroOffset = N * 48;
+            int labelNumber = (N * 12) + 1;
+            for (int f = 1; f <= 12; f++)
+            {
+                dgMacroTable.Rows[0].Cells[f].Value = $"{labelNumber}";
+                labelNumber++;
+            }
+            ShowMacroTitles();
+            tbCommand.Focus();
+        }
+        private void btnGroup1_Click(object sender, EventArgs e)
+        {
+            SetMacroOffset(0);
+        }
+
+        private void btnGroup2_Click(object sender, EventArgs e)
+        {
+            SetMacroOffset(1);
+        }
+
+        private void btnGroup3_Click(object sender, EventArgs e)
+        {
+            SetMacroOffset(2);
+        }
+
+        private void btnGroup4_Click(object sender, EventArgs e)
+        {
+            SetMacroOffset(3);
         }
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox

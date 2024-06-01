@@ -66,19 +66,18 @@ namespace Terminal
 
         public static bool _terminateFlag = false;
 
-        private void Enqueue(string str)
+        private void Enqueue(byte[] data)
         {
             StringBuilder sb = new StringBuilder();
 
             // only HEX
             if (!_embellishments.ShowASCII && _embellishments.ShowHEX)
             {
-                foreach (char c in str)
+                foreach (byte b in data)
                 {
                     if (_hexColumn == 0 && _embellishments.ShowTimestamp)
                         sb.Append(Utils.Timestamp());
 
-                    byte b = Convert.ToByte(c);
                     sb.Append($"{b:X2} ");
 
                     _hexColumn++;
@@ -97,8 +96,10 @@ namespace Terminal
             // ASCI with or without HEX
             else
             {
-                foreach (char c in str)
+                foreach (byte b in data)
                 {
+                    char c = (char)b;
+
                     // if we did not complete the previous CRLF, do it now
                     if (_halfCRLF)
                     {
@@ -136,7 +137,6 @@ namespace Terminal
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
-                                byte b = Convert.ToByte(c);
                                 sb.Append($"{b:X2} ");
                             }
 
@@ -151,7 +151,6 @@ namespace Terminal
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
-                                byte b = Convert.ToByte(c);
                                 sb.Append($"{b:X2} ");
                             }
 
@@ -168,7 +167,6 @@ namespace Terminal
                             // add the HEX version of the character
                             if (_embellishments.ShowHEX)
                             {
-                                byte b = Convert.ToByte(c);
                                 sb.Append($"{b:X2} ");
                             }
 
@@ -179,8 +177,8 @@ namespace Terminal
                 }
             }
             _inputQueue.Enqueue(sb.ToString());
-        }
 
+        }
         private void SerialReaderThread()
         {
             if (_com == null)
@@ -200,8 +198,7 @@ namespace Terminal
                         {
                             byte[] ser_data = new byte[count];
                             _com.Read(ser_data, 0, count);
-                            string utfString = Encoding.Default.GetString(ser_data);    // don't use ASCII or UTF8 encoding
-                            Enqueue(utfString);
+                            Enqueue(ser_data);
                         }
                         else
                         {
@@ -235,9 +232,8 @@ namespace Terminal
                             tcp_data = new byte[tcp_count];
                             if (!_socket.Connected) break;
                             _socket.Receive(tcp_data);
-                            str = System.Text.Encoding.Default.GetString(tcp_data);
+                            Enqueue(tcp_data);
                         }
-                        Enqueue(str);
                     }
                     else
                     {

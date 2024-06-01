@@ -281,7 +281,7 @@ namespace Terminal
             {
                 string data = string.Empty;
                 data += "# -----------------------------------------------------\n";
-                data += "# Terminal2 - Copyright ©2022-23-23 Michael Heyns\n";
+                data += "# Terminal2 - Copyright ©2022-2024 Michael Heyns\n";
                 data += $"# New profile for {name}\n";
                 data += "# -----------------------------------------------------\n";
                 data += "\n";
@@ -290,6 +290,7 @@ namespace Terminal
                 data += "SendCR=True\n";
                 data += "SendLF=False\n";
                 data += "ClearCMD=False\n";
+                data += "SendAsIType=False\n";
                 data += "OnTop=False\n";
                 data += "TimeOutput=True\n";
                 data += "MaxLines=2000\n";
@@ -403,6 +404,7 @@ namespace Terminal
                 data += $"SendCR={profile.sendCR}\n";
                 data += $"SendLF={profile.sendLF}\n";
                 data += $"ClearCMD={profile.clearCMD}\n";
+                data += $"SendAsIType={profile.sendAsIType}\n";
                 data += $"OnTop={profile.stayontop}\n";
                 data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
 
@@ -574,6 +576,10 @@ namespace Terminal
                         else if (line.StartsWith("ClearCMD="))
                         {
                             profile.clearCMD = line.Contains("True");
+                        }
+                        else if (line.StartsWith("SendAsIType="))
+                        {
+                            profile.sendAsIType = line.Contains("True");
                         }
                         else if (line.StartsWith("OnTop="))
                         {

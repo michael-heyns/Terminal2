@@ -112,14 +112,19 @@ namespace Terminal
             this.scF12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnGroup4 = new System.Windows.Forms.Button();
+            this.btnGroup2 = new System.Windows.Forms.Button();
+            this.btnGroup3 = new System.Windows.Forms.Button();
+            this.btnGroup1 = new System.Windows.Forms.Button();
             this.btnFile = new System.Windows.Forms.Button();
             this.SendPanel = new System.Windows.Forms.Panel();
+            this.cbSendAsIType = new System.Windows.Forms.CheckBox();
+            this.btnSTXETX = new System.Windows.Forms.Button();
             this.btnClearOutput = new System.Windows.Forms.Button();
             this.cbSendLF = new System.Windows.Forms.CheckBox();
             this.cbSendCR = new System.Windows.Forms.CheckBox();
             this.cbClearCMD = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnEditMacro = new System.Windows.Forms.Button();
             this.ctrlTwo = new System.Windows.Forms.Label();
             this.tbCommand = new System.Windows.Forms.TextBox();
             this.ctrlOne = new System.Windows.Forms.Label();
@@ -163,6 +168,7 @@ namespace Terminal
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgMacroTable)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SendPanel.SuspendLayout();
             this.PanelTwo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -565,7 +571,7 @@ namespace Terminal
             this.dgMacroTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgMacroTable.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgMacroTable.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgMacroTable.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgMacroTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgMacroTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgMacroTable.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgMacroTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -595,7 +601,7 @@ namespace Terminal
             this.dgMacroTable.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgMacroTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgMacroTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgMacroTable.Location = new System.Drawing.Point(10, 0);
+            this.dgMacroTable.Location = new System.Drawing.Point(34, 0);
             this.dgMacroTable.MultiSelect = false;
             this.dgMacroTable.Name = "dgMacroTable";
             this.dgMacroTable.ReadOnly = true;
@@ -611,7 +617,7 @@ namespace Terminal
             this.dgMacroTable.ShowCellToolTips = false;
             this.dgMacroTable.ShowEditingIcon = false;
             this.dgMacroTable.ShowRowErrors = false;
-            this.dgMacroTable.Size = new System.Drawing.Size(1414, 86);
+            this.dgMacroTable.Size = new System.Drawing.Size(1390, 86);
             this.dgMacroTable.TabIndex = 0;
             this.dgMacroTable.TabStop = false;
             this.dgMacroTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgMacroTable_CellClick);
@@ -742,11 +748,83 @@ namespace Terminal
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.btnGroup4);
+            this.panel4.Controls.Add(this.btnGroup2);
+            this.panel4.Controls.Add(this.btnGroup3);
+            this.panel4.Controls.Add(this.btnGroup1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 109);
+            this.panel4.Size = new System.Drawing.Size(34, 109);
             this.panel4.TabIndex = 1;
+            // 
+            // btnGroup4
+            // 
+            this.btnGroup4.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnGroup4.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGroup4.FlatAppearance.BorderSize = 0;
+            this.btnGroup4.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnGroup4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnGroup4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGroup4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGroup4.Location = new System.Drawing.Point(7, 66);
+            this.btnGroup4.Name = "btnGroup4";
+            this.btnGroup4.Size = new System.Drawing.Size(19, 19);
+            this.btnGroup4.TabIndex = 6;
+            this.btnGroup4.Text = "D";
+            this.btnGroup4.UseVisualStyleBackColor = false;
+            this.btnGroup4.Click += new System.EventHandler(this.btnGroup4_Click);
+            // 
+            // btnGroup2
+            // 
+            this.btnGroup2.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnGroup2.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGroup2.FlatAppearance.BorderSize = 0;
+            this.btnGroup2.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnGroup2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnGroup2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGroup2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGroup2.Location = new System.Drawing.Point(7, 26);
+            this.btnGroup2.Name = "btnGroup2";
+            this.btnGroup2.Size = new System.Drawing.Size(19, 19);
+            this.btnGroup2.TabIndex = 4;
+            this.btnGroup2.Text = "B";
+            this.btnGroup2.UseVisualStyleBackColor = false;
+            this.btnGroup2.Click += new System.EventHandler(this.btnGroup2_Click);
+            // 
+            // btnGroup3
+            // 
+            this.btnGroup3.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnGroup3.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGroup3.FlatAppearance.BorderSize = 0;
+            this.btnGroup3.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnGroup3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnGroup3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGroup3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGroup3.Location = new System.Drawing.Point(7, 46);
+            this.btnGroup3.Name = "btnGroup3";
+            this.btnGroup3.Size = new System.Drawing.Size(19, 19);
+            this.btnGroup3.TabIndex = 5;
+            this.btnGroup3.Text = "C";
+            this.btnGroup3.UseVisualStyleBackColor = false;
+            this.btnGroup3.Click += new System.EventHandler(this.btnGroup3_Click);
+            // 
+            // btnGroup1
+            // 
+            this.btnGroup1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnGroup1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGroup1.FlatAppearance.BorderSize = 0;
+            this.btnGroup1.FlatAppearance.CheckedBackColor = System.Drawing.Color.White;
+            this.btnGroup1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnGroup1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGroup1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGroup1.Location = new System.Drawing.Point(7, 6);
+            this.btnGroup1.Name = "btnGroup1";
+            this.btnGroup1.Size = new System.Drawing.Size(19, 19);
+            this.btnGroup1.TabIndex = 3;
+            this.btnGroup1.Text = "A";
+            this.btnGroup1.UseVisualStyleBackColor = false;
+            this.btnGroup1.Click += new System.EventHandler(this.btnGroup1_Click);
             // 
             // btnFile
             // 
@@ -758,7 +836,7 @@ namespace Terminal
             this.btnFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFile.ForeColor = System.Drawing.Color.Blue;
-            this.btnFile.Location = new System.Drawing.Point(1346, 2);
+            this.btnFile.Location = new System.Drawing.Point(1370, 3);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(52, 20);
             this.btnFile.TabIndex = 1;
@@ -769,12 +847,13 @@ namespace Terminal
             // SendPanel
             // 
             this.SendPanel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.SendPanel.Controls.Add(this.cbSendAsIType);
+            this.SendPanel.Controls.Add(this.btnSTXETX);
             this.SendPanel.Controls.Add(this.btnClearOutput);
             this.SendPanel.Controls.Add(this.cbSendLF);
             this.SendPanel.Controls.Add(this.cbSendCR);
             this.SendPanel.Controls.Add(this.cbClearCMD);
             this.SendPanel.Controls.Add(this.label2);
-            this.SendPanel.Controls.Add(this.btnEditMacro);
             this.SendPanel.Controls.Add(this.btnFile);
             this.SendPanel.Controls.Add(this.ctrlTwo);
             this.SendPanel.Controls.Add(this.tbCommand);
@@ -786,6 +865,40 @@ namespace Terminal
             this.SendPanel.Size = new System.Drawing.Size(1434, 25);
             this.SendPanel.TabIndex = 10;
             // 
+            // cbSendAsIType
+            // 
+            this.cbSendAsIType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSendAsIType.BackColor = System.Drawing.Color.Transparent;
+            this.cbSendAsIType.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbSendAsIType.FlatAppearance.BorderSize = 0;
+            this.cbSendAsIType.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
+            this.cbSendAsIType.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cbSendAsIType.Location = new System.Drawing.Point(752, 5);
+            this.cbSendAsIType.Name = "cbSendAsIType";
+            this.cbSendAsIType.Size = new System.Drawing.Size(86, 18);
+            this.cbSendAsIType.TabIndex = 34;
+            this.cbSendAsIType.Text = "Send as I type";
+            this.cbSendAsIType.UseVisualStyleBackColor = false;
+            this.cbSendAsIType.CheckedChanged += new System.EventHandler(this.cbSendAsIType_CheckedChanged);
+            // 
+            // btnSTXETX
+            // 
+            this.btnSTXETX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSTXETX.BackColor = System.Drawing.Color.White;
+            this.btnSTXETX.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.btnSTXETX.FlatAppearance.BorderSize = 0;
+            this.btnSTXETX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnSTXETX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSTXETX.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSTXETX.ForeColor = System.Drawing.Color.Blue;
+            this.btnSTXETX.Location = new System.Drawing.Point(1312, 3);
+            this.btnSTXETX.Name = "btnSTXETX";
+            this.btnSTXETX.Size = new System.Drawing.Size(52, 20);
+            this.btnSTXETX.TabIndex = 33;
+            this.btnSTXETX.Text = "S-ETX";
+            this.btnSTXETX.UseVisualStyleBackColor = false;
+            this.btnSTXETX.Click += new System.EventHandler(this.btnSTXETX_Click);
+            // 
             // btnClearOutput
             // 
             this.btnClearOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -795,7 +908,7 @@ namespace Terminal
             this.btnClearOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearOutput.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearOutput.Location = new System.Drawing.Point(1080, 2);
+            this.btnClearOutput.Location = new System.Drawing.Point(1041, 3);
             this.btnClearOutput.Name = "btnClearOutput";
             this.btnClearOutput.Size = new System.Drawing.Size(80, 20);
             this.btnClearOutput.TabIndex = 17;
@@ -811,7 +924,7 @@ namespace Terminal
             this.cbSendLF.FlatAppearance.BorderSize = 0;
             this.cbSendLF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbSendLF.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbSendLF.Location = new System.Drawing.Point(1030, 4);
+            this.cbSendLF.Location = new System.Drawing.Point(991, 5);
             this.cbSendLF.Name = "cbSendLF";
             this.cbSendLF.Size = new System.Drawing.Size(44, 18);
             this.cbSendLF.TabIndex = 2;
@@ -829,7 +942,7 @@ namespace Terminal
             this.cbSendCR.FlatAppearance.BorderSize = 0;
             this.cbSendCR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbSendCR.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbSendCR.Location = new System.Drawing.Point(987, 4);
+            this.cbSendCR.Location = new System.Drawing.Point(948, 5);
             this.cbSendCR.Name = "cbSendCR";
             this.cbSendCR.Size = new System.Drawing.Size(45, 18);
             this.cbSendCR.TabIndex = 3;
@@ -845,11 +958,11 @@ namespace Terminal
             this.cbClearCMD.FlatAppearance.BorderSize = 0;
             this.cbClearCMD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbClearCMD.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbClearCMD.Location = new System.Drawing.Point(896, 4);
+            this.cbClearCMD.Location = new System.Drawing.Point(852, 5);
             this.cbClearCMD.Name = "cbClearCMD";
-            this.cbClearCMD.Size = new System.Drawing.Size(86, 18);
+            this.cbClearCMD.Size = new System.Drawing.Size(90, 18);
             this.cbClearCMD.TabIndex = 4;
-            this.cbClearCMD.Text = "Clear on Send";
+            this.cbClearCMD.Text = "Clear on send";
             this.cbClearCMD.UseVisualStyleBackColor = false;
             this.cbClearCMD.CheckedChanged += new System.EventHandler(this.ResetFocus);
             // 
@@ -863,21 +976,6 @@ namespace Terminal
             this.label2.TabIndex = 32;
             this.label2.Text = "Send";
             // 
-            // btnEditMacro
-            // 
-            this.btnEditMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditMacro.BackColor = System.Drawing.Color.White;
-            this.btnEditMacro.FlatAppearance.BorderSize = 0;
-            this.btnEditMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnEditMacro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditMacro.Image = global::Terminal.Properties.Resources.Gear;
-            this.btnEditMacro.Location = new System.Drawing.Point(1404, 2);
-            this.btnEditMacro.Name = "btnEditMacro";
-            this.btnEditMacro.Size = new System.Drawing.Size(21, 21);
-            this.btnEditMacro.TabIndex = 0;
-            this.btnEditMacro.UseVisualStyleBackColor = false;
-            this.btnEditMacro.Click += new System.EventHandler(this.BtnEditMacro_Click);
-            // 
             // ctrlTwo
             // 
             this.ctrlTwo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -887,7 +985,7 @@ namespace Terminal
             this.ctrlTwo.Enabled = false;
             this.ctrlTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ctrlTwo.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlTwo.Location = new System.Drawing.Point(1206, 4);
+            this.ctrlTwo.Location = new System.Drawing.Point(1167, 5);
             this.ctrlTwo.Margin = new System.Windows.Forms.Padding(0);
             this.ctrlTwo.Name = "ctrlTwo";
             this.ctrlTwo.Size = new System.Drawing.Size(32, 16);
@@ -908,10 +1006,11 @@ namespace Terminal
             this.tbCommand.HideSelection = false;
             this.tbCommand.Location = new System.Drawing.Point(41, 2);
             this.tbCommand.Name = "tbCommand";
-            this.tbCommand.Size = new System.Drawing.Size(849, 21);
+            this.tbCommand.Size = new System.Drawing.Size(701, 21);
             this.tbCommand.TabIndex = 1;
             this.tbCommand.WordWrap = false;
             this.tbCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
+            this.tbCommand.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCommand_KeyPress);
             // 
             // ctrlOne
             // 
@@ -922,7 +1021,7 @@ namespace Terminal
             this.ctrlOne.Enabled = false;
             this.ctrlOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ctrlOne.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlOne.Location = new System.Drawing.Point(1172, 4);
+            this.ctrlOne.Location = new System.Drawing.Point(1133, 5);
             this.ctrlOne.Margin = new System.Windows.Forms.Padding(0);
             this.ctrlOne.Name = "ctrlOne";
             this.ctrlOne.Size = new System.Drawing.Size(32, 16);
@@ -941,7 +1040,7 @@ namespace Terminal
             this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.ForeColor = System.Drawing.Color.Blue;
-            this.btnSend.Location = new System.Drawing.Point(1242, 2);
+            this.btnSend.Location = new System.Drawing.Point(1208, 3);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(98, 20);
             this.btnSend.TabIndex = 0;
@@ -1448,6 +1547,7 @@ namespace Terminal
             this.PanelOne.PerformLayout();
             this.MacroPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgMacroTable)).EndInit();
+            this.panel4.ResumeLayout(false);
             this.SendPanel.ResumeLayout(false);
             this.SendPanel.PerformLayout();
             this.PanelTwo.ResumeLayout(false);
@@ -1491,7 +1591,6 @@ namespace Terminal
         private System.Windows.Forms.DataGridView dgMacroTable;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Button btnEditMacro;
         private System.Windows.Forms.DataGridViewTextBoxColumn Mode;
         private System.Windows.Forms.DataGridViewTextBoxColumn F1;
         private System.Windows.Forms.DataGridViewTextBoxColumn scF2;
@@ -1554,6 +1653,12 @@ namespace Terminal
         private System.Windows.Forms.Button btnProfile;
         private System.Windows.Forms.Button btnClearOutput;
         private System.Windows.Forms.Button btnResize;
+        private System.Windows.Forms.Button btnSTXETX;
+        private System.Windows.Forms.CheckBox cbSendAsIType;
+        private System.Windows.Forms.Button btnGroup1;
+        private System.Windows.Forms.Button btnGroup4;
+        private System.Windows.Forms.Button btnGroup3;
+        private System.Windows.Forms.Button btnGroup2;
     }
 }
 

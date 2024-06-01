@@ -34,16 +34,14 @@ namespace Terminal
         public bool Modified = false;
 
         private readonly Profile _activeProfile;
-        private readonly DataGridView _macroTable;
         private int _id;
 
-        public FrmMacroOptions(Profile profile, int id, DataGridView table)
+        public FrmMacroOptions(Profile profile, int id)
         {
             InitializeComponent();
             _activeProfile = profile;
-            _macroTable = table;
 
-            if (id < 0 || id >= 48)
+            if (id < 0 || id >= (48 * 4))
                 id = 0;
             _id = id;
 
@@ -124,11 +122,6 @@ namespace Terminal
             {
                 for (int m = 0; m < _activeProfile.macros.Length; m++)
                     _activeProfile.macros[m] = null;
-                for (int r = 1; r <= 4; r++)
-                {
-                    for (int f = 1; f <= 12; f++)
-                        _macroTable.Rows[r].Cells[f].Value = string.Empty;
-                }
                 ClearScreen();
                 SaveProfile();
             }
@@ -191,7 +184,6 @@ namespace Terminal
 
             int column = (_id % 12) + 1;
             int row = (_id / 12) + 1;
-            _macroTable.Rows[row].Cells[column].Value = tbTitle.Text;
             Modified = false;
         }
 

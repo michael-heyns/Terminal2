@@ -130,6 +130,18 @@
     <Compile Include="FrmHelp.Designer.cs">
       <DependentUpon>FrmHelp.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmHorizontal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmHorizontal.Designer.cs">
+      <DependentUpon>FrmHorizontal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmInspect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInspect.Designer.cs">
+      <DependentUpon>FrmInspect.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmLogOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,17 +160,35 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmNumber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNumber.Designer.cs">
+      <DependentUpon>FrmNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmProfileName.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmProfileName.Designer.cs">
       <DependentUpon>FrmProfileName.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReplace.Designer.cs">
+      <DependentUpon>FrmReplace.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmSearch.Designer.cs">
       <DependentUpon>FrmSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmVertical.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmVertical.Designer.cs">
+      <DependentUpon>FrmVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Logging.cs" />
@@ -177,6 +207,8 @@
     <Compile Include="FrmProfileDatabase.Designer.cs">
       <DependentUpon>FrmProfileDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Filters.cs" />
+    <Compile Include="StxEtx.cs" />
     <EmbeddedResource Include="frmASCII.resx">
       <DependentUpon>frmASCII.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -191,6 +223,12 @@
     <EmbeddedResource Include="FrmHelp.resx">
       <DependentUpon>FrmHelp.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmHorizontal.resx">
+      <DependentUpon>FrmHorizontal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInspect.resx">
+      <DependentUpon>FrmInspect.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmLogOptions.resx">
       <DependentUpon>FrmLogOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,11 +238,20 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmNumber.resx">
+      <DependentUpon>FrmNumber.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmProfileName.resx">
       <DependentUpon>FrmProfileName.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmReplace.resx">
+      <DependentUpon>FrmReplace.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSearch.resx">
       <DependentUpon>FrmSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmVertical.resx">
+      <DependentUpon>FrmVertical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

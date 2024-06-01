@@ -168,13 +168,14 @@ namespace Terminal
         public bool sendCR = true;
         public bool sendLF = false;
         public bool clearCMD = false;
+        public bool sendAsIType = false;
         public bool stayontop = false;
 
         public Embellishments embellishments = new Embellishments();
         public ConOptions conOptions = new ConOptions();
         public LoggingOptions logOptions = new LoggingOptions();
         public DisplayOptions displayOptions = new DisplayOptions();
-        public Macro[] macros = new Macro[48];
+        public Macro[] macros = new Macro[48 * 4];
 
         public Profile()
         {
@@ -247,6 +248,7 @@ namespace Terminal
             return true;
         }
 
+        // Assuming "HH:mm:ss.fff: "
         public static int TimestampLength()
         {
             return 14;

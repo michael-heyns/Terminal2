@@ -113,7 +113,7 @@ namespace Terminal
 
         private void CbTimestampOutputLines_CheckedChanged(object sender, EventArgs e)
         {
-            Options.timestampOutputLines = cbTimestampOutputLines.Checked;
+            Options.ShowOutputTimestamp = cbTimestampOutputLines.Checked;
         }
 
         private void BackColorInput_Click(object sender, EventArgs e)
@@ -266,7 +266,7 @@ namespace Terminal
         }
         private void FrmDisplayOptions_Shown(object sender, EventArgs e)
         {
-            cbTimestampOutputLines.Checked = Options.timestampOutputLines;
+            cbTimestampOutputLines.Checked = Options.ShowOutputTimestamp;
             RefreshScreenFromDatabase();
         }
     }

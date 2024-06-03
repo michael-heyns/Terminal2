@@ -1123,9 +1123,9 @@ namespace Terminal
             this.cbTimestampOutputLines.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbTimestampOutputLines.Location = new System.Drawing.Point(109, 25);
             this.cbTimestampOutputLines.Name = "cbTimestampOutputLines";
-            this.cbTimestampOutputLines.Size = new System.Drawing.Size(105, 18);
+            this.cbTimestampOutputLines.Size = new System.Drawing.Size(152, 18);
             this.cbTimestampOutputLines.TabIndex = 0;
-            this.cbTimestampOutputLines.Text = "Add Timestamp";
+            this.cbTimestampOutputLines.Text = "Add Timestamp to Output";
             this.cbTimestampOutputLines.UseVisualStyleBackColor = true;
             this.cbTimestampOutputLines.CheckedChanged += new System.EventHandler(this.CbTimestampOutputLines_CheckedChanged);
             // 

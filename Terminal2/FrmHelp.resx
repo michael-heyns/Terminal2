@@ -186,7 +186,10 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.3.4.2
+    <value>v1.3.4.3
+  * Bug fix in 'Send as I type'
+
+v1.3.4.2
   * Macro count increased from 48 to 196 in total
 
 v1.3.4.0

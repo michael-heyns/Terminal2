@@ -120,7 +120,7 @@ namespace Terminal
         public Font outputFont;
         public Color outputBackground = Color.Gainsboro;
 
-        public bool timestampOutputLines = true;
+        public bool ShowOutputTimestamp = true;
 
         public DisplayOptions()
         {
@@ -149,7 +149,7 @@ namespace Terminal
     {
         public bool ShowCR;
         public bool ShowLF;
-        public bool ShowTimestamp;
+        public bool ShowInputTimestamp;
         public bool ShowASCII;
         public bool ShowHEX;
 

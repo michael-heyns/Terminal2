@@ -362,8 +362,19 @@ namespace Terminal
 
                 lbOutput.BeginUpdate();
                 {
-                    if (_activeProfile.displayOptions.timestampOutputLines)
-                        lbOutput.Items.Add(tm + str);
+                    if (_activeProfile.displayOptions.ShowOutputTimestamp)
+                    {
+                        if (_typingHistoryBuffer.Length == 0)
+                            _typingHistoryBuffer += tm;
+
+                        _typingHistoryBuffer += str;
+                        if (str.EndsWith("$0D") || str.EndsWith("$0A"))
+                        {
+                            lbOutput.Items.Add(_typingHistoryBuffer);
+                            _typingHistoryBuffer = string.Empty;
+                        }
+
+                    }
                     else
                     {
                         _typingHistoryBuffer += str;
@@ -801,7 +812,7 @@ namespace Terminal
         #region EMBELLISHMENTS
         private void cbTimestamp_CheckedChanged(object sender, EventArgs e)
         {
-            _activeProfile.embellishments.ShowTimestamp = cbTimestamp.Checked;
+            _activeProfile.embellishments.ShowInputTimestamp = cbTimestamp.Checked;
             _comms.SetEmbellishments(_activeProfile.embellishments);
             tbCommand.Focus();
         }
@@ -1306,7 +1317,7 @@ namespace Terminal
                 cbClearCMD.Checked = _activeProfile.clearCMD;
                 cbSendAsIType.Checked = _activeProfile.sendAsIType;
 
-                cbTimestamp.Checked = _activeProfile.embellishments.ShowTimestamp;
+                cbTimestamp.Checked = _activeProfile.embellishments.ShowInputTimestamp;
                 cbASCII.Checked = _activeProfile.embellishments.ShowASCII;
                 cbHEX.Checked = _activeProfile.embellishments.ShowHEX;
                 cbShowCR.Checked = _activeProfile.embellishments.ShowCR;

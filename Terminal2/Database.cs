@@ -406,13 +406,13 @@ namespace Terminal
                 data += $"ClearCMD={profile.clearCMD}\n";
                 data += $"SendAsIType={profile.sendAsIType}\n";
                 data += $"OnTop={profile.stayontop}\n";
-                data += $"TimeOutput={profile.displayOptions.timestampOutputLines}\n";
+                data += $"TimeOutput={profile.displayOptions.ShowOutputTimestamp}\n";
 
                 data += $"ShowCR={profile.embellishments.ShowCR}\n";
                 data += $"ShowLF={profile.embellishments.ShowLF}\n";
                 data += $"ShowASCII={profile.embellishments.ShowASCII}\n";
                 data += $"ShowHEX={profile.embellishments.ShowHEX}\n";
-                data += $"TimeInput={profile.embellishments.ShowTimestamp}\n";
+                data += $"TimeInput={profile.embellishments.ShowInputTimestamp}\n";
 
                 if (!Directory.Exists(profile.logOptions.Directory))
                 {
@@ -603,7 +603,7 @@ namespace Terminal
                         }
                         else if (line.StartsWith("TimeInput="))
                         {
-                            profile.embellishments.ShowTimestamp = line.Contains("True");
+                            profile.embellishments.ShowInputTimestamp = line.Contains("True");
                         }
                         else if (line.StartsWith("OutFont="))
                         {
@@ -625,7 +625,7 @@ namespace Terminal
 
                         else if (line.StartsWith("TimeOutput="))
                         {
-                            profile.displayOptions.timestampOutputLines = line.Contains("True");
+                            profile.displayOptions.ShowOutputTimestamp = line.Contains("True");
                         }
                         else if (line.StartsWith("InBackColor="))
                         {

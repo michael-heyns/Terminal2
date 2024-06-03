@@ -75,7 +75,7 @@ namespace Terminal
             {
                 foreach (byte b in data)
                 {
-                    if (_hexColumn == 0 && _embellishments.ShowTimestamp)
+                    if (_hexColumn == 0 && _embellishments.ShowInputTimestamp)
                         sb.Append(Utils.Timestamp());
 
                     sb.Append($"{b:X2} ");
@@ -112,7 +112,7 @@ namespace Terminal
                             default:
                                 // it was NOT a CR-LF sequence - so treat it as an EOL
                                 sb.Append('\n');
-                                if (_embellishments.ShowTimestamp)
+                                if (_embellishments.ShowInputTimestamp)
                                     _showTimestamp = true;
                                 break;
                         }
@@ -156,7 +156,7 @@ namespace Terminal
 
                             sb.Append("\n");
                             _halfCRLF = false;
-                            if (_embellishments.ShowTimestamp)
+                            if (_embellishments.ShowInputTimestamp)
                                 _showTimestamp = true;
                             break;
 
@@ -273,7 +273,7 @@ namespace Terminal
         public void SetEmbellishments(Embellishments embellishments)
         {
             _embellishments = embellishments;
-            _showTimestamp = _embellishments.ShowTimestamp;
+            _showTimestamp = _embellishments.ShowInputTimestamp;
         }
 
         private enum CommType

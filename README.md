@@ -1,5 +1,5 @@
 ![Letter-T-icon](https://user-images.githubusercontent.com/4144679/169688149-106da035-d4bd-4b1e-a290-c2a2885a9959.png)
-# Terminal2 - v1.3.4.2  (June 2024)
+# Terminal2 - v1.3.4.3  (June 2024)
 
 Windows 10/11 executable can be found here: https://github.com/michael-heyns/Terminal2_bin
 

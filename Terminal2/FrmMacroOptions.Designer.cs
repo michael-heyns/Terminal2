@@ -85,6 +85,7 @@ namespace Terminal
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnHelp = new System.Windows.Forms.Button();
+            this.btnClearGroup = new System.Windows.Forms.Button();
             this.localHelp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,7 +148,7 @@ namespace Terminal
             this.btnClear.ForeColor = System.Drawing.Color.Blue;
             this.btnClear.Location = new System.Drawing.Point(21, 426);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(120, 23);
+            this.btnClear.Size = new System.Drawing.Size(130, 23);
             this.btnClear.TabIndex = 27;
             this.btnClear.Tag = "28";
             this.btnClear.Text = "&Clear THIS macro";
@@ -162,9 +163,9 @@ namespace Terminal
             this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.Color.Blue;
-            this.btnApply.Location = new System.Drawing.Point(482, 426);
+            this.btnApply.Location = new System.Drawing.Point(480, 426);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(120, 23);
+            this.btnApply.Size = new System.Drawing.Size(130, 23);
             this.btnApply.TabIndex = 26;
             this.btnApply.Tag = "30";
             this.btnApply.Text = "&Apply";
@@ -292,9 +293,9 @@ namespace Terminal
             this.btnClearAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnClearAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnClearAll.Location = new System.Drawing.Point(244, 426);
+            this.btnClearAll.Location = new System.Drawing.Point(327, 426);
             this.btnClearAll.Name = "btnClearAll";
-            this.btnClearAll.Size = new System.Drawing.Size(120, 23);
+            this.btnClearAll.Size = new System.Drawing.Size(130, 23);
             this.btnClearAll.TabIndex = 28;
             this.btnClearAll.Tag = "29";
             this.btnClearAll.Text = "Clear &ALL macros";
@@ -472,11 +473,29 @@ namespace Terminal
             this.btnHelp.UseVisualStyleBackColor = false;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
+            // btnClearGroup
+            // 
+            this.btnClearGroup.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClearGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnClearGroup.FlatAppearance.BorderSize = 0;
+            this.btnClearGroup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnClearGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearGroup.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearGroup.Location = new System.Drawing.Point(174, 426);
+            this.btnClearGroup.Name = "btnClearGroup";
+            this.btnClearGroup.Size = new System.Drawing.Size(130, 23);
+            this.btnClearGroup.TabIndex = 38;
+            this.btnClearGroup.Tag = "29";
+            this.btnClearGroup.Text = "xxxxxx";
+            this.btnClearGroup.UseVisualStyleBackColor = false;
+            this.btnClearGroup.Click += new System.EventHandler(this.btnClearGroup_Click);
+            // 
             // FrmMacroOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 461);
+            this.Controls.Add(this.btnClearGroup);
             this.Controls.Add(this.localHelp);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.label14);
@@ -553,5 +572,6 @@ namespace Terminal
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnHelp;
+        protected System.Windows.Forms.Button btnClearGroup;
     }
 }

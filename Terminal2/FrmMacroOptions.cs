@@ -32,6 +32,8 @@ namespace Terminal
     public partial class FrmMacroOptions : Form
     {
         public bool Modified = false;
+        public char macroLabel = 'A';
+        public int macroGroupStart = 0;
 
         private readonly Profile _activeProfile;
         private int _id;
@@ -124,6 +126,7 @@ namespace Terminal
                     _activeProfile.macros[m] = null;
                 ClearScreen();
                 SaveProfile();
+                Close();
             }
         }
 
@@ -146,6 +149,7 @@ namespace Terminal
         private void FrmMacroOptions_Load(object sender, EventArgs e)
         {
             Modified = false;
+            btnClearGroup.Text = $"Clear group '{macroLabel}' macros";
         }
 
         private void MacroText_TextChanged(object sender, EventArgs e)
@@ -225,7 +229,7 @@ namespace Terminal
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == Keys.Escape)
+            if (keyData == Keys.Escape && !Modified)
             {
                 this.Close();
                 return true;
@@ -241,6 +245,23 @@ namespace Terminal
         private void textBox3_Click(object sender, EventArgs e)
         {
             localHelp.Visible = false;
+        }
+
+        private void btnClearGroup_Click(object sender, EventArgs e)
+        {
+            DialogResult yn = MessageBox.Show($"Macros {macroGroupStart + 1} - {macroGroupStart + 48} for this profile will be cleared.  Are you sure?", "Clear all macros", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (yn != DialogResult.Yes)
+                return;
+
+            yn = MessageBox.Show("Are you really, really sure?", "Clear all macros", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (yn == DialogResult.Yes)
+            {
+                for (int m = macroGroupStart; m < macroGroupStart + 48; m++)
+                    _activeProfile.macros[m] = null;
+                ClearScreen();
+                SaveProfile();
+                Close();
+            }
         }
     }
 }

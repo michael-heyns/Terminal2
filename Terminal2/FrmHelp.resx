@@ -186,7 +186,11 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.3.4.3
+    <value>v1.3.4.4
+  * Pressing ESC when macro editor is open does not close the the dialog if changes were already made
+  * Added button to clear only the macros in a specific group
+
+v1.3.4.3
   * Bug fix in 'Send as I type'
 
 v1.3.4.2

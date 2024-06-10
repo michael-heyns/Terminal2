@@ -84,6 +84,7 @@ namespace Terminal
         private bool _macroIsMoving = false;
         private int _macroBeingMoved;
         private int _macroOffset = 0;
+        private char _macroLabel = 'A';
 
         private volatile bool _tickBusy = false;
         private static bool _terminateFlag = false;
@@ -1174,6 +1175,8 @@ namespace Terminal
 
                 FrmMacroOptions macros = new FrmMacroOptions(_activeProfile, m);
                 TopMost = false;
+                macros.macroLabel = _macroLabel;
+                macros.macroGroupStart = _macroOffset;
                 macros.ShowDialog();
                 if (macros.Modified)
                     SaveThisProfile();
@@ -2448,6 +2451,7 @@ namespace Terminal
 
         private void SetMacroOffset(int N)
         {
+            _macroLabel = (char)('A' + N);
             _macroOffset = N * 48;
             int labelNumber = (N * 12) + 1;
             for (int f = 1; f <= 12; f++)

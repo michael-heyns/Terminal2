@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022-23-23 Michael Heyns
+ * Copyright © 2021-2024 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -446,9 +446,9 @@ namespace Terminal
                         data += $"F{i}Text={profile.displayOptions.filter[i].text}\n";
                         data += $"F{i}Color={profile.displayOptions.filter[i].foreColor.ToArgb()}\n";
                         data += $"F{i}Back={profile.displayOptions.filter[i].backColor.ToArgb()}\n";
+                        data += $"F{i}Macro={profile.displayOptions.filter[i].macro}\n";
                     }
                 }
-
                 data += $"\n";
 
                 data += "[Connect]\n";
@@ -682,6 +682,13 @@ namespace Terminal
                                 {
                                     profile.displayOptions.filter[i].backColor = Color.FromArgb(Utils.Int(line.Substring(key.Length)));
                                 }
+
+                                key = $"F{i}Macro=";
+                                if (line.StartsWith(key))
+                                {
+                                    profile.displayOptions.filter[i].macro = line.Substring(key.Length);
+                                }
+
                             }
                         }
                     }

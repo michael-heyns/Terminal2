@@ -27,6 +27,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -48,7 +50,6 @@ namespace Terminal
 
         public bool ExitFlag = false;
         private Profile _activeProfile = new Profile();
-        private FrmDisplayOptions _config = new FrmDisplayOptions();
         private FrmHelp _help = new FrmHelp();
 
         private int _ticks = 0;
@@ -65,6 +66,7 @@ namespace Terminal
         private readonly Thread[] _macroThread = new Thread[48 * 4];
         private static readonly AutoResetEvent[] _macroTrigger = new AutoResetEvent[48 * 4];
         private static readonly bool[] _macroBusy = new bool[48 * 4];
+        private static readonly bool[] _macroTriggeredByFilter = new bool[48 * 4];
 
         // TCP Server listening thread
         private Thread _connectThread = null;
@@ -95,6 +97,7 @@ namespace Terminal
         private const int SEARCH_INDEX = 11;
         private Brush[] _filterFrontBrush = new Brush[12];
         private Brush[] _filterBackBrush = new Brush[12];
+        private string[] _filterMacro = new string[12];
         private Brush _inputDefaultFrontBrush;
         private Brush _inputBackBrush;
         private Brush _outputFrontBrush;
@@ -112,9 +115,12 @@ namespace Terminal
         private bool _typingPaused = false;
         private bool _typingWarnedAboutDelete = false;
 
-        private bool _resetHistoryIndex = true;
+        private bool _freezeTriggeredFromMacro = false;
 
-        ////private int[] _appliedFilter = new int[MAX_INPUT_LINE_COUNT];
+        private bool _resetHistoryIndex = true;
+        private StringBuilder _macroTriggerString = new StringBuilder();
+
+        private Button[] _btnGroups = new Button[4];
 
         private string[] _LogLimits = { "No limits", "1000", "5000", "10000", "50000", "100000", "500000", "1000000"};
 
@@ -267,6 +273,42 @@ namespace Terminal
             }
         }
 
+        private void AddToMacropActivationString(string str)
+        {
+            Filters filters = new Filters();
+            for (int i = 0; i < str.Length; i++)
+            {
+                char ch = str[i];
+                if (ch < ' ')
+                {
+                    string line = _macroTriggerString.ToString();
+                    int offset = 0;
+                    if (Utils.HasTimestamp(line))
+                        offset += Utils.TimestampLength();
+                    int filter = filters.FindApplicableFilter(_activeProfile, line, offset);
+                    if (filter >= 0)
+                    {
+                        int m = FindMacro(_filterMacro[filter]);
+                        if (m >= 0)
+                        {
+                            if (!_macroTriggeredByFilter[m])
+                            {
+                                _macroTriggeredByFilter[m] = true;
+                                if (!_macroBusy[m])
+                                    _macroTrigger[m].Set();
+                            }
+                        }
+                    }
+                    _macroTriggerString.Clear();
+                }
+                else
+                {
+                    _macroTriggerString.Append(ch);
+                }
+            }
+
+        }
+
         private void UIInputQueueHandler()
         {
             if (_frozen)
@@ -279,6 +321,8 @@ namespace Terminal
             {
                 string str = (string)_uiInputQueue.Dequeue();
                 LogAdd(str);
+
+                AddToMacropActivationString(str);
 
                 char[] delim = { '\n' };
                 string[] lines = str.Split(delim);
@@ -406,11 +450,11 @@ namespace Terminal
             for (int f = 1; f <= 12; f++)
             {
                 dgMacroTable.Rows[0].Cells[f].Value = $"{f}";
-                dgMacroTable.Rows[0].Cells[f].Style.BackColor = Color.LightGray;// Ivory;
+                dgMacroTable.Rows[0].Cells[f].Style.BackColor = btnGroup1.BackColor;
             }
 
             for (int r = 0; r <= 4; r++)
-                dgMacroTable.Rows[r].Cells[0].Style.BackColor = Color.LightGray;// Ivory;
+                dgMacroTable.Rows[r].Cells[0].Style.BackColor = btnGroup1.BackColor;
 
             //dgMacroTable.Rows[0].Cells[0].Value = " <--  --> ";
             dgMacroTable.Rows[1].Cells[0].Value = "Plain";	// "1 - 48";
@@ -469,14 +513,26 @@ namespace Terminal
                 SaveThisProfile();
 
                 TopMost = false;
-                _config.Options = _activeProfile.displayOptions.Clone();
-                _config.ShowDialog();
+
+                FrmDisplayOptions DialogOptions = new FrmDisplayOptions();
+                DialogOptions.MacroNames.Clear();
+                foreach (Macro m in _activeProfile.macros)
+                {
+                    if (m != null)
+                    {
+                        if (m.title.Length > 0)
+                            DialogOptions.MacroNames.Add(m.title);
+                    }
+                }
+
+                DialogOptions.Options = _activeProfile.displayOptions.Clone();
+                DialogOptions.ShowDialog();
 
                 TopMost = cbStayOnTop.Checked;
 
-                if (_config.Result == DialogResult.OK)
+                if (DialogOptions.Result == DialogResult.OK)
                 {
-                    _activeProfile.displayOptions = _config.Options.Clone();
+                    _activeProfile.displayOptions = DialogOptions.Options.Clone();
                     SaveThisProfile();
 
                     lbInput.BackColor = _activeProfile.displayOptions.inputBackground;
@@ -495,8 +551,10 @@ namespace Terminal
                     {
                         _filterFrontBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].foreColor);
                         _filterBackBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].backColor);
+                        _filterMacro[f] = _activeProfile.displayOptions.filter[f].macro;
                     }
                 }
+                DialogOptions = null;
             }
             btnColorConfig.Enabled = true;
             lbInput.Refresh();
@@ -614,6 +672,7 @@ namespace Terminal
                 MessageBox.Show("Please configure a port", "Port not configured", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            _macroTriggerString.Clear();
             btnConnect.Enabled = false;
             _cancelRestart = true;
             if (_state == State.Disconnected)
@@ -911,6 +970,16 @@ namespace Terminal
                 RestartMacro(m);
         }
 
+        private void ChangeMacroButtonColor(int m, Color color)
+        {
+            if (m < _macroOffset || m > (_macroOffset + 48)) return;
+
+            int num = m - _macroOffset;
+            int col = (num % 12) + 1;
+            int row = (num / 12) + 1;
+            dgMacroTable.Rows[row].Cells[col].Style.BackColor = color;
+        }
+
         private void MacroThread()
         {
             int m = Utils.Int(Thread.CurrentThread.Name);
@@ -921,6 +990,7 @@ namespace Terminal
             {
                 while (!_terminateFlag)
                 {
+                    _macroTriggeredByFilter[m] = false;
                     _macroBusy[m] = false;
                     _macroTrigger[m].WaitOne();
                     Thread.Sleep(10);
@@ -939,7 +1009,7 @@ namespace Terminal
                     if (mac.runLines.Length == 0)
                         continue;
 
-                    dgMacroTable.Rows[mac.uiRow].Cells[mac.uiColumn].Style.BackColor = Color.Tomato;
+                    ChangeMacroButtonColor(m, Color.Tomato);
 
                     _macroBusy[m] = true;
                     int repeatCount = 0;
@@ -988,6 +1058,48 @@ namespace Terminal
                                     { 
                                         // fall through
                                     }
+                                }
+
+                                // restore and continue
+                                line = mac.runLines[x];
+                            }
+
+                            // detect #FREEZE nn
+                            cmdIndex = line.IndexOf("#FREEZE");
+                            if (cmdIndex >= 0)
+                            {
+                                line = line.TrimEnd();
+                                if (line.StartsWith("#FREEZE"))
+                                {
+                                    _freezeTriggeredFromMacro = true;
+                                }
+
+                                // restore and continue
+                                line = mac.runLines[x];
+                            }
+
+                            // detect #DTR nn
+                            cmdIndex = line.IndexOf("#DTR");
+                            if (cmdIndex >= 0)
+                            {
+                                line = line.TrimEnd();
+                                if (line.StartsWith("#DTR"))
+                                {
+                                    _comms.ControlPressed(0);
+                                }
+
+                                // restore and continue
+                                line = mac.runLines[x];
+                            }
+
+                            // detect #RTS nn
+                            cmdIndex = line.IndexOf("#RTS");
+                            if (cmdIndex >= 0)
+                            {
+                                line = line.TrimEnd();
+                                if (line.StartsWith("#RTS"))
+                                {
+                                    _comms.ControlPressed(1);
                                 }
 
                                 // restore and continue
@@ -1050,7 +1162,7 @@ namespace Terminal
                             break;
                         Thread.Sleep(mac.resendEveryMs);
                     }
-                    dgMacroTable.Rows[mac.uiRow].Cells[mac.uiColumn].Style.BackColor = Color.White;
+                    ChangeMacroButtonColor(m, Color.White);
                 }
             }
             catch { }
@@ -1107,20 +1219,25 @@ namespace Terminal
             lbInput.Items.Add(string.Empty);
             _lineFinished = false;
 
-            ////Rectangle rec = Screen.GetWorkingArea(System.Windows.Forms.Cursor.Position);
-            ////this.Width = (rec.Width * 3) / 4;
-            ////this.Height = (rec.Height * 3) / 4;
-
+            _btnGroups[0] = btnGroup1;
+            _btnGroups[1] = btnGroup2;
+            _btnGroups[2] = btnGroup3;
+            _btnGroups[3] = btnGroup4;
             this.CenterToScreen();
         }
 
         private int FindMacro(string title)
         {
+            if (title.Length == 0) return -1;
+
             for (int m = 0; m < _activeProfile.macros.Length; m++)
             {
                 Macro mac = _activeProfile.macros[m];
-                if (mac.title.Equals(title))
-                    return m;
+                if (mac != null)
+                {
+                    if (mac.title.Equals(title))
+                        return m;
+                }
             }
             return -1;
         }
@@ -1268,15 +1385,18 @@ namespace Terminal
         private void ShowMacroTitles()
         {
             int i = _macroOffset;
-            for (int r = 1; r <= 4; r++)
+            for (int mRow = 1; mRow <= 4; mRow++)
             {
-                for (int f = 1; f <= 12; f++)
+                for (int mCol = 1; mCol <= 12; mCol++)
                 {
                     Macro m = _activeProfile.macros[i++];
-                    if (m == null)
-                        dgMacroTable.Rows[r].Cells[f].Value = string.Empty;
-                    else
-                        dgMacroTable.Rows[r].Cells[f].Value = m.title;
+                    if (m != null)
+                    {
+                        if (m == null)
+                            dgMacroTable.Rows[mRow].Cells[mCol].Value = string.Empty;
+                        else
+                            dgMacroTable.Rows[mRow].Cells[mCol].Value = m.title;
+                    }
                 }
             }
         }
@@ -1310,6 +1430,7 @@ namespace Terminal
                 {
                     _filterFrontBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].foreColor);
                     _filterBackBrush[f] = new SolidBrush(_activeProfile.displayOptions.filter[f].backColor);
+                    _filterMacro[f] = _activeProfile.displayOptions.filter[f].macro;
                 }
 
                 btnProfile.Text = _activeProfile.name;
@@ -1325,6 +1446,12 @@ namespace Terminal
                 cbHEX.Checked = _activeProfile.embellishments.ShowHEX;
                 cbShowCR.Checked = _activeProfile.embellishments.ShowCR;
                 cbShowLF.Checked = _activeProfile.embellishments.ShowLF;
+
+                for (int f = 1; f <= 12; f++)
+                    dgMacroTable.Rows[0].Cells[f].Style.BackColor = btnGroup1.BackColor;
+
+                for (int r = 0; r <= 4; r++)
+                    dgMacroTable.Rows[r].Cells[0].Style.BackColor = btnGroup1.BackColor;
 
                 UnFreeze();
                 ShowMacroTitles();
@@ -1584,6 +1711,12 @@ namespace Terminal
         {
             if (_terminateFlag)
                 return;
+
+            if (_freezeTriggeredFromMacro)
+            {
+                _freezeTriggeredFromMacro = false;
+                BtnFreeze_Click(new object(), new EventArgs());
+            }
 
             dgMacroTable.ClearSelection();
             if (_comms == null)
@@ -2449,6 +2582,15 @@ namespace Terminal
             tbCommand.Focus();
         }
 
+        private void ShowButtonColours(int N)
+        {
+            for (int f = 1; f <= 12; f++)
+                dgMacroTable.Rows[0].Cells[f].Style.BackColor = _btnGroups[N].BackColor;
+
+            for (int r = 0; r <= 4; r++)
+                dgMacroTable.Rows[r].Cells[0].Style.BackColor = _btnGroups[N].BackColor;
+        }
+
         private void SetMacroOffset(int N)
         {
             _macroLabel = (char)('A' + N);
@@ -2459,25 +2601,27 @@ namespace Terminal
                 dgMacroTable.Rows[0].Cells[f].Value = $"{labelNumber}";
                 labelNumber++;
             }
+            ShowButtonColours(N);
             ShowMacroTitles();
             tbCommand.Focus();
         }
-        private void btnGroup1_Click(object sender, EventArgs e)
+
+        private void btnGroup1_MouseDown(object sender, MouseEventArgs e)
         {
             SetMacroOffset(0);
         }
 
-        private void btnGroup2_Click(object sender, EventArgs e)
+        private void btnGroup2_MouseDown(object sender, MouseEventArgs e)
         {
             SetMacroOffset(1);
         }
 
-        private void btnGroup3_Click(object sender, EventArgs e)
+        private void btnGroup3_MouseDown(object sender, MouseEventArgs e)
         {
             SetMacroOffset(2);
         }
 
-        private void btnGroup4_Click(object sender, EventArgs e)
+        private void btnGroup4_MouseDown(object sender, MouseEventArgs e)
         {
             SetMacroOffset(3);
         }

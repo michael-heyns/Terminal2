@@ -140,7 +140,6 @@ namespace Terminal
             this.Controls.Add(this.ASCIIcharacter);
             this.Controls.Add(this.DecValue);
             this.Controls.Add(this.HexValue);
-            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

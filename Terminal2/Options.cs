@@ -25,6 +25,8 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 
+using static System.Net.Mime.MediaTypeNames;
+
 namespace Terminal
 {
     public class ConOptions
@@ -92,7 +94,7 @@ namespace Terminal
 
         public Macro Clone()
         {
-            return (Macro)MemberwiseClone();
+            return (Macro)this.MemberwiseClone();
         }
     }
 
@@ -102,10 +104,7 @@ namespace Terminal
         public string text = string.Empty;
         public Color foreColor = Color.Black;
         public Color backColor = Color.White;
-        public ColorFilter Clone()
-        {
-            return (ColorFilter)MemberwiseClone();
-        }
+        public string macro = string.Empty;
     }
 
     public class DisplayOptions
@@ -133,13 +132,28 @@ namespace Terminal
 
         public DisplayOptions Clone()
         {
-            DisplayOptions opt = (DisplayOptions)this.MemberwiseClone();
-            for (int dl = 0; dl < filter.Length; dl++)
+            DisplayOptions opt = new DisplayOptions();
+            opt.inputFont = inputFont;
+            opt.outputFont = outputFont;
+            opt.inputDefaultForeground = inputDefaultForeground;
+            opt.inputBackground = inputBackground;
+            opt.IgnoreCase = IgnoreCase;
+            opt.outputBackground = outputBackground;
+            opt.ShowOutputTimestamp = ShowOutputTimestamp;
+
+            for (int f = 0; f < filter.Length; f++)
             {
-                if (filter[dl] != null)
-                    opt.filter[dl] = filter[dl].Clone();
+                if (filter[f] != null)
+                {
+                    opt.filter[f] = new ColorFilter();
+                    opt.filter[f].mode = filter[f].mode;
+                    opt.filter[f].text = filter[f].text;
+                    opt.filter[f].foreColor = filter[f].foreColor;
+                    opt.filter[f].backColor = filter[f].backColor;
+                    opt.filter[f].macro = filter[f].macro;
+                }
                 else
-                    opt.filter[dl] = null;
+                    opt.filter[f] = null;
             }
             return opt;
         }

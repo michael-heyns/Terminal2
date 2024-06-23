@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022-23-23 Michael Heyns
+ * Copyright © 2021-2024 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -59,6 +59,24 @@ namespace Terminal
             this.btnOk = new System.Windows.Forms.Button();
             this.btnSelectFontInput = new System.Windows.Forms.Button();
             this.grpColourFilters = new System.Windows.Forms.GroupBox();
+            this.btnClearTriggers = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnClearMacros = new System.Windows.Forms.Button();
+            this.mac11 = new System.Windows.Forms.ComboBox();
+            this.mac10 = new System.Windows.Forms.ComboBox();
+            this.mac9 = new System.Windows.Forms.ComboBox();
+            this.mac8 = new System.Windows.Forms.ComboBox();
+            this.mac7 = new System.Windows.Forms.ComboBox();
+            this.mac6 = new System.Windows.Forms.ComboBox();
+            this.mac5 = new System.Windows.Forms.ComboBox();
+            this.mac4 = new System.Windows.Forms.ComboBox();
+            this.mac3 = new System.Windows.Forms.ComboBox();
+            this.mac2 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.mac1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.x12 = new System.Windows.Forms.ComboBox();
             this.cbFilterCase = new System.Windows.Forms.CheckBox();
@@ -131,11 +149,12 @@ namespace Terminal
             this.t2 = new System.Windows.Forms.TextBox();
             this.c1 = new System.Windows.Forms.Panel();
             this.t1 = new System.Windows.Forms.TextBox();
-            this.btnReset = new System.Windows.Forms.Button();
             this.btnSelectFontOutput = new System.Windows.Forms.Button();
             this.cbTimestampOutputLines = new System.Windows.Forms.CheckBox();
             this.BackColorOutput = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.grpColourFilters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -147,11 +166,11 @@ namespace Terminal
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(209, 14);
+            this.label1.Location = new System.Drawing.Point(302, 15);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 16);
+            this.label1.Size = new System.Drawing.Size(129, 16);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Display Options";
+            this.label1.Text = "Event Responses";
             // 
             // btnOk
             // 
@@ -160,7 +179,7 @@ namespace Terminal
             this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.ForeColor = System.Drawing.Color.Blue;
-            this.btnOk.Location = new System.Drawing.Point(448, 499);
+            this.btnOk.Location = new System.Drawing.Point(631, 547);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 20);
             this.btnOk.TabIndex = 10;
@@ -186,6 +205,24 @@ namespace Terminal
             // 
             // grpColourFilters
             // 
+            this.grpColourFilters.Controls.Add(this.btnClearTriggers);
+            this.grpColourFilters.Controls.Add(this.label8);
+            this.grpColourFilters.Controls.Add(this.btnReset);
+            this.grpColourFilters.Controls.Add(this.label7);
+            this.grpColourFilters.Controls.Add(this.btnClearMacros);
+            this.grpColourFilters.Controls.Add(this.mac11);
+            this.grpColourFilters.Controls.Add(this.mac10);
+            this.grpColourFilters.Controls.Add(this.mac9);
+            this.grpColourFilters.Controls.Add(this.mac8);
+            this.grpColourFilters.Controls.Add(this.mac7);
+            this.grpColourFilters.Controls.Add(this.mac6);
+            this.grpColourFilters.Controls.Add(this.mac5);
+            this.grpColourFilters.Controls.Add(this.mac4);
+            this.grpColourFilters.Controls.Add(this.mac3);
+            this.grpColourFilters.Controls.Add(this.mac2);
+            this.grpColourFilters.Controls.Add(this.label5);
+            this.grpColourFilters.Controls.Add(this.mac1);
+            this.grpColourFilters.Controls.Add(this.label4);
             this.grpColourFilters.Controls.Add(this.panel1);
             this.grpColourFilters.Controls.Add(this.x12);
             this.grpColourFilters.Controls.Add(this.cbFilterCase);
@@ -261,10 +298,179 @@ namespace Terminal
             this.grpColourFilters.Controls.Add(this.t1);
             this.grpColourFilters.Location = new System.Drawing.Point(9, 42);
             this.grpColourFilters.Name = "grpColourFilters";
-            this.grpColourFilters.Size = new System.Drawing.Size(514, 429);
+            this.grpColourFilters.Size = new System.Drawing.Size(716, 460);
             this.grpColourFilters.TabIndex = 15;
             this.grpColourFilters.TabStop = false;
             this.grpColourFilters.Text = "Input panel";
+            // 
+            // btnClearTriggers
+            // 
+            this.btnClearTriggers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnClearTriggers.FlatAppearance.BorderSize = 0;
+            this.btnClearTriggers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnClearTriggers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearTriggers.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearTriggers.Location = new System.Drawing.Point(19, 420);
+            this.btnClearTriggers.Name = "btnClearTriggers";
+            this.btnClearTriggers.Size = new System.Drawing.Size(123, 22);
+            this.btnClearTriggers.TabIndex = 130;
+            this.btnClearTriggers.Text = "Clear All";
+            this.btnClearTriggers.UseVisualStyleBackColor = false;
+            this.btnClearTriggers.Click += new System.EventHandler(this.btnClearAll_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(150, 91);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(63, 13);
+            this.label8.TabIndex = 129;
+            this.label8.Text = "... this string";
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.ForeColor = System.Drawing.Color.Blue;
+            this.btnReset.Location = new System.Drawing.Point(245, 420);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(78, 22);
+            this.btnReset.TabIndex = 71;
+            this.btnReset.Text = "&Reset Colors";
+            this.btnReset.UseVisualStyleBackColor = false;
+            this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(255, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 13);
+            this.label7.TabIndex = 128;
+            this.label7.Text = "set color to...";
+            // 
+            // btnClearMacros
+            // 
+            this.btnClearMacros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnClearMacros.FlatAppearance.BorderSize = 0;
+            this.btnClearMacros.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnClearMacros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearMacros.ForeColor = System.Drawing.Color.Blue;
+            this.btnClearMacros.Location = new System.Drawing.Point(574, 420);
+            this.btnClearMacros.Name = "btnClearMacros";
+            this.btnClearMacros.Size = new System.Drawing.Size(123, 22);
+            this.btnClearMacros.TabIndex = 127;
+            this.btnClearMacros.Text = "Clear Macros";
+            this.btnClearMacros.UseVisualStyleBackColor = false;
+            this.btnClearMacros.Click += new System.EventHandler(this.btnClearMacros_Click);
+            // 
+            // mac11
+            // 
+            this.mac11.FormattingEnabled = true;
+            this.mac11.Location = new System.Drawing.Point(496, 368);
+            this.mac11.Name = "mac11";
+            this.mac11.Size = new System.Drawing.Size(201, 21);
+            this.mac11.TabIndex = 126;
+            // 
+            // mac10
+            // 
+            this.mac10.FormattingEnabled = true;
+            this.mac10.Location = new System.Drawing.Point(496, 342);
+            this.mac10.Name = "mac10";
+            this.mac10.Size = new System.Drawing.Size(201, 21);
+            this.mac10.TabIndex = 125;
+            // 
+            // mac9
+            // 
+            this.mac9.FormattingEnabled = true;
+            this.mac9.Location = new System.Drawing.Point(496, 316);
+            this.mac9.Name = "mac9";
+            this.mac9.Size = new System.Drawing.Size(201, 21);
+            this.mac9.TabIndex = 124;
+            // 
+            // mac8
+            // 
+            this.mac8.FormattingEnabled = true;
+            this.mac8.Location = new System.Drawing.Point(496, 290);
+            this.mac8.Name = "mac8";
+            this.mac8.Size = new System.Drawing.Size(201, 21);
+            this.mac8.TabIndex = 123;
+            // 
+            // mac7
+            // 
+            this.mac7.FormattingEnabled = true;
+            this.mac7.Location = new System.Drawing.Point(496, 264);
+            this.mac7.Name = "mac7";
+            this.mac7.Size = new System.Drawing.Size(201, 21);
+            this.mac7.TabIndex = 122;
+            // 
+            // mac6
+            // 
+            this.mac6.FormattingEnabled = true;
+            this.mac6.Location = new System.Drawing.Point(496, 238);
+            this.mac6.Name = "mac6";
+            this.mac6.Size = new System.Drawing.Size(201, 21);
+            this.mac6.TabIndex = 121;
+            // 
+            // mac5
+            // 
+            this.mac5.FormattingEnabled = true;
+            this.mac5.Location = new System.Drawing.Point(496, 212);
+            this.mac5.Name = "mac5";
+            this.mac5.Size = new System.Drawing.Size(201, 21);
+            this.mac5.TabIndex = 120;
+            // 
+            // mac4
+            // 
+            this.mac4.FormattingEnabled = true;
+            this.mac4.Location = new System.Drawing.Point(496, 186);
+            this.mac4.Name = "mac4";
+            this.mac4.Size = new System.Drawing.Size(201, 21);
+            this.mac4.TabIndex = 119;
+            // 
+            // mac3
+            // 
+            this.mac3.FormattingEnabled = true;
+            this.mac3.Location = new System.Drawing.Point(496, 159);
+            this.mac3.Name = "mac3";
+            this.mac3.Size = new System.Drawing.Size(201, 21);
+            this.mac3.TabIndex = 118;
+            // 
+            // mac2
+            // 
+            this.mac2.FormattingEnabled = true;
+            this.mac2.Location = new System.Drawing.Point(496, 134);
+            this.mac2.Name = "mac2";
+            this.mac2.Size = new System.Drawing.Size(201, 21);
+            this.mac2.TabIndex = 117;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(548, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(91, 13);
+            this.label5.TabIndex = 116;
+            this.label5.Text = "... then call macro";
+            // 
+            // mac1
+            // 
+            this.mac1.FormattingEnabled = true;
+            this.mac1.Location = new System.Drawing.Point(496, 108);
+            this.mac1.Name = "mac1";
+            this.mac1.Size = new System.Drawing.Size(201, 21);
+            this.mac1.TabIndex = 115;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(376, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 114;
+            this.label4.Text = "(sample)";
             // 
             // panel1
             // 
@@ -272,7 +478,7 @@ namespace Terminal
             this.panel1.Location = new System.Drawing.Point(19, 84);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(475, 3);
+            this.panel1.Size = new System.Drawing.Size(678, 2);
             this.panel1.TabIndex = 113;
             // 
             // x12
@@ -290,7 +496,7 @@ namespace Terminal
             this.cbFilterCase.AutoSize = true;
             this.cbFilterCase.Checked = true;
             this.cbFilterCase.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbFilterCase.Location = new System.Drawing.Point(145, 90);
+            this.cbFilterCase.Location = new System.Drawing.Point(614, 63);
             this.cbFilterCase.Margin = new System.Windows.Forms.Padding(2);
             this.cbFilterCase.Name = "cbFilterCase";
             this.cbFilterCase.Size = new System.Drawing.Size(83, 17);
@@ -482,11 +688,11 @@ namespace Terminal
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(37, 92);
+            this.label16.Location = new System.Drawing.Point(16, 92);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(51, 13);
+            this.label16.Size = new System.Drawing.Size(114, 13);
             this.label16.TabIndex = 69;
-            this.label16.Text = "Condition";
+            this.label16.Text = "If a line starts/contains";
             // 
             // m12
             // 
@@ -1086,21 +1292,6 @@ namespace Terminal
             this.t1.Tag = "0";
             this.t1.TextChanged += new System.EventHandler(this.T1_TextChanged);
             // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.btnReset.FlatAppearance.BorderSize = 0;
-            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.ForeColor = System.Drawing.Color.Blue;
-            this.btnReset.Location = new System.Drawing.Point(358, 499);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(74, 20);
-            this.btnReset.TabIndex = 71;
-            this.btnReset.Text = "&Reset";
-            this.btnReset.UseVisualStyleBackColor = false;
-            this.btnReset.Click += new System.EventHandler(this.BtnDefault_Click);
-            // 
             // btnSelectFontOutput
             // 
             this.btnSelectFontOutput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -1141,35 +1332,59 @@ namespace Terminal
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.btnSelectFontOutput);
             this.groupBox3.Controls.Add(this.cbTimestampOutputLines);
             this.groupBox3.Controls.Add(this.BackColorOutput);
-            this.groupBox3.Location = new System.Drawing.Point(9, 477);
+            this.groupBox3.Location = new System.Drawing.Point(9, 508);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(344, 59);
+            this.groupBox3.Size = new System.Drawing.Size(475, 59);
             this.groupBox3.TabIndex = 20;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Output Panel";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(327, 26);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 13);
+            this.label6.TabIndex = 58;
+            this.label6.Text = "Colour of Output panel";
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.ForeColor = System.Drawing.Color.Blue;
+            this.btnCancel.Location = new System.Drawing.Point(538, 547);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 20);
+            this.btnCancel.TabIndex = 21;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FrmDisplayOptions
             // 
             this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 548);
+            this.ClientSize = new System.Drawing.Size(736, 586);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.grpColourFilters);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOk);
-            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmDisplayOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Display Options";
+            this.Text = "Event Responses";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.FrmDisplayOptions_Shown);
             this.grpColourFilters.ResumeLayout(false);
@@ -1268,5 +1483,24 @@ namespace Terminal
         private System.Windows.Forms.CheckBox cbFilterCase;
         private System.Windows.Forms.ComboBox x12;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox mac11;
+        private System.Windows.Forms.ComboBox mac10;
+        private System.Windows.Forms.ComboBox mac9;
+        private System.Windows.Forms.ComboBox mac8;
+        private System.Windows.Forms.ComboBox mac7;
+        private System.Windows.Forms.ComboBox mac6;
+        private System.Windows.Forms.ComboBox mac5;
+        private System.Windows.Forms.ComboBox mac4;
+        private System.Windows.Forms.ComboBox mac3;
+        private System.Windows.Forms.ComboBox mac2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox mac1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnClearMacros;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnClearTriggers;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

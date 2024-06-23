@@ -124,6 +124,9 @@
 - Also gets injected into the input stream
 - Delays macro execution for nn milliseonds
 - Encapsulates 'text' in STX...ETX LRC packet
+- Presses the 'Freeze' button
+- Presses Ctrl-1 (DTR in serial mode) button
+- Presses Ctrl-2 (RTS in serial mode) button
 - Executes another macro with that title (case sensitive)
    NOTE: Because they execute in parallel, you may want
    to add #DELAY when executing more than one.

@@ -140,7 +140,6 @@ namespace Terminal
             this.Controls.Add(this.tbRight);
             this.Controls.Add(this.tbLeft);
             this.Controls.Add(this.grid);
-            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;

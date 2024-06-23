@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022-23-23 Michael Heyns
+ * Copyright © 2021-2024 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 
@@ -35,6 +35,7 @@ namespace Terminal
     {
         public DisplayOptions Options;
         public DialogResult Result = DialogResult.Cancel;
+        public List<string> MacroNames = new List<string>();
 
         public readonly ComboBox[] ModeList;
         public readonly TextBox[] TextList;
@@ -53,6 +54,9 @@ namespace Terminal
             ForePanelList = new Panel[] { c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12 };
             BackPanelList = new Panel[] { b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12 };
             SampleList = new Label[] { sample1, sample2, sample3, sample4, sample5, sample6, sample7, sample8, sample9, sample10, sample11, sample12 };
+
+            ComboBox dummy = new ComboBox();
+            MacroList = new ComboBox[] { mac1, mac2, mac3, mac4, mac5, mac6, mac7, mac8, mac9, mac10, mac11, dummy };
         }
 
         private void RefreshScreenFromDatabase()
@@ -81,11 +85,16 @@ namespace Terminal
                 SampleList[i].Font = Options.inputFont;
                 SampleList[i].ForeColor = Options.filter[i].foreColor;
                 SampleList[i].BackColor = Options.filter[i].backColor;
+
+                MacroList[i].Text = Options.filter[i].macro;
             }
+            Application.DoEvents();
         }
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i <= 10; i++)
+                Options.filter[i].macro = MacroList[i].Text;
             Result = DialogResult.OK;
             Close();
         }
@@ -123,15 +132,10 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 Options.inputBackground = colorDialog.Color;
-
-                DialogResult yn = MessageBox.Show("Do you want to set all filter backgrounds to this color as well?", "Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (yn == DialogResult.Yes)
+                for (int i = 0; i <= 10; i++)
                 {
-                    for (int i = 0; i < Options.filter.Length; i++)
-                    {
-                        if (i != SEARCH_INDEX)
-                            Options.filter[i].backColor = colorDialog.Color;
-                    }
+                    if (Options.filter[i].text.Length == 0)
+                        Options.filter[i].backColor = colorDialog.Color;
                 }
                 RefreshScreenFromDatabase();
             }
@@ -182,12 +186,62 @@ namespace Terminal
             Options.filter[i].mode = cbox.SelectedIndex;
         }
 
+        private void ResetRow(int row)
+        {
+            switch (row)
+            {
+                case 0:
+                    Options.filter[row].foreColor = Color.DarkOrange;
+                    break;
+                case 1:
+                    Options.filter[row].foreColor = Color.Blue;
+                    break;
+                case 2:
+                    Options.filter[row].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+                    break;
+                case 3:
+                    Options.filter[row].foreColor = Color.DarkGreen;
+                    break;
+                case 4:
+                    Options.filter[row].foreColor = Color.Fuchsia;
+                    break;
+                case 5:
+                    Options.filter[row].foreColor = Color.Olive;
+                    break;
+                case 6:
+                    Options.filter[row].foreColor = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+                    break;
+                case 7:
+                    Options.filter[row].foreColor = Color.Green;
+                    break;
+                case 8:
+                    Options.filter[row].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+                    break;
+                case 9:
+                    Options.filter[row].foreColor = Color.LightSalmon;
+                    break;
+                case 10:
+                    Options.filter[row].foreColor = Color.Yellow;
+                    break;
+                default:
+                    return;
+            }
+
+            Options.filter[row].backColor = BackColorInput.BackColor;
+        }
+
         private void T1_TextChanged(object sender, EventArgs e)
         {
             TextBox tb = (TextBox)sender;
-            int i = Utils.Int(tb.Tag.ToString());
-            Options.filter[i].text = tb.Text;
-            ModeList[i].Enabled = (tb.Text.Length > 0);
+            int row = Utils.Int(tb.Tag.ToString());
+            Options.filter[row].text = tb.Text;
+            ModeList[row].Enabled = (tb.Text.Length > 0);
+
+            if (!ModeList[row].Enabled)
+            {
+                ResetRow(row);
+                RefreshScreenFromDatabase();
+            }
         }
 
         private void TextColorInput_Click(object sender, EventArgs e)
@@ -203,49 +257,10 @@ namespace Terminal
 
         private void BtnDefault_Click(object sender, EventArgs e)
         {
-            DialogResult yn = MessageBox.Show("Are you sure?", "Please Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (yn != DialogResult.Yes)
-                return;
-
-            Options.filter[9].foreColor = Color.LightSalmon;
-            Options.filter[8].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            Options.filter[7].foreColor = Color.Green;
-            Options.filter[6].foreColor = Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            Options.filter[5].foreColor = Color.Olive;
-            Options.filter[4].foreColor = Color.Fuchsia;
-            Options.filter[3].foreColor = Color.DarkGreen;
-            Options.filter[2].foreColor = Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            Options.filter[1].foreColor = Color.Blue;
-            Options.filter[0].foreColor = Color.DarkOrange;
-
-            Options.outputBackground = Color.White;
-
-            Options.inputDefaultForeground = Color.Black;
-            Options.inputBackground = Color.White;
-
-            Options.outputBackground = Color.Gainsboro;
-
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(Font));
-            Options.inputFont = (Font)converter.ConvertFromString(Utils.DefaultInputFont);
-            Options.outputFont = (Font)converter.ConvertFromString(Utils.DefaultOutputFont);
-
-            for (int i = 0; i < Options.filter.Length; i++)
-            {
-                Options.filter[i].mode = 1;
-                Options.filter[i].text = string.Empty;
-                Options.filter[i].backColor = Color.White;
-            }
-            Options.IgnoreCase = true;
-
-            // search option
+            for (int row = 0; row <= 10; row++)
+                ResetRow(row);
             Options.filter[SEARCH_INDEX].foreColor = Color.Black;
             Options.filter[SEARCH_INDEX].backColor = Color.Lime;
-
-            // suggest error condition
-            Options.filter[10].foreColor = Color.Yellow;
-            Options.filter[10].backColor = Color.Red;
-            Options.filter[10].text = "ERROR";
-
             RefreshScreenFromDatabase();
         }
 
@@ -266,8 +281,43 @@ namespace Terminal
         }
         private void FrmDisplayOptions_Shown(object sender, EventArgs e)
         {
+            RefreshScreenFromDatabase();
+            Application.DoEvents();
+            foreach (var mac in MacroList)
+            {
+                mac.Items.Clear();
+                foreach (string s in MacroNames)
+                    mac.Items.Add(s);
+            }
             cbTimestampOutputLines.Checked = Options.ShowOutputTimestamp;
             RefreshScreenFromDatabase();
+        }
+
+        private void btnClearMacros_Click(object sender, EventArgs e)
+        {
+            for (int row = 0; row <= 10; row++)
+            {
+                Options.filter[row].macro = string.Empty;
+            }
+            RefreshScreenFromDatabase();
+        }
+
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            for (int row = 0; row <= 10; row++)
+            {
+                Options.filter[row].mode = 1;
+                Options.filter[row].text = string.Empty;
+                Options.filter[row].macro = string.Empty;
+            }
+            RefreshScreenFromDatabase();
+
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Result = DialogResult.Cancel;
+            Close();
         }
     }
 }

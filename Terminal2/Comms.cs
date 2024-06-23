@@ -1,7 +1,7 @@
 ﻿/* 
  * Terminal2
  *
- * Copyright © 2022-23-23 Michael Heyns
+ * Copyright © 2021-2024 Michael Heyns
  * 
  * This file is part of Terminal2.
  * 

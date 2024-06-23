@@ -34,8 +34,9 @@ Some screenshots:
 ![Main](https://github.com/michael-heyns/Terminal2/assets/4144679/5b4465c3-d059-4d8e-9264-a1bea4534d29)
 ![Main2](https://github.com/michael-heyns/Terminal2/assets/4144679/07e6b057-1de1-4ffa-83cf-70364435b290)
 ![Main3](https://github.com/michael-heyns/Terminal2/assets/4144679/5cd12603-7fa1-4727-a69b-67cc4aaad6ec)
-![Main4](https://github.com/michael-heyns/Terminal2/assets/4144679/21ae92d0-e078-4988-a066-938657ab2112)
-![ConnectionTypes](https://github.com/michael-heyns/Terminal2/assets/4144679/aec5458e-8aff-439e-a8b6-b841140d08c9)
+![Main4](https://github.com/michael-heyns/Terminal2/assets/4144679/f40c87fa-1c98-493a-af6f-6704146b0515)
+![Main5](https://github.com/michael-heyns/Terminal2/assets/4144679/ea0b9595-e7b3-4c3f-82df-ebf73c38d00e)
+![Main6](https://github.com/michael-heyns/Terminal2/assets/4144679/123e63bb-d23d-47a4-9ff5-53a12d3fcf9e)
 
 ### The name
 The name "Terminal2" was chosen to allow existing users of the very useful (now unmaintained) "Terminal" program to adapt quickly.

@@ -33,10 +33,8 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 Some screenshots:
 ![Main](https://github.com/michael-heyns/Terminal2/assets/4144679/5b4465c3-d059-4d8e-9264-a1bea4534d29)
 ![Main2](https://github.com/michael-heyns/Terminal2/assets/4144679/07e6b057-1de1-4ffa-83cf-70364435b290)
-
-![Inspector](https://github.com/michael-heyns/Terminal2/assets/4144679/9c1d0fa9-37d1-4205-a9f9-39830b2de457)
-![Macros](https://github.com/michael-heyns/Terminal2/assets/4144679/f99dfdbd-6cb7-4e78-82a2-ed968f34ae20)
-![Filters](https://github.com/michael-heyns/Terminal2/assets/4144679/7a4b631a-1d57-41b4-9a9e-1f958fae5cf1)
+![Main3](https://github.com/michael-heyns/Terminal2/assets/4144679/5cd12603-7fa1-4727-a69b-67cc4aaad6ec)
+![Main4](https://github.com/michael-heyns/Terminal2/assets/4144679/21ae92d0-e078-4988-a066-938657ab2112)
 ![ConnectionTypes](https://github.com/michael-heyns/Terminal2/assets/4144679/aec5458e-8aff-439e-a8b6-b841140d08c9)
 
 ### The name

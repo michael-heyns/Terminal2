@@ -30,11 +30,10 @@ Terminal Emulator, Baud rate, Parity, Stop bits, Handshaking, TCP Client, TCP Se
 5. Add Terminal2.exe to your start menu or toolbar.
 
 ## Terminal2
-The font face has been kept clean and the settings have been moved one layer down.
-
 Some screenshots:
 ![Main](https://github.com/michael-heyns/Terminal2/assets/4144679/5b4465c3-d059-4d8e-9264-a1bea4534d29)
-![MainScreen](https://github.com/michael-heyns/Terminal2/assets/4144679/dc2192b4-6342-4ee2-98e5-28d0e780f911)
+![Main2](https://github.com/michael-heyns/Terminal2/assets/4144679/07e6b057-1de1-4ffa-83cf-70364435b290)
+
 ![Inspector](https://github.com/michael-heyns/Terminal2/assets/4144679/9c1d0fa9-37d1-4205-a9f9-39830b2de457)
 ![Macros](https://github.com/michael-heyns/Terminal2/assets/4144679/f99dfdbd-6cb7-4e78-82a2-ed968f34ae20)
 ![Filters](https://github.com/michael-heyns/Terminal2/assets/4144679/7a4b631a-1d57-41b4-9a9e-1f958fae5cf1)

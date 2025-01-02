@@ -75,7 +75,7 @@ namespace Terminal
         // attributes
         public string title = string.Empty;
         public int delayBetweenChars = 0;
-        public int delayBetweenLinesMs = 0;
+        public int delayBetweenLinesMs = 200;
         public bool addCR = true;
         public bool addLF = false;
         public string macro = string.Empty;
@@ -190,6 +190,7 @@ namespace Terminal
         public LoggingOptions logOptions = new LoggingOptions();
         public DisplayOptions displayOptions = new DisplayOptions();
         public Macro[] macros = new Macro[48 * 4];
+        public string[] titles = new string[12 * 4];
 
         public Profile()
         {
@@ -197,25 +198,29 @@ namespace Terminal
                 macros[m] = new Macro();
         }
 
-        public Profile Clone(string name)
-        {
-            Profile s = (Profile)this.MemberwiseClone();
-            s.name = name;
-            s.embellishments = embellishments.Clone();
-            s.conOptions = conOptions.Clone();
-            s.logOptions = logOptions.Clone();
-            s.displayOptions = displayOptions.Clone();
-            s.conOptions.Modified = false;
-            s.logOptions.Modified = false;
-            for (int m = 0; m < macros.Length; m++)
-            {
-                if (macros[m] != null)
-                    s.macros[m] = macros[m].Clone();
-                else
-                    s.macros[m] = null;
-            }
-            return s;
-        }
+        //public Profile Clone(string name)
+        //{
+        //    Profile s = (Profile)this.MemberwiseClone();
+        //    s.name = name;
+        //    s.embellishments = embellishments.Clone();
+        //    s.conOptions = conOptions.Clone();
+        //    s.logOptions = logOptions.Clone();
+        //    s.displayOptions = displayOptions.Clone();
+        //    s.conOptions.Modified = false;
+        //    s.logOptions.Modified = false;
+
+        //    for (int t = 0; t < titles.Length; t++)
+        //        s.titles[t] = titles[t];
+
+        //    for (int m = 0; m < macros.Length; m++)
+        //    {
+        //        if (macros[m] != null)
+        //            s.macros[m] = macros[m].Clone();
+        //        else
+        //            s.macros[m] = null;
+        //    }
+        //    return s;
+        //}
     }
 
     public class Utils

@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -35,7 +36,7 @@ namespace Terminal
 {
     internal class Database
     {
-        private enum FSection { None, Profile, Connections, Macros };
+        private enum FSection { None, Profile, Connections, Macros, Titles };
         private static readonly string _directory = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2";
         private const int SEARCH_INDEX = 11;
 
@@ -467,6 +468,15 @@ namespace Terminal
                 data += $"RestartOnClose={profile.conOptions.RestartServer}\n";
                 data += $"\n";
 
+                data += "[Titles]\n";
+                for (int t = 0; t < profile.titles.Length; t++)
+                {
+                    if ((profile.titles[t] != null) && (profile.titles[t].Length > 0))
+                    {
+                        data += $"Title{t}={profile.titles[t]}\n";
+                    }
+                }
+
                 int index = 0;
                 foreach (Macro mac in profile.macros)
                 {
@@ -535,6 +545,9 @@ namespace Terminal
 
                 profile.displayOptions.IgnoreCase = true;   // unless overwritten
 
+                for (int t = 0; t < profile.titles.Length; t++)
+                    profile.titles[t] = string.Empty;
+
                 foreach (string line in lines)
                 {
                     if (line.Equals("[Profile]"))
@@ -544,6 +557,10 @@ namespace Terminal
                     else if (line.Equals("[Connect]"))
                     {
                         section = FSection.Connections;
+                    }
+                    else if (line.Equals("[Titles]"))
+                    {
+                        section = FSection.Titles;
                     }
                     else if (line.StartsWith("[") && line.EndsWith("]"))
                     {
@@ -557,6 +574,18 @@ namespace Terminal
                         if (profile.macros[mid] == null)
                         {
                             profile.macros[mid] = new Macro();
+                        }
+                    }
+                    else if (section == FSection.Titles)
+                    {
+                        if (line.StartsWith("Title"))
+                        {
+                            string[] src = line.Split(new char[] { '=' });
+                            int c = Utils.Int(src[0].Substring(5));
+                            if (c >= 0 && c < profile.titles.Length)
+                            {
+                                profile.titles[c] = src[1];
+                            }
                         }
                     }
                     else if (section == FSection.Profile)

@@ -86,6 +86,11 @@ namespace Terminal
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnClearGroup = new System.Windows.Forms.Button();
+            this.btnMoveMacro = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.localHelp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -219,7 +224,7 @@ namespace Terminal
             this.tbDelayBetweenLinesMs.Size = new System.Drawing.Size(37, 20);
             this.tbDelayBetweenLinesMs.TabIndex = 19;
             this.tbDelayBetweenLinesMs.Tag = "19";
-            this.tbDelayBetweenLinesMs.Text = "0";
+            this.tbDelayBetweenLinesMs.Text = "200";
             this.tbDelayBetweenLinesMs.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbDelayBetweenLinesMs.TextChanged += new System.EventHandler(this.Common_TextChanged);
             // 
@@ -287,7 +292,7 @@ namespace Terminal
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClearAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClearAll.FlatAppearance.BorderSize = 0;
             this.btnClearAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
@@ -410,7 +415,7 @@ namespace Terminal
             this.localHelp.Controls.Add(this.textBox3);
             this.localHelp.Controls.Add(this.textBox2);
             this.localHelp.Controls.Add(this.textBox1);
-            this.localHelp.Location = new System.Drawing.Point(177, 108);
+            this.localHelp.Location = new System.Drawing.Point(188, 107);
             this.localHelp.Name = "localHelp";
             this.localHelp.Size = new System.Drawing.Size(414, 212);
             this.localHelp.TabIndex = 36;
@@ -435,7 +440,7 @@ namespace Terminal
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Location = new System.Drawing.Point(104, 14);
+            this.textBox2.Location = new System.Drawing.Point(95, 14);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
@@ -475,7 +480,7 @@ namespace Terminal
             // 
             // btnClearGroup
             // 
-            this.btnClearGroup.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnClearGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClearGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClearGroup.FlatAppearance.BorderSize = 0;
             this.btnClearGroup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
@@ -490,13 +495,80 @@ namespace Terminal
             this.btnClearGroup.UseVisualStyleBackColor = false;
             this.btnClearGroup.Click += new System.EventHandler(this.btnClearGroup_Click);
             // 
+            // btnMoveMacro
+            // 
+            this.btnMoveMacro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveMacro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnMoveMacro.FlatAppearance.BorderSize = 0;
+            this.btnMoveMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnMoveMacro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveMacro.ForeColor = System.Drawing.Color.Blue;
+            this.btnMoveMacro.Location = new System.Drawing.Point(473, 107);
+            this.btnMoveMacro.Name = "btnMoveMacro";
+            this.btnMoveMacro.Size = new System.Drawing.Size(130, 23);
+            this.btnMoveMacro.TabIndex = 39;
+            this.btnMoveMacro.Tag = "29";
+            this.btnMoveMacro.Text = "Move this macro";
+            this.btnMoveMacro.UseVisualStyleBackColor = false;
+            this.btnMoveMacro.Click += new System.EventHandler(this.btnMoveMacro_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnExport.FlatAppearance.BorderSize = 0;
+            this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.ForeColor = System.Drawing.Color.Blue;
+            this.btnExport.Location = new System.Drawing.Point(174, 393);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(130, 23);
+            this.btnExport.TabIndex = 40;
+            this.btnExport.Tag = "29";
+            this.btnExport.Text = "Export macros";
+            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnImport
+            // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnImport.FlatAppearance.BorderSize = 0;
+            this.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.ForeColor = System.Drawing.Color.Blue;
+            this.btnImport.Location = new System.Drawing.Point(21, 393);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(130, 23);
+            this.btnImport.TabIndex = 41;
+            this.btnImport.Tag = "29";
+            this.btnImport.Text = "Import macros";
+            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "macros";
+            this.saveFileDialog1.Filter = "Macro files|*.macros";
+            this.saveFileDialog1.Title = "Select the filename to contain the selected macros";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.DefaultExt = "macros";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Macro files|*.macros";
+            this.openFileDialog1.Title = "Select a macro file to import";
+            // 
             // FrmMacroOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(639, 461);
-            this.Controls.Add(this.btnClearGroup);
+            this.Controls.Add(this.btnImport);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.localHelp);
+            this.Controls.Add(this.btnMoveMacro);
+            this.Controls.Add(this.btnClearGroup);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -573,5 +645,10 @@ namespace Terminal
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btnHelp;
         protected System.Windows.Forms.Button btnClearGroup;
+        protected System.Windows.Forms.Button btnMoveMacro;
+        protected System.Windows.Forms.Button btnExport;
+        protected System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

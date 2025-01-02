@@ -186,7 +186,18 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.3.5.0
+    <value>v1.3.6.1
+  * Cosmetic changes to the macro-move screen
+  * Ability to import and export macros only
+
+v1.3.6.0
+  * Bug fix displaying macros on main screen
+  * Ability to move a macro to any open slot
+  * Ability to rename a macro column
+  * Brighter colours for the 4 macro groups
+  * Default delay between lines in a macro is 200ms
+
+v1.3.5.0
   * Events can change colors and trigger macros
   * Redesign of the Options screen (called Events now)
 

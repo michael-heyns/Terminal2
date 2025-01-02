@@ -28,6 +28,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
@@ -39,6 +40,51 @@ namespace Terminal
 {
     public partial class FrmMain : Form
     {
+        [StructLayout(LayoutKind.Sequential)]
+        public struct INPUT
+        {
+            public uint type;
+            public MOUSEINPUT mi;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MOUSEINPUT
+        {
+            public int dx;
+            public int dy;
+            public uint mouseData;
+            public uint dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
+        }
+
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct POINT
+        {
+            public int X;
+            public int Y;
+        }
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetCursorPos(out POINT lpPoint);
+
+        [FlagsAttribute]
+        public enum EXECUTION_STATE : uint
+        {
+            ES_AWAYMODE_REQUIRED = 0x00000040,
+            ES_SYSTEM_REQUIRED = 0x00000001,
+            ES_DISPLAY_REQUIRED = 0x00000002,
+            ES_CONTINUOUS = 0x80000000
+        }
+        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE flags);
+
+        static string STAY_ALIVE_NAME = "Terminal2_LT";
+
         private const int MAX_INPUT_LINE_COUNT = 10000;
         private const int MAX_OUTPUT_LINE_COUNT = 1000;
 
@@ -448,10 +494,7 @@ namespace Terminal
             dgMacroTable.ReadOnly = true;
             dgMacroTable.RowCount = 5;
             for (int f = 1; f <= 12; f++)
-            {
-                dgMacroTable.Rows[0].Cells[f].Value = $"{f}";
                 dgMacroTable.Rows[0].Cells[f].Style.BackColor = btnGroup1.BackColor;
-            }
 
             for (int r = 0; r <= 4; r++)
                 dgMacroTable.Rows[r].Cells[0].Style.BackColor = btnGroup1.BackColor;
@@ -1173,6 +1216,78 @@ namespace Terminal
             _localThreadCount--;
         }
 
+        private void PokeDeviceToKeepAwake(object extra)
+        {
+            try
+            {
+                SetThreadExecutionState(EXECUTION_STATE.ES_AWAYMODE_REQUIRED | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+            }
+            catch
+            {
+
+            }
+        }
+
+        private bool TickTock = false;
+        private void KeepAlive_Tick(object sender, EventArgs e)
+        {
+            POINT cursorPos;
+            if (GetCursorPos(out cursorPos))
+            {
+                // Inject a mouse movement one pixel to the right
+                INPUT input = new INPUT();
+                input.type = 0; // Mouse input
+
+                if (TickTock)
+                {
+                    input.mi.dx = 1;
+                    input.mi.dy = 1;
+                    TickTock = false;
+                }
+                else
+                {
+                    input.mi.dx = -1;
+                    input.mi.dy = -1;
+                    TickTock = true;
+                }
+                input.mi.dwFlags = 0x0001; // MOUSEEVENTF_MOVE
+                SendInput(1, ref input, Marshal.SizeOf(typeof(INPUT)));
+            }
+        }
+
+        private System.Threading.Timer preventSleepTimer = null;
+        private bool StayAliveActive = false;
+        private void DisableDeviceSleep()
+        {
+            try
+            {
+                string local = Environment.GetEnvironmentVariable("LOCALAPPDATA");
+                if (local == null) return;
+                string dir = local + "\\" + STAY_ALIVE_NAME;
+                if (!Directory.Exists(dir)) return;
+
+                // switch on the timer
+                KeepAlive.Enabled = true;
+
+                SetThreadExecutionState(EXECUTION_STATE.ES_AWAYMODE_REQUIRED | EXECUTION_STATE.ES_SYSTEM_REQUIRED | EXECUTION_STATE.ES_DISPLAY_REQUIRED | EXECUTION_STATE.ES_CONTINUOUS);
+                preventSleepTimer = new System.Threading.Timer(new TimerCallback(PokeDeviceToKeepAwake), null, 0, 30 * 1000);
+                StayAliveActive = true;
+            }
+            catch { }
+        }
+
+        private void EnableDeviceSleep()
+        {
+            try
+            {
+                if (StayAliveActive)
+                {
+                    preventSleepTimer.Dispose();
+                    preventSleepTimer = null;
+                }
+            }
+            catch { }
+        }
         private void FrmMain_Load(object sender, EventArgs e)
         {
             _startupButtonColor = btnClear.BackColor;
@@ -1224,6 +1339,8 @@ namespace Terminal
             _btnGroups[2] = btnGroup3;
             _btnGroups[3] = btnGroup4;
             this.CenterToScreen();
+
+            DisableDeviceSleep();
         }
 
         private int FindMacro(string title)
@@ -1266,6 +1383,21 @@ namespace Terminal
         }
         private void DgMacroTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (e.RowIndex == 0 && e.ColumnIndex >= 1 && e.ColumnIndex <= 12)
+            {
+                int index = (_macroOffset / 4) + e.ColumnIndex - 1;
+                FrmTitle frmTitle = new FrmTitle();
+                frmTitle.eTitle.Text = _activeProfile.titles[index];
+                frmTitle.eTitle.SelectAll();
+                frmTitle.ShowDialog();
+                if (frmTitle.PressedOK)
+                {
+                    _activeProfile.titles[index] = frmTitle.eTitle.Text;
+                }
+                ShowColumnTitles();
+                return;
+            }
+
             _macroIsMoving = false;
             if (e.RowIndex < 1 || e.RowIndex > 4)
             {
@@ -1297,6 +1429,7 @@ namespace Terminal
                 macros.ShowDialog();
                 if (macros.Modified)
                     SaveThisProfile();
+                ShowColumnTitles();
                 ShowMacroTitles();
                 TopMost = cbStayOnTop.Checked;
             }
@@ -1382,6 +1515,17 @@ namespace Terminal
             lblSaving.Text = string.Empty;
         }
 
+        private void ShowColumnTitles()
+        {
+            int index = (_macroOffset / 4);
+            for (int col = 0; col < 12; col++)
+            {
+                if (_activeProfile.titles[index + col].Length > 0)
+                    dgMacroTable.Rows[0].Cells[col + 1].Value = _activeProfile.titles[index + col];
+                else
+                    dgMacroTable.Rows[0].Cells[col + 1].Value = $"F{col+1}";
+            }
+        }
         private void ShowMacroTitles()
         {
             int i = _macroOffset;
@@ -1390,13 +1534,10 @@ namespace Terminal
                 for (int mCol = 1; mCol <= 12; mCol++)
                 {
                     Macro m = _activeProfile.macros[i++];
-                    if (m != null)
-                    {
-                        if (m == null)
-                            dgMacroTable.Rows[mRow].Cells[mCol].Value = string.Empty;
-                        else
-                            dgMacroTable.Rows[mRow].Cells[mCol].Value = m.title;
-                    }
+                    if (m == null)
+                        dgMacroTable.Rows[mRow].Cells[mCol].Value = string.Empty;
+                    else
+                        dgMacroTable.Rows[mRow].Cells[mCol].Value = m.title;
                 }
             }
         }
@@ -1454,6 +1595,7 @@ namespace Terminal
                     dgMacroTable.Rows[r].Cells[0].Style.BackColor = btnGroup1.BackColor;
 
                 UnFreeze();
+                ShowColumnTitles();
                 ShowMacroTitles();
                 RefreshPortPulldown();
 
@@ -2234,6 +2376,8 @@ namespace Terminal
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            EnableDeviceSleep();
+
             if (_interceptAltF4)
             {
                 _interceptAltF4 = false;
@@ -2595,13 +2739,13 @@ namespace Terminal
         {
             _macroLabel = (char)('A' + N);
             _macroOffset = N * 48;
-            int labelNumber = (N * 12) + 1;
+
             for (int f = 1; f <= 12; f++)
             {
-                dgMacroTable.Rows[0].Cells[f].Value = $"{labelNumber}";
-                labelNumber++;
+                dgMacroTable.Rows[0].Cells[f].Value = $"{_macroLabel}{f}";
             }
             ShowButtonColours(N);
+            ShowColumnTitles();
             ShowMacroTitles();
             tbCommand.Focus();
         }
@@ -2625,6 +2769,28 @@ namespace Terminal
         {
             SetMacroOffset(3);
         }
+
+        private void cbStayOnTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            if ((Control.ModifierKeys & Keys.Control) == Keys.Control && e.Button == MouseButtons.Right)
+            {
+                try
+                {
+                    string local = Environment.GetEnvironmentVariable("LOCALAPPDATA");
+                    if (local == null) return;
+                    string dir = local + "\\" + STAY_ALIVE_NAME;
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                        DisableDeviceSleep();
+                    }
+                    if (Directory.Exists(dir))
+                        MessageBox.Show("Long-term testing enabled", "Long-term Testing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch { }
+            }
+        }
+
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox
     {

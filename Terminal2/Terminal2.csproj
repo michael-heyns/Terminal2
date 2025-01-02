@@ -103,6 +103,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmMacroExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMacroExport.Designer.cs">
+      <DependentUpon>FrmMacroExport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTitle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTitle.Designer.cs">
+      <DependentUpon>FrmTitle.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmASCII.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +159,12 @@
     </Compile>
     <Compile Include="FrmLogOptions.Designer.cs">
       <DependentUpon>FrmLogOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMacroList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMacroList.Designer.cs">
+      <DependentUpon>FrmMacroList.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmMacroOptions.cs">
       <SubType>Form</SubType>
@@ -209,6 +227,12 @@
     </Compile>
     <Compile Include="Filters.cs" />
     <Compile Include="StxEtx.cs" />
+    <EmbeddedResource Include="FrmMacroExport.resx">
+      <DependentUpon>FrmMacroExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTitle.resx">
+      <DependentUpon>FrmTitle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmASCII.resx">
       <DependentUpon>frmASCII.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -231,6 +255,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmLogOptions.resx">
       <DependentUpon>FrmLogOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMacroList.resx">
+      <DependentUpon>FrmMacroList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMacroOptions.resx">
       <DependentUpon>FrmMacroOptions.cs</DependentUpon>

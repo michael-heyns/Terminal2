@@ -26,6 +26,10 @@ using System.Drawing;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Xml.Linq;
+using System.Reflection;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Terminal
 {
@@ -135,7 +139,7 @@ namespace Terminal
             tbMacroText.Text = string.Empty;
             tbTitle.Text = string.Empty;
             tbDelayBetweenChars.Text = "0";
-            tbDelayBetweenLinesMs.Text = "0";
+            tbDelayBetweenLinesMs.Text = "200";
             tbDelayBetweenLinesSec.Text = "0";
             tbResendEveryMs.Text = "0";
             tbResendEverySec.Text = "0";
@@ -261,6 +265,295 @@ namespace Terminal
                 ClearScreen();
                 SaveProfile();
                 Close();
+            }
+        }
+
+        private void btnMoveMacro_Click(object sender, EventArgs e)
+        {
+            FrmMacroList macroList = new FrmMacroList();
+
+            macroList.listBox.Items.Clear();
+            byte group = (byte)'A';
+            int groupCount = 0;
+            int column = 1;
+            int row = 1;
+            string rowText = "Plain";
+            for (int m = 0; m < _activeProfile.macros.Length; m++)
+            {
+                Macro mac = _activeProfile.macros[m];
+                if (mac != null)
+                {
+                    if (mac.title.Length > 0)
+                    {
+                        string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} : {mac.title}";
+                        macroList.listBox.Items.Add(entry);
+                    }
+                    else
+                    {
+                        string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} :";
+                        macroList.listBox.Items.Add(entry);
+                    }
+                }
+                else
+                {
+                    string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} :";
+                    macroList.listBox.Items.Add(entry);
+                }
+
+                // group
+                groupCount++;
+                if (groupCount == 48)
+                {
+                    groupCount = 0;
+                    group += 1;
+                }
+
+                // column
+                column++;
+                if (column == 13)
+                {
+                    column = 1;
+
+                    // row
+                    row++;
+                    if (row == 5)
+                    {
+                        row = 1;
+                    }
+
+                    // row text
+                    if (row == 1)
+                        rowText = "Plain";
+                    else if (row == 2)
+                        rowText = "Shift +";
+                    else if (row == 3)
+                        rowText = "Ctrl +";
+                    else if (row == 4)
+                        rowText = "Alt +";
+                }
+            }
+            macroList.ShowDialog();
+            if (macroList.PressedOK)
+            {
+                if (macroList.SelectedSlot >= 0)
+                {
+                    if (Modified)
+                    {
+                        if (tbTitle.Text.Length == 0 && tbMacroText.Text.Length > 0)
+                        {
+                            MessageBox.Show("This macro has no name", "Name required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                        SaveProfile();
+                    }
+
+                    int destination = macroList.SelectedSlot;
+                    Macro src = _activeProfile.macros[_id];
+                    _activeProfile.macros[destination] = src.Clone();
+                    _activeProfile.macros[_id] = null;
+                    Close();
+                }
+            }
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            FrmMacroExport macroList = new FrmMacroExport();
+
+            macroList.listBox.Items.Clear();
+            byte group = (byte)'A';
+            int groupCount = 0;
+            int column = 1;
+            int row = 1;
+            string rowText = "Plain";
+            for (int m = 0; m < _activeProfile.macros.Length; m++)
+            {
+                Macro mac = _activeProfile.macros[m];
+                if (mac != null)
+                {
+                    if (mac.title.Length > 0)
+                    {
+                        string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} : {mac.title}";
+                        macroList.listBox.Items.Add(entry);
+                    }
+                    //else
+                    //{
+                    //    string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} :";
+                    //    macroList.listBox.Items.Add(entry);
+                    //}
+                }
+                //else
+                //{
+                //    string entry = $"{(m + 1),3}  {(char)group}: {rowText,-7} F{column,-2} :";
+                //    macroList.listBox.Items.Add(entry);
+                //}
+
+                // group
+                groupCount++;
+                if (groupCount == 48)
+                {
+                    groupCount = 0;
+                    group += 1;
+                }
+
+                // column
+                column++;
+                if (column == 13)
+                {
+                    column = 1;
+
+                    // row
+                    row++;
+                    if (row == 5)
+                    {
+                        row = 1;
+                    }
+
+                    // row text
+                    if (row == 1)
+                        rowText = "Plain";
+                    else if (row == 2)
+                        rowText = "Shift +";
+                    else if (row == 3)
+                        rowText = "Ctrl +";
+                    else if (row == 4)
+                        rowText = "Alt +";
+                }
+            }
+            macroList.ShowDialog();
+            if (macroList.PressedOK && macroList.listBox.SelectedItems.Count > 0)
+            {
+                try
+                {
+                    DialogResult rc = saveFileDialog1.ShowDialog();
+                    if (rc == DialogResult.OK)
+                    {
+                        string data = string.Empty;
+
+                        data += "# -----------------------------------------------------\n";
+                        data += "# Terminal2 - Copyright ©2022-2024 Michael Heyns\n";
+                        data += "# Exported macros\n";
+                        data += "# -----------------------------------------------------\n";
+                        data += "\n";
+
+                        for (int i = 0; i < macroList.listBox.SelectedIndices.Count; i++)
+                        {
+                            int index = macroList.listBox.SelectedIndices[i];
+                            string line = macroList.listBox.Items[index].ToString();
+                            char[] delim = { ':' };
+                            string[] str = line.ToString().Split(delim);
+                            if (str[1].Length > 0)
+                            {
+                                char[] spaces = { ' ' };
+                                string[] tok = line.Trim().Split(spaces);
+                                int m = Utils.Int(tok[0]) - 1;
+
+                                Macro mac = _activeProfile.macros[m];
+                                if (mac != null && mac.title.Length > 0)
+                                {
+                                    data += $"[Macro]\n";
+                                    data += $"Title={mac.title}\n";
+                                    data += $"ICD={mac.delayBetweenChars}\n";
+                                    data += $"ILD={mac.delayBetweenLinesMs}\n";
+                                    data += $"RepeatON={mac.repeatEnabled}\n";
+                                    data += $"Delta={mac.resendEveryMs}\n";
+                                    data += $"Repeats={mac.stopAfterRepeats}\n";
+                                    data += $"Text={mac.macro}\n";
+                                    data += $"AddCR={mac.addCR}\n";
+                                    data += $"AddLF={mac.addLF}\n";
+                                    data += $"\n";
+                                }
+                            }
+                        }
+                        File.WriteAllText(saveFileDialog1.FileName, data);
+                        MessageBox.Show($"The macros were exported to {saveFileDialog1.FileName}", "Exported", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch 
+                {
+                    MessageBox.Show("An error occurred and the macros did not export correctly", "Please check the filename", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult rc = openFileDialog1.ShowDialog();
+                if ((rc == DialogResult.OK))
+                {
+                    string data = File.ReadAllText(openFileDialog1.FileName);
+                    string[] lines = data.Split(new char[] { '\r', '\n' });
+
+                    Macro mac = null;
+
+                    foreach (string line in lines)
+                    {
+                        if (line.Equals("[Macro]"))
+                        {
+                            // find a new slot inside our profile
+                            for (int i = 0; i < _activeProfile.macros.Length; i++)
+                            {
+                                if (_activeProfile.macros[i] == null || _activeProfile.macros[i].title == null || _activeProfile.macros[i].title.Length == 0)
+                                {
+                                    _activeProfile.macros[i] = null;
+                                    _activeProfile.macros[i] = new Macro();
+                                    mac = _activeProfile.macros[i];
+                                    break;
+                                }
+                            }
+                        }
+                        else if (line.StartsWith("["))
+                        {
+                            mac = null;
+                        }
+                        else if (mac != null)
+                        {
+                            if (line.StartsWith("Title="))
+                            {
+                                mac.title = line.Substring(6);
+                            }
+                            else if (line.StartsWith("ICD="))
+                            {
+                                mac.delayBetweenChars = Utils.Int(line.Substring(4));
+                            }
+                            else if (line.StartsWith("ILD="))
+                            {
+                                mac.delayBetweenLinesMs = Utils.Int(line.Substring(4));
+                            }
+                            else if (line.StartsWith("RepeatON="))
+                            {
+                                mac.repeatEnabled = line.Contains("True");
+                            }
+                            else if (line.StartsWith("Delta="))
+                            {
+                                mac.resendEveryMs = Utils.Int(line.Substring(6));
+                            }
+                            else if (line.StartsWith("Repeats="))
+                            {
+                                mac.stopAfterRepeats = Utils.Int(line.Substring(8));
+                            }
+                            else if (line.StartsWith("Text="))
+                            {
+                                mac.macro = line.Substring(5);
+                            }
+                            else if (line.StartsWith("AddCR="))
+                            {
+                                mac.addCR = line.Contains("True");
+                            }
+                            else if (line.StartsWith("AddLF="))
+                            {
+                                mac.addLF = line.Contains("True");
+                            }
+                        }
+                    }
+                    MessageBox.Show($"The macros were imported successfully to open slots.  You may want to move them around now.", "Imported successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("An error occurred and the macros did not import correctly", "Please check the filename", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -63,8 +63,8 @@ namespace Terminal
             // 
             // lblBigHeading
             // 
-            this.lblBigHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBigHeading.Location = new System.Drawing.Point(81, 20);
+            this.lblBigHeading.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBigHeading.Location = new System.Drawing.Point(80, 20);
             this.lblBigHeading.Name = "lblBigHeading";
             this.lblBigHeading.Size = new System.Drawing.Size(269, 20);
             this.lblBigHeading.TabIndex = 10;
@@ -77,15 +77,15 @@ namespace Terminal
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnCancel.FlatAppearance.BorderSize = 0;
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.Blue;
-            this.btnCancel.Location = new System.Drawing.Point(275, 132);
+            this.btnCancel.Location = new System.Drawing.Point(255, 147);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(60, 23);
+            this.btnCancel.Size = new System.Drawing.Size(80, 26);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "&Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnSearch
@@ -96,29 +96,30 @@ namespace Terminal
             this.btnSearch.Enabled = false;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.Color.Blue;
-            this.btnSearch.Location = new System.Drawing.Point(344, 132);
+            this.btnSearch.Location = new System.Drawing.Point(340, 147);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(60, 23);
+            this.btnSearch.Size = new System.Drawing.Size(80, 26);
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "&Ok";
-            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // SearchText
             // 
             this.SearchText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.SearchText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchText.Location = new System.Drawing.Point(12, 43);
             this.SearchText.Name = "SearchText";
-            this.SearchText.Size = new System.Drawing.Size(393, 20);
+            this.SearchText.Size = new System.Drawing.Size(411, 23);
             this.SearchText.TabIndex = 13;
             this.SearchText.TextChanged += new System.EventHandler(this.ReplaceText_TextChanged);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(81, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(269, 20);
@@ -130,9 +131,10 @@ namespace Terminal
             // 
             this.ReplaceText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ReplaceText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ReplaceText.Location = new System.Drawing.Point(12, 98);
             this.ReplaceText.Name = "ReplaceText";
-            this.ReplaceText.Size = new System.Drawing.Size(393, 20);
+            this.ReplaceText.Size = new System.Drawing.Size(411, 23);
             this.ReplaceText.TabIndex = 15;
             this.ReplaceText.TextChanged += new System.EventHandler(this.ReplaceText_TextChanged);
             this.ReplaceText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ReplaceText_KeyDown);
@@ -144,9 +146,10 @@ namespace Terminal
             this.IgnoreCase.Checked = true;
             this.IgnoreCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.IgnoreCase.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.IgnoreCase.Location = new System.Drawing.Point(12, 137);
+            this.IgnoreCase.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IgnoreCase.Location = new System.Drawing.Point(12, 151);
             this.IgnoreCase.Name = "IgnoreCase";
-            this.IgnoreCase.Size = new System.Drawing.Size(88, 18);
+            this.IgnoreCase.Size = new System.Drawing.Size(92, 20);
             this.IgnoreCase.TabIndex = 16;
             this.IgnoreCase.Text = "Ignore case";
             this.IgnoreCase.UseVisualStyleBackColor = true;
@@ -157,15 +160,15 @@ namespace Terminal
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.Blue;
-            this.btnClear.Location = new System.Drawing.Point(211, 132);
+            this.btnClear.Location = new System.Drawing.Point(171, 147);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(60, 23);
+            this.btnClear.Size = new System.Drawing.Size(80, 26);
             this.btnClear.TabIndex = 17;
             this.btnClear.Text = "&Clear";
-            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click_1);
             // 
             // FrmReplace
@@ -173,7 +176,7 @@ namespace Terminal
             this.AcceptButton = this.btnSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 172);
+            this.ClientSize = new System.Drawing.Size(434, 188);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.IgnoreCase);
             this.Controls.Add(this.ReplaceText);

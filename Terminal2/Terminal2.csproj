@@ -306,7 +306,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="rescan.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -324,7 +323,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Gear.png" />
     <Content Include="Terminal.ico" />
   </ItemGroup>
   <ItemGroup>

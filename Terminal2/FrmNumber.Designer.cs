@@ -58,12 +58,14 @@ namespace Terminal
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.Original2 = new System.Windows.Forms.Label();
+            this.Original3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // HexValue
             // 
-            this.HexValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HexValue.Location = new System.Drawing.Point(247, 21);
+            this.HexValue.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HexValue.Location = new System.Drawing.Point(292, 22);
             this.HexValue.Name = "HexValue";
             this.HexValue.Size = new System.Drawing.Size(164, 23);
             this.HexValue.TabIndex = 0;
@@ -72,8 +74,8 @@ namespace Terminal
             // 
             // DecValue
             // 
-            this.DecValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DecValue.Location = new System.Drawing.Point(247, 44);
+            this.DecValue.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DecValue.Location = new System.Drawing.Point(292, 45);
             this.DecValue.Name = "DecValue";
             this.DecValue.Size = new System.Drawing.Size(164, 23);
             this.DecValue.TabIndex = 1;
@@ -82,8 +84,8 @@ namespace Terminal
             // 
             // ASCIIcharacter
             // 
-            this.ASCIIcharacter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ASCIIcharacter.Location = new System.Drawing.Point(247, 67);
+            this.ASCIIcharacter.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ASCIIcharacter.Location = new System.Drawing.Point(292, 68);
             this.ASCIIcharacter.Name = "ASCIIcharacter";
             this.ASCIIcharacter.Size = new System.Drawing.Size(164, 23);
             this.ASCIIcharacter.TabIndex = 2;
@@ -92,8 +94,8 @@ namespace Terminal
             // 
             // Original
             // 
-            this.Original.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Original.Location = new System.Drawing.Point(11, 44);
+            this.Original.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Original.Location = new System.Drawing.Point(29, 44);
             this.Original.Name = "Original";
             this.Original.Size = new System.Drawing.Size(141, 23);
             this.Original.TabIndex = 3;
@@ -102,37 +104,62 @@ namespace Terminal
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(158, 21);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(173, 22);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 23);
+            this.label3.Size = new System.Drawing.Size(116, 21);
             this.label3.TabIndex = 5;
-            this.label3.Text = "decimal --> hex";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.Text = "decimal -to- hex";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(158, 49);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(173, 47);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 13);
+            this.label4.Size = new System.Drawing.Size(116, 21);
             this.label4.TabIndex = 6;
-            this.label4.Text = "hex --> decimal";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.Text = "hex -to- decimal";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(158, 67);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(195, 68);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 23);
+            this.label5.Size = new System.Drawing.Size(72, 23);
             this.label5.TabIndex = 7;
-            this.label5.Text = "--> ASCII";
+            this.label5.Text = "-to- ASCII";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Original2
+            // 
+            this.Original2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Original2.Location = new System.Drawing.Point(29, 21);
+            this.Original2.Name = "Original2";
+            this.Original2.Size = new System.Drawing.Size(141, 23);
+            this.Original2.TabIndex = 8;
+            this.Original2.Text = "1234567890123456";
+            this.Original2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // Original3
+            // 
+            this.Original3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Original3.Location = new System.Drawing.Point(29, 68);
+            this.Original3.Name = "Original3";
+            this.Original3.Size = new System.Drawing.Size(141, 23);
+            this.Original3.TabIndex = 9;
+            this.Original3.Text = "1234567890123456";
+            this.Original3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // FrmNumber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(436, 110);
+            this.ClientSize = new System.Drawing.Size(480, 110);
+            this.Controls.Add(this.Original3);
+            this.Controls.Add(this.Original2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -161,5 +188,7 @@ namespace Terminal
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Label Original2;
+        public System.Windows.Forms.Label Original3;
     }
 }

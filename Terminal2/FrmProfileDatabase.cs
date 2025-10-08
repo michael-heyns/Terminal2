@@ -42,7 +42,7 @@ namespace Terminal
         public FrmProfileDatabase(string name)
         {
             InitializeComponent();
-            Database.GetAllNames(lbProfileList);
+            Database.GetAllNames(lbProfileList, eStartsWith.Text);
             _selectedProfileName = name;
         }
 
@@ -55,7 +55,7 @@ namespace Terminal
                 Database.Remove(name);
                 if (_selectedProfileName.Equals(name))
                     _selectedProfileName = "Default";
-                Database.GetAllNames(lbProfileList);
+                Database.GetAllNames(lbProfileList, eStartsWith.Text);
             }
         }
 
@@ -127,7 +127,7 @@ namespace Terminal
             if (ok == DialogResult.OK)
             {
                 if (Database.Import(openFileDialog.FileName))
-                    Database.GetAllNames(lbProfileList);
+                    Database.GetAllNames(lbProfileList, eStartsWith.Text);
             }
         }
 
@@ -145,7 +145,7 @@ namespace Terminal
                 }
                 if (Database.Rename(name, askname.NewName))
                 {
-                    Database.GetAllNames(lbProfileList);
+                    Database.GetAllNames(lbProfileList, eStartsWith.Text);
                     if (_selectedProfileName.Equals(name))
                         _selectedProfileName = askname.NewName;
                 }
@@ -165,7 +165,7 @@ namespace Terminal
                     return;
                 }
                 Database.Copy(name, askname.NewName);
-                Database.GetAllNames(lbProfileList);
+                Database.GetAllNames(lbProfileList, eStartsWith.Text);
             }
         }
 
@@ -213,6 +213,11 @@ namespace Terminal
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void eStartsWith_TextChanged(object sender, EventArgs e)
+        {
+            Database.GetAllNames(lbProfileList, eStartsWith.Text);
         }
     }
 }

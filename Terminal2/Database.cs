@@ -239,7 +239,7 @@ namespace Terminal
             return false;
         }
 
-        public static void GetAllNames(ListBox listBox)
+        public static void GetAllNames(ListBox listBox, string startsWidth)
         {
             listBox.Items.Clear();
             try
@@ -250,7 +250,8 @@ namespace Terminal
                     if (s.EndsWith(".profile"))
                     {
                         string n = Path.GetFileNameWithoutExtension(s);
-                        listBox.Items.Add(n);
+                        if (startsWidth == string.Empty || n.StartsWith(startsWidth))
+                            listBox.Items.Add(n);
                     }
                 }
             }

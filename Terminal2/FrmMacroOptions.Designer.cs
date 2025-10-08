@@ -98,10 +98,10 @@ namespace Terminal
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(241, 9);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(214, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 18);
+            this.label1.Size = new System.Drawing.Size(187, 25);
             this.label1.TabIndex = 3;
             this.label1.Text = "Function Key Macros";
             // 
@@ -116,7 +116,7 @@ namespace Terminal
             this.tbMacroText.Multiline = true;
             this.tbMacroText.Name = "tbMacroText";
             this.tbMacroText.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbMacroText.Size = new System.Drawing.Size(601, 255);
+            this.tbMacroText.Size = new System.Drawing.Size(601, 259);
             this.tbMacroText.TabIndex = 1;
             this.tbMacroText.Tag = "27";
             this.tbMacroText.WordWrap = false;
@@ -124,11 +124,12 @@ namespace Terminal
             // 
             // tbTitle
             // 
+            this.tbTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbTitle.ForeColor = System.Drawing.Color.Blue;
-            this.tbTitle.Location = new System.Drawing.Point(51, 110);
+            this.tbTitle.Location = new System.Drawing.Point(51, 108);
             this.tbTitle.MaxLength = 40;
             this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(136, 20);
+            this.tbTitle.Size = new System.Drawing.Size(136, 23);
             this.tbTitle.TabIndex = 0;
             this.tbTitle.Tag = "24";
             this.tbTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -137,9 +138,10 @@ namespace Terminal
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 113);
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(18, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(27, 13);
+            this.label2.Size = new System.Drawing.Size(30, 15);
             this.label2.TabIndex = 6;
             this.label2.Text = "Title";
             // 
@@ -149,15 +151,15 @@ namespace Terminal
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.Color.Blue;
-            this.btnClear.Location = new System.Drawing.Point(21, 426);
+            this.btnClear.Location = new System.Drawing.Point(21, 423);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(130, 23);
             this.btnClear.TabIndex = 27;
             this.btnClear.Tag = "28";
             this.btnClear.Text = "&Clear THIS macro";
-            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnApply
@@ -165,33 +167,34 @@ namespace Terminal
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnApply.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnApply.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.Color.Blue;
-            this.btnApply.Location = new System.Drawing.Point(480, 426);
+            this.btnApply.Location = new System.Drawing.Point(480, 423);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(130, 23);
             this.btnApply.TabIndex = 26;
             this.btnApply.Tag = "30";
             this.btnApply.Text = "&Apply";
-            this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(26, 44);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 13);
+            this.label3.Size = new System.Drawing.Size(141, 15);
             this.label3.TabIndex = 9;
             this.label3.Text = "Delay between characters";
             // 
             // tbDelayBetweenChars
             // 
-            this.tbDelayBetweenChars.Location = new System.Drawing.Point(155, 41);
+            this.tbDelayBetweenChars.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDelayBetweenChars.Location = new System.Drawing.Point(171, 41);
             this.tbDelayBetweenChars.MaxLength = 6;
             this.tbDelayBetweenChars.Name = "tbDelayBetweenChars";
-            this.tbDelayBetweenChars.Size = new System.Drawing.Size(57, 20);
+            this.tbDelayBetweenChars.Size = new System.Drawing.Size(57, 23);
             this.tbDelayBetweenChars.TabIndex = 17;
             this.tbDelayBetweenChars.Tag = "17";
             this.tbDelayBetweenChars.Text = "0";
@@ -201,27 +204,30 @@ namespace Terminal
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(214, 44);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(230, 44);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 13);
+            this.label4.Size = new System.Drawing.Size(23, 15);
             this.label4.TabIndex = 11;
             this.label4.Text = "ms";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(582, 44);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(569, 44);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.Size = new System.Drawing.Size(23, 15);
             this.label5.TabIndex = 14;
             this.label5.Text = "ms";
             // 
             // tbDelayBetweenLinesMs
             // 
-            this.tbDelayBetweenLinesMs.Location = new System.Drawing.Point(541, 41);
+            this.tbDelayBetweenLinesMs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDelayBetweenLinesMs.Location = new System.Drawing.Point(528, 41);
             this.tbDelayBetweenLinesMs.MaxLength = 3;
             this.tbDelayBetweenLinesMs.Name = "tbDelayBetweenLinesMs";
-            this.tbDelayBetweenLinesMs.Size = new System.Drawing.Size(37, 20);
+            this.tbDelayBetweenLinesMs.Size = new System.Drawing.Size(37, 23);
             this.tbDelayBetweenLinesMs.TabIndex = 19;
             this.tbDelayBetweenLinesMs.Tag = "19";
             this.tbDelayBetweenLinesMs.Text = "200";
@@ -231,28 +237,31 @@ namespace Terminal
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(352, 44);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(325, 44);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 13);
+            this.label6.Size = new System.Drawing.Size(111, 15);
             this.label6.TabIndex = 12;
             this.label6.Text = "Delay between lines";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(294, 71);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(310, 71);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 13);
+            this.label7.Size = new System.Drawing.Size(23, 15);
             this.label7.TabIndex = 17;
             this.label7.Text = "ms";
             // 
             // tbResendEveryMs
             // 
             this.tbResendEveryMs.Enabled = false;
-            this.tbResendEveryMs.Location = new System.Drawing.Point(244, 69);
+            this.tbResendEveryMs.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbResendEveryMs.Location = new System.Drawing.Point(260, 69);
             this.tbResendEveryMs.MaxLength = 3;
             this.tbResendEveryMs.Name = "tbResendEveryMs";
-            this.tbResendEveryMs.Size = new System.Drawing.Size(44, 20);
+            this.tbResendEveryMs.Size = new System.Drawing.Size(44, 23);
             this.tbResendEveryMs.TabIndex = 22;
             this.tbResendEveryMs.Tag = "22";
             this.tbResendEveryMs.Text = "0";
@@ -262,19 +271,21 @@ namespace Terminal
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(511, 72);
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(498, 72);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(42, 13);
+            this.label9.Size = new System.Drawing.Size(45, 15);
             this.label9.TabIndex = 20;
             this.label9.Text = "repeats";
             // 
             // tbStopAfterRepeats
             // 
             this.tbStopAfterRepeats.Enabled = false;
-            this.tbStopAfterRepeats.Location = new System.Drawing.Point(452, 69);
+            this.tbStopAfterRepeats.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbStopAfterRepeats.Location = new System.Drawing.Point(439, 69);
             this.tbStopAfterRepeats.MaxLength = 6;
             this.tbStopAfterRepeats.Name = "tbStopAfterRepeats";
-            this.tbStopAfterRepeats.Size = new System.Drawing.Size(57, 20);
+            this.tbStopAfterRepeats.Size = new System.Drawing.Size(57, 23);
             this.tbStopAfterRepeats.TabIndex = 23;
             this.tbStopAfterRepeats.Tag = "23";
             this.tbStopAfterRepeats.Text = "0";
@@ -284,9 +295,10 @@ namespace Terminal
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(393, 73);
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(378, 73);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.Size = new System.Drawing.Size(58, 15);
             this.label10.TabIndex = 18;
             this.label10.Text = "Stop after";
             // 
@@ -296,24 +308,25 @@ namespace Terminal
             this.btnClearAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClearAll.FlatAppearance.BorderSize = 0;
             this.btnClearAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnClearAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearAll.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearAll.ForeColor = System.Drawing.Color.Blue;
-            this.btnClearAll.Location = new System.Drawing.Point(327, 426);
+            this.btnClearAll.Location = new System.Drawing.Point(327, 423);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(130, 23);
             this.btnClearAll.TabIndex = 28;
             this.btnClearAll.Tag = "29";
             this.btnClearAll.Text = "Clear &ALL macros";
-            this.btnClearAll.UseVisualStyleBackColor = false;
+            this.btnClearAll.UseVisualStyleBackColor = true;
             this.btnClearAll.Click += new System.EventHandler(this.BtnClearAll_Click);
             // 
             // label11
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(401, 398);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(411, 397);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(44, 13);
+            this.label11.Size = new System.Drawing.Size(49, 15);
             this.label11.TabIndex = 24;
             this.label11.Text = "Append";
             // 
@@ -321,7 +334,8 @@ namespace Terminal
             // 
             this.cbAddCR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAddCR.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbAddCR.Location = new System.Drawing.Point(452, 397);
+            this.cbAddCR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbAddCR.Location = new System.Drawing.Point(466, 396);
             this.cbAddCR.Name = "cbAddCR";
             this.cbAddCR.Size = new System.Drawing.Size(41, 17);
             this.cbAddCR.TabIndex = 24;
@@ -334,7 +348,7 @@ namespace Terminal
             // 
             this.cbAddLF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbAddLF.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbAddLF.Location = new System.Drawing.Point(498, 397);
+            this.cbAddLF.Location = new System.Drawing.Point(503, 396);
             this.cbAddLF.Name = "cbAddLF";
             this.cbAddLF.Size = new System.Drawing.Size(38, 17);
             this.cbAddLF.TabIndex = 25;
@@ -347,16 +361,18 @@ namespace Terminal
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(535, 398);
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(536, 397);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(67, 13);
+            this.label12.Size = new System.Drawing.Size(74, 15);
             this.label12.TabIndex = 27;
             this.label12.Text = "to every line.";
             // 
             // cbRepeat
             // 
             this.cbRepeat.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cbRepeat.Location = new System.Drawing.Point(70, 71);
+            this.cbRepeat.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRepeat.Location = new System.Drawing.Point(80, 71);
             this.cbRepeat.Name = "cbRepeat";
             this.cbRepeat.Size = new System.Drawing.Size(87, 17);
             this.cbRepeat.TabIndex = 20;
@@ -367,10 +383,11 @@ namespace Terminal
             // 
             // tbDelayBetweenLinesSec
             // 
-            this.tbDelayBetweenLinesSec.Location = new System.Drawing.Point(452, 41);
+            this.tbDelayBetweenLinesSec.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDelayBetweenLinesSec.Location = new System.Drawing.Point(439, 41);
             this.tbDelayBetweenLinesSec.MaxLength = 6;
             this.tbDelayBetweenLinesSec.Name = "tbDelayBetweenLinesSec";
-            this.tbDelayBetweenLinesSec.Size = new System.Drawing.Size(57, 20);
+            this.tbDelayBetweenLinesSec.Size = new System.Drawing.Size(57, 23);
             this.tbDelayBetweenLinesSec.TabIndex = 18;
             this.tbDelayBetweenLinesSec.Tag = "18";
             this.tbDelayBetweenLinesSec.Text = "0";
@@ -380,10 +397,11 @@ namespace Terminal
             // tbResendEverySec
             // 
             this.tbResendEverySec.Enabled = false;
-            this.tbResendEverySec.Location = new System.Drawing.Point(155, 69);
+            this.tbResendEverySec.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbResendEverySec.Location = new System.Drawing.Point(171, 69);
             this.tbResendEverySec.MaxLength = 6;
             this.tbResendEverySec.Name = "tbResendEverySec";
-            this.tbResendEverySec.Size = new System.Drawing.Size(57, 20);
+            this.tbResendEverySec.Size = new System.Drawing.Size(57, 23);
             this.tbResendEverySec.TabIndex = 21;
             this.tbResendEverySec.Tag = "21";
             this.tbResendEverySec.Text = "0";
@@ -393,18 +411,20 @@ namespace Terminal
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(511, 44);
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(498, 44);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(24, 13);
+            this.label13.Size = new System.Drawing.Size(24, 15);
             this.label13.TabIndex = 33;
             this.label13.Text = "sec";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(214, 72);
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(230, 72);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(24, 13);
+            this.label14.Size = new System.Drawing.Size(24, 15);
             this.label14.TabIndex = 34;
             this.label14.Text = "sec";
             // 
@@ -415,9 +435,9 @@ namespace Terminal
             this.localHelp.Controls.Add(this.textBox3);
             this.localHelp.Controls.Add(this.textBox2);
             this.localHelp.Controls.Add(this.textBox1);
-            this.localHelp.Location = new System.Drawing.Point(188, 107);
+            this.localHelp.Location = new System.Drawing.Point(174, 107);
             this.localHelp.Name = "localHelp";
-            this.localHelp.Size = new System.Drawing.Size(414, 212);
+            this.localHelp.Size = new System.Drawing.Size(444, 243);
             this.localHelp.TabIndex = 36;
             this.localHelp.Visible = false;
             // 
@@ -426,7 +446,7 @@ namespace Terminal
             this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBox3.ForeColor = System.Drawing.Color.Red;
-            this.textBox3.Location = new System.Drawing.Point(393, 3);
+            this.textBox3.Location = new System.Drawing.Point(421, 1);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(18, 20);
@@ -440,11 +460,12 @@ namespace Terminal
             this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox2.Location = new System.Drawing.Point(95, 14);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(114, 14);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(292, 179);
+            this.textBox2.Size = new System.Drawing.Size(303, 215);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = resources.GetString("textBox2.Text");
             // 
@@ -453,21 +474,22 @@ namespace Terminal
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(10, 14);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(111, 148);
+            this.textBox1.Size = new System.Drawing.Size(111, 195);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "-> Empty lines\r\n->  $nn\r\n->  # comment \r\n-> ## comments\r\n-> #DELAY nn \r\n-> #STX t" +
-    "ext\r\n-> #FREEZE\r\n-> #DTR\r\n-> #RTS\r\n-> #MACRO title\r\n    ";
+    "ext\r\n-> #FREEZE\r\n-> #DTR\r\n-> #RTS\r\n-> #BREAK [nn]\r\n\r\n-> #MACRO title\r\n    ";
             // 
             // btnHelp
             // 
             this.btnHelp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnHelp.FlatAppearance.BorderSize = 0;
             this.btnHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHelp.ForeColor = System.Drawing.Color.Blue;
             this.btnHelp.Location = new System.Drawing.Point(204, 108);
             this.btnHelp.Name = "btnHelp";
@@ -475,7 +497,7 @@ namespace Terminal
             this.btnHelp.TabIndex = 37;
             this.btnHelp.Tag = "28";
             this.btnHelp.Text = "&Help";
-            this.btnHelp.UseVisualStyleBackColor = false;
+            this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnClearGroup
@@ -484,15 +506,15 @@ namespace Terminal
             this.btnClearGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnClearGroup.FlatAppearance.BorderSize = 0;
             this.btnClearGroup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnClearGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClearGroup.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearGroup.ForeColor = System.Drawing.Color.Blue;
-            this.btnClearGroup.Location = new System.Drawing.Point(174, 426);
+            this.btnClearGroup.Location = new System.Drawing.Point(174, 423);
             this.btnClearGroup.Name = "btnClearGroup";
             this.btnClearGroup.Size = new System.Drawing.Size(130, 23);
             this.btnClearGroup.TabIndex = 38;
             this.btnClearGroup.Tag = "29";
             this.btnClearGroup.Text = "xxxxxx";
-            this.btnClearGroup.UseVisualStyleBackColor = false;
+            this.btnClearGroup.UseVisualStyleBackColor = true;
             this.btnClearGroup.Click += new System.EventHandler(this.btnClearGroup_Click);
             // 
             // btnMoveMacro
@@ -501,7 +523,7 @@ namespace Terminal
             this.btnMoveMacro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnMoveMacro.FlatAppearance.BorderSize = 0;
             this.btnMoveMacro.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnMoveMacro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoveMacro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoveMacro.ForeColor = System.Drawing.Color.Blue;
             this.btnMoveMacro.Location = new System.Drawing.Point(473, 107);
             this.btnMoveMacro.Name = "btnMoveMacro";
@@ -509,7 +531,7 @@ namespace Terminal
             this.btnMoveMacro.TabIndex = 39;
             this.btnMoveMacro.Tag = "29";
             this.btnMoveMacro.Text = "Move this macro";
-            this.btnMoveMacro.UseVisualStyleBackColor = false;
+            this.btnMoveMacro.UseVisualStyleBackColor = true;
             this.btnMoveMacro.Click += new System.EventHandler(this.btnMoveMacro_Click);
             // 
             // btnExport
@@ -518,15 +540,15 @@ namespace Terminal
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnExport.FlatAppearance.BorderSize = 0;
             this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.Blue;
-            this.btnExport.Location = new System.Drawing.Point(174, 393);
+            this.btnExport.Location = new System.Drawing.Point(174, 397);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(130, 23);
             this.btnExport.TabIndex = 40;
             this.btnExport.Tag = "29";
             this.btnExport.Text = "Export macros";
-            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnImport
@@ -535,15 +557,15 @@ namespace Terminal
             this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnImport.FlatAppearance.BorderSize = 0;
             this.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(21, 393);
+            this.btnImport.Location = new System.Drawing.Point(21, 397);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(130, 23);
             this.btnImport.TabIndex = 41;
             this.btnImport.Tag = "29";
             this.btnImport.Text = "Import macros";
-            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // saveFileDialog1
@@ -563,7 +585,7 @@ namespace Terminal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 461);
+            this.ClientSize = new System.Drawing.Size(639, 465);
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.localHelp);
@@ -602,6 +624,7 @@ namespace Terminal
             this.Name = "FrmMacroOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Macros";
+            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMacroOptions_FormClosing);
             this.Load += new System.EventHandler(this.FrmMacroOptions_Load);
             this.localHelp.ResumeLayout(false);

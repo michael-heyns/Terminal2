@@ -54,10 +54,5 @@ namespace Terminal
             AssemblyInfo info = new AssemblyInfo();
             lblThisVersion.Text = $"v{info.AssemblyVersion}";
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

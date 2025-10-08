@@ -24,16 +24,18 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
-using System.Windows.Forms;
-using System.Threading;
-using System.Net.Sockets;
-using System.Xml.Linq;
 using System.Net;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
+using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml.Linq;
+
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace Terminal
 {
@@ -55,7 +57,11 @@ namespace Terminal
         private static Embellishments _embellishments;
 
         private static Thread _tcpThread = null;
+        private static bool _tcpThreadRunning;
+        private static bool _tcpThreadExit;
         private static Thread _serialThread = null;
+        private static bool _serialThreadRunning;
+        private static bool _serialThreadExit;
 
         private static bool _halfCRLF = false;
         private static bool _showTimestamp = false;
@@ -63,8 +69,6 @@ namespace Terminal
 
         private static bool _showServerFailure = false;
         private static bool _suspendReadThread = false;
-
-        public static bool _terminateFlag = false;
 
         private void Enqueue(byte[] data)
         {
@@ -184,14 +188,15 @@ namespace Terminal
             if (_com == null)
                 return;
 
+            _serialThreadRunning = true;
             try
             {
                 // do the work
                 if (_com.IsOpen)
                 {
-                    _terminateFlag = false;
                     _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                    while (_com.IsOpen && !_terminateFlag)
+                    _serialThreadExit = false;
+                    while (!_serialThreadExit && _com.IsOpen)
                     {
                         int count = _com.BytesToRead;
                         if (count > 0)
@@ -211,14 +216,17 @@ namespace Terminal
                 }
             }
             catch { }
+            _serialThreadRunning = false;
             _connected = false;
         }
 
         private void TCPReaderThread()
         {
+            _tcpThreadRunning = true;
             try
             {
-                while (SocketOpen(_socket))
+                _tcpThreadExit = false;
+                while (!_tcpThreadExit && SocketOpen(_socket))
                 {
                     int count = DataWaiting();
                     if (count > 0)
@@ -242,6 +250,7 @@ namespace Terminal
                 }
             }
             catch { }
+            _tcpThreadRunning = false;
             _connected = false;
         }
 
@@ -517,25 +526,28 @@ namespace Terminal
                 switch (_comType)
                 {
                     case CommType.ctSERIAL:
-                        _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                        Stream s = _com.BaseStream;
-                        s.Flush();
-                        s.Close();
-                        _com.DtrEnable = false;
-                        _com.RtsEnable = false;
-                        _com.Close();
+                        if (_com != null)
+                        {
+                            _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
+                            Stream s = _com.BaseStream;
+                            s.Flush();
+                            s.Close();
+                            _com.DtrEnable = false;
+                            _com.RtsEnable = false;
+                            _com.Close();
+                            _com = null;
+                        }
+
+                        _serialThreadExit = true;
+                        while (_serialThreadRunning)
+                        {
+                            Thread.Sleep(20);
+                        }
                         if (_serialThread != null)
                         {
-                            _terminateFlag = true;
-                            while (_serialThread.ThreadState == ThreadState.Running)
-                                Thread.Sleep(20);
-                            Thread.Sleep(20);
-                            _serialThread.Abort();
-                            Thread.Sleep(20);
-                            _serialThread.Join();
+                            _serialThread.Join(200);
                             _serialThread = null;
                         }
-                        _com = null;
                         _connected = false;
                         break;
 
@@ -553,14 +565,14 @@ namespace Terminal
                             }
                         }
 
+                        _tcpThreadExit = true;
+                        while (_tcpThreadRunning)
+                        {
+                            Thread.Sleep(20);
+                        }
                         if (_tcpThread != null)
                         {
-                            while (_tcpThread.ThreadState == ThreadState.Running)
-                                Thread.Sleep(20);
-                            Thread.Sleep(20);
-                            _tcpThread.Abort();
-                            Thread.Sleep(20);
-                            _tcpThread.Join();
+                            _tcpThread.Join(200);
                             _tcpThread = null;
                         }
 
@@ -589,7 +601,7 @@ namespace Terminal
 
                         if (_tcpThread != null)
                         {
-                            while (_tcpThread.ThreadState == ThreadState.Running)
+                            while (_tcpThread.ThreadState == System.Threading.ThreadState.Running)
                                 Thread.Sleep(20);
                             _tcpThread.Join();
                             _tcpThread = null;
@@ -677,6 +689,38 @@ namespace Terminal
             }
             catch { }
             return false;
+        }
+
+        public void EnterBreakState(int us)
+        {
+            if (!_connected)
+                return;
+
+            try
+            {
+                switch (_comType)
+                {
+                    case CommType.ctSERIAL:
+                        {
+                            _com.BreakState = true;
+                            var stopwatch = Stopwatch.StartNew();
+                            var targetTicks = us * Stopwatch.Frequency / 1000000;
+                            while (stopwatch.ElapsedTicks < targetTicks) ;
+                            _com.BreakState = false;
+                        }
+                        break;
+
+                    case CommType.ctSERVER:
+                        break;
+
+                    case CommType.ctCLIENT:
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            catch { }
         }
 
         public void ControlPressed(int id)

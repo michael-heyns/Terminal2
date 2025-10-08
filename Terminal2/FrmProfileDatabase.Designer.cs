@@ -64,6 +64,8 @@ namespace Terminal
             this.btnRename = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.eStartsWith = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSelect
@@ -72,23 +74,25 @@ namespace Terminal
             this.btnSelect.Enabled = false;
             this.btnSelect.FlatAppearance.BorderSize = 0;
             this.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSelect.ForeColor = System.Drawing.Color.Blue;
-            this.btnSelect.Location = new System.Drawing.Point(270, 44);
+            this.btnSelect.Location = new System.Drawing.Point(335, 72);
             this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.Size = new System.Drawing.Size(75, 24);
             this.btnSelect.TabIndex = 3;
             this.btnSelect.Text = "&Switch To...";
-            this.btnSelect.UseVisualStyleBackColor = false;
+            this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.BtnSelect_Click);
             // 
             // lbProfileList
             // 
+            this.lbProfileList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbProfileList.FormattingEnabled = true;
             this.lbProfileList.HorizontalScrollbar = true;
-            this.lbProfileList.Location = new System.Drawing.Point(27, 44);
+            this.lbProfileList.ItemHeight = 15;
+            this.lbProfileList.Location = new System.Drawing.Point(30, 72);
             this.lbProfileList.Name = "lbProfileList";
-            this.lbProfileList.Size = new System.Drawing.Size(237, 264);
+            this.lbProfileList.Size = new System.Drawing.Size(298, 334);
             this.lbProfileList.Sorted = true;
             this.lbProfileList.TabIndex = 4;
             this.lbProfileList.SelectedIndexChanged += new System.EventHandler(this.ProfileList_SelectedIndexChanged);
@@ -100,21 +104,21 @@ namespace Terminal
             this.btnDelete.Enabled = false;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.ForeColor = System.Drawing.Color.Blue;
-            this.btnDelete.Location = new System.Drawing.Point(270, 286);
+            this.btnDelete.Location = new System.Drawing.Point(335, 314);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.Size = new System.Drawing.Size(75, 24);
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "&Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // lblTitle
             // 
             this.lblTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(12, 9);
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(44, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(345, 21);
             this.lblTitle.TabIndex = 8;
@@ -127,14 +131,14 @@ namespace Terminal
             this.btnExport.Enabled = false;
             this.btnExport.FlatAppearance.BorderSize = 0;
             this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.ForeColor = System.Drawing.Color.Blue;
-            this.btnExport.Location = new System.Drawing.Point(269, 228);
+            this.btnExport.Location = new System.Drawing.Point(334, 256);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.Size = new System.Drawing.Size(75, 24);
             this.btnExport.TabIndex = 9;
             this.btnExport.Text = "E&xport";
-            this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
             // btnImport
@@ -142,14 +146,14 @@ namespace Terminal
             this.btnImport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnImport.FlatAppearance.BorderSize = 0;
             this.btnImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImport.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.ForeColor = System.Drawing.Color.Blue;
-            this.btnImport.Location = new System.Drawing.Point(270, 257);
+            this.btnImport.Location = new System.Drawing.Point(335, 285);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 23);
+            this.btnImport.Size = new System.Drawing.Size(75, 24);
             this.btnImport.TabIndex = 10;
             this.btnImport.Text = "&Import";
-            this.btnImport.UseVisualStyleBackColor = false;
+            this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.BtnImport_Click);
             // 
             // openFileDialog
@@ -169,14 +173,14 @@ namespace Terminal
             this.btnRename.Enabled = false;
             this.btnRename.FlatAppearance.BorderSize = 0;
             this.btnRename.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnRename.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRename.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRename.ForeColor = System.Drawing.Color.Blue;
-            this.btnRename.Location = new System.Drawing.Point(270, 199);
+            this.btnRename.Location = new System.Drawing.Point(335, 227);
             this.btnRename.Name = "btnRename";
-            this.btnRename.Size = new System.Drawing.Size(75, 23);
+            this.btnRename.Size = new System.Drawing.Size(75, 24);
             this.btnRename.TabIndex = 11;
             this.btnRename.Text = "&Rename";
-            this.btnRename.UseVisualStyleBackColor = false;
+            this.btnRename.UseVisualStyleBackColor = true;
             this.btnRename.Click += new System.EventHandler(this.BtnRename_Click);
             // 
             // btnCopy
@@ -185,14 +189,14 @@ namespace Terminal
             this.btnCopy.Enabled = false;
             this.btnCopy.FlatAppearance.BorderSize = 0;
             this.btnCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCopy.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopy.ForeColor = System.Drawing.Color.Blue;
-            this.btnCopy.Location = new System.Drawing.Point(270, 170);
+            this.btnCopy.Location = new System.Drawing.Point(335, 198);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.Size = new System.Drawing.Size(75, 24);
             this.btnCopy.TabIndex = 12;
             this.btnCopy.Text = "&Copy";
-            this.btnCopy.UseVisualStyleBackColor = false;
+            this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
             // 
             // btnStart
@@ -201,22 +205,43 @@ namespace Terminal
             this.btnStart.Enabled = false;
             this.btnStart.FlatAppearance.BorderSize = 0;
             this.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.ForeColor = System.Drawing.Color.Blue;
-            this.btnStart.Location = new System.Drawing.Point(270, 73);
+            this.btnStart.Location = new System.Drawing.Point(335, 101);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.Size = new System.Drawing.Size(75, 24);
             this.btnStart.TabIndex = 13;
             this.btnStart.Text = "&Start";
-            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(27, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(180, 15);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Only show profiles starting with: ";
+            // 
+            // eStartsWith
+            // 
+            this.eStartsWith.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eStartsWith.Location = new System.Drawing.Point(214, 43);
+            this.eStartsWith.Name = "eStartsWith";
+            this.eStartsWith.Size = new System.Drawing.Size(192, 23);
+            this.eStartsWith.TabIndex = 15;
+            this.eStartsWith.TextChanged += new System.EventHandler(this.eStartsWith_TextChanged);
             // 
             // FrmProfileDatabase
             // 
             this.AcceptButton = this.btnSelect;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 338);
+            this.ClientSize = new System.Drawing.Size(432, 434);
+            this.Controls.Add(this.eStartsWith);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.btnRename);
@@ -233,8 +258,10 @@ namespace Terminal
             this.Name = "FrmProfileDatabase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profile Database";
+            this.TopMost = true;
             this.Shown += new System.EventHandler(this.FrmProfileDatabase_Shown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -250,5 +277,7 @@ namespace Terminal
         private System.Windows.Forms.Button btnRename;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox eStartsWith;
     }
 }

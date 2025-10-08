@@ -6,10 +6,10 @@
 
  Rebuiling the program:
  
-    1. Ensure you have Visual Studio with C# and .NET 4.8 options are installed
+    1. Ensure you have Visual Studio with C# and .NET Framework 4.8 installed
     2. Run 'build.bat' (which should work out-of-the-box) in most cases
     3. If not, read the messages from msbuild.
     4. If all else fails, open the solution file in your Visual Studio IDE en build it manually
     
 Michael Heyns
-2022
+2025

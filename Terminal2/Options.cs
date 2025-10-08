@@ -24,6 +24,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Diagnostics;
 
 using static System.Net.Mime.MediaTypeNames;
 
@@ -197,34 +198,74 @@ namespace Terminal
             for (int m = 0; m < macros.Length; m++)
                 macros[m] = new Macro();
         }
-
-        //public Profile Clone(string name)
-        //{
-        //    Profile s = (Profile)this.MemberwiseClone();
-        //    s.name = name;
-        //    s.embellishments = embellishments.Clone();
-        //    s.conOptions = conOptions.Clone();
-        //    s.logOptions = logOptions.Clone();
-        //    s.displayOptions = displayOptions.Clone();
-        //    s.conOptions.Modified = false;
-        //    s.logOptions.Modified = false;
-
-        //    for (int t = 0; t < titles.Length; t++)
-        //        s.titles[t] = titles[t];
-
-        //    for (int m = 0; m < macros.Length; m++)
-        //    {
-        //        if (macros[m] != null)
-        //            s.macros[m] = macros[m].Clone();
-        //        else
-        //            s.macros[m] = null;
-        //    }
-        //    return s;
-        //}
     }
 
     public class Utils
     {
+        private static Stopwatch stopwatchT = new Stopwatch();
+        private static int millisecondsSinceMidnight = 0;
+
+        private static int GetTimeProgramStarted()
+        {
+            // Get current DateTime (in local time zone, consistent with typical "now")
+            DateTime now = DateTime.Now;
+
+            // Compute total milliseconds since midnight
+            int msSinceMidnight = now.Hour * 3600000 + now.Minute * 60000 + now.Second * 1000 + now.Millisecond;
+
+            return msSinceMidnight;
+        }
+
+        private static string GetTime(int timeProgramStarted, double elapsedTime)
+        {
+            // Total milliseconds since midnight
+            double totalMs = timeProgramStarted + elapsedTime;
+
+            // Total seconds since midnight (with full precision)
+            double totalSec = totalMs / 1000.0;
+
+            // Extract hours
+            int hours = (int)(totalSec / 3600.0);
+
+            // Remaining seconds after full hours
+            double remSec = totalSec % 3600.0;
+
+            // Extract minutes
+            int minutes = (int)(remSec / 60.0);
+
+            // Remaining seconds after full minutes
+            double remSecAfterMin = remSec % 60.0;
+
+            // Extract whole seconds (0-59)
+            int seconds = (int)remSecAfterMin;
+
+            // Get the fractional part of the seconds (0.0 to 0.999...)
+            double frac = remSecAfterMin - seconds;
+
+            // Calculate milliseconds from fractional part (multiply by 1000)
+            double msValue = frac * 1000.0;
+
+            // Whole milliseconds (0-999)
+            int ms = (int)msValue;
+
+            // Remaining fraction for microseconds
+            double subMs = msValue - ms;
+
+            // Calculate microseconds (round to nearest)
+            int us = (int)Math.Round(subMs * 1000.0);
+
+            // Format hours, minutes, seconds, and ms with leading zeros
+            // uuu similarly
+            string timeStr = $"{hours:D2}:{minutes:D2}:{seconds:D2}.{ms:D3} {us:D3}: ";
+
+            return timeStr;
+        }
+
+        public static void StartStopwatch()
+        {
+            millisecondsSinceMidnight = GetTimeProgramStarted();
+            stopwatchT.Start();
+        }
 
         public const string DefaultInputFont = "Courier New, 11.25pt";
         public const string DefaultOutputFont = "Courier New, 8.25pt";
@@ -246,7 +287,14 @@ namespace Terminal
 
         public static string Timestamp()
         {
-            return $"{DateTime.Now:HH:mm:ss.fff}: ";
+            if (millisecondsSinceMidnight >= 86400000)
+            {
+                //midnight roll-over
+                stopwatchT.Stop();
+                StartStopwatch();
+            }
+
+            return GetTime(millisecondsSinceMidnight, stopwatchT.Elapsed.TotalMilliseconds);
         }
         public static bool IsNumeric(char ch)
         {
@@ -255,22 +303,24 @@ namespace Terminal
             return true;
         }
 
-        // "HH:mm:ss.fff: "
+        //  012345678901234567
+        // "HH:mm:ss.mmm mmm: "
         public static bool HasTimestamp(string str)
         {
-            if (str.Length < 14)
+            if (str.Length < 18)
                 return false;
-            if (!IsNumeric(str[0]) || !IsNumeric(str[1]) || !IsNumeric(str[3]) || !IsNumeric(str[4]) || !IsNumeric(str[6]) || !IsNumeric(str[7]) || !IsNumeric(str[9]) || !IsNumeric(str[10]) || !IsNumeric(str[11]))
+            if (!IsNumeric(str[0]) || !IsNumeric(str[1]) || !IsNumeric(str[3]) || !IsNumeric(str[4]) || !IsNumeric(str[6]) || !IsNumeric(str[7]) || !IsNumeric(str[9]) || !IsNumeric(str[10]) || !IsNumeric(str[11]) || !IsNumeric(str[13]) || !IsNumeric(str[14]) || !IsNumeric(str[15]))
                 return false;
-            if (str[2] != (char)':' || str[5] != (char)':' || str[8] != (char)'.' || str[12] != (char)':')
+            if (str[2] != (char)':' || str[5] != (char)':' || str[8] != (char)'.' || str[12] != (char)' ' || str[16] != (char)':')
                 return false;
             return true;
         }
 
-        // Assuming "HH:mm:ss.fff: "
+        //           123456789012345678
+        // Assuming "HH:mm:ss.mmm mmm: "
         public static int TimestampLength()
         {
-            return 14;
+            return 18;
         }
     }
 }

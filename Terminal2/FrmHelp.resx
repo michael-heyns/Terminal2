@@ -186,7 +186,26 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.3.6.1
+    <value>v1.5.x.x
+  * New look and feel
+  * Profiles can be changed without closing current one
+  * Save/Restore of position and size
+  * Filtered profile search
+
+v1.4.0.0
+  *  Updated threading mechanism for macros
+  *  General improvements
+
+v1.3.7.2
+  *  Timestamp now in the format HH.MM.SS.mmm uuu:   (with uuu being microseconds)
+
+v1.3.6.5
+  * Added #BREAK option
+
+v1.3.6.4
+  * 'Macro move' bugfix
+
+v1.3.6.1
   * Cosmetic changes to the macro-move screen
   * Ability to import and export macros only
 

@@ -27,12 +27,14 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using static System.Net.WebRequestMethods;
 
@@ -105,17 +107,18 @@ namespace Terminal
         private readonly static object _dollarLock = new object();
 
         private readonly FrmSearch _search = new FrmSearch();
-        private enum State { Changing, Disconnected, Connected, Listening };
-        private State _state = State.Disconnected;
+        private enum ConnectionState { Changing, Disconnected, Connected, Listening };
+        private ConnectionState _conState = ConnectionState.Disconnected;
 
         // MACRO threads
-        private readonly Thread[] _macroThread = new Thread[48 * 4];
-        private static readonly AutoResetEvent[] _macroTrigger = new AutoResetEvent[48 * 4];
-        private static readonly bool[] _macroBusy = new bool[48 * 4];
-        private static readonly bool[] _macroTriggeredByFilter = new bool[48 * 4];
+        private const int MACRO_COUNT = (48 * 4);
+        private readonly static object _macroLock = new object();
+        private bool[] _macroRunning = new bool[MACRO_COUNT];
+        private bool[] _macroStop = new bool[MACRO_COUNT];
 
         // TCP Server listening thread
         private Thread _connectThread = null;
+        private bool _connectThreadRunning;
         private bool _threadResult;
         private bool _threadDone = false;
 
@@ -136,7 +139,6 @@ namespace Terminal
 
         private volatile bool _tickBusy = false;
         private static bool _terminateFlag = false;
-        private static int _localThreadCount = 0;
 
         private volatile bool _frozen = false;
 
@@ -149,7 +151,8 @@ namespace Terminal
         private Brush _outputFrontBrush;
         private Brush _outputBackBrush;
         private bool _cancelRestart = false;
-        private Color _startupButtonColor;
+        private Color _topRowBackColor;
+        private Color _secondRowBackColor;
         private bool _lineFinished = true;
         private ToolTip toolTip = new ToolTip();
         private int _stopLine = -1;
@@ -168,9 +171,35 @@ namespace Terminal
 
         private Button[] _btnGroups = new Button[4];
 
-        private string[] _LogLimits = { "No limits", "1000", "5000", "10000", "50000", "100000", "500000", "1000000"};
+        private readonly string[] _LogLimits = { "No limits", "1000", "5000", "10000", "50000", "100000", "500000", "1000000" };
+
+        private string _stopAtText = string.Empty;
+        private bool _stopAtEnabled = false;
+        private bool _stopAtUseCase = false;
 
         // ==============================================
+        private List<string> GetAllIPAddresses()
+        {
+            var addresses = new List<string>();
+
+            // Get IP addresses via DNS, filtering for IPv4
+            try
+            {
+                var host = Dns.GetHostEntry(Dns.GetHostName());
+                addresses.AddRange(host.AddressList
+                    .Where(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    .Select(ip => ip.ToString()));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting host addresses: {ex.Message}");
+            }
+
+            // Remove duplicates and localhost (which is already filtered by IPv4)
+            return addresses.Distinct()
+                            .Where(ip => !ip.StartsWith("127."))  // Redundant but safe, as loopback is IPv4.0
+                            .ToList();
+        }
         private void SetSearchText(string str)
         {
             if (Utils.HasTimestamp(str))
@@ -180,58 +209,6 @@ namespace Terminal
             _activeProfile.displayOptions.filter[SEARCH_INDEX].mode = 1;
             lbInput.Refresh();
         }
-
-        //private int FindApplicableFilter(string str, int offset)
-        //{
-        //    if (offset >= str.Length)
-        //        return -1;
-
-        //    if (_activeProfile.displayOptions.IgnoreCase)
-        //    {
-        //        for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
-        //        {
-        //            if (_activeProfile.displayOptions.filter[i].text.Length > 0)
-        //            {
-        //                // starts with
-        //                if (_activeProfile.displayOptions.filter[i].mode == 0)
-        //                {
-        //                    if (str.ToLower().Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text.ToLower()))
-        //                        return i;
-        //                }
-
-        //                // contains
-        //                else if (_activeProfile.displayOptions.filter[i].mode == 1)
-        //                {
-        //                    if (str.ToLower().Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text.ToLower()))
-        //                        return i;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        for (int i = 0; i < _activeProfile.displayOptions.filter.Length; i++)
-        //        {
-        //            if (_activeProfile.displayOptions.filter[i].text.Length > 0)
-        //            {
-        //                // starts with
-        //                if (_activeProfile.displayOptions.filter[i].mode == 0)
-        //                {
-        //                    if (str.Substring(offset).StartsWith(_activeProfile.displayOptions.filter[i].text))
-        //                        return i;
-        //                }
-
-        //                // contains
-        //                else if (_activeProfile.displayOptions.filter[i].mode == 1)
-        //                {
-        //                    if (str.Substring(offset).Contains(_activeProfile.displayOptions.filter[i].text))
-        //                        return i;
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return -1;
-        //}
 
         private void UpdatePendingCounter()
         {
@@ -274,20 +251,20 @@ namespace Terminal
 
         private void TestForFreeze()
         {
-            if (!cbFreezeAt.Checked || freezeText.Text.Length == 0)
+            if (!_stopAtEnabled || _stopAtText.Length == 0)
                 return;
 
             int line = lbInput.Items.Count - 1;
-            if (cbFreezeCase.Checked)
+            if (_stopAtUseCase)
             {
                 string strC = lbInput.Items[lbInput.Items.Count - 1].ToString();
-                if (!strC.Contains(freezeText.Text))
+                if (!strC.Contains(_stopAtText))
                     return;
             }
             else
             {
                 string str = lbInput.Items[lbInput.Items.Count - 1].ToString().ToLower();
-                if (!str.Contains(freezeText.Text.ToLower()))
+                if (!str.Contains(_stopAtText.ToLower()))
                     return;
 
             }
@@ -299,14 +276,7 @@ namespace Terminal
                 {
                     _stopLine = line;
                     Freeze(_stopLine - 5);
-
-                    // add it to our archive list
-                    if (cbFreezeAt.Checked)
-                    {
-                        int index = freezeText.FindString(freezeText.Text);
-                        if (index < 0)
-                            freezeText.Items.Add(freezeText.Text);
-                    }
+                    MessageBox.Show($"The string '{_stopAtText}' has been detected", "Stop-At condition met", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -337,12 +307,7 @@ namespace Terminal
                         int m = FindMacro(_filterMacro[filter]);
                         if (m >= 0)
                         {
-                            if (!_macroTriggeredByFilter[m])
-                            {
-                                _macroTriggeredByFilter[m] = true;
-                                if (!_macroBusy[m])
-                                    _macroTrigger[m].Set();
-                            }
+                            RunMacro(m);
                         }
                     }
                     _macroTriggerString.Clear();
@@ -352,7 +317,6 @@ namespace Terminal
                     _macroTriggerString.Append(ch);
                 }
             }
-
         }
 
         private void UIInputQueueHandler()
@@ -555,8 +519,6 @@ namespace Terminal
             {
                 SaveThisProfile();
 
-                TopMost = false;
-
                 FrmDisplayOptions DialogOptions = new FrmDisplayOptions();
                 DialogOptions.MacroNames.Clear();
                 foreach (Macro m in _activeProfile.macros)
@@ -570,8 +532,6 @@ namespace Terminal
 
                 DialogOptions.Options = _activeProfile.displayOptions.Clone();
                 DialogOptions.ShowDialog();
-
-                TopMost = cbStayOnTop.Checked;
 
                 if (DialogOptions.Result == DialogResult.OK)
                 {
@@ -607,12 +567,14 @@ namespace Terminal
 
         private void ConnectionThread()
         {
+            _connectThreadRunning = true;
             try
             {
                 _threadResult = _comms.Connect(_activeProfile);
                 _threadDone = true;
             }
             catch { }
+            _connectThreadRunning = false;
         }
 
         private void ActionConnect()
@@ -621,7 +583,7 @@ namespace Terminal
             Application.DoEvents();
 
             _cancelRestart = false;
-            _state = State.Changing;
+            _conState = ConnectionState.Changing;
 
             if (pdPort.Text.Equals("TCP Server"))
                 _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
@@ -635,6 +597,14 @@ namespace Terminal
 
             if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
             {
+                List<string> ips = GetAllIPAddresses();
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Listening on: ");
+                foreach (string s in ips)
+                    sb.Append(s + "  ");
+                sb.Append("- Port " + _activeProfile.conOptions.TCPListenPort);
+                this.Text = sb.ToString() + " - " + VersionLabel;
+
                 _ticks = 0;
                 _tock = 1;
                 btnConnect.Text = "|";
@@ -642,10 +612,9 @@ namespace Terminal
                 btnConnectOptions.Enabled = false;
                 pdPort.Enabled = false;
                 btnRescan.Enabled = false;
-                btnProfile.Enabled = false;
 
                 LogAdd(Utils.Timestamp() + "{LISTENING}");
-                _state = State.Listening;
+                _conState = ConnectionState.Listening;
 
                 _threadDone = false;
                 _connectThread = new Thread(new ThreadStart(ConnectionThread));
@@ -659,21 +628,20 @@ namespace Terminal
                     btnConnect.Text = "Dis&connect";
                     btnConnectOptions.Enabled = false;
                     pdPort.Enabled = false;
-                    btnRescan.Enabled=false;
-                    btnProfile.Enabled = false;
+                    btnRescan.Enabled = false;
                     btnFile.Enabled = true;
                     btnConnect.BackColor = Color.Lime;
 
                     LogAdd(Utils.Timestamp() + "{CONNECTED}");
-                    _state = State.Connected;
-                    this.Text = pdPort.Text;
+                    _conState = ConnectionState.Connected;
+                    this.Text = pdPort.Text + " - " + VersionLabel;
                 }
                 else
                 {
                     btnConnect.Text = "&Connect";
                     MessageBox.Show("The port may be used by another application\n** or **\nWindows is preventing access at the moment.\n\nWait a few seconds and try again", "Cannot connect right now", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LogAdd(Utils.Timestamp() + "{FAILED}");
-                    _state = State.Disconnected;
+                    _conState = ConnectionState.Disconnected;
                 }
             }
         }
@@ -684,28 +652,27 @@ namespace Terminal
             Application.DoEvents();
             _comms.Disconnect();
 
-            if (_state == State.Listening)
+            if (_conState == ConnectionState.Listening)
             {
-                if (!_threadDone)
-                    _connectThread.Abort();
-                _connectThread.Join();
+
+                _connectThread?.Join(2000);
                 _connectThread = null;
             }
 
-            btnConnect.BackColor = _startupButtonColor;
+            btnConnect.BackColor = _topRowBackColor;
+            btnConnect.UseVisualStyleBackColor = true;
             RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
             btnRescan.Enabled = true;
-            btnProfile.Enabled = true;
             btnFile.Enabled = false;
             Application.DoEvents();
 
-            RestartAllMacros();
+            StopAllMacros();
             this.Text = VersionLabel;
 
             LogAdd(Utils.Timestamp() + "{DISCONNECTED}");
-            _state = State.Disconnected;
+            _conState = ConnectionState.Disconnected;
         }
 
         private void DoConnectDisconnect()
@@ -718,7 +685,7 @@ namespace Terminal
             _macroTriggerString.Clear();
             btnConnect.Enabled = false;
             _cancelRestart = true;
-            if (_state == State.Disconnected)
+            if (_conState == ConnectionState.Disconnected)
             {
                 ActionConnect();
             }
@@ -769,9 +736,7 @@ namespace Terminal
             {
                 SaveThisProfile();
                 FrmLogOptions options = new FrmLogOptions(_activeProfile.logOptions);
-                TopMost = false;
                 options.ShowDialog();
-                TopMost = cbStayOnTop.Checked;
                 if (_activeProfile.logOptions.Modified)
                     SaveThisProfile();
             }
@@ -781,13 +746,13 @@ namespace Terminal
 
         private void BtnSend_Click(object sender, EventArgs e)
         {
-            if (_state == State.Disconnected)
+            if (_conState == ConnectionState.Disconnected)
             {
-                DialogResult yn = MessageBox.Show("Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult yn = MessageBox.Show("    Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (yn == DialogResult.Yes)
                     BtnConnect_Click(sender, e);
             }
-            if (_state == State.Connected)
+            if (_conState == ConnectionState.Connected)
             {
                 string str;
                 if (cbSendAsIType.Checked && !_typingPaused)
@@ -815,13 +780,13 @@ namespace Terminal
 
         private void btnSTXETX_Click(object sender, EventArgs e)
         {
-            if (_state == State.Disconnected)
+            if (_conState == ConnectionState.Disconnected)
             {
-                DialogResult yn = MessageBox.Show("Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult yn = MessageBox.Show("    Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (yn == DialogResult.Yes)
                     BtnConnect_Click(sender, e);
             }
-            if (_state == State.Connected)
+            if (_conState == ConnectionState.Connected)
             {
                 string str = tbCommand.Text;
                 str = EncapsulateSTXETX(str);
@@ -858,9 +823,7 @@ namespace Terminal
                 }
 
                 FrmConnectOptions port = new FrmConnectOptions(_activeProfile.conOptions, _comms.GetSerialPortNames());
-                TopMost = false;
                 port.ShowDialog();
-                TopMost = cbStayOnTop.Checked;
                 if (_activeProfile.conOptions.Modified)
                 {
                     RefreshPortPulldown();
@@ -870,7 +833,7 @@ namespace Terminal
             RefreshPortPulldown();
             btnConnectOptions.Enabled = true;
             pdPort.Enabled = true;
-            btnRescan.Enabled=true;
+            btnRescan.Enabled = true;
             tbCommand.Focus();
         }
 
@@ -906,7 +869,8 @@ namespace Terminal
             else
             {
                 btnLogOptions.Enabled = true;
-                btnStartLog.BackColor = _startupButtonColor;
+                btnStartLog.BackColor = _topRowBackColor;
+                btnStartLog.UseVisualStyleBackColor = true;
                 btnStartLog.Text = "Start &Log";
             }
             tbCommand.Focus();
@@ -955,7 +919,7 @@ namespace Terminal
         private void Freeze(int topLine)
         {
             _frozen = true;
-            btnFreeze.ForeColor = Color.Blue;
+            btnFreeze.ForeColor = Color.Yellow;
             btnFreeze.BackColor = Color.IndianRed;
             btnFreeze.Text = "&GO";
             lbInput.TopIndex = topLine;
@@ -963,7 +927,8 @@ namespace Terminal
         private void UnFreeze()
         {
             btnFreeze.ForeColor = Color.Black;
-            btnFreeze.BackColor = _startupButtonColor;
+            btnFreeze.BackColor = _secondRowBackColor;
+            btnFreeze.UseVisualStyleBackColor = true;
             btnFreeze.Text = "&Freeze";
             _frozen = false;
             _stopLine = lbInput.Items.Count - 1;
@@ -987,32 +952,6 @@ namespace Terminal
             btnFreeze.Enabled = true;
             tbCommand.Focus();
         }
-        private void CbStayOnTop_CheckedChanged(object sender, EventArgs e)
-        {
-            TopMost = cbStayOnTop.Checked;
-        }
-
-        private void RestartMacro(int m)
-        {
-            if (_macroBusy[m])
-            {
-                Macro mac = _activeProfile.macros[m];
-                dgMacroTable.Rows[mac.uiRow].Cells[mac.uiColumn].Style.BackColor = Color.White;
-                _macroThread[m].Abort();
-                _macroThread[m] = new Thread(new ThreadStart(MacroThread))
-                {
-                    Name = m.ToString()
-                };
-                _macroThread[m].Start();
-            }
-        }
-
-        private void RestartAllMacros()
-        {
-            for (int m = 0; m < _macroThread.Length; m++)
-                RestartMacro(m);
-        }
-
         private void ChangeMacroButtonColor(int m, Color color)
         {
             if (m < _macroOffset || m > (_macroOffset + 48)) return;
@@ -1021,199 +960,303 @@ namespace Terminal
             int col = (num % 12) + 1;
             int row = (num / 12) + 1;
             dgMacroTable.Rows[row].Cells[col].Style.BackColor = color;
+            Application.DoEvents();
+        }
+
+        private void LowlevelExecuteMacro(int m, int parent)
+        {
+            Macro mac = _activeProfile.macros[m];
+            if (mac == null) return;
+
+            string[] delim = { "{0D}", "{0A}" };
+            mac.runLines = mac.macro.Split(delim, StringSplitOptions.RemoveEmptyEntries);
+            if (mac.runLines.Length == 0) return;
+
+            int repeatCount = 0;
+            while (true)
+            {
+                if (_terminateFlag) return;
+                if (!_comms.Connected()) return;
+                if (_macroStop[parent]) return;
+
+                for (int lineNo = 0; lineNo < mac.runLines.Length; lineNo++)
+                {
+                    if (_terminateFlag) return;
+                    if (!_comms.Connected()) return;
+                    if (_macroStop[parent]) return;
+
+                    string line = mac.runLines[lineNo];
+
+                    // detect #MACRO name
+                    int cmdIndex = line.IndexOf("#MACRO ");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#MACRO "))
+                        {
+                            string title = line.Substring(7).Trim();
+                            int sub_m = FindMacro(title);
+                            if (sub_m >= 0)
+                            {
+                                LowlevelExecuteMacro(sub_m, parent);
+                                continue;
+                            }
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #DELAY nn
+                    cmdIndex = line.IndexOf("#DELAY ");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#DELAY "))
+                        {
+                            string strNN = line.Substring(7);
+                            try
+                            {
+                                int NN = int.Parse(strNN);
+                                if (NN > 0)
+                                {
+                                    Thread.Sleep(NN);   // sleep for N milliseconds
+                                    continue;
+                                }
+                            }
+                            catch
+                            {
+                                // fall through
+                            }
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #BREAK nn
+                    cmdIndex = line.IndexOf("#BREAK");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#BREAK"))
+                        {
+                            string[] tokens = line.Split(' ');
+                            int NN = 1000;  // microseconds default
+                            if (tokens.Length > 1)
+                            {
+                                NN = int.Parse(tokens[1]);
+                                if (NN < 1) NN = 1000;
+                            }
+
+                            // enter BREAK state
+                            _comms.EnterBreakState(NN);
+                            continue;
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #FREEZE
+                    cmdIndex = line.IndexOf("#FREEZE");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#FREEZE"))
+                        {
+                            _freezeTriggeredFromMacro = true;
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #DTR
+                    cmdIndex = line.IndexOf("#DTR");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#DTR"))
+                        {
+                            _comms.ControlPressed(0);
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #RTS
+                    cmdIndex = line.IndexOf("#RTS");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#RTS"))
+                        {
+                            _comms.ControlPressed(1);
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // double comments go to input stream as well
+                    int noteStart = line.IndexOf("##");
+                    if (noteStart >= 0)
+                        _uiInputQueue.Enqueue("-NOTE-> " + line.Substring(noteStart + 2) + "\n");
+
+                    // detect #STX
+                    bool encapsulateSTXETX = false;
+                    cmdIndex = line.IndexOf("#STX ");
+                    if (cmdIndex >= 0)
+                    {
+                        line = line.TrimEnd();
+                        if (line.StartsWith("#STX "))
+                        {
+                            line = line.Substring(5);   // throw away the #STX
+                            encapsulateSTXETX = true;
+                        }
+                    }
+
+                    // remove comments altogether
+                    int commentStart = line.IndexOf('#');
+                    if (commentStart >= 0)
+                        line = line.Substring(0, commentStart);
+
+                    // trim
+                    line = line.TrimEnd();
+
+                    // encapsulate in STX/ETX packet
+                    if (encapsulateSTXETX)
+                    {
+                        line = EncapsulateSTXETX(line);
+                    }
+
+                    // add CR/LF
+                    if (line.Length > 0)
+                    {
+                        if (mac.addCR)
+                            line += "$0D";
+                        if (mac.addLF)
+                            line += "$0A";
+                    }
+
+                    // send
+                    if (line.Length > 0)
+                    {
+                        if (_terminateFlag)
+                            return;
+                        SendDollarString(line, mac.delayBetweenChars);
+
+                        // only delay if delay specified
+                        if (mac.delayBetweenLinesMs > 0)
+                        {
+                            // check for fine or rough resolution
+                            if (mac.delayBetweenLinesMs > 50)
+                            {
+                                // rough resolution
+                                // sleep - but check for cancellation regularly
+                                for (int ms = 0; ms < (mac.delayBetweenLinesMs / 5); ms++)
+                                {
+                                    if (_terminateFlag) return;
+                                    if (!_comms.Connected()) return;
+                                    if (_macroStop[parent]) return;
+
+                                    Thread.Sleep(5);
+                                }
+                            }
+                            else
+                            {
+                                // fine resolution
+                                Thread.Sleep(mac.delayBetweenLinesMs);
+                            }
+                        }
+                    }
+                }
+
+                if (!mac.repeatEnabled)
+                    break;
+                repeatCount++;
+                if (mac.stopAfterRepeats > 0 && repeatCount > mac.stopAfterRepeats)
+                    break;
+
+                // sleep - but check for cancellation
+                for (int ms = 0; ms < (mac.resendEveryMs / 10); ms++)
+                {
+                    if (_terminateFlag) return;
+                    if (!_comms.Connected()) return;
+                    if (_macroStop[parent]) return;
+
+                    Thread.Sleep(10);
+                }
+            }
         }
 
         private void MacroThread()
         {
             int m = Utils.Int(Thread.CurrentThread.Name);
-            string[] delim = { "{0D}", "{0A}" };
-
-            _localThreadCount++;
-            try // Thread.Abort will cause an exception
+            lock (_macroLock)
             {
-                while (!_terminateFlag)
-                {
-                    _macroTriggeredByFilter[m] = false;
-                    _macroBusy[m] = false;
-                    _macroTrigger[m].WaitOne();
-                    Thread.Sleep(10);
-                    if (_terminateFlag)
-                        break;
+                _macroRunning[m] = true;
+            }
 
-                    // -------------------------------------------
-                    // the thread will wait here till activated
-                    // -------------------------------------------
-
-                    Macro mac = _activeProfile.macros[m];
-                    if (mac == null)
-                        continue;
-
-                    mac.runLines = mac.macro.Split(delim, StringSplitOptions.RemoveEmptyEntries);
-                    if (mac.runLines.Length == 0)
-                        continue;
-
-                    ChangeMacroButtonColor(m, Color.Tomato);
-
-                    _macroBusy[m] = true;
-                    int repeatCount = 0;
-                    while (!_terminateFlag)
-                    {
-                        for (int x = 0; x < mac.runLines.Length; x++)
-                        {
-                            string line = mac.runLines[x];
-
-                            // detect #MACRO name
-                            int cmdIndex = line.IndexOf("#MACRO ");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#MACRO "))
-                                {
-                                    string title = line.Substring(7).Trim();
-                                    int mm = FindMacro(title);
-                                    if (mm >= 0)
-                                        DoMacro(mm);
-                                    continue;
-                                }
-
-                                // restore and continue
-                                line = mac.runLines[x];
-                            }
-
-                            // detect #DELAY nn
-                            cmdIndex = line.IndexOf("#DELAY ");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#DELAY "))
-                                {
-                                    string strNN = line.Substring(7);
-                                    try
-                                    {
-                                        int NN = int.Parse(strNN);
-                                        if (NN > 0)
-                                        {
-                                            Thread.Sleep(NN);   // sleep for N milliseconds
-                                            continue;
-                                        }
-                                    }
-                                    catch 
-                                    { 
-                                        // fall through
-                                    }
-                                }
-
-                                // restore and continue
-                                line = mac.runLines[x];
-                            }
-
-                            // detect #FREEZE nn
-                            cmdIndex = line.IndexOf("#FREEZE");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#FREEZE"))
-                                {
-                                    _freezeTriggeredFromMacro = true;
-                                }
-
-                                // restore and continue
-                                line = mac.runLines[x];
-                            }
-
-                            // detect #DTR nn
-                            cmdIndex = line.IndexOf("#DTR");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#DTR"))
-                                {
-                                    _comms.ControlPressed(0);
-                                }
-
-                                // restore and continue
-                                line = mac.runLines[x];
-                            }
-
-                            // detect #RTS nn
-                            cmdIndex = line.IndexOf("#RTS");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#RTS"))
-                                {
-                                    _comms.ControlPressed(1);
-                                }
-
-                                // restore and continue
-                                line = mac.runLines[x];
-                            }
-
-                            // double comments go to input stream as well
-                            int noteStart = line.IndexOf("##");
-                            if (noteStart >= 0)
-                                _uiInputQueue.Enqueue("-NOTE-> " + line.Substring(noteStart + 2) + "\n");
-
-                            // detect #STX
-                            bool encapsulateSTXETX = false;
-                            cmdIndex = line.IndexOf("#STX ");
-                            if (cmdIndex >= 0)
-                            {
-                                line = line.TrimEnd();
-                                if (line.StartsWith("#STX "))
-                                {
-                                    line = line.Substring(5);   // throw away the #STX
-                                    encapsulateSTXETX = true;
-                                }
-                            }
-
-                            // remove comments altogether
-                            int commentStart = line.IndexOf('#');
-                            if (commentStart >= 0)
-                                line = line.Substring(0, commentStart);
-
-                            // trim
-                            line = line.TrimEnd();
-
-                            // encapsulate in STX/ETX packet
-                            if (encapsulateSTXETX)
-                            {
-                                line = EncapsulateSTXETX(line);
-                            }
-
-                            // add CR/LF
-                            if (line.Length > 0)
-                            {
-                                if (mac.addCR)
-                                    line += "$0D";
-                                if (mac.addLF)
-                                    line += "$0A";
-                            }
-
-                            // send
-                            if (line.Length > 0)
-                            {
-                                SendDollarString(line, mac.delayBetweenChars);
-                                Thread.Sleep(mac.delayBetweenLinesMs);
-                            }
-                        }
-
-                        if (!mac.repeatEnabled)
-                            break;
-                        repeatCount++;
-                        if (mac.stopAfterRepeats > 0 && repeatCount > mac.stopAfterRepeats)
-                            break;
-                        Thread.Sleep(mac.resendEveryMs);
-                    }
-                    ChangeMacroButtonColor(m, Color.White);
-                }
+            ChangeMacroButtonColor(m, Color.Tomato);
+            try
+            {
+                LowlevelExecuteMacro(m, m);
             }
             catch { }
+            ChangeMacroButtonColor(m, Color.White);
 
-            if (dgMacroTable.SelectedCells.Count > 0)
-                dgMacroTable.ClearSelection();
+            lock (_macroLock)
+            {
+                _macroRunning[m] = false;
+                _macroStop[m] = false;
+            }
+        }
 
-            _localThreadCount--;
+        private void StopMacro(int m)
+        {
+            lock (_macroLock)
+            {
+                if (_macroRunning[m])
+                {
+                    _macroStop[m] = true;
+                }
+            }
+        }
+
+        private void StopAllMacros()
+        {
+            for (int m = 0; m < _macroRunning.Length; m++)
+                StopMacro(m);
+        }
+
+        private void WaitAllMacrosStopped()
+        {
+            for (int m = 0; m < _macroRunning.Length; m++)
+            {
+                while (_macroRunning[m])
+                    Thread.Sleep(10);
+            }
+        }
+
+        private void RunMacro(int m)
+        {
+            if (_conState == ConnectionState.Disconnected)
+            {
+                DialogResult yn = MessageBox.Show("    Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (yn == DialogResult.Yes)
+                    BtnConnect_Click(null, null);
+            }
+
+            StopMacro(m);
+
+            Thread mac = new Thread(new ThreadStart(MacroThread))
+            {
+                Name = m.ToString()
+            };
+            mac.Start();
         }
 
         private void PokeDeviceToKeepAwake(object extra)
@@ -1290,47 +1333,75 @@ namespace Terminal
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            _startupButtonColor = btnClear.BackColor;
-            btnFreeze.BackColor = _startupButtonColor;
-            toolTip.AutomaticDelay = 1000; 
-            toolTip.InitialDelay = 500; // dT till show
-            toolTip.ReshowDelay = 100;  // dT from one tip to another
-            toolTip.UseFading = true;
-            toolTip.UseAnimation = true;
-            //toolTip.SetToolTip(this.pdPort, "A list of available communication channels - this list is updated in whenever this puldown is opened");
-            //toolTip.SetToolTip(this.btnConnect, "Click to Connect or Disconnect the selected communications channel");
-            //toolTip.SetToolTip(this.btnStartLog, "Click to start logging data to file");
-            toolTip.SetToolTip(this.ctrlOne, "Click this LED to toggle it's outgoing state");
-            toolTip.SetToolTip(this.ctrlTwo, "Click this LED to toggle it's outgoing state");
+            Utils.StartStopwatch();
+            _topRowBackColor = btnConnect.BackColor;
+            _secondRowBackColor = btnClear.BackColor;
+            btnFreeze.BackColor = _secondRowBackColor;
+            btnFreeze.UseVisualStyleBackColor = true;
+
+            toolTip.AutomaticDelay = 10000;// 1000;
+            toolTip.InitialDelay = 0; // dT till show
+            toolTip.ReshowDelay = 0; // dT from one tip to another
+            toolTip.UseFading = false;// true;
+            toolTip.UseAnimation = false;// true;
+            toolTip.BackColor = Color.Yellow;
+            toolTip.ForeColor = Color.Red;
+            toolTip.SetToolTip(this.pdPort, "Available Serial or TCP ports");
+            toolTip.SetToolTip(this.btnRescan, "Updates the Serial and TCP ports list");
+            toolTip.SetToolTip(this.btnConnect, "Connects (or disconnects) from the communication channel");
+            toolTip.SetToolTip(this.btnConnectOptions, "Configures the select channel");
+            toolTip.SetToolTip(this.btnStartLog, "Starts (or stops) logging");
+            toolTip.SetToolTip(this.btnLogOptions, "Configures logging options");
+            toolTip.SetToolTip(this.btnColorConfig, "Configures event detections and associated colours");
+            toolTip.SetToolTip(this.btnProfile, "Selects the active profile");
+            toolTip.SetToolTip(this.btnNew, "Adds a new profile");
+            toolTip.SetToolTip(this.btnQuickLaunch, "Launches another session");
+            toolTip.SetToolTip(this.btnSavePosition, "Saves the window size and position");
+            toolTip.SetToolTip(this.btnRestorePosition, "Restores the window size and position");
+            toolTip.SetToolTip(this.btnResize, "Auto-fits the window to the current screen");
+            toolTip.SetToolTip(this.btnASCII, "Show a simple ASCII table");
+            toolTip.SetToolTip(this.btnFreeze, "Freezes the display while still collecting data");
+            toolTip.SetToolTip(this.btnClear, "Clears the display buffer");
+            toolTip.SetToolTip(this.btnEdit, "Passes a snapshot of the display buffer to your default editor");
+            toolTip.SetToolTip(this.btnInspect, "Passes a snapshot of the display buffer to an internal viewer");
+            toolTip.SetToolTip(this.btnSearch, "Searches the display buffer for a particular pattern");
+
+            toolTip.SetToolTip(this.cbTimestamp, "Shows the time when the first character of a line was received");
+            toolTip.SetToolTip(this.cbASCII, "Prints the incoming data in human readable ASCII test");
+            toolTip.SetToolTip(this.cbHEX, "Prints the incoming data as 2-byte HEX values");
+
+            toolTip.SetToolTip(this.cbShowCR, "Prints {CR} whan 0x0D is received");
+            toolTip.SetToolTip(this.cbShowLF, "Prints {LF} whan 0x0A is received");
+
             toolTip.SetToolTip(this.LED1, "View-only status of the incoming hardware line");
             toolTip.SetToolTip(this.LED2, "View-only status of the incoming hardware line");
             toolTip.SetToolTip(this.LED3, "View-only status of the incoming hardware line");
             toolTip.SetToolTip(this.LED4, "View-only status of the incoming hardware line");
-            toolTip.SetToolTip(this.cbStayOnTop, "Check this to prevent this program (window) from being hidden by other windows");
-            toolTip.SetToolTip(this.cbFreezeAt, "Check this to trigger FREEZE when next the search string is received");
-            toolTip.SetToolTip(this.freezeText, "Enter the search string which will trigger a FREEZE.  It will be added to the list once it has caused a freeze.");
-            toolTip.SetToolTip(this.cbFreezeCase, "Check this to enable Case Sensitive search");
-            toolTip.SetToolTip(this.btnConnectOptions, "Click to define Connection Options");
-            toolTip.SetToolTip(this.btnLogOptions, "Click to configure Logging Options");
-            toolTip.SetToolTip(this.btnNew, "Click to add a NEW profile (without closing this one)");
-            toolTip.SetToolTip(this.btnQuickLaunch, "Click to launch ANOTHER session (without closing this one)");
-            toolTip.SetToolTip(this.btnColorConfig, "Click to change the Look-and-Feel");
+
+            toolTip.SetToolTip(this.tbCommand, "Type the text you want to send");
+
+            toolTip.SetToolTip(this.btnClearOutput, "Clears the output text box");
+            toolTip.SetToolTip(this.btnSTXETX, "Sends the command line text using an STX-ETX header-footer");
+            toolTip.SetToolTip(this.btnFile, "Sends a file (either in raw format or via Xmodem protocol)");
+
+            toolTip.SetToolTip(this.cbSendAsIType, "WARNING: Once sent, you cannot retract it");
+            toolTip.SetToolTip(this.cbClearCMD, "Clears the command line after it was sent");
+
+            toolTip.SetToolTip(this.cbSendCR, "Appends 0x0D to the outgoing line of text (before 0x0A)");
+            toolTip.SetToolTip(this.cbSendLF, "Appends 0x0A to the outgoing line of text (after 0x0D)");
+
+            toolTip.SetToolTip(this.ctrlOne, "Click this block to toggle it's outgoing state");
+            toolTip.SetToolTip(this.ctrlTwo, "Click this block to toggle it's outgoing state");
+
+            toolTip.SetToolTip(this.btnSend, "Sends the typed text string");
+
+            toolTip.ShowAlways = true;
+            toolTip.Active = true;
 
             lblSaving.Text = string.Empty;
-            MacroPanel.Height = (dgMacroTable.Rows[0].Height * 5) + 2; // +2 for horizontal lines
+            MacroPanel.Height = (dgMacroTable.Rows[0].Height * 5) + 4;
             dgMacroTable.Dock = DockStyle.Fill;
             dgMacroTable.ClearSelection();
-            for (int t = 0; t < _macroThread.Length; t++)
-            {
-                _macroTrigger[t] = new AutoResetEvent(false);
-                _macroThread[t] = new Thread(new ThreadStart(MacroThread))
-                {
-                    Name = t.ToString()
-                };
-                _macroThread[t].Start();
-                Thread.Sleep(2);
-                Application.DoEvents();
-            }
             lbInput.Items.Add(string.Empty);
             _lineFinished = false;
 
@@ -1338,8 +1409,8 @@ namespace Terminal
             _btnGroups[1] = btnGroup2;
             _btnGroups[2] = btnGroup3;
             _btnGroups[3] = btnGroup4;
-            this.CenterToScreen();
 
+            btnResize_Click(sender, e);
             DisableDeviceSleep();
         }
 
@@ -1359,28 +1430,6 @@ namespace Terminal
             return -1;
         }
 
-        private void DoMacro(int m)
-        {
-            Macro mac = _activeProfile.macros[m];
-            if (mac.title.Length != 0)
-            {
-                if (_state == State.Disconnected)
-                {
-                    DialogResult yn = MessageBox.Show("Go online?", "Is offline", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (yn == DialogResult.Yes)
-                        DoConnectDisconnect();
-                }
-
-                // may or may NOT be connected
-                if (_state == State.Connected)
-                {
-                    if (_macroBusy[m])
-                        RestartMacro(m);
-                    else
-                        _macroTrigger[m].Set();
-                }
-            }
-        }
         private void DgMacroTable_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex == 0 && e.ColumnIndex >= 1 && e.ColumnIndex <= 12)
@@ -1419,11 +1468,9 @@ namespace Terminal
 
             if (e.Button == MouseButtons.Right)
             {
-                if (_macroBusy[m])
-                    RestartMacro(m);
+                StopMacro(m);
 
                 FrmMacroOptions macros = new FrmMacroOptions(_activeProfile, m);
-                TopMost = false;
                 macros.macroLabel = _macroLabel;
                 macros.macroGroupStart = _macroOffset;
                 macros.ShowDialog();
@@ -1431,7 +1478,6 @@ namespace Terminal
                     SaveThisProfile();
                 ShowColumnTitles();
                 ShowMacroTitles();
-                TopMost = cbStayOnTop.Checked;
             }
             else
             {
@@ -1445,7 +1491,12 @@ namespace Terminal
                 }
                 else
                 {
-                    DoMacro(m);
+                    if (_macroRunning[m])
+                        StopMacro(m);
+                    else
+                    {
+                        RunMacro(m);
+                    }
                 }
             }
         }
@@ -1504,7 +1555,6 @@ namespace Terminal
         {
             lblSaving.Text = "*";
             Application.DoEvents();
-            _activeProfile.stayontop = cbStayOnTop.Checked;
             _activeProfile.sendCR = cbSendCR.Checked;
             _activeProfile.sendLF = cbSendLF.Checked;
             _activeProfile.clearCMD = cbClearCMD.Checked;
@@ -1523,7 +1573,7 @@ namespace Terminal
                 if (_activeProfile.titles[index + col].Length > 0)
                     dgMacroTable.Rows[0].Cells[col + 1].Value = _activeProfile.titles[index + col];
                 else
-                    dgMacroTable.Rows[0].Cells[col + 1].Value = $"F{col+1}";
+                    dgMacroTable.Rows[0].Cells[col + 1].Value = $"F{col + 1}";
             }
         }
         private void ShowMacroTitles()
@@ -1575,7 +1625,6 @@ namespace Terminal
                 }
 
                 btnProfile.Text = _activeProfile.name;
-                cbStayOnTop.Checked = _activeProfile.stayontop;
 
                 cbSendCR.Checked = _activeProfile.sendCR;
                 cbSendLF.Checked = _activeProfile.sendLF;
@@ -1663,7 +1712,7 @@ namespace Terminal
             {
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                RestartAllMacros();
+                /////?????RestartAllMacros();
                 tbCommand.Text = string.Empty;
                 _typingPaused = false;
                 _resetHistoryIndex = true;
@@ -1699,7 +1748,7 @@ namespace Terminal
                     Macro mac = _activeProfile.macros[index];
                     mac.uiColumn = column;
                     mac.uiRow = row;
-                    DoMacro(index);
+                    RunMacro(index);
                 }
                 else if (key == (int)Keys.Back || key == (int)Keys.Delete)
                 {
@@ -1863,9 +1912,9 @@ namespace Terminal
             dgMacroTable.ClearSelection();
             if (_comms == null)
                 return;
-            else if (_state == State.Changing || _state == State.Disconnected)
+            else if (_conState == ConnectionState.Changing || _conState == ConnectionState.Disconnected)
                 return;
-            else if (_state == State.Connected)
+            else if (_conState == ConnectionState.Connected)
             {
                 if (_activeProfile.conOptions.Type == ConOptions.ConType.TCPClient ||
                     _activeProfile.conOptions.Type == ConOptions.ConType.TCPServer)
@@ -1879,28 +1928,27 @@ namespace Terminal
                     }
                 }
             }
-            else if (_state == State.Listening)
+            else if (_conState == ConnectionState.Listening)
             {
                 if (_threadDone)
                 {
                     if (_threadResult)
                     {
-                        _state = State.Connected;
+                        _conState = ConnectionState.Connected;
                         btnConnect.Text = "Dis&connect";
                         btnConnectOptions.Enabled = false;
                         pdPort.Enabled = false;
                         btnRescan.Enabled = false;
-                        btnProfile.Enabled = false;
                         btnFile.Enabled = true;
                         btnConnect.BackColor = Color.Lime;
                         LogAdd(Utils.Timestamp() + "{CONNECTED}");
                     }
                     else
                     {
-                        if (_state == State.Listening)
+                        if (_conState == ConnectionState.Listening)
                             ActionDisconnect();
                         else
-                            _state = State.Disconnected;
+                            _conState = ConnectionState.Disconnected;
                     }
                     return;
                 }
@@ -2117,10 +2165,8 @@ namespace Terminal
                 SendCR = _lastSendCR,
                 SendLF = _lastSendLF
             };
-            TopMost = false;
             fs.cbXmodem.Enabled = (_activeProfile.conOptions.Type == ConOptions.ConType.Serial);
             fs.ShowDialog();
-            TopMost = cbStayOnTop.Checked;
             if (fs.Result == DialogResult.OK)
             {
                 _lastFileSend = fs.Filename;
@@ -2217,10 +2263,8 @@ namespace Terminal
             btnQuickLaunch.Enabled = false;
             {
                 FrmProfileDatabase db = new FrmProfileDatabase(_activeProfile.name);
-                TopMost = false;
                 db.StartOnly = true;
                 db.ShowDialog();
-                TopMost = cbStayOnTop.Checked;
                 btnQuickLaunch.Enabled = true;
             }
             tbCommand.Focus();
@@ -2297,21 +2341,25 @@ namespace Terminal
 
         private void PdPort_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (pdPort.Text.Equals("TCP Server"))
+
+            if (_conState == ConnectionState.Disconnected)
             {
-                _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
-                btnConnect.Text = "&Start";
-            }
-            else if (pdPort.Text.Equals("TCP Client"))
-            {
-                _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
-                btnConnect.Text = "&Connect";
-            }
-            else
-            {
-                _activeProfile.conOptions.Type = ConOptions.ConType.Serial;
-                _activeProfile.conOptions.SerialPort = pdPort.Text;
-                btnConnect.Text = "&Connect";
+                if (pdPort.Text.Equals("TCP Server"))
+                {
+                    _activeProfile.conOptions.Type = ConOptions.ConType.TCPServer;
+                    btnConnect.Text = "&Start";
+                }
+                else if (pdPort.Text.Equals("TCP Client"))
+                {
+                    _activeProfile.conOptions.Type = ConOptions.ConType.TCPClient;
+                    btnConnect.Text = "&Connect";
+                }
+                else
+                {
+                    _activeProfile.conOptions.Type = ConOptions.ConType.Serial;
+                    _activeProfile.conOptions.SerialPort = pdPort.Text;
+                    btnConnect.Text = "&Connect";
+                }
             }
 
             if (_activeProfile.conOptions.Type == ConOptions.ConType.Serial)
@@ -2387,46 +2435,25 @@ namespace Terminal
 
             try
             {
-                _terminateFlag = true;
-                SaveThisProfile();
-
                 this.Visible = false;
                 Application.DoEvents();
+
+                _terminateFlag = true;
+                SaveThisProfile();
 
                 timer.Stop();
                 timer.Enabled = false;
 
-                if (_comms.Connected())
-                {
-                    _comms.Disconnect();
-                    Thread.Sleep(50);
-                    lock (_uiInputQueue)
-                    {
-                        _uiInputQueue.Clear();
-                    }
-                }
+                StopAllMacros();
+                WaitAllMacrosStopped();
+                ActionDisconnect();
 
-                for (int retry = 0; retry < 2; retry++)
-                {
-                    for (int t = 0; t < _macroThread.Length; t++)
-                        _macroTrigger[t].Set();
-                    Application.DoEvents();
-                }
+                while (_connectThreadRunning)
+                    Thread.Sleep(20);
 
-                Thread.Sleep(20);
-                if (_localThreadCount != 0)
-                {
-                    for (int t = 0; t < _macroThread.Length; t++)
-                    {
-                        _macroThread[t].Interrupt();
-                        if (_macroThread[t].IsAlive)
-                        {
-                            _macroThread[t].Abort();
-                        }
-                    }
-                }
                 if (_connectThread != null)
-                    _connectThread.Join();
+                    _connectThread.Join(20);
+                _connectThread = null;
             }
             catch { }
         }
@@ -2512,6 +2539,8 @@ namespace Terminal
                     }
                 }
 
+                _search.OkAlwaysEnabled = false;
+                _search.lblTitle.Text = "Search for...";
                 DialogResult rc = _search.ShowDialog();
                 if (rc == DialogResult.OK)
                 {
@@ -2568,8 +2597,6 @@ namespace Terminal
                 return;
 
             frmASCII frmASCII = new frmASCII();
-            frmASCII.Left = (this.Left + this.Width) - 50;
-            frmASCII.Top = this.Top + 100;
             frmASCII.Show();
             tbCommand.Focus();
         }
@@ -2581,7 +2608,7 @@ namespace Terminal
             {
                 RefreshPortPulldown();
             }
-            btnRescan.Enabled=true;
+            btnRescan.Enabled = true;
             pdPort.Enabled = true;
             tbCommand.Focus();
         }
@@ -2604,7 +2631,7 @@ namespace Terminal
 
                 try
                 {
-                    string fileName = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2.txt";
+                    string fileName = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2\Terminal2.txt";
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < lbInput.Items.Count; i++)
                         sb.Append(lbInput.Items[i].ToString() + "\r\n");
@@ -2657,7 +2684,7 @@ namespace Terminal
                 if (!initFreeze)
                     Freeze(lbInput.Items.Count - 1);
 
-                string fileName = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2.txt";
+                string fileName = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2\Terminal2.txt";
                 try
                 {
                     StringBuilder sb = new StringBuilder();
@@ -2684,14 +2711,16 @@ namespace Terminal
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
+            btnProfile.Enabled = false;
             SaveThisProfile();
             FrmProfileDatabase db = new FrmProfileDatabase(_activeProfile.name);
-            TopMost = false;
+
             db.StartOnly = false;
             db.ShowDialog();
-            TopMost = cbStayOnTop.Checked;
+
             if (!db.SelectedProfile.Equals(_activeProfile.name))
                 SwitchToProfile(db.SelectedProfile);
+            btnProfile.Enabled = true;
             tbCommand.Focus();
         }
 
@@ -2705,9 +2734,19 @@ namespace Terminal
         private void btnResize_Click(object sender, EventArgs e)
         {
             Rectangle rec = Screen.GetWorkingArea(System.Windows.Forms.Cursor.Position);
-            this.Width = (rec.Width * 4) / 5;
-            this.Height = (rec.Height * 4) / 5;
 
+            if (rec.Height > rec.Width)
+            {
+                // vertical
+                this.Width = Math.Max(840, ((rec.Width * 4) / 5));
+                this.Height = (rec.Height * 4) / 5;
+            }
+            else
+            {
+                // horizontal
+                this.Width = Math.Min(1600, ((rec.Width * 4) / 5));
+                this.Height = (rec.Height * 4) / 5;
+            }
             this.CenterToScreen();
         }
 
@@ -2770,7 +2809,7 @@ namespace Terminal
             SetMacroOffset(3);
         }
 
-        private void cbStayOnTop_MouseDown(object sender, MouseEventArgs e)
+        private void btnHelp_MouseDown(object sender, MouseEventArgs e)
         {
             if ((Control.ModifierKeys & Keys.Control) == Keys.Control && e.Button == MouseButtons.Right)
             {
@@ -2791,6 +2830,83 @@ namespace Terminal
             }
         }
 
+        private void btnStopAt_Click(object sender, EventArgs e)
+        {
+            btnStopAt.Enabled = false;
+            {
+                if (_stopAtEnabled)
+                {
+                    _search.IgnoreCase.Checked = !_stopAtUseCase;
+                    _search.SearchText.Text = _stopAtText;
+                }
+                else
+                {
+                    _search.IgnoreCase.Checked = true;
+                    _search.SearchText.Text = string.Empty;
+                }
+
+                _search.OkAlwaysEnabled = true;
+                _search.lblTitle.Text = "Freeze when this text received...";
+                DialogResult rc = _search.ShowDialog();
+                if (rc == DialogResult.OK)
+                {
+                    if (_search.SearchText.Text.Length > 0)
+                    {
+                        _stopAtUseCase = !_search.IgnoreCase.Checked;
+                        _stopAtText = _search.SearchText.Text;
+                        _stopAtEnabled = true;
+                    }
+                    else
+                    {
+                        _stopAtUseCase = false;
+                        _stopAtText = string.Empty;
+                        _stopAtEnabled = false;
+                    }
+                }
+            }
+            btnStopAt.Enabled = true;
+            tbCommand.Focus();
+        }
+
+        private void FrmMain_Resize(object sender, EventArgs e)
+        {
+            //lbInput.Width = this.Width - _fromTheRight;
+            //lbOutput.Width = this.Width - _fromTheRight;
+        }
+
+        string positionFileName = Environment.GetEnvironmentVariable("LOCALAPPDATA") + @"\Terminal2\Terminal2.pos";
+        private void btnSavePosition_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.IO.File.WriteAllText(positionFileName, $"{this.Left},{this.Top},{this.Width},{this.Height}");
+                MessageBox.Show($"The window position and size saved", "Restore point created", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch 
+            {
+                MessageBox.Show($"Could not save the window position and size", "Disk error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRestorePosition_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string settings = System.IO.File.ReadAllText(positionFileName);
+                string[] strings = settings.Split(','); 
+                if (strings.Length == 4)
+                {
+                    this.Left = int.Parse(strings[0]);
+                    this.Top = int.Parse(strings[1]);
+                    this.Width = int.Parse(strings[2]);
+                    this.Height = int.Parse(strings[3]);
+                }
+            }
+            catch 
+            {
+                MessageBox.Show($"A previous restore point does not exist", "Window size restore", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
     internal class FlickerFreeListBox : System.Windows.Forms.ListBox
     {

@@ -35,6 +35,7 @@ namespace Terminal
 {
     public partial class FrmSearch : Form
     {
+        public bool OkAlwaysEnabled = false;
         public FrmSearch()
         {
             InitializeComponent();
@@ -56,10 +57,12 @@ namespace Terminal
 
         private void SearchText_TextChanged(object sender, EventArgs e)
         {
-            btnSearch.Enabled = (SearchText.Text.Length > 0);
+            if (!OkAlwaysEnabled)
+                btnSearch.Enabled = (SearchText.Text.Length > 0);
         }
         private void FrmSearch_Shown(object sender, EventArgs e)
         {
+            btnSearch.Enabled = OkAlwaysEnabled;
             SearchText.Focus();
             SearchText.Select(0, 1000);
         }

@@ -61,8 +61,8 @@ namespace Terminal
             // 
             // lblBigHeading
             // 
-            this.lblBigHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBigHeading.Location = new System.Drawing.Point(9, 20);
+            this.lblBigHeading.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBigHeading.Location = new System.Drawing.Point(32, 18);
             this.lblBigHeading.Name = "lblBigHeading";
             this.lblBigHeading.Size = new System.Drawing.Size(269, 20);
             this.lblBigHeading.TabIndex = 9;
@@ -71,10 +71,11 @@ namespace Terminal
             // 
             // tbEditString
             // 
-            this.tbEditString.Location = new System.Drawing.Point(9, 66);
+            this.tbEditString.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbEditString.Location = new System.Drawing.Point(32, 64);
             this.tbEditString.MaxLength = 40;
             this.tbEditString.Name = "tbEditString";
-            this.tbEditString.Size = new System.Drawing.Size(269, 20);
+            this.tbEditString.Size = new System.Drawing.Size(269, 23);
             this.tbEditString.TabIndex = 10;
             this.tbEditString.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tbEditString.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
@@ -87,19 +88,20 @@ namespace Terminal
             this.btnApply.Enabled = false;
             this.btnApply.FlatAppearance.BorderSize = 0;
             this.btnApply.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApply.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnApply.ForeColor = System.Drawing.Color.Blue;
-            this.btnApply.Location = new System.Drawing.Point(203, 92);
+            this.btnApply.Location = new System.Drawing.Point(221, 102);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.Size = new System.Drawing.Size(80, 26);
             this.btnApply.TabIndex = 11;
             this.btnApply.Text = "&Apply";
-            this.btnApply.UseVisualStyleBackColor = false;
+            this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // lblSmallHeading
             // 
-            this.lblSmallHeading.Location = new System.Drawing.Point(9, 40);
+            this.lblSmallHeading.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSmallHeading.Location = new System.Drawing.Point(32, 38);
             this.lblSmallHeading.Name = "lblSmallHeading";
             this.lblSmallHeading.Size = new System.Drawing.Size(269, 23);
             this.lblSmallHeading.TabIndex = 12;
@@ -111,7 +113,7 @@ namespace Terminal
             this.AcceptButton = this.btnApply;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 124);
+            this.ClientSize = new System.Drawing.Size(333, 143);
             this.Controls.Add(this.lblSmallHeading);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.tbEditString);
@@ -123,6 +125,7 @@ namespace Terminal
             this.Name = "FrmProfileName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Name";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

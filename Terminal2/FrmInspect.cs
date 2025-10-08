@@ -63,7 +63,6 @@ namespace Terminal
         {
             try
             {
-                llblMessage.Text = $"";
                 saveFileDialog1.DefaultExt = "rtb";
                 saveFileDialog1.Filter = "RTB files|*.rtb";
                 saveFileDialog1.Title = "Export to RTF file";
@@ -82,7 +81,6 @@ namespace Terminal
         {
             try
             {
-                llblMessage.Text = $"";
                 saveFileDialog1.DefaultExt = "txt";
                 saveFileDialog1.Filter = "TXT files|*.txt|LOG files|*.log|All files|*.*";
                 saveFileDialog1.Title = "Export to file";
@@ -99,7 +97,6 @@ namespace Terminal
 
         private void SetForeColor(string txt, bool ignorecase, Color color)
         {
-            llblMessage.Text = $"";
             if (txt.Length == 0) return;
             int start = 0;
 
@@ -115,7 +112,6 @@ namespace Terminal
         }
         private void SetBackColor(string txt, bool ignorecase, Color color)
         {
-            llblMessage.Text = $"";
             if (txt.Length == 0) return;
             int start = 0;
 
@@ -145,7 +141,6 @@ namespace Terminal
 
         private void toolStripMenuItemPrev_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             int index;
             int start = 0;
 
@@ -192,7 +187,6 @@ namespace Terminal
 
         private void copyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
 
             try
@@ -214,7 +208,6 @@ namespace Terminal
 
         private void inspectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
             FrmVertical vert = new FrmVertical();
             for (int i = 0; i < rtb.SelectedText.Length; i++)
@@ -240,7 +233,6 @@ namespace Terminal
 
         private void ShowInHorizontalWindow(string str)
         {
-            llblMessage.Text = $"";
             FrmHorizontal hor = new FrmHorizontal();
 
             int tlen = Math.Min(str.Length, 653);
@@ -299,14 +291,12 @@ namespace Terminal
         }
         private void inspectAsHorizontalListCtrlHToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
             ShowInHorizontalWindow(rtb.SelectedText);
         }
 
         private void decodeAsABase64StringToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             string txt = rtb.SelectedText;
             if (txt.Length == 0) return;
 
@@ -343,25 +333,26 @@ namespace Terminal
             }
             else
             {
-                llblMessage.Text = $" Cannot decode as a Base64 string";
+                MessageBox.Show("Cannot convert selected string - Verify selection", "Conversion error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void showNumbersCtrlNToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             string txt = rtb.SelectedText;
             if (txt.Length == 0) return;
 
             if (txt.Length > 16)
             {
-                llblMessage.Text = $"String too long (length must be <= 15)";
+                MessageBox.Show("String too long (length must be <= 15)", "Selection error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             FrmNumber num = new FrmNumber();
 
             num.Original.Text = $"{txt}";
+            num.Original2.Text = $"{txt}";
+            num.Original3.Text = $"{txt}";
             try
             {
                 Int64 decvalue = Int64.Parse(txt.Trim());
@@ -406,7 +397,6 @@ namespace Terminal
 
         private void removeAllColoursToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             rtb.SelectionStart = 0;
             rtb.SelectionLength = rtb.Text.Length;
             rtb.SelectionColor = startForeColor;
@@ -430,14 +420,12 @@ namespace Terminal
 
         private void setColourToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             colorDialog1.ShowDialog();
             SetForeColor(rtb.SelectedText, false, colorDialog1.Color);
         }
 
         private void setSelectionBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             colorDialog1.ShowDialog();
             SetBackColor(rtb.SelectedText, false, colorDialog1.Color);
         }
@@ -476,7 +464,6 @@ namespace Terminal
 
         private void forePanel_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             colorDialog1.ShowDialog();
             forePanel.BackColor = colorDialog1.Color;
             lblSample.ForeColor = colorDialog1.Color;
@@ -484,7 +471,6 @@ namespace Terminal
 
         private void backPanel_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             colorDialog1.ShowDialog();
             backPanel.BackColor = colorDialog1.Color;
             lblSample.BackColor = colorDialog1.Color;
@@ -492,16 +478,15 @@ namespace Terminal
 
         private void btnChangeSingle_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
             rtb.SelectionColor = forePanel.BackColor;
             rtb.SelectionBackColor = backPanel.BackColor;
+            rtb.Select(rtb.SelectionStart, 0);
             rtb.Focus();
         }
 
         private void btnChangeAll_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
 
             int selStart = rtb.SelectionStart;
@@ -513,12 +498,12 @@ namespace Terminal
                 start = rtb.SelectionStart + rtb.SelectedText.Length;
             }
             rtb.SelectionStart = selStart;
+            rtb.Select(rtb.SelectionStart, 0);
             rtb.Focus();
         }
 
         private void btnNext(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
 
             int start = rtb.SelectionStart + rtb.SelectedText.Length;
@@ -528,7 +513,6 @@ namespace Terminal
 
         private void btnPrev(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length == 0) return;
 
             int endPoint = rtb.SelectionStart;
@@ -555,7 +539,6 @@ namespace Terminal
 
         private void btnMono_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             int startSelText = rtb.SelectionStart;
             int startSelTextLen = rtb.SelectedText.Length;
 
@@ -578,7 +561,6 @@ namespace Terminal
         {
             if (rtb.Text.Length == 0) return;
 
-            llblMessage.Text = $"";
             FrmSearch search = new FrmSearch();
             search.SearchText.Text = lastSearch;
             DialogResult rc = search.ShowDialog();
@@ -596,14 +578,12 @@ namespace Terminal
                 searchStart = rtb.SelectionStart + 1;
 
                 lastSearch = search.SearchText.Text;
-                llblMessage.Text = $"Last search string: {lastSearch}";
             }
             rtb.Focus();
         }
 
         private void btnReplace_Click(object sender, EventArgs e)
         {
-            llblMessage.Text = $"";
             FrmReplace replace = new FrmReplace();
             replace.SearchText.Text = rtb.SelectedText;
             DialogResult rc = replace.ShowDialog();
@@ -629,7 +609,6 @@ namespace Terminal
         {
             rtb.Enabled = false;
 
-            llblMessage.Text = $"";
             if (rtb.SelectedText.Length > 0)
             {
                 int selStart = rtb.SelectionStart;
@@ -685,5 +664,51 @@ namespace Terminal
             btnFilterColours_Click(sender, e);
         }
 
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            int startSelText = rtb.SelectionStart;
+            int startSelTextLen = rtb.SelectedText.Length;
+
+            rtb.SelectionStart = 0;
+            rtb.SelectionLength = rtb.Text.Length;
+            rtb.SelectionColor = startForeColor;
+            rtb.SelectionBackColor = startBackColor;
+
+            if (startSelText >= 0)
+            {
+                rtb.Select(startSelText, startSelTextLen);
+            }
+            rtb.Focus();
+        }
+
+        private void resetColorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnReset_Click(sender, e);
+        }
+
+        private void coloiseTheSelectedItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnChangeSingle_Click(sender, e);
+        }
+
+        private void coloriseAllSimilarItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnChangeAll_Click(sender, e);
+        }
+
+        private void coloriseUsingEventDetectionFiltersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnFilterColours_Click(sender, e);
+        }
+
+        private void asBase64StringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            decodeAsABase64StringToolStripMenuItem_Click(sender, e);
+        }
+
+        private void btnBase64_Click(object sender, EventArgs e)
+        {
+            decodeAsABase64StringToolStripMenuItem_Click(sender, e);
+        }
     }
 }

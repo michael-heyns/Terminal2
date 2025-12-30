@@ -250,7 +250,7 @@ namespace Terminal
                     if (s.EndsWith(".profile"))
                     {
                         string n = Path.GetFileNameWithoutExtension(s);
-                        if (startsWidth == string.Empty || n.StartsWith(startsWidth))
+                        if (startsWidth == string.Empty || n.ToLower().StartsWith(startsWidth.ToLower()))
                             listBox.Items.Add(n);
                     }
                 }

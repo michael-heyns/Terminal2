@@ -140,18 +140,22 @@ namespace Terminal
             this.LED1 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnFreeze = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.cbTimestamp = new System.Windows.Forms.CheckBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnStopAt = new System.Windows.Forms.Button();
-            this.btnAbortFile = new System.Windows.Forms.Button();
-            this.lblLineCounter = new System.Windows.Forms.Label();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btnPauseFile = new System.Windows.Forms.Button();
+            this.btnAbortFile = new System.Windows.Forms.Button();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.lblLineCounter = new System.Windows.Forms.Label();
             this.lbInput = new Terminal.FlickerFreeListBox();
             this.hScrollBar = new System.Windows.Forms.HScrollBar();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.bottomControlPanel = new System.Windows.Forms.Panel();
             this.lbOutput = new Terminal.FlickerFreeListBox();
+            this.btnStopAt = new System.Windows.Forms.Button();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
@@ -163,7 +167,7 @@ namespace Terminal
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.KeepAlive = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.PanelOne.SuspendLayout();
             this.MacroPanel.SuspendLayout();
@@ -174,8 +178,11 @@ namespace Terminal
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.bottomControlPanel.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -195,7 +202,7 @@ namespace Terminal
             this.stsLogfile});
             this.statusStrip1.Location = new System.Drawing.Point(0, 860);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1271, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1253, 24);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "0";
             // 
@@ -342,7 +349,7 @@ namespace Terminal
             this.PanelOne.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelOne.Location = new System.Drawing.Point(0, 0);
             this.PanelOne.Name = "PanelOne";
-            this.PanelOne.Size = new System.Drawing.Size(1271, 29);
+            this.PanelOne.Size = new System.Drawing.Size(1253, 29);
             this.PanelOne.TabIndex = 4;
             // 
             // btnSavePosition
@@ -352,7 +359,7 @@ namespace Terminal
             this.btnSavePosition.FlatAppearance.BorderSize = 0;
             this.btnSavePosition.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSavePosition.Image = ((System.Drawing.Image)(resources.GetObject("btnSavePosition.Image")));
-            this.btnSavePosition.Location = new System.Drawing.Point(1134, 3);
+            this.btnSavePosition.Location = new System.Drawing.Point(1116, 3);
             this.btnSavePosition.Name = "btnSavePosition";
             this.btnSavePosition.Size = new System.Drawing.Size(24, 24);
             this.btnSavePosition.TabIndex = 33;
@@ -366,7 +373,7 @@ namespace Terminal
             this.btnRestorePosition.FlatAppearance.BorderSize = 0;
             this.btnRestorePosition.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnRestorePosition.Image = ((System.Drawing.Image)(resources.GetObject("btnRestorePosition.Image")));
-            this.btnRestorePosition.Location = new System.Drawing.Point(1160, 3);
+            this.btnRestorePosition.Location = new System.Drawing.Point(1142, 3);
             this.btnRestorePosition.Name = "btnRestorePosition";
             this.btnRestorePosition.Size = new System.Drawing.Size(24, 24);
             this.btnRestorePosition.TabIndex = 32;
@@ -379,7 +386,7 @@ namespace Terminal
             this.lblSaving.AutoSize = true;
             this.lblSaving.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSaving.ForeColor = System.Drawing.Color.Red;
-            this.lblSaving.Location = new System.Drawing.Point(1115, 9);
+            this.lblSaving.Location = new System.Drawing.Point(1097, 9);
             this.lblSaving.Name = "lblSaving";
             this.lblSaving.Size = new System.Drawing.Size(13, 16);
             this.lblSaving.TabIndex = 24;
@@ -393,7 +400,7 @@ namespace Terminal
             this.btnResize.FlatAppearance.BorderSize = 0;
             this.btnResize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnResize.Image = ((System.Drawing.Image)(resources.GetObject("btnResize.Image")));
-            this.btnResize.Location = new System.Drawing.Point(1186, 3);
+            this.btnResize.Location = new System.Drawing.Point(1168, 3);
             this.btnResize.Name = "btnResize";
             this.btnResize.Size = new System.Drawing.Size(24, 24);
             this.btnResize.TabIndex = 31;
@@ -406,7 +413,7 @@ namespace Terminal
             this.btnHelp.BackColor = System.Drawing.Color.White;
             this.btnHelp.FlatAppearance.BorderSize = 0;
             this.btnHelp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnHelp.Location = new System.Drawing.Point(1238, 3);
+            this.btnHelp.Location = new System.Drawing.Point(1220, 3);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(24, 24);
             this.btnHelp.TabIndex = 1;
@@ -421,7 +428,7 @@ namespace Terminal
             this.btnASCII.BackColor = System.Drawing.Color.White;
             this.btnASCII.FlatAppearance.BorderSize = 0;
             this.btnASCII.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnASCII.Location = new System.Drawing.Point(1212, 3);
+            this.btnASCII.Location = new System.Drawing.Point(1194, 3);
             this.btnASCII.Name = "btnASCII";
             this.btnASCII.Size = new System.Drawing.Size(24, 24);
             this.btnASCII.TabIndex = 28;
@@ -570,7 +577,7 @@ namespace Terminal
             this.MacroPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.MacroPanel.Location = new System.Drawing.Point(0, 751);
             this.MacroPanel.Name = "MacroPanel";
-            this.MacroPanel.Size = new System.Drawing.Size(1271, 109);
+            this.MacroPanel.Size = new System.Drawing.Size(1253, 109);
             this.MacroPanel.TabIndex = 6;
             // 
             // dgMacroTable
@@ -628,7 +635,7 @@ namespace Terminal
             this.dgMacroTable.ShowCellToolTips = false;
             this.dgMacroTable.ShowEditingIcon = false;
             this.dgMacroTable.ShowRowErrors = false;
-            this.dgMacroTable.Size = new System.Drawing.Size(1227, 86);
+            this.dgMacroTable.Size = new System.Drawing.Size(1209, 86);
             this.dgMacroTable.TabIndex = 0;
             this.dgMacroTable.TabStop = false;
             this.dgMacroTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgMacroTable_CellClick);
@@ -752,7 +759,7 @@ namespace Terminal
             // panel6
             // 
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(1261, 0);
+            this.panel6.Location = new System.Drawing.Point(1243, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(10, 109);
             this.panel6.TabIndex = 2;
@@ -831,7 +838,6 @@ namespace Terminal
             // 
             // btnFile
             // 
-            this.btnFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFile.BackColor = System.Drawing.Color.White;
             this.btnFile.Enabled = false;
             this.btnFile.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
@@ -839,11 +845,11 @@ namespace Terminal
             this.btnFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFile.ForeColor = System.Drawing.Color.Black;
-            this.btnFile.Location = new System.Drawing.Point(8, 58);
+            this.btnFile.Image = ((System.Drawing.Image)(resources.GetObject("btnFile.Image")));
+            this.btnFile.Location = new System.Drawing.Point(93, 0);
             this.btnFile.Name = "btnFile";
-            this.btnFile.Size = new System.Drawing.Size(52, 24);
+            this.btnFile.Size = new System.Drawing.Size(44, 24);
             this.btnFile.TabIndex = 1;
-            this.btnFile.Text = "Fil&e";
             this.btnFile.UseVisualStyleBackColor = true;
             this.btnFile.Click += new System.EventHandler(this.BtnFile_Click);
             // 
@@ -859,7 +865,7 @@ namespace Terminal
             this.SendPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.SendPanel.Location = new System.Drawing.Point(0, 721);
             this.SendPanel.Name = "SendPanel";
-            this.SendPanel.Size = new System.Drawing.Size(1271, 30);
+            this.SendPanel.Size = new System.Drawing.Size(1253, 30);
             this.SendPanel.TabIndex = 10;
             // 
             // cbSendLF
@@ -871,7 +877,7 @@ namespace Terminal
             this.cbSendLF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbSendLF.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbSendLF.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSendLF.Location = new System.Drawing.Point(861, 6);
+            this.cbSendLF.Location = new System.Drawing.Point(843, 6);
             this.cbSendLF.Name = "cbSendLF";
             this.cbSendLF.Size = new System.Drawing.Size(44, 18);
             this.cbSendLF.TabIndex = 2;
@@ -890,7 +896,7 @@ namespace Terminal
             this.cbSendCR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbSendCR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbSendCR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSendCR.Location = new System.Drawing.Point(812, 6);
+            this.cbSendCR.Location = new System.Drawing.Point(794, 6);
             this.cbSendCR.Name = "cbSendCR";
             this.cbSendCR.Size = new System.Drawing.Size(45, 18);
             this.cbSendCR.TabIndex = 3;
@@ -910,7 +916,7 @@ namespace Terminal
             this.tbCommand.HideSelection = false;
             this.tbCommand.Location = new System.Drawing.Point(7, 4);
             this.tbCommand.Name = "tbCommand";
-            this.tbCommand.Size = new System.Drawing.Size(799, 21);
+            this.tbCommand.Size = new System.Drawing.Size(781, 21);
             this.tbCommand.TabIndex = 1;
             this.tbCommand.WordWrap = false;
             this.tbCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbCommand_KeyDown);
@@ -926,7 +932,7 @@ namespace Terminal
             this.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSend.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSend.ForeColor = System.Drawing.Color.Blue;
-            this.btnSend.Location = new System.Drawing.Point(906, 3);
+            this.btnSend.Location = new System.Drawing.Point(888, 3);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(149, 24);
             this.btnSend.TabIndex = 0;
@@ -943,7 +949,7 @@ namespace Terminal
             this.cbSendAsIType.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbSendAsIType.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbSendAsIType.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbSendAsIType.Location = new System.Drawing.Point(1062, 6);
+            this.cbSendAsIType.Location = new System.Drawing.Point(1044, 6);
             this.cbSendAsIType.Name = "cbSendAsIType";
             this.cbSendAsIType.Size = new System.Drawing.Size(96, 18);
             this.cbSendAsIType.TabIndex = 34;
@@ -960,7 +966,7 @@ namespace Terminal
             this.cbClearCMD.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbClearCMD.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbClearCMD.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbClearCMD.Location = new System.Drawing.Point(1162, 6);
+            this.cbClearCMD.Location = new System.Drawing.Point(1144, 6);
             this.cbClearCMD.Name = "cbClearCMD";
             this.cbClearCMD.Size = new System.Drawing.Size(97, 18);
             this.cbClearCMD.TabIndex = 4;
@@ -970,34 +976,32 @@ namespace Terminal
             // 
             // btnSTXETX
             // 
-            this.btnSTXETX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSTXETX.BackColor = System.Drawing.Color.White;
             this.btnSTXETX.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.btnSTXETX.FlatAppearance.BorderSize = 0;
             this.btnSTXETX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSTXETX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSTXETX.ForeColor = System.Drawing.Color.Black;
-            this.btnSTXETX.Location = new System.Drawing.Point(8, 32);
+            this.btnSTXETX.Image = ((System.Drawing.Image)(resources.GetObject("btnSTXETX.Image")));
+            this.btnSTXETX.Location = new System.Drawing.Point(48, 0);
             this.btnSTXETX.Name = "btnSTXETX";
-            this.btnSTXETX.Size = new System.Drawing.Size(52, 24);
+            this.btnSTXETX.Size = new System.Drawing.Size(44, 24);
             this.btnSTXETX.TabIndex = 33;
-            this.btnSTXETX.Text = "S-ETX";
             this.btnSTXETX.UseVisualStyleBackColor = true;
             this.btnSTXETX.Click += new System.EventHandler(this.btnSTXETX_Click);
             // 
             // btnClearOutput
             // 
-            this.btnClearOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClearOutput.BackColor = System.Drawing.Color.White;
             this.btnClearOutput.FlatAppearance.BorderSize = 0;
             this.btnClearOutput.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnClearOutput.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearOutput.ForeColor = System.Drawing.Color.Black;
-            this.btnClearOutput.Location = new System.Drawing.Point(8, 6);
+            this.btnClearOutput.Image = ((System.Drawing.Image)(resources.GetObject("btnClearOutput.Image")));
+            this.btnClearOutput.Location = new System.Drawing.Point(3, 0);
             this.btnClearOutput.Name = "btnClearOutput";
-            this.btnClearOutput.Size = new System.Drawing.Size(52, 24);
+            this.btnClearOutput.Size = new System.Drawing.Size(44, 24);
             this.btnClearOutput.TabIndex = 17;
-            this.btnClearOutput.Text = "Clear";
             this.btnClearOutput.UseVisualStyleBackColor = true;
             this.btnClearOutput.Click += new System.EventHandler(this.btnClearOutput_Click);
             // 
@@ -1010,7 +1014,7 @@ namespace Terminal
             this.ctrlTwo.Enabled = false;
             this.ctrlTwo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ctrlTwo.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlTwo.Location = new System.Drawing.Point(1138, 7);
+            this.ctrlTwo.Location = new System.Drawing.Point(1212, 5);
             this.ctrlTwo.Margin = new System.Windows.Forms.Padding(0);
             this.ctrlTwo.Name = "ctrlTwo";
             this.ctrlTwo.Size = new System.Drawing.Size(32, 16);
@@ -1028,7 +1032,7 @@ namespace Terminal
             this.ctrlOne.Enabled = false;
             this.ctrlOne.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ctrlOne.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ctrlOne.Location = new System.Drawing.Point(1104, 7);
+            this.ctrlOne.Location = new System.Drawing.Point(1180, 5);
             this.ctrlOne.Margin = new System.Windows.Forms.Padding(0);
             this.ctrlOne.Name = "ctrlOne";
             this.ctrlOne.Size = new System.Drawing.Size(32, 16);
@@ -1039,14 +1043,13 @@ namespace Terminal
             // 
             // cbShowLF
             // 
-            this.cbShowLF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbShowLF.BackColor = System.Drawing.Color.Transparent;
             this.cbShowLF.Cursor = System.Windows.Forms.Cursors.Default;
             this.cbShowLF.FlatAppearance.BorderSize = 0;
             this.cbShowLF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbShowLF.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbShowLF.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbShowLF.Location = new System.Drawing.Point(12, 252);
+            this.cbShowLF.Location = new System.Drawing.Point(487, 7);
             this.cbShowLF.Name = "cbShowLF";
             this.cbShowLF.Size = new System.Drawing.Size(41, 18);
             this.cbShowLF.TabIndex = 9;
@@ -1056,14 +1059,13 @@ namespace Terminal
             // 
             // cbShowCR
             // 
-            this.cbShowCR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbShowCR.BackColor = System.Drawing.Color.Transparent;
             this.cbShowCR.Cursor = System.Windows.Forms.Cursors.Default;
             this.cbShowCR.FlatAppearance.BorderSize = 0;
             this.cbShowCR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbShowCR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbShowCR.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbShowCR.Location = new System.Drawing.Point(12, 230);
+            this.cbShowCR.Location = new System.Drawing.Point(438, 7);
             this.cbShowCR.Name = "cbShowCR";
             this.cbShowCR.Size = new System.Drawing.Size(43, 18);
             this.cbShowCR.TabIndex = 10;
@@ -1073,14 +1075,13 @@ namespace Terminal
             // 
             // cbHEX
             // 
-            this.cbHEX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbHEX.BackColor = System.Drawing.Color.Transparent;
             this.cbHEX.Cursor = System.Windows.Forms.Cursors.Default;
             this.cbHEX.FlatAppearance.BorderSize = 0;
             this.cbHEX.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbHEX.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbHEX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbHEX.Location = new System.Drawing.Point(12, 208);
+            this.cbHEX.Location = new System.Drawing.Point(386, 7);
             this.cbHEX.Name = "cbHEX";
             this.cbHEX.Size = new System.Drawing.Size(46, 18);
             this.cbHEX.TabIndex = 7;
@@ -1090,7 +1091,6 @@ namespace Terminal
             // 
             // cbASCII
             // 
-            this.cbASCII.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbASCII.BackColor = System.Drawing.Color.Transparent;
             this.cbASCII.Checked = true;
             this.cbASCII.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1099,7 +1099,7 @@ namespace Terminal
             this.cbASCII.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbASCII.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbASCII.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbASCII.Location = new System.Drawing.Point(12, 186);
+            this.cbASCII.Location = new System.Drawing.Point(330, 8);
             this.cbASCII.Name = "cbASCII";
             this.cbASCII.Size = new System.Drawing.Size(50, 18);
             this.cbASCII.TabIndex = 6;
@@ -1109,17 +1109,16 @@ namespace Terminal
             // 
             // btnInspect
             // 
-            this.btnInspect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInspect.BackColor = System.Drawing.Color.White;
             this.btnInspect.FlatAppearance.BorderSize = 0;
             this.btnInspect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnInspect.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnInspect.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnInspect.Location = new System.Drawing.Point(8, 84);
+            this.btnInspect.Image = ((System.Drawing.Image)(resources.GetObject("btnInspect.Image")));
+            this.btnInspect.Location = new System.Drawing.Point(137, 3);
             this.btnInspect.Name = "btnInspect";
-            this.btnInspect.Size = new System.Drawing.Size(55, 24);
+            this.btnInspect.Size = new System.Drawing.Size(44, 24);
             this.btnInspect.TabIndex = 34;
-            this.btnInspect.Text = "&Inspect";
             this.btnInspect.UseVisualStyleBackColor = true;
             this.btnInspect.Click += new System.EventHandler(this.BtnInspect_Click);
             // 
@@ -1132,7 +1131,7 @@ namespace Terminal
             this.LED3.Enabled = false;
             this.LED3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LED3.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LED3.Location = new System.Drawing.Point(1106, 16);
+            this.LED3.Location = new System.Drawing.Point(1180, 7);
             this.LED3.Margin = new System.Windows.Forms.Padding(0);
             this.LED3.Name = "LED3";
             this.LED3.Size = new System.Drawing.Size(32, 16);
@@ -1149,7 +1148,7 @@ namespace Terminal
             this.LED4.Enabled = false;
             this.LED4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LED4.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LED4.Location = new System.Drawing.Point(1138, 16);
+            this.LED4.Location = new System.Drawing.Point(1212, 7);
             this.LED4.Margin = new System.Windows.Forms.Padding(0);
             this.LED4.Name = "LED4";
             this.LED4.Size = new System.Drawing.Size(32, 16);
@@ -1166,7 +1165,7 @@ namespace Terminal
             this.LED2.Enabled = false;
             this.LED2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LED2.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LED2.Location = new System.Drawing.Point(1074, 16);
+            this.LED2.Location = new System.Drawing.Point(1148, 7);
             this.LED2.Margin = new System.Windows.Forms.Padding(0);
             this.LED2.Name = "LED2";
             this.LED2.Size = new System.Drawing.Size(32, 16);
@@ -1183,7 +1182,7 @@ namespace Terminal
             this.LED1.Enabled = false;
             this.LED1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LED1.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LED1.Location = new System.Drawing.Point(1042, 16);
+            this.LED1.Location = new System.Drawing.Point(1116, 7);
             this.LED1.Margin = new System.Windows.Forms.Padding(0);
             this.LED1.Name = "LED1";
             this.LED1.Size = new System.Drawing.Size(32, 16);
@@ -1193,71 +1192,74 @@ namespace Terminal
             // 
             // btnSearch
             // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.BackColor = System.Drawing.Color.White;
             this.btnSearch.FlatAppearance.BorderSize = 0;
             this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSearch.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSearch.Location = new System.Drawing.Point(8, 110);
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(181, 3);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(55, 24);
+            this.btnSearch.Size = new System.Drawing.Size(44, 24);
             this.btnSearch.TabIndex = 24;
-            this.btnSearch.Text = "&Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnFreeze
             // 
-            this.btnFreeze.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFreeze.BackColor = System.Drawing.Color.White;
             this.btnFreeze.FlatAppearance.BorderSize = 0;
             this.btnFreeze.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnFreeze.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFreeze.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnFreeze.Location = new System.Drawing.Point(8, 6);
+            this.btnFreeze.ImageIndex = 0;
+            this.btnFreeze.ImageList = this.imageList1;
+            this.btnFreeze.Location = new System.Drawing.Point(5, 3);
             this.btnFreeze.Name = "btnFreeze";
-            this.btnFreeze.Size = new System.Drawing.Size(55, 24);
+            this.btnFreeze.Size = new System.Drawing.Size(44, 24);
             this.btnFreeze.TabIndex = 22;
-            this.btnFreeze.Text = "&Freeze";
-            this.btnFreeze.UseVisualStyleBackColor = true;
+            this.btnFreeze.UseVisualStyleBackColor = false;
             this.btnFreeze.Click += new System.EventHandler(this.BtnFreeze_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "BW_Pause3.png");
+            this.imageList1.Images.SetKeyName(1, "BW_Play2.png");
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnEdit.Location = new System.Drawing.Point(8, 58);
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.Location = new System.Drawing.Point(93, 3);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(55, 24);
+            this.btnEdit.Size = new System.Drawing.Size(44, 24);
             this.btnEdit.TabIndex = 17;
-            this.btnEdit.Text = "E&dit";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnClear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClear.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClear.Location = new System.Drawing.Point(8, 32);
+            this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
+            this.btnClear.Location = new System.Drawing.Point(49, 3);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(55, 24);
+            this.btnClear.Size = new System.Drawing.Size(44, 24);
             this.btnClear.TabIndex = 16;
-            this.btnClear.Text = "Cl&ear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // cbTimestamp
             // 
-            this.cbTimestamp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cbTimestamp.BackColor = System.Drawing.Color.Transparent;
             this.cbTimestamp.Checked = true;
             this.cbTimestamp.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1266,7 +1268,7 @@ namespace Terminal
             this.cbTimestamp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Red;
             this.cbTimestamp.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cbTimestamp.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTimestamp.Location = new System.Drawing.Point(12, 165);
+            this.cbTimestamp.Location = new System.Drawing.Point(275, 8);
             this.cbTimestamp.Name = "cbTimestamp";
             this.cbTimestamp.Size = new System.Drawing.Size(49, 17);
             this.cbTimestamp.TabIndex = 8;
@@ -1277,88 +1279,37 @@ namespace Terminal
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 29);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 58);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.LED3);
-            this.splitContainer1.Panel1.Controls.Add(this.LED4);
-            this.splitContainer1.Panel1.Controls.Add(this.LED2);
-            this.splitContainer1.Panel1.Controls.Add(this.LED1);
-            this.splitContainer1.Panel1.Controls.Add(this.lbInput);
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1.Controls.Add(this.btnAbortFile);
-            this.splitContainer1.Panel1.Controls.Add(this.lblLineCounter);
-            this.splitContainer1.Panel1.Controls.Add(this.progressBar);
-            this.splitContainer1.Panel1.Controls.Add(this.btnPauseFile);
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.panel2);
             this.splitContainer1.Panel1.Controls.Add(this.hScrollBar);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.ctrlOne);
-            this.splitContainer1.Panel2.Controls.Add(this.ctrlTwo);
-            this.splitContainer1.Panel2.Controls.Add(this.lbOutput);
-            this.splitContainer1.Panel2.Controls.Add(this.panel2);
-            this.splitContainer1.Size = new System.Drawing.Size(1271, 692);
-            this.splitContainer1.SplitterDistance = 535;
+            this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel2.Controls.Add(this.panel3);
+            this.splitContainer1.Size = new System.Drawing.Size(1253, 663);
+            this.splitContainer1.SplitterDistance = 511;
             this.splitContainer1.TabIndex = 11;
             // 
-            // btnStopAt
+            // panel2
             // 
-            this.btnStopAt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStopAt.BackColor = System.Drawing.Color.White;
-            this.btnStopAt.FlatAppearance.BorderSize = 0;
-            this.btnStopAt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnStopAt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStopAt.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnStopAt.Location = new System.Drawing.Point(8, 136);
-            this.btnStopAt.Name = "btnStopAt";
-            this.btnStopAt.Size = new System.Drawing.Size(55, 24);
-            this.btnStopAt.TabIndex = 35;
-            this.btnStopAt.Text = "Stop@";
-            this.btnStopAt.UseVisualStyleBackColor = true;
-            this.btnStopAt.Click += new System.EventHandler(this.btnStopAt_Click);
-            // 
-            // btnAbortFile
-            // 
-            this.btnAbortFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnAbortFile.FlatAppearance.BorderSize = 0;
-            this.btnAbortFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
-            this.btnAbortFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAbortFile.Location = new System.Drawing.Point(640, 138);
-            this.btnAbortFile.Name = "btnAbortFile";
-            this.btnAbortFile.Size = new System.Drawing.Size(80, 26);
-            this.btnAbortFile.TabIndex = 14;
-            this.btnAbortFile.Text = "&Cancel";
-            this.btnAbortFile.UseVisualStyleBackColor = true;
-            this.btnAbortFile.Visible = false;
-            this.btnAbortFile.Click += new System.EventHandler(this.BtnAbortFile_Click);
-            // 
-            // lblLineCounter
-            // 
-            this.lblLineCounter.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblLineCounter.BackColor = System.Drawing.Color.Bisque;
-            this.lblLineCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLineCounter.Location = new System.Drawing.Point(561, 84);
-            this.lblLineCounter.Name = "lblLineCounter";
-            this.lblLineCounter.Size = new System.Drawing.Size(67, 23);
-            this.lblLineCounter.TabIndex = 16;
-            this.lblLineCounter.Text = "0";
-            this.lblLineCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLineCounter.Visible = false;
-            // 
-            // progressBar
-            // 
-            this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.progressBar.Location = new System.Drawing.Point(441, 110);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(295, 23);
-            this.progressBar.Step = 1;
-            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar.TabIndex = 9;
-            this.progressBar.Visible = false;
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.btnPauseFile);
+            this.panel2.Controls.Add(this.btnAbortFile);
+            this.panel2.Controls.Add(this.progressBar);
+            this.panel2.Controls.Add(this.lblLineCounter);
+            this.panel2.Controls.Add(this.lbInput);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 11);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1253, 500);
+            this.panel2.TabIndex = 19;
             // 
             // btnPauseFile
             // 
@@ -1366,7 +1317,7 @@ namespace Terminal
             this.btnPauseFile.FlatAppearance.BorderSize = 0;
             this.btnPauseFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
             this.btnPauseFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPauseFile.Location = new System.Drawing.Point(462, 138);
+            this.btnPauseFile.Location = new System.Drawing.Point(499, 223);
             this.btnPauseFile.Name = "btnPauseFile";
             this.btnPauseFile.Size = new System.Drawing.Size(80, 26);
             this.btnPauseFile.TabIndex = 15;
@@ -1375,16 +1326,56 @@ namespace Terminal
             this.btnPauseFile.Visible = false;
             this.btnPauseFile.Click += new System.EventHandler(this.BtnPauseFile_Click);
             // 
+            // btnAbortFile
+            // 
+            this.btnAbortFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnAbortFile.FlatAppearance.BorderSize = 0;
+            this.btnAbortFile.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnAbortFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbortFile.Location = new System.Drawing.Point(677, 223);
+            this.btnAbortFile.Name = "btnAbortFile";
+            this.btnAbortFile.Size = new System.Drawing.Size(80, 26);
+            this.btnAbortFile.TabIndex = 14;
+            this.btnAbortFile.Text = "&Cancel";
+            this.btnAbortFile.UseVisualStyleBackColor = true;
+            this.btnAbortFile.Visible = false;
+            this.btnAbortFile.Click += new System.EventHandler(this.BtnAbortFile_Click);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.progressBar.Location = new System.Drawing.Point(478, 195);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(295, 23);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 9;
+            this.progressBar.Visible = false;
+            // 
+            // lblLineCounter
+            // 
+            this.lblLineCounter.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblLineCounter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblLineCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLineCounter.Location = new System.Drawing.Point(598, 169);
+            this.lblLineCounter.Name = "lblLineCounter";
+            this.lblLineCounter.Size = new System.Drawing.Size(67, 23);
+            this.lblLineCounter.TabIndex = 16;
+            this.lblLineCounter.Text = "0";
+            this.lblLineCounter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLineCounter.Visible = false;
+            // 
             // lbInput
             // 
             this.lbInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbInput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbInput.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbInput.FormattingEnabled = true;
-            this.lbInput.ItemHeight = 16;
-            this.lbInput.Location = new System.Drawing.Point(0, 10);
+            this.lbInput.ItemHeight = 19;
+            this.lbInput.Location = new System.Drawing.Point(0, 0);
             this.lbInput.Name = "lbInput";
             this.lbInput.ScrollAlwaysVisible = true;
-            this.lbInput.Size = new System.Drawing.Size(1201, 525);
+            this.lbInput.Size = new System.Drawing.Size(1253, 500);
             this.lbInput.TabIndex = 17;
             this.lbInput.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbInput_MouseClick);
             this.lbInput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbInput_DrawItem);
@@ -1398,24 +1389,63 @@ namespace Terminal
             this.hScrollBar.Location = new System.Drawing.Point(0, 0);
             this.hScrollBar.Maximum = 240;
             this.hScrollBar.Name = "hScrollBar";
-            this.hScrollBar.Size = new System.Drawing.Size(1271, 10);
+            this.hScrollBar.Size = new System.Drawing.Size(1253, 11);
             this.hScrollBar.TabIndex = 18;
             this.hScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar_Scroll);
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1253, 148);
+            this.panel3.TabIndex = 35;
+            // 
+            // bottomControlPanel
+            // 
+            this.bottomControlPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.bottomControlPanel.Controls.Add(this.ctrlTwo);
+            this.bottomControlPanel.Controls.Add(this.ctrlOne);
+            this.bottomControlPanel.Controls.Add(this.btnClearOutput);
+            this.bottomControlPanel.Controls.Add(this.btnSTXETX);
+            this.bottomControlPanel.Controls.Add(this.btnFile);
+            this.bottomControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bottomControlPanel.Location = new System.Drawing.Point(0, 0);
+            this.bottomControlPanel.Name = "bottomControlPanel";
+            this.bottomControlPanel.Size = new System.Drawing.Size(1253, 26);
+            this.bottomControlPanel.TabIndex = 34;
+            // 
             // lbOutput
             // 
-            this.lbOutput.BackColor = System.Drawing.Color.Gainsboro;
+            this.lbOutput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbOutput.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.lbOutput.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbOutput.FormattingEnabled = true;
-            this.lbOutput.ItemHeight = 16;
-            this.lbOutput.Location = new System.Drawing.Point(0, 0);
+            this.lbOutput.Location = new System.Drawing.Point(0, 26);
             this.lbOutput.Name = "lbOutput";
             this.lbOutput.ScrollAlwaysVisible = true;
-            this.lbOutput.Size = new System.Drawing.Size(1201, 153);
+            this.lbOutput.Size = new System.Drawing.Size(1253, 122);
             this.lbOutput.TabIndex = 0;
             this.lbOutput.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lbOutput_DrawItem);
             this.lbOutput.SelectedIndexChanged += new System.EventHandler(this.LbOutput_SelectedIndexChanged);
+            // 
+            // btnStopAt
+            // 
+            this.btnStopAt.BackColor = System.Drawing.Color.White;
+            this.btnStopAt.FlatAppearance.BorderSize = 0;
+            this.btnStopAt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Bisque;
+            this.btnStopAt.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStopAt.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnStopAt.Image = ((System.Drawing.Image)(resources.GetObject("btnStopAt.Image")));
+            this.btnStopAt.Location = new System.Drawing.Point(225, 3);
+            this.btnStopAt.Name = "btnStopAt";
+            this.btnStopAt.Size = new System.Drawing.Size(44, 24);
+            this.btnStopAt.TabIndex = 35;
+            this.btnStopAt.UseVisualStyleBackColor = true;
+            this.btnStopAt.Click += new System.EventHandler(this.btnStopAt_Click);
             // 
             // timer
             // 
@@ -1478,41 +1508,45 @@ namespace Terminal
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnFreeze);
-            this.panel1.Controls.Add(this.btnStopAt);
-            this.panel1.Controls.Add(this.cbASCII);
-            this.panel1.Controls.Add(this.btnClear);
-            this.panel1.Controls.Add(this.cbHEX);
-            this.panel1.Controls.Add(this.btnEdit);
-            this.panel1.Controls.Add(this.cbTimestamp);
-            this.panel1.Controls.Add(this.btnInspect);
-            this.panel1.Controls.Add(this.cbShowCR);
-            this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.cbShowLF);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(1201, 10);
+            this.panel1.Controls.Add(this.cbShowCR);
+            this.panel1.Controls.Add(this.cbHEX);
+            this.panel1.Controls.Add(this.cbASCII);
+            this.panel1.Controls.Add(this.LED3);
+            this.panel1.Controls.Add(this.btnStopAt);
+            this.panel1.Controls.Add(this.LED4);
+            this.panel1.Controls.Add(this.LED2);
+            this.panel1.Controls.Add(this.btnFreeze);
+            this.panel1.Controls.Add(this.LED1);
+            this.panel1.Controls.Add(this.cbTimestamp);
+            this.panel1.Controls.Add(this.btnClear);
+            this.panel1.Controls.Add(this.btnEdit);
+            this.panel1.Controls.Add(this.btnInspect);
+            this.panel1.Controls.Add(this.btnSearch);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(70, 525);
-            this.panel1.TabIndex = 36;
+            this.panel1.Size = new System.Drawing.Size(1253, 29);
+            this.panel1.TabIndex = 12;
             // 
-            // panel2
+            // panel5
             // 
-            this.panel2.Controls.Add(this.btnClearOutput);
-            this.panel2.Controls.Add(this.btnSTXETX);
-            this.panel2.Controls.Add(this.btnFile);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1201, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(70, 153);
-            this.panel2.TabIndex = 34;
+            this.panel5.Controls.Add(this.lbOutput);
+            this.panel5.Controls.Add(this.bottomControlPanel);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1253, 148);
+            this.panel5.TabIndex = 35;
             // 
             // FrmMain
             // 
             this.AcceptButton = this.btnSend;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1271, 884);
+            this.ClientSize = new System.Drawing.Size(1253, 884);
             this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.SendPanel);
             this.Controls.Add(this.MacroPanel);
             this.Controls.Add(this.PanelOne);
@@ -1540,8 +1574,11 @@ namespace Terminal
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.bottomControlPanel.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1643,8 +1680,12 @@ namespace Terminal
         private System.Windows.Forms.Button btnStopAt;
         private System.Windows.Forms.Button btnSavePosition;
         private System.Windows.Forms.Button btnRestorePosition;
+        private System.Windows.Forms.Panel bottomControlPanel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 

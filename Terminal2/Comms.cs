@@ -30,6 +30,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -56,19 +57,13 @@ namespace Terminal
         private static Profile _profile;
         private static Embellishments _embellishments;
 
-        private static Thread _tcpThread = null;
-        private static bool _tcpThreadRunning;
-        private static bool _tcpThreadExit;
-        private static Thread _serialThread = null;
-        private static bool _serialThreadRunning;
-        private static bool _serialThreadExit;
+        private static byte[] _receiveBuffer = new byte[4096];
 
         private static bool _halfCRLF = false;
         private static bool _showTimestamp = false;
         private static int _hexColumn = 0;
 
         private static bool _showServerFailure = false;
-        private static bool _suspendReadThread = false;
 
         private void Enqueue(byte[] data)
         {
@@ -183,77 +178,45 @@ namespace Terminal
             _inputQueue.Enqueue(sb.ToString());
 
         }
-        private void SerialReaderThread()
+        private void OnSerialDataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (_com == null)
-                return;
-
-            _serialThreadRunning = true;
             try
             {
-                // do the work
-                if (_com.IsOpen)
+                int count = DataWaiting();
+                if (count > 0)
                 {
-                    _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                    _serialThreadExit = false;
-                    while (!_serialThreadExit && _com.IsOpen)
-                    {
-                        int count = _com.BytesToRead;
-                        if (count > 0)
-                        {
-                            byte[] ser_data = new byte[count];
-                            _com.Read(ser_data, 0, count);
-                            Enqueue(ser_data);
-                        }
-                        else
-                        {
-                            Thread.Sleep(1);
-                        }
-
-                        while (_suspendReadThread)
-                            Thread.Sleep(10);
-                    }
+                    byte[] ser_data = new byte[count];
+                    _com.Read(ser_data, 0, count);
+                    Enqueue(ser_data);
                 }
             }
-            catch { }
-            _serialThreadRunning = false;
-            _connected = false;
+            catch 
+            {
+                Disconnect();
+            }
         }
 
-        private void TCPReaderThread()
+        private void OnTcpDataReceived(IAsyncResult ar)
         {
-            _tcpThreadRunning = true;
             try
             {
-                _tcpThreadExit = false;
-                while (!_tcpThreadExit && SocketOpen(_socket))
+                if (_socket != null)
                 {
-                    int count = DataWaiting();
+                    int count = _socket.EndReceive(ar);
                     if (count > 0)
                     {
-                        string str = string.Empty;
-                        byte[] tcp_data = null;
-                        int tcp_count = 0;
-                        tcp_count = _socket.Available;
-                        if (tcp_count > 0)
-                        {
-                            tcp_data = new byte[tcp_count];
-                            if (!_socket.Connected) break;
-                            _socket.Receive(tcp_data);
-                            Enqueue(tcp_data);
-                        }
-                    }
-                    else
-                    {
-                        Thread.Sleep(1);
+                        byte[] tcp_data = new byte[count];
+                        Array.Copy(_receiveBuffer, 0, tcp_data, 0, count);  // Copy the received data  
+                        Enqueue(tcp_data);
+                        _socket?.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, OnTcpDataReceived, _socket);
                     }
                 }
             }
-            catch { }
-            _tcpThreadRunning = false;
-            _connected = false;
+            catch
+            {
+                Disconnect();
+            }
         }
-
         public Comms(Label[] leds, Label[] controls, EventQueue inputQueue)
         {
             _leds = leds;
@@ -410,6 +373,8 @@ namespace Terminal
                         _com.Open();
                         if (_com.IsOpen)
                         {
+                            _com.PinChanged += new SerialPinChangedEventHandler(SerialPinChangeHandler);
+                            _com.DataReceived += OnSerialDataReceived;
                             _connected = true;
                             break;
                         }
@@ -417,11 +382,8 @@ namespace Terminal
                     catch { }
                 }
 
-                // start the thread
                 if (_connected)
                 {
-                    _serialThread = new Thread(new ThreadStart(SerialReaderThread));
-                    _serialThread.Start();
                     _connectionString = $"Connected to: {_profile.conOptions.SerialPort},{_profile.conOptions.Baudrate},{_profile.conOptions.DataBits},{_profile.conOptions.Parity},{_profile.conOptions.StopBits},{_profile.conOptions.Handshaking}";
                     SetupOutgoingLEDs();
                     SetupIncomingLEDs();
@@ -446,9 +408,8 @@ namespace Terminal
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;
+                    _socket.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, OnTcpDataReceived, _socket);
                     _connected = true;
-                    _tcpThread = new Thread(new ThreadStart(TCPReaderThread));
-                    _tcpThread.Start();
                 }
                 catch
                 {
@@ -467,9 +428,8 @@ namespace Terminal
                     string clientEndPoint = _client.Client.RemoteEndPoint.ToString();
                     _socket = _client.Client;
                     _socket.SendTimeout = 200;
+                    _socket.BeginReceive(_receiveBuffer, 0, _receiveBuffer.Length, SocketFlags.None, OnTcpDataReceived, _socket);
                     _connected = true;
-                    _tcpThread = new Thread(new ThreadStart(TCPReaderThread));
-                    _tcpThread.Start();
                 }
                 catch
                 {
@@ -485,7 +445,6 @@ namespace Terminal
 
             if (_com.IsOpen && _connected)
             {
-                _suspendReadThread = true;
                 Thread.Sleep(1);
             }
         }
@@ -496,127 +455,52 @@ namespace Terminal
 
             if (_com.IsOpen && _connected)
             {
-                _suspendReadThread = false;
                 Thread.Sleep(1);
             }
         }
 
         public void Disconnect()
         {
-            // don't check - always force - might be waiting
-
-            foreach (Label led in _leds)
-            {
-                led.Text = "-";
-                led.Visible = true;
-                led.Enabled = false;
-                led.BackColor = Color.LightGray;
-            }
-            foreach (Label control in _controls)
-            {
-                control.Text = "-";
-                control.Visible = true;
-                control.Enabled = false;
-                control.BackColor = Color.LightGray;
-            }
-            Application.DoEvents();
-
             try
             {
+                _connected = false;
+
                 switch (_comType)
                 {
                     case CommType.ctSERIAL:
                         if (_com != null)
                         {
-                            _com.PinChanged -= new SerialPinChangedEventHandler(SerialPinChangeHandler);
-                            Stream s = _com.BaseStream;
-                            s.Flush();
-                            s.Close();
-                            _com.DtrEnable = false;
-                            _com.RtsEnable = false;
-                            _com.Close();
+                            _com.DataReceived -= OnSerialDataReceived;
+                            _com.PinChanged -= SerialPinChangeHandler;
+
+                            Thread.Sleep(50);
+
+                            if (_com.IsOpen)
+                            {
+                                _com.BaseStream.Close();
+                                _com.Close();
+                            }
                             _com = null;
                         }
-
-                        _serialThreadExit = true;
-                        while (_serialThreadRunning)
-                        {
-                            Thread.Sleep(20);
-                        }
-                        if (_serialThread != null)
-                        {
-                            _serialThread.Join(200);
-                            _serialThread = null;
-                        }
-                        _connected = false;
                         break;
 
                     case CommType.ctSERVER:
+                    case CommType.ctCLIENT:
                         _showServerFailure = false;
                         if (_socket != null)
                         {
-                            try
-                            {
-                                _socket.Shutdown(SocketShutdown.Both);
-                            }
-                            finally
-                            {
-                                _socket.Close();
-                            }
+                            try { _socket.Shutdown(SocketShutdown.Both); } catch { }
+                            _socket.Close();
+                            _socket = null;
                         }
-
-                        _tcpThreadExit = true;
-                        while (_tcpThreadRunning)
-                        {
-                            Thread.Sleep(20);
-                        }
-                        if (_tcpThread != null)
-                        {
-                            _tcpThread.Join(200);
-                            _tcpThread = null;
-                        }
-
                         if (_server != null)
+                        {
                             _server.Stop();
-
-                        _socket = null;
-                        _server = null;
-                        _connected = false;
-                        _connectionString = "Disconnected";
-
-                        break;
-
-                    case CommType.ctCLIENT:
-                        if (_socket != null)
-                        {
-                            try
-                            {
-                                _socket.Shutdown(SocketShutdown.Both);
-                            }
-                            finally
-                            {
-                                _socket.Close();
-                            }
+                            _server = null;
                         }
-
-                        if (_tcpThread != null)
-                        {
-                            while (_tcpThread.ThreadState == System.Threading.ThreadState.Running)
-                                Thread.Sleep(20);
-                            _tcpThread.Join();
-                            _tcpThread = null;
-                        }
-
-                        _socket = null;
-                        _server = null;
-                        _connected = false;
-                        _connectionString = "Disconnected";
-
-                        break;
-
-                    default:
                         break;
                 }
+                _connectionString = "Disconnected";
             }
             catch { }
         }
@@ -654,6 +538,7 @@ namespace Terminal
 
             try
             {
+                // determine status of socket
                 if (socket.Poll(0, SelectMode.SelectRead))
                 {
                     byte[] buff = new byte[1];

@@ -186,7 +186,28 @@ Source Code:
 ----</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>v1.5.x.x
+    <value>v1.6.1.4
+  * Fix bug with port staying open when window closed
+
+v1.6.1.3
+  * Add horizontal scrolling support through shift + scroll
+
+v1.6.1.2
+  * Improve scrolling feel
+	
+v1.6.1.0
+  * Serial and TCP socket handling via direct events
+     from WIndows - no longer using read threads.
+  
+v1.6.0.1
+  * Added: #DISCONNECT, #STOPLOG, #STARTLOG
+
+v1.6.0.0
+  * Better look and feel
+  * Made logging pure asynchronous (using a thread).
+  * Fixed a timestamp error if duration &gt; 24 hours
+
+v1.5.x.x
   * New look and feel
   * Profiles can be changed without closing current one
   * Save/Restore of position and size

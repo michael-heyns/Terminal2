@@ -59,7 +59,10 @@ namespace Terminal
             {
                 _lengthOfStringObjects += item.ToString().Length;
                 base.Enqueue(item);
-                _main.Invoke(_handler);
+                if (_main != null && !_main.IsDisposed && !_main.Disposing)
+                {
+                    _main.BeginInvoke(_handler);
+                }
             }
             catch { }
         }

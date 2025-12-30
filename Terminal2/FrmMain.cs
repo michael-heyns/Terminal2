@@ -283,9 +283,9 @@ namespace Terminal
 
         private void LogAdd(string msg)
         {
-            if (Log.Add(msg))
+            if (Log.Enabled && Log.Filename.Length > 0) 
             {
-                stsLogfile.Text = "   " + Log.Filename + "   ";
+                Log.Add(msg);
             }
         }
 
@@ -453,6 +453,8 @@ namespace Terminal
         {
             InitializeComponent();
 
+            lbInput.HorizontalScrollRequested += LbInput_HorizontalScrollRequested;
+
             this.Text = VersionLabel;
 
             dgMacroTable.ReadOnly = true;
@@ -511,6 +513,24 @@ namespace Terminal
             Label[] controls = new Label[] { ctrlOne, ctrlTwo };
             _comms = new Comms(leds, controls, _uiInputQueue);
             SwitchToProfile(preferred);
+        }
+        private void LbInput_HorizontalScrollRequested(int delta)
+        {
+            int direction = delta > 0 ? 1 : -1;
+            int scrollAmount = hScrollBar.SmallChange * direction * SystemInformation.MouseWheelScrollLines;
+            int newValue = hScrollBar.Value + scrollAmount;
+            int maxScroll = hScrollBar.Maximum - hScrollBar.LargeChange + 1;
+
+            if (newValue < hScrollBar.Minimum) newValue = hScrollBar.Minimum;
+            if (newValue > maxScroll) newValue = maxScroll;
+
+            if (newValue != hScrollBar.Value)
+            {
+                hScrollBar.Value = newValue;
+
+                stsColumnStart.Text = hScrollBar.Value.ToString();
+                lbInput.Refresh();
+            }
         }
 
         private void BtnColorConfig_Click(object sender, EventArgs e)
@@ -579,7 +599,7 @@ namespace Terminal
 
         private void ActionConnect()
         {
-            btnConnect.Text = "------";
+            btnConnect.Text = "--><--";
             Application.DoEvents();
 
             _cancelRestart = false;
@@ -622,6 +642,7 @@ namespace Terminal
             }
             else
             {
+                Application.DoEvents();
                 bool rc = _comms.Connect(_activeProfile);
                 if (rc)
                 {
@@ -648,16 +669,24 @@ namespace Terminal
 
         private void ActionDisconnect()
         {
-            btnConnect.Text = "------";
+            btnConnect.Text = "--||--";
             Application.DoEvents();
             _comms.Disconnect();
+            Application.DoEvents();
 
-            if (_conState == ConnectionState.Listening)
+            try
             {
-
-                _connectThread?.Join(2000);
-                _connectThread = null;
+                if (_conState == ConnectionState.Listening)
+                {
+                    if (_connectThread != null)
+                    {
+                        _connectThread.Abort();
+                        _connectThread.Join(2000);
+                    }
+                    _connectThread = null;
+                }
             }
+            catch { }
 
             btnConnect.BackColor = _topRowBackColor;
             btnConnect.UseVisualStyleBackColor = true;
@@ -671,6 +700,7 @@ namespace Terminal
             StopAllMacros();
             this.Text = VersionLabel;
 
+            btnConnect.Text = "&Connect";
             LogAdd(Utils.Timestamp() + "{DISCONNECTED}");
             _conState = ConnectionState.Disconnected;
         }
@@ -717,7 +747,9 @@ namespace Terminal
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
+            btnStartLog.Enabled = false;
             DoConnectDisconnect();
+            btnStartLog.Enabled = true;
         }
 
         private void ControlOne_Click(object sender, EventArgs e)
@@ -837,7 +869,7 @@ namespace Terminal
             tbCommand.Focus();
         }
 
-        private void BtnStartLog_Click(object sender, EventArgs e)
+        private void EnableDisableLogging()
         {
             if (!Log.Enabled)
             {
@@ -873,7 +905,14 @@ namespace Terminal
                 btnStartLog.UseVisualStyleBackColor = true;
                 btnStartLog.Text = "Start &Log";
             }
+        }
+
+        private void BtnStartLog_Click(object sender, EventArgs e)
+        {
+            btnStartLog.Enabled = false;
+            EnableDisableLogging();
             tbCommand.Focus();
+            btnStartLog.Enabled = true;
         }
 
         #region EMBELLISHMENTS
@@ -920,16 +959,14 @@ namespace Terminal
         {
             _frozen = true;
             btnFreeze.ForeColor = Color.Yellow;
-            btnFreeze.BackColor = Color.IndianRed;
-            btnFreeze.Text = "&GO";
+            btnFreeze.BackColor = Color.LightSalmon;
+            btnFreeze.ImageIndex = 1;
             lbInput.TopIndex = topLine;
         }
         private void UnFreeze()
         {
-            btnFreeze.ForeColor = Color.Black;
-            btnFreeze.BackColor = _secondRowBackColor;
-            btnFreeze.UseVisualStyleBackColor = true;
-            btnFreeze.Text = "&Freeze";
+            btnFreeze.BackColor = Color.White;
+            btnFreeze.ImageIndex = 0;
             _frozen = false;
             _stopLine = lbInput.Items.Count - 1;
             UIInputQueueHandler();
@@ -979,6 +1016,8 @@ namespace Terminal
                 if (!_comms.Connected()) return;
                 if (_macroStop[parent]) return;
 
+                DateTime nextRun = DateTime.Now.AddMilliseconds(mac.resendEveryMs);
+
                 for (int lineNo = 0; lineNo < mac.runLines.Length; lineNo++)
                 {
                     if (_terminateFlag) return;
@@ -1001,6 +1040,45 @@ namespace Terminal
                                 LowlevelExecuteMacro(sub_m, parent);
                                 continue;
                             }
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #DISCONNECT
+                    cmdIndex = line.IndexOf("#DISCONNECT");
+                    if (cmdIndex >= 0)
+                    {
+                        if (_conState == ConnectionState.Connected)
+                        {
+                            DoConnectDisconnect();
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #STARTLOG
+                    cmdIndex = line.IndexOf("#STARTLOG");
+                    if (cmdIndex >= 0)
+                    {
+                        if (!Log.Enabled)
+                        {
+                            EnableDisableLogging();
+                        }
+
+                        // restore and continue
+                        line = mac.runLines[lineNo];
+                    }
+
+                    // detect #STOPLOG
+                    cmdIndex = line.IndexOf("#STOPLOG");
+                    if (cmdIndex >= 0)
+                    {
+                        if (Log.Enabled)
+                        {
+                            EnableDisableLogging();
                         }
 
                         // restore and continue
@@ -1174,6 +1252,7 @@ namespace Terminal
                     }
                 }
 
+                // first check for repeats
                 if (!mac.repeatEnabled)
                     break;
                 repeatCount++;
@@ -1181,13 +1260,12 @@ namespace Terminal
                     break;
 
                 // sleep - but check for cancellation
-                for (int ms = 0; ms < (mac.resendEveryMs / 10); ms++)
+                while (DateTime.Now < nextRun)
                 {
                     if (_terminateFlag) return;
                     if (!_comms.Connected()) return;
                     if (_macroStop[parent]) return;
-
-                    Thread.Sleep(10);
+                    Thread.Yield();
                 }
             }
         }
@@ -1346,54 +1424,55 @@ namespace Terminal
             toolTip.UseAnimation = false;// true;
             toolTip.BackColor = Color.Yellow;
             toolTip.ForeColor = Color.Red;
-            toolTip.SetToolTip(this.pdPort, "Available Serial or TCP ports");
-            toolTip.SetToolTip(this.btnRescan, "Updates the Serial and TCP ports list");
-            toolTip.SetToolTip(this.btnConnect, "Connects (or disconnects) from the communication channel");
-            toolTip.SetToolTip(this.btnConnectOptions, "Configures the select channel");
-            toolTip.SetToolTip(this.btnStartLog, "Starts (or stops) logging");
-            toolTip.SetToolTip(this.btnLogOptions, "Configures logging options");
-            toolTip.SetToolTip(this.btnColorConfig, "Configures event detections and associated colours");
-            toolTip.SetToolTip(this.btnProfile, "Selects the active profile");
-            toolTip.SetToolTip(this.btnNew, "Adds a new profile");
-            toolTip.SetToolTip(this.btnQuickLaunch, "Launches another session");
-            toolTip.SetToolTip(this.btnSavePosition, "Saves the window size and position");
-            toolTip.SetToolTip(this.btnRestorePosition, "Restores the window size and position");
-            toolTip.SetToolTip(this.btnResize, "Auto-fits the window to the current screen");
-            toolTip.SetToolTip(this.btnASCII, "Show a simple ASCII table");
-            toolTip.SetToolTip(this.btnFreeze, "Freezes the display while still collecting data");
-            toolTip.SetToolTip(this.btnClear, "Clears the display buffer");
-            toolTip.SetToolTip(this.btnEdit, "Passes a snapshot of the display buffer to your default editor");
-            toolTip.SetToolTip(this.btnInspect, "Passes a snapshot of the display buffer to an internal viewer");
-            toolTip.SetToolTip(this.btnSearch, "Searches the display buffer for a particular pattern");
+            toolTip.SetToolTip(this.pdPort, "PORTS: Available Serial or TCP ports");
+            toolTip.SetToolTip(this.btnRescan, "RESCAN: Updates the Serial and TCP ports list");
+            toolTip.SetToolTip(this.btnConnect, "CONNECT: Connects (or disconnects) from the communication channel");
+            toolTip.SetToolTip(this.btnConnectOptions, "CONNECT OPTIONS: Configures the select channel");
+            toolTip.SetToolTip(this.btnStartLog, "START/STOP LOG: Starts (or stops) logging");
+            toolTip.SetToolTip(this.btnLogOptions, "LOG OPTIONS: Configures logging options");
+            toolTip.SetToolTip(this.btnColorConfig, "COLORS/EVENTS: Configures event detections and associated colours");
+            toolTip.SetToolTip(this.btnProfile, "PROFILES: Selects the active profile");
+            toolTip.SetToolTip(this.btnNew, "ADD PROFILE: Adds a new profile");
+            toolTip.SetToolTip(this.btnQuickLaunch, "LAUCH: Launches another session");
+            toolTip.SetToolTip(this.btnSavePosition, "SAVE: Saves the window size and position");
+            toolTip.SetToolTip(this.btnRestorePosition, "RESTORE: Restores the window size and position");
+            toolTip.SetToolTip(this.btnResize, "AUTO-FIT: Auto-fits the window to the current screen");
+            toolTip.SetToolTip(this.btnASCII, "ASCII: Show a simple ASCII table");
+            toolTip.SetToolTip(this.btnFreeze, "FREEZE: Freezes the display while still collecting data");
+            toolTip.SetToolTip(this.btnClear, "CLEAR: Clears the display buffer");
+            toolTip.SetToolTip(this.btnEdit, "EDIT: Passes a snapshot of the display buffer to your default editor (such as Notepad++)");
+            toolTip.SetToolTip(this.btnInspect, "INSPECT: Passes a snapshot of the display buffer to an internal viewer for detailed inspection");
+            toolTip.SetToolTip(this.btnSearch, "SEARCH: Searches the display buffer for a particular pattern");
+            toolTip.SetToolTip(this.btnStopAt, "STOP AT: Freezes the display when a certain pattern is detected");
 
-            toolTip.SetToolTip(this.cbTimestamp, "Shows the time when the first character of a line was received");
-            toolTip.SetToolTip(this.cbASCII, "Prints the incoming data in human readable ASCII test");
-            toolTip.SetToolTip(this.cbHEX, "Prints the incoming data as 2-byte HEX values");
+            toolTip.SetToolTip(this.cbTimestamp, "TIMESTAMP: Shows the time when the first character of a line was received");
+            toolTip.SetToolTip(this.cbASCII, "ASCII: Prints the incoming data in human readable ASCII test");
+            toolTip.SetToolTip(this.cbHEX, "HEX: Prints the incoming data as 2-byte HEX values");
 
-            toolTip.SetToolTip(this.cbShowCR, "Prints {CR} whan 0x0D is received");
-            toolTip.SetToolTip(this.cbShowLF, "Prints {LF} whan 0x0A is received");
+            toolTip.SetToolTip(this.cbShowCR, "CR: Prints {CR} whan 0x0D is received");
+            toolTip.SetToolTip(this.cbShowLF, "LF: Prints {LF} whan 0x0A is received");
 
-            toolTip.SetToolTip(this.LED1, "View-only status of the incoming hardware line");
-            toolTip.SetToolTip(this.LED2, "View-only status of the incoming hardware line");
-            toolTip.SetToolTip(this.LED3, "View-only status of the incoming hardware line");
-            toolTip.SetToolTip(this.LED4, "View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED1, "LED1: View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED2, "LED2: View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED3, "LED3: View-only status of the incoming hardware line");
+            toolTip.SetToolTip(this.LED4, "LED4: View-only status of the incoming hardware line");
 
-            toolTip.SetToolTip(this.tbCommand, "Type the text you want to send");
+            toolTip.SetToolTip(this.tbCommand, "TEXT TO SEND: Type the text you want to send");
 
-            toolTip.SetToolTip(this.btnClearOutput, "Clears the output text box");
-            toolTip.SetToolTip(this.btnSTXETX, "Sends the command line text using an STX-ETX header-footer");
-            toolTip.SetToolTip(this.btnFile, "Sends a file (either in raw format or via Xmodem protocol)");
+            toolTip.SetToolTip(this.btnClearOutput, "CLEAR: Clears the output text box");
+            toolTip.SetToolTip(this.btnSTXETX, "STX-ETX: Sends the command line text using an STX-ETX header-footer");
+            toolTip.SetToolTip(this.btnFile, "FILE SEND: Sends a file (either in raw format or via Xmodem protocol)");
 
             toolTip.SetToolTip(this.cbSendAsIType, "WARNING: Once sent, you cannot retract it");
-            toolTip.SetToolTip(this.cbClearCMD, "Clears the command line after it was sent");
+            toolTip.SetToolTip(this.cbClearCMD, "CLEAR: Clears the command line after it was sent");
 
-            toolTip.SetToolTip(this.cbSendCR, "Appends 0x0D to the outgoing line of text (before 0x0A)");
-            toolTip.SetToolTip(this.cbSendLF, "Appends 0x0A to the outgoing line of text (after 0x0D)");
+            toolTip.SetToolTip(this.cbSendCR, "CR: Appends 0x0D to the outgoing line of text (before 0x0A)");
+            toolTip.SetToolTip(this.cbSendLF, "LF: Appends 0x0A to the outgoing line of text (after 0x0D)");
 
-            toolTip.SetToolTip(this.ctrlOne, "Click this block to toggle it's outgoing state");
-            toolTip.SetToolTip(this.ctrlTwo, "Click this block to toggle it's outgoing state");
+            toolTip.SetToolTip(this.ctrlOne, "OUT1: Click this block to toggle it's outgoing state");
+            toolTip.SetToolTip(this.ctrlTwo, "OUT2: Click this block to toggle it's outgoing state");
 
-            toolTip.SetToolTip(this.btnSend, "Sends the typed text string");
+            toolTip.SetToolTip(this.btnSend, "SEND: Sends the typed text string");
 
             toolTip.ShowAlways = true;
             toolTip.Active = true;
@@ -2435,25 +2514,22 @@ namespace Terminal
 
             try
             {
-                this.Visible = false;
-                Application.DoEvents();
-
-                _terminateFlag = true;
-                SaveThisProfile();
-
                 timer.Stop();
                 timer.Enabled = false;
 
+                _terminateFlag = true;
+
                 StopAllMacros();
-                WaitAllMacrosStopped();
+                DateTime startWait = DateTime.Now;
+                while (_macroRunning.Any(r => r) && (DateTime.Now - startWait).TotalMilliseconds < 500)
+                {
+                    Application.DoEvents();
+                    Thread.Sleep(10);
+                }
+
                 ActionDisconnect();
-
-                while (_connectThreadRunning)
-                    Thread.Sleep(20);
-
-                if (_connectThread != null)
-                    _connectThread.Join(20);
-                _connectThread = null;
+                Log.Stop();
+                SaveThisProfile();
             }
             catch { }
         }
@@ -2919,6 +2995,50 @@ namespace Terminal
                 true);
             this.DrawMode = DrawMode.OwnerDrawFixed;
         }
+
+        private const int WM_MOUSEWHEEL = 0x020A;
+        private const int WM_MOUSEHWHEEL = 0x020E;
+
+        public event Action<int> HorizontalScrollRequested;
+
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_MOUSEHWHEEL)
+            {
+                int delta = (short)(m.WParam.ToInt64() >> 16);
+                HorizontalScrollRequested?.Invoke(delta);
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            if (m.Msg == WM_MOUSEWHEEL)
+            {
+                if (this.Items.Count == 0) return;
+                int delta = (short)(m.WParam.ToInt64() >> 16);
+
+                if (Control.ModifierKeys == Keys.Shift)
+                {
+                    HorizontalScrollRequested?.Invoke(-delta);
+                    m.Result = IntPtr.Zero;
+                    return;
+                }
+
+                int direction = delta > 0 ? -1 : 1;
+                int linesToScroll = SystemInformation.MouseWheelScrollLines;
+                if (linesToScroll < 1) linesToScroll = 3;
+                int newTopIndex = this.TopIndex + (direction * linesToScroll);
+                if (newTopIndex < 0) newTopIndex = 0;
+                if (newTopIndex > this.Items.Count - 1) newTopIndex = this.Items.Count - 1;
+
+                this.TopIndex = newTopIndex;
+                m.Result = IntPtr.Zero;
+                return;
+            }
+
+            base.WndProc(ref m);
+        }
+
         protected override void OnDrawItem(DrawItemEventArgs e)
         {
             try

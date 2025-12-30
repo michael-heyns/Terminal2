@@ -204,6 +204,7 @@ namespace Terminal
                 btnImport.Visible = true;
                 btnDelete.Visible = true;
             }
+            eStartsWith.Focus();
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

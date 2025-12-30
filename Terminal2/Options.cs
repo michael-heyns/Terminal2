@@ -203,68 +203,20 @@ namespace Terminal
     public class Utils
     {
         private static Stopwatch stopwatchT = new Stopwatch();
-        private static int millisecondsSinceMidnight = 0;
-
-        private static int GetTimeProgramStarted()
-        {
-            // Get current DateTime (in local time zone, consistent with typical "now")
-            DateTime now = DateTime.Now;
-
-            // Compute total milliseconds since midnight
-            int msSinceMidnight = now.Hour * 3600000 + now.Minute * 60000 + now.Second * 1000 + now.Millisecond;
-
-            return msSinceMidnight;
-        }
-
-        private static string GetTime(int timeProgramStarted, double elapsedTime)
-        {
-            // Total milliseconds since midnight
-            double totalMs = timeProgramStarted + elapsedTime;
-
-            // Total seconds since midnight (with full precision)
-            double totalSec = totalMs / 1000.0;
-
-            // Extract hours
-            int hours = (int)(totalSec / 3600.0);
-
-            // Remaining seconds after full hours
-            double remSec = totalSec % 3600.0;
-
-            // Extract minutes
-            int minutes = (int)(remSec / 60.0);
-
-            // Remaining seconds after full minutes
-            double remSecAfterMin = remSec % 60.0;
-
-            // Extract whole seconds (0-59)
-            int seconds = (int)remSecAfterMin;
-
-            // Get the fractional part of the seconds (0.0 to 0.999...)
-            double frac = remSecAfterMin - seconds;
-
-            // Calculate milliseconds from fractional part (multiply by 1000)
-            double msValue = frac * 1000.0;
-
-            // Whole milliseconds (0-999)
-            int ms = (int)msValue;
-
-            // Remaining fraction for microseconds
-            double subMs = msValue - ms;
-
-            // Calculate microseconds (round to nearest)
-            int us = (int)Math.Round(subMs * 1000.0);
-
-            // Format hours, minutes, seconds, and ms with leading zeros
-            // uuu similarly
-            string timeStr = $"{hours:D2}:{minutes:D2}:{seconds:D2}.{ms:D3} {us:D3}: ";
-
-            return timeStr;
-        }
+        private static long startTimestampMs = 0L;
 
         public static void StartStopwatch()
         {
-            millisecondsSinceMidnight = GetTimeProgramStarted();
+            startTimestampMs = (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
             stopwatchT.Start();
+        }
+
+        public static string Timestamp()
+        {
+            long totalMs = (long)(startTimestampMs + stopwatchT.Elapsed.TotalMilliseconds);
+            DateTime now = DateTimeOffset.FromUnixTimeMilliseconds(totalMs).ToLocalTime().DateTime;
+            long us = (stopwatchT.Elapsed.Ticks / 10) % 1000;
+            return $"{now.Hour:D2}:{now.Minute:D2}:{now.Second:D2}.{now.Millisecond:D3} {us:D3}: ";
         }
 
         public const string DefaultInputFont = "Courier New, 11.25pt";
@@ -285,17 +237,6 @@ namespace Terminal
             return $"{DateTime.Now:yyMMdd_HHmmss}";
         }
 
-        public static string Timestamp()
-        {
-            if (millisecondsSinceMidnight >= 86400000)
-            {
-                //midnight roll-over
-                stopwatchT.Stop();
-                StartStopwatch();
-            }
-
-            return GetTime(millisecondsSinceMidnight, stopwatchT.Elapsed.TotalMilliseconds);
-        }
         public static bool IsNumeric(char ch)
         {
             if (ch < '0' || ch > '9')

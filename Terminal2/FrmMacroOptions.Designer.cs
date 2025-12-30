@@ -435,9 +435,9 @@ namespace Terminal
             this.localHelp.Controls.Add(this.textBox3);
             this.localHelp.Controls.Add(this.textBox2);
             this.localHelp.Controls.Add(this.textBox1);
-            this.localHelp.Location = new System.Drawing.Point(174, 107);
+            this.localHelp.Location = new System.Drawing.Point(177, 107);
             this.localHelp.Name = "localHelp";
-            this.localHelp.Size = new System.Drawing.Size(444, 243);
+            this.localHelp.Size = new System.Drawing.Size(444, 272);
             this.localHelp.TabIndex = 36;
             this.localHelp.Visible = false;
             // 
@@ -465,7 +465,7 @@ namespace Terminal
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(303, 215);
+            this.textBox2.Size = new System.Drawing.Size(303, 258);
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = resources.GetString("textBox2.Text");
             // 
@@ -479,10 +479,11 @@ namespace Terminal
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(111, 195);
+            this.textBox1.Size = new System.Drawing.Size(111, 258);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "-> Empty lines\r\n->  $nn\r\n->  # comment \r\n-> ## comments\r\n-> #DELAY nn \r\n-> #STX t" +
-    "ext\r\n-> #FREEZE\r\n-> #DTR\r\n-> #RTS\r\n-> #BREAK [nn]\r\n\r\n-> #MACRO title\r\n    ";
+    "ext\r\n-> #FREEZE\r\n-> #DTR\r\n-> #RTS\r\n-> #BREAK [nn]\r\n\r\n-> #MACRO title\r\n\r\n-> #DISC" +
+    "ONNECT\r\n-> #STOPLOG\r\n-> #STARTLOG";
             // 
             // btnHelp
             // 
